@@ -1,0 +1,55 @@
+name: Binance Spot 15-Day Live Paper Trading Scanner
+
+on:
+  schedule:
+    # Runs every 15 minutes as fallback
+    - cron: '*/15 * * * *'
+  repository_dispatch:
+    # External Cron Job (cron-job.org) trigger
+    types: [cron_trigger, scan_trigger]
+  workflow_dispatch:
+    # Manual Trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  run-scanner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Live Market Scan, Safety Checks & Email Dispatch
+        env:
+          STARTING_BALANCE: 10000.0
+          SPOT_FEE_RATE: 0.00075
+          SLIPPAGE_RATE: 0.0005
+          MAX_CONCURRENT_POSITIONS: 5
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL || 'abdurrehmansajidhafiz@gmail.com' }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD || 'ejeccnvnnoypabjy' }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL || 'abdurrehmansajidhafiz1@gmail.com' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python main.py --mode scan
+
+      - name: Commit & Push Updated Live Results and State
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ LIVE_RESULTS.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(live-bot): update 15-day paper trading results [skip ci]" && git push)
