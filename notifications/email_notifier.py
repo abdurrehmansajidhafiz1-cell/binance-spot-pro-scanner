@@ -1,13 +1,14 @@
 """
-Email Notification Service for Binance Spot Trading Signals.
-Generates comprehensive, actionable 100 USDT trade execution plans.
+Email Notification Service for Binance Spot Trading Signals & 12-Hour Summaries.
+Supports dual timestamps (Pakistan Standard Time PKT + UTC) and comprehensive trade plans.
 """
 import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime, timezone
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
+from engine.time_utils import format_dual_time, get_current_utc
 
 
 class EmailNotifier:
@@ -32,14 +33,12 @@ class EmailNotifier:
         msg.attach(part2)
 
         try:
-            # Connect via SSL port 465
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=12) as server:
                 server.login(self.sender_email, self.app_password)
                 server.sendmail(self.sender_email, self.receiver_email, msg.as_string())
             return True
-        except Exception as e:
+        except Exception:
             try:
-                # Fallback to port 587 STARTTLS
                 with smtplib.SMTP("smtp.gmail.com", 587, timeout=12) as server:
                     server.starttls()
                     server.login(self.sender_email, self.app_password)
@@ -52,11 +51,13 @@ class EmailNotifier:
     def send_trade_signal_email(self, symbol: str, strategy: str, current_price: float,
                                 stop_loss: float, tp1: float, tp2: float,
                                 reason: str, metadata: Optional[Dict[str, Any]] = None,
-                                safety_info: Optional[Dict[str, Any]] = None) -> bool:
+                                safety_info: Optional[Dict[str, Any]] = None,
+                                candle_time: Optional[Any] = None) -> bool:
         """
-        Formats and dispatches a comprehensive, actionable 100 USDT trade execution plan.
+        Formats and dispatches a comprehensive, actionable 100 USDT trade execution plan with dual PKT + UTC timestamps.
         """
-        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        signal_time_str = format_dual_time()
+        candle_time_str = format_dual_time(candle_time) if candle_time else signal_time_str
         capital_usdt = 100.0
         
         # Calculate Risk and Sizing
@@ -67,7 +68,6 @@ class EmailNotifier:
         
         # Entry Plan Logic based on Strategy
         if "I1" in strategy:
-            # Staggered 60% Market + 40% Limit Dip Entry
             entry1_usdt = 60.0
             entry1_price = current_price
             entry1_qty = entry1_usdt / entry1_price
@@ -77,7 +77,7 @@ class EmailNotifier:
             entry2_qty = entry2_usdt / entry2_price
             
             entry_style_text = (
-                f"• Entry 1 (Market Order — $60.00 USDT): Buy at current market price ${entry1_price:,.4f} (~{entry1_qty:.4f} {symbol[:-4]})\n"
+                f"• Entry 1 (Market Order — $60.00 USDT): Buy at ${entry1_price:,.4f} (~{entry1_qty:.4f} {symbol[:-4]})\n"
                 f"• Entry 2 (Limit Order — $40.00 USDT): Place Limit Buy at deeper dip ${entry2_price:,.4f} (~{entry2_qty:.4f} {symbol[:-4]})\n"
                 f"• Average Expected Entry: ~${(entry1_usdt + entry2_usdt) / (entry1_qty + entry2_qty):,.4f}"
             )
@@ -110,32 +110,28 @@ class EmailNotifier:
             )
             entry_style_html = f"<p><b>Basket Allocation:</b> Buy <b>$20.00 USDT</b> of this coin at market price <b>${current_price:,.4f}</b> as part of Top 5 Momentum Leaders.</p>"
         else:
-            # S3: Single Market Breakout Entry
             qty_100 = capital_usdt / current_price
             entry_style_text = f"• Single Market Entry: Buy 100% ($100.00 USDT) at ${current_price:,.4f} (~{qty_100:.4f} {symbol[:-4]})"
             entry_style_html = f"<p><b>Fast Breakout Entry:</b> Buy 100% (<b>$100.00 USDT</b>) at current price <b>${current_price:,.4f}</b> (~{qty_100:.4f} {symbol[:-4]}).</p>"
 
-        # Breakeven target price
         be_price = current_price * 1.0025
-
-        # Subject Line
         subject = f"🟢 [BINANCE SPOT SIGNAL] {symbol} | Strategy: {strategy} | Capital: $100 USDT"
 
-        # Plain Text
         text_content = f"""
 ================================================================================
 BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
 ================================================================================
-Time: {now_str}
-Strategy: {strategy}
-Total Capital: $100.00 USDT
-Current Price: ${current_price:,.4f}
+• Signal Time:        {signal_time_str}
+• Zone / Candle Time: {candle_time_str}
+• Strategy:           {strategy}
+• Total Capital:      $100.00 USDT
+• Current Price:      ${current_price:,.4f}
 
 1. ENTRY ROADMAP (100 USDT ALLOCATION):
 {entry_style_text}
 
 2. STOP LOSS & MAXIMUM RISK:
-• Hard Stop Loss: ${stop_loss:,.4f} (-{risk_pct:.2f}%)
+• Hard Stop Loss:     ${stop_loss:,.4f} (-{risk_pct:.2f}%)
 • Maximum Dollar Risk: -${max_loss_usdt:.2f} USDT
 
 3. TAKE PROFIT TARGETS:
@@ -150,11 +146,10 @@ Current Price: ${current_price:,.4f}
 
 5. DETECTION REASON & MARKET STATE:
 • Trigger Reason: {reason}
-• Safety Warning: {safety_info.get('timing_msg', 'Normal') if safety_info else 'Normal'}
+• Safety Status:  {safety_info.get('timing_msg', 'Normal') if safety_info else 'Normal'}
 ================================================================================
 """
 
-        # Rich HTML Email
         html_content = f"""
 <!DOCTYPE html>
 <html>
@@ -166,16 +161,16 @@ Current Price: ${current_price:,.4f}
     .header {{ background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #ffffff; padding: 24px; text-align: center; }}
     .header h1 {{ margin: 0; font-size: 22px; font-weight: 700; }}
     .header p {{ margin: 6px 0 0 0; font-size: 14px; opacity: 0.9; color: #38bdf8; }}
+    .time-badge {{ background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; margin-top: 8px; }}
     .content {{ padding: 24px; }}
     .section {{ margin-bottom: 22px; border-bottom: 1px solid #e2e8f0; padding-bottom: 18px; }}
     .section:last-child {{ border-bottom: none; }}
-    .section-title {{ font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 10px; display: flex; align-items: center; }}
+    .section-title {{ font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 10px; }}
     .metric-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }}
     .metric-box {{ background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; }}
     .metric-label {{ font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; }}
     .metric-value {{ font-size: 16px; font-weight: 700; color: #0f172a; margin-top: 4px; }}
     .danger {{ color: #dc2626; }}
-    .success {{ color: #16a34a; }}
     .warning-box {{ background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px; border-radius: 6px; font-size: 13px; color: #92400e; margin-top: 10px; }}
     .plan-box {{ background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px; margin-top: 10px; font-size: 14px; }}
     .footer {{ background: #f1f5f9; text-align: center; padding: 16px; font-size: 12px; color: #64748b; }}
@@ -186,9 +181,23 @@ Current Price: ${current_price:,.4f}
     <div class="header">
         <h1>🟢 BINANCE SPOT BUY SIGNAL</h1>
         <p>{symbol} • Strategy: {strategy} • 100 USDT Capital</p>
+        <div class="time-badge">🕒 Signal Time: <b>{signal_time_str}</b></div>
     </div>
     <div class="content">
-        <!-- Overview -->
+        <!-- Timestamps Overview -->
+        <div class="section">
+            <div class="section-title">⏱️ Exact Timestamps (PKT & UTC)</div>
+            <div class="metric-box" style="margin-bottom:8px;">
+                <div class="metric-label">Signal Generated At</div>
+                <div class="metric-value" style="font-size:14px; color:#0284c7;">{signal_time_str}</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">Zone / Candle Formed At</div>
+                <div class="metric-value" style="font-size:14px; color:#475569;">{candle_time_str}</div>
+            </div>
+        </div>
+
+        <!-- Trade Overview -->
         <div class="section">
             <div class="section-title">📊 Trade Overview</div>
             <div class="metric-grid">
@@ -244,7 +253,7 @@ Current Price: ${current_price:,.4f}
             <div class="section-title">🔄 Step 3: Break-Even & Trade Management Rules</div>
             <div class="plan-box">
                 <b>1. Breakeven Shift Rule:</b> Jaise hi price <b>${tp1:,.4f} (TP1)</b> hit kare aur aap 50% sell kar dein, apne baqi bache hue coins ka Stop Loss foran barha kar <b>${be_price:,.4f}</b> (Breakeven + Fees) par shift kar dein.<br><br>
-                <b>2. Zero-Loss Guarantee:</b> Iske baad ye trade 100% risk-free ho jayegi aur kisi soorat loss nahi degi.<br><br>
+                <b>2. Zero-Loss Guarantee:</b> Iske baad ye trade 100% risk-free ho jayegi.<br><br>
                 <b>3. Trailing Rule:</b> Price mazid ooper jaye to SL ko 1H SuperTrend line ke sath-sath trail karte jayein.
             </div>
         </div>
@@ -260,6 +269,199 @@ Current Price: ${current_price:,.4f}
     </div>
     <div class="footer">
         Binance Spot Autonomous Quantitative Scanner • Phase 1 Live Validation
+    </div>
+</div>
+</body>
+</html>
+"""
+        return self.send_email(subject, html_content, text_content)
+
+    def send_12h_summary_email(self, period_start_utc: Any, period_end_utc: Any,
+                               total_qualified: int, win_count: int, loss_count: int,
+                               unresolved_count: int, net_pnl_usdt: float,
+                               trades_details: List[Dict[str, Any]],
+                               open_positions_details: List[Dict[str, Any]]) -> bool:
+        """
+        Dispatches the 12-Hour Trading Activity Summary Email with dual PKT + UTC timestamps.
+        """
+        start_str = format_dual_time(period_start_utc)
+        end_str = format_dual_time(period_end_utc)
+        
+        subject = f"📊 [12-HOUR SUMMARY] Binance Spot Activity Report | {format_dual_time()}"
+        
+        # Build Table of Closed Trades
+        trade_rows_html = []
+        trade_rows_text = []
+        
+        for t in trades_details:
+            entry_time_str = format_dual_time(t.get("entry_time"))
+            exit_time_str = format_dual_time(t.get("exit_time"))
+            pnl_val = t.get("net_pnl_usdt", 0.0)
+            pnl_pct = t.get("net_pnl_pct", 0.0)
+            status = "🟢 WIN" if pnl_val > 0 else "🔴 LOSS"
+            
+            trade_rows_text.append(
+                f"• {status} | {t.get('symbol')} ({t.get('strategy')})\n"
+                f"  Entry: ${t.get('entry_price', 0):,.4f} at {entry_time_str}\n"
+                f"  Exit:  ${t.get('exit_price', 0):,.4f} at {exit_time_str}\n"
+                f"  PnL:   ${pnl_val:+,.2f} ({pnl_pct:+.2f}%) | Reason: {t.get('exit_reason')}\n"
+            )
+            
+            row_bg = "#dcfce7" if pnl_val > 0 else "#fee2e2"
+            pnl_color = "#166534" if pnl_val > 0 else "#991b1b"
+            
+            trade_rows_html.append(f"""
+            <tr style="background:{row_bg};">
+                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700;">{t.get('symbol')}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{t.get('strategy')}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">${t.get('entry_price', 0):,.4f}<br><small style="color:#64748b;">{entry_time_str}</small></td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">${t.get('exit_price', 0):,.4f}<br><small style="color:#64748b;">{exit_time_str}</small></td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:{pnl_color};">${pnl_val:+,.2f} ({pnl_pct:+.2f}%)</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{t.get('exit_reason')}</td>
+            </tr>
+            """)
+
+        # Build Table of Unresolved / Active Trades
+        unresolved_rows_html = []
+        unresolved_rows_text = []
+        
+        for pos in open_positions_details:
+            entry_time_str = format_dual_time(pos.get("entry_time"))
+            curr_p = pos.get("current_price", pos.get("entry_price", 0))
+            entry_p = pos.get("entry_price", 1)
+            unrealized_pct = ((curr_p - entry_p) / entry_p) * 100.0
+            
+            unresolved_rows_text.append(
+                f"• 🟡 ACTIVE | {pos.get('symbol')} ({pos.get('strategy')})\n"
+                f"  Entry: ${entry_p:,.4f} at {entry_time_str}\n"
+                f"  Current Price: ${curr_p:,.4f} | Unrealized: {unrealized_pct:+.2f}%\n"
+                f"  Stop Loss: ${pos.get('stop_loss', 0):,.4f} | TP1: ${pos.get('tp1', 0):,.4f}\n"
+            )
+            
+            unresolved_rows_html.append(f"""
+            <tr style="background:#fef9c3;">
+                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700;">{pos.get('symbol')}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{pos.get('strategy')}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">${entry_p:,.4f}<br><small style="color:#64748b;">{entry_time_str}</small></td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">${curr_p:,.4f}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:{'#166534' if unrealized_pct >= 0 else '#991b1b'};">{unrealized_pct:+.2f}%</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">SL: ${pos.get('stop_loss', 0):,.4f}<br>TP1: ${pos.get('tp1', 0):,.4f}</td>
+            </tr>
+            """)
+
+        closed_table_html = "".join(trade_rows_html) if trade_rows_html else "<tr><td colspan='6' style='padding:12px; text-align:center; color:#64748b;'>No closed trades in this 12-hour window.</td></tr>"
+        unresolved_table_html = "".join(unresolved_rows_html) if unresolved_rows_html else "<tr><td colspan='6' style='padding:12px; text-align:center; color:#64748b;'>No unresolved / active trades currently open.</td></tr>"
+
+        text_content = f"""
+================================================================================
+12-HOUR BINANCE SPOT TRADING ACTIVITY REPORT
+================================================================================
+Window: {start_str}  -->  {end_str}
+
+EXECUTIVE SUMMARY:
+• Total Qualified Trades: {total_qualified}
+• Realized Wins:         {win_count}
+• Realized Losses:       {loss_count}
+• Unresolved / Active:   {unresolved_count}
+• Net Realized PnL:      ${net_pnl_usdt:+,.2f} USDT
+
+--------------------------------------------------------------------------------
+1. REALIZED CLOSED TRADES:
+{chr(10).join(trade_rows_text) if trade_rows_text else 'None'}
+
+--------------------------------------------------------------------------------
+2. UNRESOLVED / ACTIVE POSITIONS:
+{chr(10).join(unresolved_rows_text) if unresolved_rows_text else 'None'}
+================================================================================
+"""
+
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; margin: 0; padding: 20px; }}
+    .card {{ background: #ffffff; border-radius: 12px; max-width: 750px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #e2e8f0; }}
+    .header {{ background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: #ffffff; padding: 24px; text-align: center; }}
+    .header h1 {{ margin: 0; font-size: 22px; font-weight: 700; }}
+    .header p {{ margin: 6px 0 0 0; font-size: 13px; color: #c7d2fe; }}
+    .content {{ padding: 24px; }}
+    .section {{ margin-bottom: 24px; }}
+    .section-title {{ font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }}
+    .metric-grid {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }}
+    .metric-box {{ background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center; }}
+    .metric-label {{ font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; }}
+    .metric-value {{ font-size: 18px; font-weight: 700; color: #0f172a; margin-top: 4px; }}
+    table {{ width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }}
+    th {{ background: #f1f5f9; padding: 8px; border: 1px solid #cbd5e1; text-align: left; }}
+    .footer {{ background: #f1f5f9; text-align: center; padding: 16px; font-size: 12px; color: #64748b; }}
+</style>
+</head>
+<body>
+<div class="card">
+    <div class="header">
+        <h1>📊 12-HOUR TRADING ACTIVITY SUMMARY</h1>
+        <p>Period: <b>{start_str}</b> &nbsp;➔&nbsp; <b>{end_str}</b></p>
+    </div>
+    <div class="content">
+        <!-- 12h Metrics -->
+        <div class="section">
+            <div class="section-title">📈 12-Hour Performance Scorecard</div>
+            <div class="metric-grid">
+                <div class="metric-box">
+                    <div class="metric-label">Total Qualified</div>
+                    <div class="metric-value">{total_qualified}</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Wins</div>
+                    <div class="metric-value" style="color:#16a34a;">{win_count}</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Losses</div>
+                    <div class="metric-value" style="color:#dc2626;">{loss_count}</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Active / Unresolved</div>
+                    <div class="metric-value" style="color:#d97706;">{unresolved_count}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Realized Closed Trades -->
+        <div class="section">
+            <div class="section-title">✅ Realized Closed Trades in Last 12h ({len(trades_details)})</div>
+            <table>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Strategy</th>
+                    <th>Entry Price & Time</th>
+                    <th>Exit Price & Time</th>
+                    <th>Net PnL</th>
+                    <th>Exit Reason</th>
+                </tr>
+                {closed_table_html}
+            </table>
+        </div>
+
+        <!-- Unresolved / Active Positions -->
+        <div class="section">
+            <div class="section-title">🟡 Unresolved / Still Active Positions ({len(open_positions_details)})</div>
+            <table>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Strategy</th>
+                    <th>Entry Price & Time</th>
+                    <th>Current Price</th>
+                    <th>Unrealized PnL</th>
+                    <th>Targets (SL / TP1)</th>
+                </tr>
+                {unresolved_table_html}
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        Binance Spot Autonomous Quantitative Scanner • 12-Hour Scheduled Summary
     </div>
 </div>
 </body>

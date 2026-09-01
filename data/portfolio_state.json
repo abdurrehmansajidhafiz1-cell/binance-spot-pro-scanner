@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 3717.041900066972,
+  "cash_usdt": 6241.665809978317,
   "starting_balance": 10000.0,
   "equity_peak": 10000.0,
   "open_positions": {
@@ -8,41 +8,20 @@
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "entry_time": "2026-08-31T18:13:49.316701",
       "entry_price": 0.47823899999999997,
-      "current_price": 0.481,
-      "quantity": 5227.511767128988,
-      "initial_cost_usdt": 2500.0,
-      "stop_loss": 0.473053,
+      "current_price": 0.482,
+      "quantity": 2613.755883564494,
+      "initial_cost_usdt": 1250.0,
+      "stop_loss": 0.47943459749999995,
       "initial_stop_loss": 0.473053,
       "tp1": 0.48278,
       "tp2": 0.483355,
-      "tp1_reached": false,
-      "highest_price": 0.481,
-      "fees_paid": 1.875,
+      "tp1_reached": true,
+      "highest_price": 0.483,
+      "fees_paid": 0.9375,
       "metadata": {
         "atr": 0.002677,
         "mom_hist": 0.0016,
         "bb_upper": 0.477883
-      }
-    },
-    "OPUSDT": {
-      "symbol": "OPUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "entry_time": "2026-08-31T18:13:49.663692",
-      "entry_price": 0.08874435,
-      "current_price": 0.098,
-      "quantity": 14082.76273362755,
-      "initial_cost_usdt": 1249.765625,
-      "stop_loss": 0.08896621087499999,
-      "initial_stop_loss": 0.086966,
-      "tp1": 0.089587,
-      "tp2": 0.089891,
-      "tp1_reached": true,
-      "highest_price": 0.0984,
-      "fees_paid": 0.93732421875,
-      "metadata": {
-        "atr": 0.000596,
-        "mom_hist": 0.0005,
-        "bb_upper": 0.0884
       }
     },
     "EGLDUSDT": {
@@ -50,7 +29,7 @@
       "strategy": "I1_MTF_TREND_PULLBACK",
       "entry_time": "2026-09-01T11:24:48.835902",
       "entry_price": 3.9299639999999996,
-      "current_price": 3.9299639999999996,
+      "current_price": 3.911,
       "quantity": 645.7641155870282,
       "initial_cost_usdt": 2537.8297267488592,
       "stop_loss": 3.81427,
@@ -68,5 +47,5 @@
     }
   },
   "start_time": "2026-08-31T18:12:31.163933",
-  "last_updated": "2026-09-01T11:24:48.835909"
+  "last_updated": "2026-09-01T11:58:33.143488"
 }

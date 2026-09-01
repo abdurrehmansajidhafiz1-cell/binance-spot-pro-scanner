@@ -1,14 +1,15 @@
 """
-15-Day Live Performance Tracker & Report Generator.
+15-Day Live Performance Tracker & 12-Hour Summary Generator.
 Computes real-time statistics (Sharpe, Profit Factor, Max Drawdown, Win Rate)
-and automatically formats LIVE_RESULTS.md for GitHub.
+and supports 12-hour slice activity analysis with dual PKT + UTC timestamps.
 """
-from datetime import datetime
-from typing import Dict, List, Any
+from datetime import datetime, timezone, timedelta
+from typing import Dict, List, Any, Tuple
 import numpy as np
 import pandas as pd
 from tabulate import tabulate
 from config.settings import LIVE_RESULTS_MD, STARTING_BALANCE_USDT
+from engine.time_utils import format_dual_time, parse_to_utc, get_current_utc
 
 
 class PerformanceTracker:
@@ -63,8 +64,47 @@ class PerformanceTracker:
             "avg_win_pct": avg_win_pct,
             "avg_loss_pct": avg_loss_pct,
             "open_positions_count": len(self.broker.open_positions),
-            "start_time": state.get("start_time", "N/A"),
-            "last_updated": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+            "start_time": format_dual_time(state.get("start_time")),
+            "last_updated": format_dual_time()
+        }
+
+    def get_12h_summary_data(self, hours: int = 12) -> Dict[str, Any]:
+        """
+        Extract trading activity from the last 12 hours.
+        """
+        now_utc = get_current_utc()
+        cutoff_utc = now_utc - timedelta(hours=hours)
+        
+        history = self.broker.trade_history
+        open_positions = list(self.broker.open_positions.values())
+        
+        # Filter closed trades in last 12h (by exit_time or entry_time)
+        closed_in_12h = []
+        for t in history:
+            exit_dt = parse_to_utc(t.get("exit_time"))
+            entry_dt = parse_to_utc(t.get("entry_time"))
+            if (exit_dt and exit_dt >= cutoff_utc) or (entry_dt and entry_dt >= cutoff_utc):
+                closed_in_12h.append(t)
+                
+        # Filter open positions
+        open_in_12h = open_positions
+        
+        win_count = len([t for t in closed_in_12h if t.get("net_pnl_usdt", 0) > 0])
+        loss_count = len([t for t in closed_in_12h if t.get("net_pnl_usdt", 0) <= 0])
+        unresolved_count = len(open_in_12h)
+        total_qualified = len(closed_in_12h) + unresolved_count
+        net_pnl_usdt = sum(t.get("net_pnl_usdt", 0.0) for t in closed_in_12h)
+        
+        return {
+            "period_start_utc": cutoff_utc,
+            "period_end_utc": now_utc,
+            "total_qualified": total_qualified,
+            "win_count": win_count,
+            "loss_count": loss_count,
+            "unresolved_count": unresolved_count,
+            "net_pnl_usdt": net_pnl_usdt,
+            "closed_trades": closed_in_12h,
+            "open_positions": open_in_12h
         }
 
     def generate_markdown_report(self, current_prices: Dict[str, float]) -> str:
@@ -72,7 +112,6 @@ class PerformanceTracker:
         state = self.broker.state
         history = self.broker.trade_history
         
-        # Format Open Positions table
         open_pos_rows = []
         for sym, pos in state["open_positions"].items():
             curr_p = current_prices.get(sym, pos["current_price"])
@@ -86,13 +125,12 @@ class PerformanceTracker:
                 f"${pos['stop_loss']:,.4f}",
                 f"${pos['tp1']:,.4f}",
                 f"${pnl_val:+,.2f} ({pnl_pct:+.2f}%)",
-                pos["entry_time"][:16]
+                format_dual_time(pos.get("entry_time"))
             ])
 
-        open_headers = ["Symbol", "Strategy", "Entry Price", "Current Price", "Stop Loss", "TP1", "Unrealized PnL", "Entry Time"]
+        open_headers = ["Symbol", "Strategy", "Entry Price", "Current Price", "Stop Loss", "TP1", "Unrealized PnL", "Entry Time (PKT & UTC)"]
         open_table_md = tabulate(open_pos_rows, headers=open_headers, tablefmt="github") if open_pos_rows else "_No open positions currently._"
 
-        # Format Recent Closed Trades (last 15)
         closed_rows = []
         for t in reversed(history[-15:]):
             closed_rows.append([
@@ -104,10 +142,10 @@ class PerformanceTracker:
                 f"{t['net_pnl_pct']:+.2f}%",
                 f"${t.get('fees_paid', 0.0):,.3f}",
                 t["exit_reason"],
-                t["exit_time"][:16]
+                format_dual_time(t.get("exit_time"))
             ])
             
-        closed_headers = ["Symbol", "Strategy", "Entry Price", "Exit Price", "Net PnL ($)", "PnL (%)", "Fees", "Exit Reason", "Exit Time"]
+        closed_headers = ["Symbol", "Strategy", "Entry Price", "Exit Price", "Net PnL ($)", "PnL (%)", "Fees", "Exit Reason", "Exit Time (PKT & UTC)"]
         closed_table_md = tabulate(closed_rows, headers=closed_headers, tablefmt="github") if closed_rows else "_No closed trades yet._"
 
         pnl_color = "brightgreen" if metrics['total_pnl_usdt'] >= 0 else "red"
@@ -156,7 +194,7 @@ class PerformanceTracker:
 - **I2: Cross-Sectional Momentum & Relative Strength Rotation (1D Top Decile Ranker)**
 - **S3: Volatility Squeeze Breakout (15m Bollinger-Keltner + OBV)**
 
-*Note: All trades automatically model VIP0 0.075% BNB Spot fees + 0.05% slippage.*
+*Note: All timestamps displayed in dual PKT (UTC+5) and UTC format.*
 """
         return md
 

@@ -1,12 +1,12 @@
 """
 Main Entrypoint for Binance Spot Phase 1 Live Paper Trading Scanner.
-Integrates S3 (15m Squeeze), I1 (MTF Pullback), I2 (Momentum Ranker),
-Market Safety Shield, and 100 USDT Actionable Email Notifications.
+Integrates S3, I1, I2, Market Safety Shield, 100 USDT Actionable Email Signals,
+and Scheduled 12-Hour Activity Summaries (06:00 PKT & 18:00 PKT).
 """
 import sys
 import time
 import argparse
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from tabulate import tabulate
 from colorama import init, Fore, Style
 
@@ -26,6 +26,7 @@ from engine.binance_client import BinanceSpotClient
 from engine.paper_broker import PaperBroker
 from engine.state_manager import StateManager
 from engine.safety_shield import MarketSafetyShield
+from engine.time_utils import format_dual_time, get_pkt_hour, get_current_utc, PKT_OFFSET
 from strategies.s3_volatility_squeeze import VolatilitySqueezeStrategy
 from strategies.i1_mtf_trend_pullback import MultiTimeframePullbackStrategy
 from strategies.i2_cross_sectional_momentum import CrossSectionalMomentumStrategy
@@ -55,9 +56,53 @@ class LiveScannerEngine:
         self.strat_i1 = MultiTimeframePullbackStrategy()
         self.strat_i2 = CrossSectionalMomentumStrategy(top_n=5)
 
+    def check_and_send_12h_summary(self):
+        """
+        Checks if current time is within 06:00 PKT or 18:00 PKT window
+        and dispatches 12-hour summary email if not already sent for this window.
+        """
+        now_utc = get_current_utc()
+        now_pkt = now_utc + PKT_OFFSET
+        current_hour_pkt = now_pkt.hour
+        current_date_pkt = now_pkt.strftime("%Y-%m-%d")
+        
+        # Windows: Morning (06:00 to 07:00 PKT) or Evening (18:00 to 19:00 PKT)
+        target_slot = None
+        if current_hour_pkt in (6, 7):
+            target_slot = f"{current_date_pkt}_06_AM"
+        elif current_hour_pkt in (18, 19):
+            target_slot = f"{current_date_pkt}_06_PM"
+            
+        if not target_slot:
+            return
+
+        last_slot = self.broker.state.get("last_12h_summary_slot")
+        if last_slot == target_slot:
+            return # Already sent for this window
+
+        print(f"\n{Fore.CYAN}--> [12-HOUR TRIGGER] Dispatching 12-Hour Summary Report for {target_slot}...{Style.RESET_ALL}")
+        summary_data = self.tracker.get_12h_summary_data(hours=12)
+        
+        sent = self.email_notifier.send_12h_summary_email(
+            period_start_utc=summary_data["period_start_utc"],
+            period_end_utc=summary_data["period_end_utc"],
+            total_qualified=summary_data["total_qualified"],
+            win_count=summary_data["win_count"],
+            loss_count=summary_data["loss_count"],
+            unresolved_count=summary_data["unresolved_count"],
+            net_pnl_usdt=summary_data["net_pnl_usdt"],
+            trades_details=summary_data["closed_trades"],
+            open_positions_details=summary_data["open_positions"]
+        )
+        
+        if sent:
+            print(f"{Fore.GREEN}✔ [12-HOUR SUMMARY SENT] Activity report delivered to {RECEIVER_EMAIL} ({target_slot}){Style.RESET_ALL}")
+            self.broker.state["last_12h_summary_slot"] = target_slot
+            self.broker.save()
+
     def run_scan_cycle(self):
         """Execute one complete scanning, safety evaluation, and trade management cycle."""
-        now_str = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+        now_str = format_dual_time()
         print(f"\n{Fore.CYAN}{'='*80}")
         print(f"{Fore.YELLOW}[*] BINANCE SPOT SCAN CYCLE STARTED | {now_str}")
         print(f"{Fore.CYAN}{'='*80}{Style.RESET_ALL}")
@@ -153,8 +198,8 @@ class LiveScannerEngine:
                             metadata=s3_signal.metadata
                         )
                         if pos:
+                            candle_time = df_15m.index[-1] if not df_15m.empty else None
                             print(f"{Fore.GREEN}  [BUY S3] {symbol} @ ${s3_signal.price:,.4f} | SL: ${s3_signal.stop_loss:,.4f} | TP1: ${s3_signal.tp1:,.4f} | TP2: ${s3_signal.tp2:,.4f}{Style.RESET_ALL}")
-                            # Send Telegram & Comprehensive 100 USDT Email Alert
                             self.notifier.alert_buy(symbol, s3_signal.strategy_name, s3_signal.price, s3_signal.stop_loss, s3_signal.tp1, s3_signal.tp2, s3_signal.reason)
                             email_sent = self.email_notifier.send_trade_signal_email(
                                 symbol=symbol,
@@ -165,7 +210,8 @@ class LiveScannerEngine:
                                 tp2=s3_signal.tp2,
                                 reason=s3_signal.reason,
                                 metadata=s3_signal.metadata,
-                                safety_info=safety
+                                safety_info=safety,
+                                candle_time=candle_time
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
@@ -189,8 +235,8 @@ class LiveScannerEngine:
                             metadata=i1_signal.metadata
                         )
                         if pos:
+                            candle_time = df_1h.index[-1] if not df_1h.empty else None
                             print(f"{Fore.GREEN}  [BUY I1] {symbol} @ ${i1_signal.price:,.4f} | SL: ${i1_signal.stop_loss:,.4f} | TP1: ${i1_signal.tp1:,.4f} | TP2: ${i1_signal.tp2:,.4f}{Style.RESET_ALL}")
-                            # Send Telegram & Comprehensive 100 USDT Email Alert
                             self.notifier.alert_buy(symbol, i1_signal.strategy_name, i1_signal.price, i1_signal.stop_loss, i1_signal.tp1, i1_signal.tp2, i1_signal.reason)
                             email_sent = self.email_notifier.send_trade_signal_email(
                                 symbol=symbol,
@@ -201,14 +247,18 @@ class LiveScannerEngine:
                                 tp2=i1_signal.tp2,
                                 reason=i1_signal.reason,
                                 metadata=i1_signal.metadata,
-                                safety_info=safety
+                                safety_info=safety,
+                                candle_time=candle_time
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
 
         print(f"{Fore.MAGENTA}  Scanning complete. New Signals Executed: {signals_found}{Style.RESET_ALL}")
 
-        # 5. Compute Metrics & Save LIVE_RESULTS.md
+        # 5. Check 12-Hour Summary Schedule (06:00 PKT / 18:00 PKT)
+        self.check_and_send_12h_summary()
+
+        # 6. Compute Metrics & Save LIVE_RESULTS.md
         print(f"\n{Fore.BLUE}--> Step 5: Updating LIVE_RESULTS.md and Performance Scorecard...{Style.RESET_ALL}")
         self.tracker.save_live_results(current_prices)
         metrics = self.tracker.compute_metrics(current_prices)
@@ -232,7 +282,8 @@ class LiveScannerEngine:
             ["Profit Factor", f"{metrics['profit_factor']:.2f}"],
             ["Max Drawdown", f"-{metrics['max_drawdown_pct']:.2f}%"],
             ["Total Fees Deducted", f"${metrics['total_fees_paid']:,.2f} USDT"],
-            ["Active Positions", f"{metrics['open_positions_count']}"]
+            ["Active Positions", f"{metrics['open_positions_count']}"],
+            ["Report Time", format_dual_time()]
         ]
         print(f"\n{Fore.YELLOW}=== 📊 15-DAY LIVE PAPER TRADING PERFORMANCE REPORT ==={Style.RESET_ALL}")
         print(tabulate(summary_table, headers=["Metric", "Value"], tablefmt="fancy_grid"))
@@ -240,8 +291,8 @@ class LiveScannerEngine:
 
 def main():
     parser = argparse.ArgumentParser(description="Binance Spot Phase 1 Live Paper Trading Scanner")
-    parser.add_argument("--mode", choices=["scan", "live-paper", "report", "test-email"], default="scan",
-                        help="Execution mode: 'scan', 'live-paper', 'report', 'test-email'")
+    parser.add_argument("--mode", choices=["scan", "live-paper", "report", "test-email", "test-summary"], default="scan",
+                        help="Execution mode: 'scan', 'live-paper', 'report', 'test-email', 'test-summary'")
     parser.add_argument("--interval", type=int, default=60, help="Interval in seconds for continuous mode (default: 60s)")
     args = parser.parse_args()
 
@@ -257,12 +308,33 @@ def main():
             tp1=147.50,
             tp2=154.00,
             reason="[TEST SCAN] 4H Macro Trend Bullish + 1H EMA21 Pullback Reversal",
-            safety_info={"timing_msg": "Normal market trading hours."}
+            safety_info={"timing_msg": "Normal market trading hours."},
+            candle_time=get_current_utc() - timedelta(minutes=15)
         )
         if sent:
-            print(f"{Fore.GREEN}[SUCCESS] Test email successfully delivered to {RECEIVER_EMAIL}! Please check your Inbox / Spam folder.{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}[SUCCESS] Test email successfully delivered to {RECEIVER_EMAIL}!{Style.RESET_ALL}")
         else:
-            print(f"{Fore.RED}[FAILED] Email delivery failed. Please verify credentials.{Style.RESET_ALL}")
+            print(f"{Fore.RED}[FAILED] Email delivery failed.{Style.RESET_ALL}")
+            
+    elif args.mode == "test-summary":
+        print(f"{Fore.CYAN}Sending Test 12-Hour Activity Summary Email to {RECEIVER_EMAIL}...{Style.RESET_ALL}")
+        summary_data = engine.tracker.get_12h_summary_data(hours=12)
+        sent = engine.email_notifier.send_12h_summary_email(
+            period_start_utc=summary_data["period_start_utc"],
+            period_end_utc=summary_data["period_end_utc"],
+            total_qualified=summary_data["total_qualified"],
+            win_count=summary_data["win_count"],
+            loss_count=summary_data["loss_count"],
+            unresolved_count=summary_data["unresolved_count"],
+            net_pnl_usdt=summary_data["net_pnl_usdt"],
+            trades_details=summary_data["closed_trades"],
+            open_positions_details=summary_data["open_positions"]
+        )
+        if sent:
+            print(f"{Fore.GREEN}[SUCCESS] 12-Hour Summary Email successfully delivered to {RECEIVER_EMAIL}! Please check your Inbox.{Style.RESET_ALL}")
+        else:
+            print(f"{Fore.RED}[FAILED] 12-Hour Summary Email delivery failed.{Style.RESET_ALL}")
+            
     elif args.mode == "scan":
         engine.run_scan_cycle()
     elif args.mode == "report":
