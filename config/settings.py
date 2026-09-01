@@ -35,9 +35,9 @@ MAX_CONCURRENT_POSITIONS = int(os.getenv("MAX_CONCURRENT_POSITIONS", 5))
 RISK_PER_TRADE_PCT = float(os.getenv("RISK_PER_TRADE_PCT", 0.015)) # 1.5% portfolio risk per trade
 
 # Email Notification Settings (Actionable 100 USDT Trade Plans)
-SENDER_EMAIL = os.getenv("SENDER_EMAIL", "abdurrehmansajidhafiz@gmail.com")
-GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD", "ejeccnvnnoypabjy")
-RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL", "abdurrehmansajidhafiz1@gmail.com")
+SENDER_EMAIL = os.getenv("SENDER_EMAIL", "").strip()
+GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD", "").replace(" ", "").strip()
+RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL", "").strip()
 ENABLE_EMAIL = bool(SENDER_EMAIL and GMAIL_APP_PASSWORD and RECEIVER_EMAIL)
 
 # Telegram Notification Settings (Optional)
