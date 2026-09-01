@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--0.09%25-red?style=for-the-badge)](LIVE_RESULTS.md)
-[![Win Rate](https://img.shields.io/badge/Win_Rate-0.0%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
-[![Profit Factor](https://img.shields.io/badge/Profit_Factor-1.00-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Trades](https://img.shields.io/badge/Total_Trades-0-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return-+1.46%25-brightgreen?style=for-the-badge)](LIVE_RESULTS.md)
+[![Win Rate](https://img.shields.io/badge/Win_Rate-100.0%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
+[![Profit Factor](https://img.shields.io/badge/Profit_Factor-99.90-orange?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Trades](https://img.shields.io/badge/Total_Trades-1-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-08-31 18:14:11 UTC`  
+> **Last Updated:** `2026-09-01 11:24:56 UTC`  
 > **Testing Start Date:** `2026-08-31T18:12:31.163933`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 
@@ -15,28 +15,31 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$10,000.00 USDT` | **Total Realized Trades** | `0` |
-| **Current Equity** | `$9,990.94 USDT` | **Win / Loss Ratio** | `0 Win / 0 Loss` |
-| **Available Cash** | `$4,996.72 USDT` | **Win Rate** | `0.00%` |
-| **Net PnL ($)** | `$-9.06 USDT` | **Profit Factor** | `1.00` |
-| **Net Return (%)** | `-0.09%` | **Avg Win / Avg Loss** | `+0.00% / 0.00%` |
-| **Peak Equity** | `$10,000.00 USDT` | **Total Fees Deducted** | `$0.00 USDT` |
-| **Max Drawdown** | `-0.09%` | **Active Positions** | `2` |
+| **Starting Balance** | `$10,000.00 USDT` | **Total Realized Trades** | `1` |
+| **Current Equity** | `$10,146.21 USDT` | **Win / Loss Ratio** | `1 Win / 0 Loss` |
+| **Available Cash** | `$3,717.04 USDT` | **Win Rate** | `100.00%` |
+| **Net PnL ($)** | `$+146.21 USDT` | **Profit Factor** | `99.90` |
+| **Net Return (%)** | `+1.46%` | **Avg Win / Avg Loss** | `+0.82% / 0.00%` |
+| **Peak Equity** | `$10,146.21 USDT` | **Total Fees Deducted** | `$1.88 USDT` |
+| **Max Drawdown** | `-0.00%` | **Active Positions** | `3` |
 
 ---
 
-## 🟢 Active Open Positions (2)
+## 🟢 Active Open Positions (3)
 
-| Symbol   | Strategy              | Entry Price   | Current Price   | Stop Loss   | TP1     | Unrealized PnL   | Entry Time       |
-|----------|-----------------------|---------------|-----------------|-------------|---------|------------------|------------------|
-| RUNEUSDT | S3_VOLATILITY_SQUEEZE | $0.4782       | $0.4780         | $0.4731     | $0.4828 | $-1.25 (-0.05%)  | 2026-08-31T18:13 |
-| OPUSDT   | S3_VOLATILITY_SQUEEZE | $0.0887       | $0.0886         | $0.0870     | $0.0896 | $-4.07 (-0.16%)  | 2026-08-31T18:13 |
+| Symbol   | Strategy              | Entry Price   | Current Price   | Stop Loss   | TP1     | Unrealized PnL     | Entry Time       |
+|----------|-----------------------|---------------|-----------------|-------------|---------|--------------------|------------------|
+| RUNEUSDT | S3_VOLATILITY_SQUEEZE | $0.4782       | $0.4810         | $0.4731     | $0.4828 | $+14.43 (+0.58%)   | 2026-08-31T18:13 |
+| OPUSDT   | S3_VOLATILITY_SQUEEZE | $0.0887       | $0.0980         | $0.0890     | $0.0896 | $+130.35 (+10.43%) | 2026-08-31T18:13 |
+| EGLDUSDT | I1_MTF_TREND_PULLBACK | $3.9300       | $3.9250         | $3.8143     | $4.0986 | $-3.21 (-0.13%)    | 2026-09-01T11:24 |
 
 ---
 
 ## 📜 Recent Closed Trades (Last 15)
 
-_No closed trades yet._
+| Symbol   | Strategy              | Entry Price   | Exit Price   | Net PnL ($)   | PnL (%)   | Fees   | Exit Reason   | Exit Time        |
+|----------|-----------------------|---------------|--------------|---------------|-----------|--------|---------------|------------------|
+| OPUSDT   | S3_VOLATILITY_SQUEEZE | $0.0887       | $0.0895      | $+10.29       | +0.82%    | $1.883 | TP1_HIT_50PCT | 2026-09-01T11:23 |
 
 ---
 

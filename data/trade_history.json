@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "symbol": "OPUSDT",
+    "strategy": "S3_VOLATILITY_SQUEEZE",
+    "entry_time": "2026-08-31T18:13:49.663692",
+    "exit_time": "2026-09-01T11:23:47.595437",
+    "entry_price": 0.08874435,
+    "exit_price": 0.0895422065,
+    "quantity": 14082.76273362755,
+    "cost_usdt": 1249.765625,
+    "net_pnl_usdt": 10.2903,
+    "net_pnl_pct": 0.82,
+    "fees_paid": 1.8831,
+    "exit_reason": "TP1_HIT_50PCT",
+    "partial": true
+  }
+]
