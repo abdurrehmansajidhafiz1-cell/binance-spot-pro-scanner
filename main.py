@@ -205,6 +205,7 @@ class LiveScannerEngine:
                             stop_loss=s3_signal.stop_loss,
                             tp1=s3_signal.tp1,
                             tp2=s3_signal.tp2,
+                            timeframe="15m",
                             zone_candle_time=zone_time,
                             metadata=s3_signal.metadata
                         )
@@ -221,7 +222,8 @@ class LiveScannerEngine:
                                 reason=s3_signal.reason,
                                 metadata=s3_signal.metadata,
                                 safety_info=safety,
-                                candle_time=zone_time
+                                candle_time=zone_time,
+                                timeframe="15m"
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
@@ -246,6 +248,7 @@ class LiveScannerEngine:
                             stop_loss=i1_signal.stop_loss,
                             tp1=i1_signal.tp1,
                             tp2=i1_signal.tp2,
+                            timeframe="1h (4h Macro Trend)",
                             zone_candle_time=zone_time,
                             metadata=i1_signal.metadata
                         )
@@ -262,7 +265,8 @@ class LiveScannerEngine:
                                 reason=i1_signal.reason,
                                 metadata=i1_signal.metadata,
                                 safety_info=safety,
-                                candle_time=zone_time
+                                candle_time=zone_time,
+                                timeframe="1h (4h Macro Trend)"
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")

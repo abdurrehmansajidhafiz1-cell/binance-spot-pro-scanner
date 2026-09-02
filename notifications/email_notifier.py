@@ -52,9 +52,11 @@ class EmailNotifier:
                                 stop_loss: float, tp1: float, tp2: float,
                                 reason: str, metadata: Optional[Dict[str, Any]] = None,
                                 safety_info: Optional[Dict[str, Any]] = None,
-                                candle_time: Optional[Any] = None) -> bool:
+                                candle_time: Optional[Any] = None,
+                                timeframe: str = "15m") -> bool:
         """
-        Formats and dispatches a comprehensive, actionable 100 USDT trade execution plan with dual PKT + UTC timestamps.
+        Formats and dispatches a comprehensive, actionable 100 USDT trade execution plan with dual PKT + UTC timestamps
+        and exact TradingView chart timeframe.
         """
         signal_time_str = format_dual_time()
         candle_time_str = format_dual_time(candle_time) if candle_time else signal_time_str
@@ -115,12 +117,13 @@ class EmailNotifier:
             entry_style_html = f"<p><b>Fast Breakout Entry:</b> Buy 100% (<b>$100.00 USDT</b>) at current price <b>${current_price:,.4f}</b> (~{qty_100:.4f} {symbol[:-4]}).</p>"
 
         be_price = current_price * 1.0025
-        subject = f"🟢 [BINANCE SPOT SIGNAL] {symbol} | Strategy: {strategy} | Capital: $100 USDT"
+        subject = f"🟢 [BINANCE SPOT SIGNAL] {symbol} ({timeframe}) | Strategy: {strategy} | Capital: $100 USDT"
 
         text_content = f"""
 ================================================================================
 BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
 ================================================================================
+• TradingView Timeframe: {timeframe}  <-- Open this timeframe on TradingView
 • Signal Time:        {signal_time_str}
 • Zone / Candle Time: {candle_time_str}
 • Strategy:           {strategy}
@@ -162,6 +165,7 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
     .header h1 {{ margin: 0; font-size: 22px; font-weight: 700; }}
     .header p {{ margin: 6px 0 0 0; font-size: 14px; opacity: 0.9; color: #38bdf8; }}
     .time-badge {{ background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; margin-top: 8px; }}
+    .tf-badge {{ background: #38bdf8; color: #0f172a; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 13px; display: inline-block; margin-left: 6px; }}
     .content {{ padding: 24px; }}
     .section {{ margin-bottom: 22px; border-bottom: 1px solid #e2e8f0; padding-bottom: 18px; }}
     .section:last-child {{ border-bottom: none; }}
@@ -184,6 +188,15 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
         <div class="time-badge">🕒 Signal Time: <b>{signal_time_str}</b></div>
     </div>
     <div class="content">
+        <!-- TradingView Timeframe Highlight -->
+        <div class="section" style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:14px;">
+            <div style="font-size:13px; color:#166534; font-weight:700; text-transform:uppercase;">📈 TradingView Chart Timeframe</div>
+            <div style="font-size:18px; font-weight:800; color:#15803d; margin-top:4px;">
+                Open Chart on: <span style="background:#dcfce7; border:1px solid #86efac; padding:2px 10px; border-radius:6px;">{timeframe}</span>
+            </div>
+            <div style="font-size:12px; color:#166534; margin-top:4px;">Is trade ka zone aur candle formation dekhne ke liye TradingView par <b>{timeframe}</b> timeframe use karein.</div>
+        </div>
+
         <!-- Timestamps Overview -->
         <div class="section">
             <div class="section-title">⏱️ Exact Timestamps (PKT & UTC)</div>
@@ -192,7 +205,7 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
                 <div class="metric-value" style="font-size:14px; color:#0284c7;">{signal_time_str}</div>
             </div>
             <div class="metric-box">
-                <div class="metric-label">Zone / Candle Formed At</div>
+                <div class="metric-label">Zone / Candle Formed At ({timeframe})</div>
                 <div class="metric-value" style="font-size:14px; color:#475569;">{candle_time_str}</div>
             </div>
         </div>
@@ -300,8 +313,9 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
             pnl_pct = t.get("net_pnl_pct", 0.0)
             status = "🟢 WIN" if pnl_val > 0 else "🔴 LOSS"
             
+            tf_val = t.get("timeframe", "15m" if "S3" in t.get("strategy", "") else "1h")
             trade_rows_text.append(
-                f"• {status} | {t.get('symbol')} ({t.get('strategy')})\n"
+                f"• {status} | {t.get('symbol')} ({t.get('strategy')}) [TF: {tf_val}]\n"
                 f"  Entry: ${t.get('entry_price', 0):,.4f} at {entry_time_str}\n"
                 f"  Exit:  ${t.get('exit_price', 0):,.4f} at {exit_time_str}\n"
                 f"  PnL:   ${pnl_val:+,.2f} ({pnl_pct:+.2f}%) | Reason: {t.get('exit_reason')}\n"
@@ -314,6 +328,7 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
             <tr style="background:{row_bg};">
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700;">{t.get('symbol')}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{t.get('strategy')}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:#0284c7;">{tf_val}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1;">${t.get('entry_price', 0):,.4f}<br><small style="color:#64748b;">{entry_time_str}</small></td>
                 <td style="padding:8px; border:1px solid #cbd5e1;">${t.get('exit_price', 0):,.4f}<br><small style="color:#64748b;">{exit_time_str}</small></td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:{pnl_color};">${pnl_val:+,.2f} ({pnl_pct:+.2f}%)</td>
@@ -330,9 +345,10 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
             curr_p = pos.get("current_price", pos.get("entry_price", 0))
             entry_p = pos.get("entry_price", 1)
             unrealized_pct = ((curr_p - entry_p) / entry_p) * 100.0
+            pos_tf = pos.get("timeframe", "15m" if "S3" in pos.get("strategy", "") else "1h")
             
             unresolved_rows_text.append(
-                f"• 🟡 ACTIVE | {pos.get('symbol')} ({pos.get('strategy')})\n"
+                f"• 🟡 ACTIVE | {pos.get('symbol')} ({pos.get('strategy')}) [TF: {pos_tf}]\n"
                 f"  Entry: ${entry_p:,.4f} at {entry_time_str}\n"
                 f"  Current Price: ${curr_p:,.4f} | Unrealized: {unrealized_pct:+.2f}%\n"
                 f"  Stop Loss: ${pos.get('stop_loss', 0):,.4f} | TP1: ${pos.get('tp1', 0):,.4f}\n"
@@ -342,6 +358,7 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
             <tr style="background:#fef9c3;">
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700;">{pos.get('symbol')}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{pos.get('strategy')}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:#0284c7;">{pos_tf}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1;">${entry_p:,.4f}<br><small style="color:#64748b;">{entry_time_str}</small></td>
                 <td style="padding:8px; border:1px solid #cbd5e1;">${curr_p:,.4f}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:{'#166534' if unrealized_pct >= 0 else '#991b1b'};">{unrealized_pct:+.2f}%</td>
@@ -349,8 +366,8 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
             </tr>
             """)
 
-        closed_table_html = "".join(trade_rows_html) if trade_rows_html else "<tr><td colspan='6' style='padding:12px; text-align:center; color:#64748b;'>No closed trades in this 12-hour window.</td></tr>"
-        unresolved_table_html = "".join(unresolved_rows_html) if unresolved_rows_html else "<tr><td colspan='6' style='padding:12px; text-align:center; color:#64748b;'>No unresolved / active trades currently open.</td></tr>"
+        closed_table_html = "".join(trade_rows_html) if trade_rows_html else "<tr><td colspan='7' style='padding:12px; text-align:center; color:#64748b;'>No closed trades in this 12-hour window.</td></tr>"
+        unresolved_table_html = "".join(unresolved_rows_html) if unresolved_rows_html else "<tr><td colspan='7' style='padding:12px; text-align:center; color:#64748b;'>No unresolved / active trades currently open.</td></tr>"
 
         text_content = f"""
 ================================================================================
@@ -435,6 +452,7 @@ EXECUTIVE SUMMARY:
                 <tr>
                     <th>Symbol</th>
                     <th>Strategy</th>
+                    <th>TradingView TF</th>
                     <th>Entry Price & Time</th>
                     <th>Exit Price & Time</th>
                     <th>Net PnL</th>
@@ -451,6 +469,7 @@ EXECUTIVE SUMMARY:
                 <tr>
                     <th>Symbol</th>
                     <th>Strategy</th>
+                    <th>TradingView TF</th>
                     <th>Entry Price & Time</th>
                     <th>Current Price</th>
                     <th>Unrealized PnL</th>

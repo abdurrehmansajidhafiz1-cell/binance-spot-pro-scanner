@@ -73,6 +73,7 @@ class PaperBroker:
 
     def open_long_position(self, symbol: str, strategy_name: str, current_price: float,
                            stop_loss: float, tp1: float, tp2: float,
+                           timeframe: str = "15m",
                            zone_candle_time: Optional[str] = None,
                            metadata: Optional[Dict] = None) -> Optional[Dict]:
         """
@@ -110,6 +111,7 @@ class PaperBroker:
             "trade_id": trade_id,
             "symbol": symbol,
             "strategy": strategy_name,
+            "timeframe": timeframe,
             "zone_candle_time": zone_candle_time or now_iso,
             "signal_time": now_iso,
             "entry_time": now_iso,

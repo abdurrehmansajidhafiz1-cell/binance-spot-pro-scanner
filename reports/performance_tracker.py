@@ -114,7 +114,7 @@ class PerformanceTracker:
         state = self.broker.state
         history = self.broker.trade_history
         
-        # 1. Format Active Positions with complete timeline
+        # 1. Format Active Positions with complete timeline and TradingView Timeframe
         open_pos_rows = []
         for sym, pos in state["open_positions"].items():
             curr_p = current_prices.get(sym, pos["current_price"])
@@ -124,10 +124,12 @@ class PerformanceTracker:
             
             tp1_status = f"${pos['tp1']:,.4f} " + ("(HIT)" if pos.get("tp1_reached") else "(Pending)")
             tp2_status = f"${pos['tp2']:,.4f} " + ("(HIT)" if pos.get("tp2_reached") else "(Pending)")
+            tf_display = pos.get("timeframe", "15m" if "S3" in pos["strategy"] else "1h (4h Trend)")
             
             open_pos_rows.append([
                 sym,
                 pos["strategy"],
+                f"<b>{tf_display}</b>",
                 format_dual_time(pos.get("zone_candle_time")),
                 format_dual_time(pos.get("signal_time")),
                 f"${entry_p:,.4f}<br><small>{format_dual_time(pos.get('entry_time'))}</small>",
@@ -139,18 +141,19 @@ class PerformanceTracker:
             ])
 
         open_headers = [
-            "Symbol", "Strategy", "Zone Formed (PKT/UTC)", "Signal Time (PKT/UTC)",
+            "Symbol", "Strategy", "TradingView Timeframe", "Zone Formed (PKT/UTC)", "Signal Time (PKT/UTC)",
             "Entry Price & Time (PKT/UTC)", "Current Price", "Stop Loss",
             "Targets (TP1 / TP2)", "Unrealized PnL", "Status"
         ]
         open_table_md = tabulate(open_pos_rows, headers=open_headers, tablefmt="github") if open_pos_rows else "_No active open positions currently._"
 
-        # 2. Format Completed Trades Postmortem History
+        # 2. Format Completed Trades Postmortem History with TradingView Timeframe
         closed_rows = []
         for t in reversed(history):
             pnl_val = t.get("net_pnl_usdt", 0.0)
             pnl_pct = t.get("net_pnl_pct", 0.0)
             result_badge = "🟢 FULL WIN" if "TP2" in t.get("exit_reason", "") else ("🟢 PARTIAL WIN" if pnl_val > 0 else "🔴 LOSS")
+            tf_display = t.get("timeframe", "15m" if "S3" in t["strategy"] else "1h")
             
             tp1_hit_str = format_dual_time(t.get("tp1_hit_time")) if t.get("tp1_hit_time") else "-"
             tp2_hit_str = format_dual_time(t.get("tp2_hit_time")) if t.get("tp2_hit_time") else "-"
@@ -159,6 +162,7 @@ class PerformanceTracker:
             closed_rows.append([
                 t["symbol"],
                 t["strategy"],
+                f"<b>{tf_display}</b>",
                 format_dual_time(t.get("zone_candle_time")),
                 format_dual_time(t.get("signal_time")),
                 f"${t['entry_price']:,.4f}<br><small>{format_dual_time(t.get('entry_time'))}</small>",
@@ -171,7 +175,7 @@ class PerformanceTracker:
             ])
             
         closed_headers = [
-            "Symbol", "Strategy", "Zone Formed (PKT/UTC)", "Signal Time (PKT/UTC)",
+            "Symbol", "Strategy", "TradingView Timeframe", "Zone Formed (PKT/UTC)", "Signal Time (PKT/UTC)",
             "Entry Price & Time", "TP1 Price & Hit Time", "TP2 Price & Hit Time",
             "SL Hit Time", "Fees", "Net PnL ($ / %)", "Final Result"
         ]
