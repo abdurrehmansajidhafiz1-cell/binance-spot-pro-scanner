@@ -1,6 +1,7 @@
 """
 Main Entrypoint for Binance Spot Phase 1 Live Paper Trading Scanner.
-Integrates S3, I1, I2, Market Safety Shield, 100 USDT Actionable Email Signals,
+Integrates S3 (Closed Bar), I1 (Closed Bar), I2 (Momentum Ranker),
+Market Safety Shield, 100 USDT Actionable Email Signals,
 and Scheduled 12-Hour Activity Summaries (06:00 PKT & 18:00 PKT).
 """
 import sys
@@ -66,7 +67,6 @@ class LiveScannerEngine:
         current_hour_pkt = now_pkt.hour
         current_date_pkt = now_pkt.strftime("%Y-%m-%d")
         
-        # Windows: Morning (06:00 to 07:00 PKT) or Evening (18:00 to 19:00 PKT)
         target_slot = None
         if current_hour_pkt in (6, 7):
             target_slot = f"{current_date_pkt}_06_AM"
@@ -78,7 +78,7 @@ class LiveScannerEngine:
 
         last_slot = self.broker.state.get("last_12h_summary_slot")
         if last_slot == target_slot:
-            return # Already sent for this window
+            return
 
         print(f"\n{Fore.CYAN}--> [12-HOUR TRIGGER] Dispatching 12-Hour Summary Report for {target_slot}...{Style.RESET_ALL}")
         summary_data = self.tracker.get_12h_summary_data(hours=12)
@@ -96,7 +96,7 @@ class LiveScannerEngine:
         )
         
         if sent:
-            print(f"{Fore.GREEN}✔ [12-HOUR SUMMARY SENT] Activity report delivered to {RECEIVER_EMAIL} ({target_slot}){Style.RESET_ALL}")
+            print(f"{Fore.GREEN}[OK] [12-HOUR SUMMARY SENT] Activity report delivered to {RECEIVER_EMAIL} ({target_slot}){Style.RESET_ALL}")
             self.broker.state["last_12h_summary_slot"] = target_slot
             self.broker.save()
 
@@ -140,18 +140,22 @@ class LiveScannerEngine:
                 else:
                     last_high, last_low = curr_p, curr_p
                     
-                trade_record = self.broker.update_position_market_price(symbol, curr_p, last_high, last_low)
-                if trade_record:
-                    pnl_color = Fore.GREEN if trade_record['net_pnl_usdt'] >= 0 else Fore.RED
-                    print(f"{pnl_color}  [CLOSED] {symbol} | Reason: {trade_record['exit_reason']} | PnL: ${trade_record['net_pnl_usdt']:+,.2f} ({trade_record['net_pnl_pct']:+.2f}%){Style.RESET_ALL}")
-                    self.notifier.alert_close(
-                        symbol=symbol,
-                        strategy=trade_record["strategy"],
-                        exit_price=trade_record["exit_price"],
-                        pnl_usdt=trade_record["net_pnl_usdt"],
-                        pnl_pct=trade_record["net_pnl_pct"],
-                        reason=trade_record["exit_reason"]
-                    )
+                event_data = self.broker.update_position_market_price(symbol, curr_p, last_high, last_low)
+                if event_data:
+                    if event_data.get("event") == "MILESTONE_TP1":
+                        print(f"{Fore.GREEN}  [TP1 MILESTONE] {symbol} hit TP1 @ ${event_data['exit_price']:,.4f} | 50% Profit Locked: ${event_data['pnl_usdt']:+,.2f} | SL moved to Breakeven{Style.RESET_ALL}")
+                    elif event_data.get("event") == "CLOSE":
+                        trade = event_data["trade"]
+                        pnl_color = Fore.GREEN if trade['net_pnl_usdt'] >= 0 else Fore.RED
+                        print(f"{pnl_color}  [TRADE COMPLETED] {symbol} | Result: {trade['status']} ({trade['exit_reason']}) | Net PnL: ${trade['net_pnl_usdt']:+,.2f} ({trade['net_pnl_pct']:+.2f}%){Style.RESET_ALL}")
+                        self.notifier.alert_close(
+                            symbol=symbol,
+                            strategy=trade["strategy"],
+                            exit_price=trade.get("exit_price", curr_p),
+                            pnl_usdt=trade["net_pnl_usdt"],
+                            pnl_pct=trade["net_pnl_pct"],
+                            reason=trade["exit_reason"]
+                        )
 
         # 3. Evaluate Strategy I2: Cross-Sectional Momentum (1D Universe Rank)
         print(f"\n{Fore.BLUE}--> Step 3: Evaluating I2 Cross-Sectional Momentum (Top 50 Ranker)...{Style.RESET_ALL}")
@@ -159,7 +163,8 @@ class LiveScannerEngine:
         for symbol in COINS_UNIVERSE:
             df_1d = self.client.get_klines(symbol, TIMEFRAME_I2_RANK, limit=40)
             if not df_1d.empty and len(df_1d) >= 32:
-                universe_1d[symbol] = df_1d
+                # Drop unclosed daily candle
+                universe_1d[symbol] = df_1d.iloc[:-1] if len(df_1d) > 1 else df_1d
                 
         btc_1d = universe_1d.get("BTCUSDT")
         top_coins, scores, btc_bullish = self.strat_i2.evaluate_universe(universe_1d, btc_1d)
@@ -169,8 +174,8 @@ class LiveScannerEngine:
         else:
             print(f"{Fore.GREEN}  [BTC REGIME] BTC > 50-day SMA (Bullish). Top Momentum Leaders: {', '.join(top_coins)}{Style.RESET_ALL}")
 
-        # 4. Scan 50 Coins for Strategy Signals (S3 & I1)
-        print(f"\n{Fore.BLUE}--> Step 4: Scanning 50 Coins for S3 (15m Squeeze) & I1 (1H Pullback)...{Style.RESET_ALL}")
+        # 4. Scan 50 Coins for Strategy Signals (S3 & I1 on COMPLETED CLOSED CANDLES)
+        print(f"\n{Fore.BLUE}--> Step 4: Scanning 50 Coins for S3 (15m Squeeze) & I1 (1H Pullback) [Closed-Bar Evaluation]...{Style.RESET_ALL}")
         signals_found = 0
         
         if safety["is_safe"]:
@@ -182,73 +187,82 @@ class LiveScannerEngine:
                 if not self.broker.can_open_position(symbol):
                     continue
 
-                # Evaluate S3: 15m Volatility Squeeze
-                df_15m = self.client.get_klines(symbol, TIMEFRAME_S3, limit=60)
-                if not df_15m.empty:
-                    s3_signal = self.strat_s3.evaluate(symbol, df_15m)
+                # 4A. Evaluate S3: 15m Volatility Squeeze on COMPLETED closed candle
+                df_15m = self.client.get_klines(symbol, TIMEFRAME_S3, limit=65)
+                if not df_15m.empty and len(df_15m) >= 50:
+                    # Drop the unclosed live bar to evaluate strictly on confirmed completed volume and close
+                    closed_15m = df_15m.iloc[:-1]
+                    s3_signal = self.strat_s3.evaluate(symbol, closed_15m)
                     if s3_signal and s3_signal.action == "BUY":
                         signals_found += 1
+                        zone_time = closed_15m.index[-1].isoformat()
+                        
+                        # Execute at live current market price
                         pos = self.broker.open_long_position(
                             symbol=symbol,
                             strategy_name=s3_signal.strategy_name,
-                            current_price=s3_signal.price,
+                            current_price=curr_p,
                             stop_loss=s3_signal.stop_loss,
                             tp1=s3_signal.tp1,
                             tp2=s3_signal.tp2,
+                            zone_candle_time=zone_time,
                             metadata=s3_signal.metadata
                         )
                         if pos:
-                            candle_time = df_15m.index[-1] if not df_15m.empty else None
-                            print(f"{Fore.GREEN}  [BUY S3] {symbol} @ ${s3_signal.price:,.4f} | SL: ${s3_signal.stop_loss:,.4f} | TP1: ${s3_signal.tp1:,.4f} | TP2: ${s3_signal.tp2:,.4f}{Style.RESET_ALL}")
-                            self.notifier.alert_buy(symbol, s3_signal.strategy_name, s3_signal.price, s3_signal.stop_loss, s3_signal.tp1, s3_signal.tp2, s3_signal.reason)
+                            print(f"{Fore.GREEN}  [BUY S3] {symbol} @ ${curr_p:,.4f} | SL: ${s3_signal.stop_loss:,.4f} | TP1: ${s3_signal.tp1:,.4f} | TP2: ${s3_signal.tp2:,.4f}{Style.RESET_ALL}")
+                            self.notifier.alert_buy(symbol, s3_signal.strategy_name, curr_p, s3_signal.stop_loss, s3_signal.tp1, s3_signal.tp2, s3_signal.reason)
                             email_sent = self.email_notifier.send_trade_signal_email(
                                 symbol=symbol,
                                 strategy=s3_signal.strategy_name,
-                                current_price=s3_signal.price,
+                                current_price=curr_p,
                                 stop_loss=s3_signal.stop_loss,
                                 tp1=s3_signal.tp1,
                                 tp2=s3_signal.tp2,
                                 reason=s3_signal.reason,
                                 metadata=s3_signal.metadata,
                                 safety_info=safety,
-                                candle_time=candle_time
+                                candle_time=zone_time
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
                             continue
 
-                # Evaluate I1: MTF Pullback (4H Trend + 1H Execution)
-                df_1h = self.client.get_klines(symbol, TIMEFRAME_I1_EXEC, limit=80)
-                df_4h = self.client.get_klines(symbol, TIMEFRAME_I1_TREND, limit=220)
+                # 4B. Evaluate I1: MTF Pullback (4H Trend + 1H Execution) on COMPLETED closed candles
+                df_1h = self.client.get_klines(symbol, TIMEFRAME_I1_EXEC, limit=85)
+                df_4h = self.client.get_klines(symbol, TIMEFRAME_I1_TREND, limit=225)
                 
-                if not df_1h.empty and not df_4h.empty:
-                    i1_signal = self.strat_i1.evaluate(symbol, df_1h, df_4h=df_4h)
+                if not df_1h.empty and not df_4h.empty and len(df_1h) >= 60 and len(df_4h) >= 220:
+                    closed_1h = df_1h.iloc[:-1]
+                    closed_4h = df_4h.iloc[:-1]
+                    i1_signal = self.strat_i1.evaluate(symbol, closed_1h, df_4h=closed_4h)
                     if i1_signal and i1_signal.action == "BUY":
                         signals_found += 1
+                        zone_time = closed_1h.index[-1].isoformat()
+                        
                         pos = self.broker.open_long_position(
                             symbol=symbol,
                             strategy_name=i1_signal.strategy_name,
-                            current_price=i1_signal.price,
+                            current_price=curr_p,
                             stop_loss=i1_signal.stop_loss,
                             tp1=i1_signal.tp1,
                             tp2=i1_signal.tp2,
+                            zone_candle_time=zone_time,
                             metadata=i1_signal.metadata
                         )
                         if pos:
-                            candle_time = df_1h.index[-1] if not df_1h.empty else None
-                            print(f"{Fore.GREEN}  [BUY I1] {symbol} @ ${i1_signal.price:,.4f} | SL: ${i1_signal.stop_loss:,.4f} | TP1: ${i1_signal.tp1:,.4f} | TP2: ${i1_signal.tp2:,.4f}{Style.RESET_ALL}")
-                            self.notifier.alert_buy(symbol, i1_signal.strategy_name, i1_signal.price, i1_signal.stop_loss, i1_signal.tp1, i1_signal.tp2, i1_signal.reason)
+                            print(f"{Fore.GREEN}  [BUY I1] {symbol} @ ${curr_p:,.4f} | SL: ${i1_signal.stop_loss:,.4f} | TP1: ${i1_signal.tp1:,.4f} | TP2: ${i1_signal.tp2:,.4f}{Style.RESET_ALL}")
+                            self.notifier.alert_buy(symbol, i1_signal.strategy_name, curr_p, i1_signal.stop_loss, i1_signal.tp1, i1_signal.tp2, i1_signal.reason)
                             email_sent = self.email_notifier.send_trade_signal_email(
                                 symbol=symbol,
                                 strategy=i1_signal.strategy_name,
-                                current_price=i1_signal.price,
+                                current_price=curr_p,
                                 stop_loss=i1_signal.stop_loss,
                                 tp1=i1_signal.tp1,
                                 tp2=i1_signal.tp2,
                                 reason=i1_signal.reason,
                                 metadata=i1_signal.metadata,
                                 safety_info=safety,
-                                candle_time=candle_time
+                                candle_time=zone_time
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
@@ -277,12 +291,13 @@ class LiveScannerEngine:
             ["Available Cash", f"${metrics['cash_usdt']:,.2f} USDT"],
             ["Net PnL ($)", f"${metrics['total_pnl_usdt']:+,.2f} USDT"],
             ["Net Return (%)", f"{metrics['total_return_pct']:+.2f}%"],
-            ["Total Realized Trades", f"{metrics['total_trades']}"],
+            ["Total Qualified Trades", f"{metrics['total_qualified_trades']} Unique Trades"],
+            ["Completed Trades", f"{metrics['completed_trades_count']} Trades"],
+            ["Active In-Trade", f"{metrics['active_trades_count']} Trade"],
             ["Win Rate", f"{metrics['win_rate']:.2f}% ({metrics['win_count']}W / {metrics['loss_count']}L)"],
             ["Profit Factor", f"{metrics['profit_factor']:.2f}"],
             ["Max Drawdown", f"-{metrics['max_drawdown_pct']:.2f}%"],
             ["Total Fees Deducted", f"${metrics['total_fees_paid']:,.2f} USDT"],
-            ["Active Positions", f"{metrics['open_positions_count']}"],
             ["Report Time", format_dual_time()]
         ]
         print(f"\n{Fore.YELLOW}=== 📊 15-DAY LIVE PAPER TRADING PERFORMANCE REPORT ==={Style.RESET_ALL}")

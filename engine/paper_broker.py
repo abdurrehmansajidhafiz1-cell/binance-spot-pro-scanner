@@ -1,14 +1,17 @@
 """
 Realistic Binance Spot Virtual Paper Broker.
-Models maker/taker fees, bid-ask spread, slippage, and position tracking.
+Models maker/taker fees, bid-ask spread, slippage, and unified trade lifecycle.
+Each trade is a single entity from entry to final exit (milestones like TP1 are tracked within the trade).
 """
-from datetime import datetime
-from typing import Dict, Optional, Tuple, Any
+import uuid
+from datetime import datetime, timezone
+from typing import Dict, Optional, Tuple, Any, List
 from config.settings import (
     SPOT_FEE_RATE, SLIPPAGE_RATE, MAX_CONCURRENT_POSITIONS,
     RISK_PER_TRADE_PCT, STARTING_BALANCE_USDT
 )
 from engine.state_manager import StateManager
+from engine.time_utils import get_current_utc, format_dual_time
 
 
 class PaperBroker:
@@ -18,7 +21,7 @@ class PaperBroker:
         self.trade_history = self.state_manager.load_trade_history()
         
         if not self.state.get("start_time"):
-            self.state["start_time"] = datetime.utcnow().isoformat()
+            self.state["start_time"] = get_current_utc().isoformat()
             self.save()
 
     @property
@@ -34,7 +37,7 @@ class PaperBroker:
         equity = self.cash
         for symbol, pos in self.open_positions.items():
             price = current_prices.get(symbol, pos["current_price"])
-            equity += pos["quantity"] * price
+            equity += pos["remaining_quantity"] * price
         return equity
 
     def calculate_position_size(self, current_price: float, stop_loss: float, total_equity: float) -> Tuple[float, float]:
@@ -70,9 +73,11 @@ class PaperBroker:
 
     def open_long_position(self, symbol: str, strategy_name: str, current_price: float,
                            stop_loss: float, tp1: float, tp2: float,
+                           zone_candle_time: Optional[str] = None,
                            metadata: Optional[Dict] = None) -> Optional[Dict]:
         """
         Execute Long Spot order with realistic slippage and fee deduction.
+        Initializes a single Trade Entity.
         """
         if not self.can_open_position(symbol):
             return None
@@ -91,29 +96,48 @@ class PaperBroker:
         total_deduction = cost_usdt + fee_paid
         
         if total_deduction > self.cash:
-            # Adjust to available cash
             cost_usdt = (self.cash * 0.98) / (1.0 + SPOT_FEE_RATE)
             quantity = cost_usdt / exec_price
             fee_paid = cost_usdt * SPOT_FEE_RATE
             total_deduction = cost_usdt + fee_paid
 
         self.state["cash_usdt"] -= total_deduction
+        now_iso = get_current_utc().isoformat()
+        
+        trade_id = f"T_{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}_{symbol}"
         
         position = {
+            "trade_id": trade_id,
             "symbol": symbol,
             "strategy": strategy_name,
-            "entry_time": datetime.utcnow().isoformat(),
+            "zone_candle_time": zone_candle_time or now_iso,
+            "signal_time": now_iso,
+            "entry_time": now_iso,
             "entry_price": exec_price,
             "current_price": exec_price,
-            "quantity": quantity,
+            "initial_quantity": quantity,
+            "remaining_quantity": quantity,
+            "quantity": quantity, # backwards compatibility
             "initial_cost_usdt": cost_usdt,
+            "remaining_cost_usdt": cost_usdt,
             "stop_loss": stop_loss,
             "initial_stop_loss": stop_loss,
             "tp1": tp1,
             "tp2": tp2,
             "tp1_reached": False,
+            "tp1_hit_time": None,
+            "tp1_exit_price": None,
+            "tp2_reached": False,
+            "tp2_hit_time": None,
+            "tp2_exit_price": None,
+            "sl_hit_time": None,
+            "sl_exit_price": None,
+            "exit_time": None,
+            "exit_reason": None,
+            "status": "ACTIVE",
             "highest_price": exec_price,
             "fees_paid": fee_paid,
+            "realized_pnl_usdt": 0.0,
             "metadata": metadata or {}
         }
         
@@ -121,61 +145,10 @@ class PaperBroker:
         self.save()
         return position
 
-    def close_position(self, symbol: str, current_price: float, reason: str, partial_pct: float = 1.0) -> Optional[Dict]:
-        """
-        Close full or partial spot position.
-        """
-        if symbol not in self.open_positions:
-            return None
-            
-        pos = self.open_positions[symbol]
-        
-        # Apply slippage on exit (Sell lower than mid price)
-        exec_price = current_price * (1.0 - SLIPPAGE_RATE)
-        close_qty = pos["quantity"] * partial_pct
-        gross_return_usdt = close_qty * exec_price
-        exit_fee = gross_return_usdt * SPOT_FEE_RATE
-        net_return_usdt = gross_return_usdt - exit_fee
-        
-        cost_basis = pos["initial_cost_usdt"] * partial_pct
-        entry_fee = pos["fees_paid"] * partial_pct
-        total_fees = entry_fee + exit_fee
-        net_pnl_usdt = net_return_usdt - cost_basis
-        net_pnl_pct = (net_pnl_usdt / cost_basis) * 100.0 if cost_basis > 0 else 0.0
-        
-        self.state["cash_usdt"] += net_return_usdt
-        
-        trade_record = {
-            "symbol": symbol,
-            "strategy": pos["strategy"],
-            "entry_time": pos["entry_time"],
-            "exit_time": datetime.utcnow().isoformat(),
-            "entry_price": pos["entry_price"],
-            "exit_price": exec_price,
-            "quantity": close_qty,
-            "cost_usdt": cost_basis,
-            "net_pnl_usdt": round(net_pnl_usdt, 4),
-            "net_pnl_pct": round(net_pnl_pct, 2),
-            "fees_paid": round(total_fees, 4),
-            "exit_reason": reason,
-            "partial": partial_pct < 1.0
-        }
-        
-        self.trade_history.append(trade_record)
-        
-        if partial_pct >= 0.99:
-            del self.state["open_positions"][symbol]
-        else:
-            pos["quantity"] -= close_qty
-            pos["initial_cost_usdt"] -= cost_basis
-            pos["fees_paid"] -= entry_fee
-            
-        self.save()
-        return trade_record
-
     def update_position_market_price(self, symbol: str, current_price: float, high_price: float, low_price: float) -> Optional[Dict]:
         """
-        Check Stop Loss, TP1, TP2, Trailing Stop triggers on new bar data.
+        Check Stop Loss, TP1, TP2 triggers on new bar data.
+        Returns trade event dict if a milestone or close occurred.
         """
         if symbol not in self.open_positions:
             return None
@@ -190,31 +163,132 @@ class PaperBroker:
         stop_loss = pos["stop_loss"]
         tp1 = pos["tp1"]
         tp2 = pos["tp2"]
+        now_iso = get_current_utc().isoformat()
         
         # 1. Check Stop Loss Trigger
         if low_price <= stop_loss:
-            return self.close_position(symbol, stop_loss, "STOP_LOSS")
+            exec_price = stop_loss * (1.0 - SLIPPAGE_RATE)
+            close_qty = pos["remaining_quantity"]
+            gross_return = close_qty * exec_price
+            exit_fee = gross_return * SPOT_FEE_RATE
+            net_return = gross_return - exit_fee
             
-        # 2. Check TP1 Trigger
+            cost_basis = pos["remaining_cost_usdt"]
+            entry_fee_portion = pos["fees_paid"] * (close_qty / pos["initial_quantity"])
+            total_fees = entry_fee_portion + exit_fee
+            leg_pnl_usdt = net_return - cost_basis
+            
+            self.state["cash_usdt"] += net_return
+            
+            pos["sl_hit_time"] = now_iso
+            pos["sl_exit_price"] = exec_price
+            pos["exit_time"] = now_iso
+            pos["exit_reason"] = "BREAKEVEN_SL" if pos["tp1_reached"] else "STOP_LOSS"
+            
+            total_net_pnl = pos["realized_pnl_usdt"] + leg_pnl_usdt
+            total_cost = pos["initial_cost_usdt"]
+            net_pnl_pct = (total_net_pnl / total_cost) * 100.0 if total_cost > 0 else 0.0
+            total_all_fees = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
+            
+            pos["status"] = "WIN" if total_net_pnl > 0 else ("LOSS" if total_net_pnl < 0 else "BREAKEVEN")
+            pos["net_pnl_usdt"] = round(total_net_pnl, 4)
+            pos["net_pnl_pct"] = round(net_pnl_pct, 2)
+            pos["fees_paid"] = round(total_all_fees, 4)
+            pos["remaining_quantity"] = 0.0
+            pos["remaining_cost_usdt"] = 0.0
+            
+            # Archive single unified trade
+            trade_record = dict(pos)
+            self.trade_history.append(trade_record)
+            del self.state["open_positions"][symbol]
+            self.save()
+            return {"event": "CLOSE", "trade": trade_record, "reason": pos["exit_reason"]}
+
+        # 2. Check TP1 Trigger (50% partial profit milestone)
         if not pos["tp1_reached"] and high_price >= tp1:
+            exec_price = tp1 * (1.0 - SLIPPAGE_RATE)
+            close_qty = pos["initial_quantity"] * 0.50
+            gross_return = close_qty * exec_price
+            exit_fee = gross_return * SPOT_FEE_RATE
+            net_return = gross_return - exit_fee
+            
+            cost_basis = pos["initial_cost_usdt"] * 0.50
+            entry_fee_portion = pos["fees_paid"] * 0.50
+            total_fees = entry_fee_portion + exit_fee
+            leg_pnl_usdt = net_return - cost_basis
+            
+            self.state["cash_usdt"] += net_return
+            
             pos["tp1_reached"] = True
-            # Secure Stop Loss to Breakeven + fee buffer (+0.25%)
+            pos["tp1_hit_time"] = now_iso
+            pos["tp1_exit_price"] = exec_price
+            pos["remaining_quantity"] -= close_qty
+            pos["quantity"] = pos["remaining_quantity"]
+            pos["remaining_cost_usdt"] -= cost_basis
+            pos["realized_pnl_usdt"] += leg_pnl_usdt
+            pos["total_fees_paid"] = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
+            
+            # Move Stop Loss to Breakeven + fee buffer (+0.25%)
             be_sl = entry_price * 1.0025
             if be_sl > pos["stop_loss"]:
                 pos["stop_loss"] = be_sl
+                
             self.save()
-            # Partial profit close 50%
-            return self.close_position(symbol, tp1, "TP1_HIT_50PCT", partial_pct=0.50)
-            
-        # 3. Check TP2 Trigger
+            return {
+                "event": "MILESTONE_TP1",
+                "symbol": symbol,
+                "strategy": pos["strategy"],
+                "exit_price": exec_price,
+                "pnl_usdt": round(leg_pnl_usdt, 4),
+                "pnl_pct": round((leg_pnl_usdt / cost_basis) * 100.0, 2),
+                "reason": "TP1_HIT_50PCT"
+            }
+
+        # 3. Check TP2 Trigger (Full 100% exit)
         if pos["tp1_reached"] and high_price >= tp2:
-            return self.close_position(symbol, tp2, "TP2_HIT_FULL", partial_pct=1.0)
+            exec_price = tp2 * (1.0 - SLIPPAGE_RATE)
+            close_qty = pos["remaining_quantity"]
+            gross_return = close_qty * exec_price
+            exit_fee = gross_return * SPOT_FEE_RATE
+            net_return = gross_return - exit_fee
             
+            cost_basis = pos["remaining_cost_usdt"]
+            entry_fee_portion = pos["fees_paid"] * (close_qty / pos["initial_quantity"])
+            total_fees = entry_fee_portion + exit_fee
+            leg_pnl_usdt = net_return - cost_basis
+            
+            self.state["cash_usdt"] += net_return
+            
+            pos["tp2_reached"] = True
+            pos["tp2_hit_time"] = now_iso
+            pos["tp2_exit_price"] = exec_price
+            pos["exit_time"] = now_iso
+            pos["exit_reason"] = "TP2_HIT_FULL"
+            
+            total_net_pnl = pos["realized_pnl_usdt"] + leg_pnl_usdt
+            total_cost = pos["initial_cost_usdt"]
+            net_pnl_pct = (total_net_pnl / total_cost) * 100.0 if total_cost > 0 else 0.0
+            total_all_fees = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
+            
+            pos["status"] = "WIN"
+            pos["net_pnl_usdt"] = round(total_net_pnl, 4)
+            pos["net_pnl_pct"] = round(net_pnl_pct, 2)
+            pos["fees_paid"] = round(total_all_fees, 4)
+            pos["remaining_quantity"] = 0.0
+            pos["remaining_cost_usdt"] = 0.0
+            
+            # Archive single unified trade
+            trade_record = dict(pos)
+            self.trade_history.append(trade_record)
+            del self.state["open_positions"][symbol]
+            self.save()
+            return {"event": "CLOSE", "trade": trade_record, "reason": "TP2_HIT_FULL"}
+
         self.save()
         return None
 
     def save(self):
         """Save state and trade history."""
-        self.state["last_updated"] = datetime.utcnow().isoformat()
+        self.state["last_updated"] = get_current_utc().isoformat()
         self.state_manager.save_state(self.state)
         self.state_manager.save_trade_history(self.trade_history)
