@@ -28,11 +28,16 @@ else:
     COINS_UNIVERSE = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT"]
 
 # Paper Broker & Account Settings
-STARTING_BALANCE_USDT = float(os.getenv("STARTING_BALANCE", 10000.0))
+# Starting balance = enough for 5 concurrent $100 trades + buffer
+STARTING_BALANCE_USDT = float(os.getenv("STARTING_BALANCE", 500.0))
 SPOT_FEE_RATE = float(os.getenv("SPOT_FEE_RATE", 0.00075)) # 0.075% with BNB discount (VIP0)
 SLIPPAGE_RATE = float(os.getenv("SLIPPAGE_RATE", 0.00050)) # 0.05% realistic slippage
 MAX_CONCURRENT_POSITIONS = int(os.getenv("MAX_CONCURRENT_POSITIONS", 5))
-RISK_PER_TRADE_PCT = float(os.getenv("RISK_PER_TRADE_PCT", 0.015)) # 1.5% portfolio risk per trade
+
+# FIXED $100 USDT ALLOCATION PER TRADE
+# Every single trade — regardless of portfolio equity — is allocated exactly $100 USDT.
+# All PnL reporting ($ and %) is relative to the $100 base investment.
+TRADE_BUDGET_USDT = float(os.getenv("TRADE_BUDGET_USDT", 100.0))
 
 # Email Notification Settings (Actionable 100 USDT Trade Plans)
 SENDER_EMAIL = os.getenv("SENDER_EMAIL", "").strip()

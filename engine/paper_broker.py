@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from typing import Dict, Optional, Tuple, Any, List
 from config.settings import (
     SPOT_FEE_RATE, SLIPPAGE_RATE, MAX_CONCURRENT_POSITIONS,
-    RISK_PER_TRADE_PCT, STARTING_BALANCE_USDT
+    STARTING_BALANCE_USDT, TRADE_BUDGET_USDT
 )
 from engine.state_manager import StateManager
 from engine.time_utils import get_current_utc, format_dual_time
@@ -42,23 +42,15 @@ class PaperBroker:
 
     def calculate_position_size(self, current_price: float, stop_loss: float, total_equity: float) -> Tuple[float, float]:
         """
-        Calculate units and USDT size based on fixed fractional risk.
-        Risk Amount = Equity * RISK_PER_TRADE_PCT.
+        Fixed $100 USDT allocation per trade.
+        Every trade — regardless of portfolio size — uses exactly $100 USDT.
+        Profit/Loss is always reported relative to the $100 base investment.
         """
-        risk_per_unit = abs(current_price - stop_loss)
-        if risk_per_unit <= 0:
-            risk_per_unit = current_price * 0.02 # fallback 2% risk distance
-            
-        risk_amount = total_equity * RISK_PER_TRADE_PCT
-        raw_quantity = risk_amount / risk_per_unit
-        position_cost_usdt = raw_quantity * current_price
-        
-        # Cap position size to max 25% of total equity per trade or available cash
-        max_pos_usdt = min(total_equity * 0.25, self.cash * 0.95)
-        if position_cost_usdt > max_pos_usdt:
-            position_cost_usdt = max_pos_usdt
-            raw_quantity = position_cost_usdt / current_price
-            
+        # Ensure we have enough cash (at least TRADE_BUDGET_USDT + fees)
+        available = min(TRADE_BUDGET_USDT, self.cash * 0.98)
+        position_cost_usdt = available
+        raw_quantity = position_cost_usdt / current_price
+
         return raw_quantity, position_cost_usdt
 
     def can_open_position(self, symbol: str) -> bool:
@@ -67,7 +59,7 @@ class PaperBroker:
             return False
         if len(self.open_positions) >= MAX_CONCURRENT_POSITIONS:
             return False
-        if self.cash < 50.0: # Minimum $50 cash threshold
+        if self.cash < 101.0: # Minimum $101 cash threshold (covers $100 trade + fees)
             return False
         return True
 
