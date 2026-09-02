@@ -43,5 +43,20 @@
     "fees_paid": 1.8863,
     "exit_reason": "TP2_HIT_FULL",
     "partial": false
+  },
+  {
+    "symbol": "RUNEUSDT",
+    "strategy": "S3_VOLATILITY_SQUEEZE",
+    "entry_time": "2026-08-31T18:13:49.316701",
+    "exit_time": "2026-09-02T01:45:28.540411",
+    "entry_price": 0.47823899999999997,
+    "exit_price": 0.47919488020124995,
+    "quantity": 2613.755883564494,
+    "cost_usdt": 1250.0,
+    "net_pnl_usdt": 1.5591,
+    "net_pnl_pct": 0.12,
+    "fees_paid": 1.8769,
+    "exit_reason": "STOP_LOSS",
+    "partial": false
   }
 ]
