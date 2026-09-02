@@ -7,7 +7,7 @@ from datetime import datetime, timezone, timedelta
 from typing import Dict, List, Any
 import numpy as np
 from tabulate import tabulate
-from config.settings import LIVE_RESULTS_MD, STARTING_BALANCE_USDT
+from config.settings import LIVE_RESULTS_MD, STARTING_BALANCE_USDT, PKR_PER_USD, REFERENCE_BUDGET_USDT, TRADE_BUDGET_USDT
 from engine.time_utils import format_dual_time, parse_to_utc, get_current_utc
 
 
@@ -147,37 +147,55 @@ class PerformanceTracker:
         ]
         open_table_md = tabulate(open_pos_rows, headers=open_headers, tablefmt="github") if open_pos_rows else "_No active open positions currently._"
 
-        # 2. Format Completed Trades Postmortem History with TradingView Timeframe
+        # 2. Format Completed Trades Postmortem History with PKR calculations
         closed_rows = []
         for t in reversed(history):
-            pnl_val = t.get("net_pnl_usdt", 0.0)
-            pnl_pct = t.get("net_pnl_pct", 0.0)
+            pnl_val   = t.get("net_pnl_usdt", 0.0)
+            pnl_pct   = t.get("net_pnl_pct", 0.0)
+            fees_usd  = t.get("fees_paid", 0.0)
             result_badge = "🟢 FULL WIN" if "TP2" in t.get("exit_reason", "") else ("🟢 PARTIAL WIN" if pnl_val > 0 else "🔴 LOSS")
             tf_display = t.get("timeframe", "15m" if "S3" in t["strategy"] else "1h")
             
             tp1_hit_str = format_dual_time(t.get("tp1_hit_time")) if t.get("tp1_hit_time") else "-"
             tp2_hit_str = format_dual_time(t.get("tp2_hit_time")) if t.get("tp2_hit_time") else "-"
-            sl_hit_str = format_dual_time(t.get("sl_hit_time")) if t.get("sl_hit_time") else "-"
+            sl_hit_str  = format_dual_time(t.get("sl_hit_time")) if t.get("sl_hit_time") else "-"
+            
+            # PKR Calculations
+            # $100 actual trade
+            pnl_100_pkr   = pnl_val * PKR_PER_USD
+            fees_100_pkr  = fees_usd * PKR_PER_USD
+            # $35 reference-only calculation (scale proportionally from $100)
+            ratio_35      = REFERENCE_BUDGET_USDT / TRADE_BUDGET_USDT   # 35/100 = 0.35
+            pnl_35_pkr    = pnl_val  * ratio_35 * PKR_PER_USD
+            fees_35_pkr   = fees_usd * ratio_35 * PKR_PER_USD
+            pnl_35_sign   = "+" if pnl_35_pkr >= 0 else ""
+
+            pkr_block = (
+                f"💵 **$100 Trade:** `{'+' if pnl_100_pkr >= 0 else ''}{pnl_100_pkr:,.0f} PKR` profit"
+                f" | Fees: `{fees_100_pkr:,.0f} PKR`<br>"
+                f"📌 **$35 Ref:** `{pnl_35_sign}{pnl_35_pkr:,.0f} PKR` profit"
+                f" | Fees: `{fees_35_pkr:,.0f} PKR`"
+            )
             
             closed_rows.append([
                 t["symbol"],
                 t["strategy"],
-                f"<b>{tf_display}</b>",
+                f"**{tf_display}**",
                 format_dual_time(t.get("zone_candle_time")),
                 format_dual_time(t.get("signal_time")),
                 f"${t['entry_price']:,.4f}<br><small>{format_dual_time(t.get('entry_time'))}</small>",
                 f"${t.get('tp1', 0):,.4f}<br><small>{tp1_hit_str}</small>",
                 f"${t.get('tp2', 0):,.4f}<br><small>{tp2_hit_str}</small>",
                 sl_hit_str,
-                f"${t.get('fees_paid', 0):,.3f}",
                 f"{pnl_val:+,.2f} ({pnl_pct:+.2f}%)",
+                pkr_block,
                 result_badge
             ])
             
         closed_headers = [
             "Symbol", "Strategy", "TradingView Timeframe", "Zone Formed (PKT/UTC)", "Signal Time (PKT/UTC)",
             "Entry Price & Time", "TP1 Price & Hit Time", "TP2 Price & Hit Time",
-            "SL Hit Time", "Fees", "Net PnL ($ / %)", "Final Result"
+            "SL Hit Time", "Net PnL ($ / %)", f"PKR Calculations (Rate: ₨{PKR_PER_USD:.0f}/$)", "Final Result"
         ]
         closed_table_md = tabulate(closed_rows, headers=closed_headers, tablefmt="github") if closed_rows else "_No closed trades yet._"
 
@@ -193,6 +211,7 @@ class PerformanceTracker:
 > **Last Updated:** `{metrics['last_updated']}`  
 > **Testing Start Date:** `{metrics['start_time']}`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
+> **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨{PKR_PER_USD:.0f} per $1 USD`
 
 ---
 
@@ -218,6 +237,11 @@ class PerformanceTracker:
 
 ## 📜 Completed Trades Postmortem History ({metrics['completed_trades_count']})
 
+> **PKR Column Guide:**
+> - 💵 `$100 Trade` → Actual realized profit/fees in PKR (actual budget used)
+> - 📌 `$35 Ref` → Reference-only: what the same trade would have earned with $35 budget (no actual trades at $35)
+> - PKR Rate used: **₨{PKR_PER_USD:.0f} per $1 USD**
+
 {closed_table_md}
 
 ---
@@ -227,7 +251,7 @@ class PerformanceTracker:
 - **I2: Cross-Sectional Momentum & Relative Strength Rotation (1D Top Decile Ranker)**
 - **S3: Volatility Squeeze Breakout (15m Bollinger-Keltner + OBV)**
 
-*Note: All milestones (Zone Formation, Signal Generation, Entry, TP1, TP2, SL) are tracked with exact Pakistan Standard Time (PKT) and UTC timestamps.*
+*Note: All milestones (Zone Formation, Signal Generation, Entry, TP1, TP2, SL) are tracked with exact Pakistan Standard Time (PKT) and UTC timestamps. PKR calculations are for informational reference only.*
 """
         return md
 

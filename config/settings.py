@@ -39,6 +39,11 @@ MAX_CONCURRENT_POSITIONS = int(os.getenv("MAX_CONCURRENT_POSITIONS", 5))
 # All PnL reporting ($ and %) is relative to the $100 base investment.
 TRADE_BUDGET_USDT = float(os.getenv("TRADE_BUDGET_USDT", 100.0))
 
+# PKR REFERENCE CALCULATION (for postmortem dashboard display only)
+# Actual trading budget stays $100. $35 is shown as reference-only calculation.
+REFERENCE_BUDGET_USDT = float(os.getenv("REFERENCE_BUDGET_USDT", 35.0))
+PKR_PER_USD = float(os.getenv("PKR_PER_USD", 278.0))  # Updated ~Sep 2026; can override via env
+
 # Email Notification Settings (Actionable 100 USDT Trade Plans)
 SENDER_EMAIL = os.getenv("SENDER_EMAIL", "").strip()
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD", "").replace(" ", "").strip()
