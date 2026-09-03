@@ -34,6 +34,7 @@ from strategies.i2_cross_sectional_momentum import CrossSectionalMomentumStrateg
 from notifications.telegram_notifier import TelegramNotifier
 from notifications.email_notifier import EmailNotifier
 from reports.performance_tracker import PerformanceTracker
+from engine.signal_queue import SignalQueue
 
 init(autoreset=True)
 
@@ -51,6 +52,7 @@ class LiveScannerEngine:
         )
         self.safety_shield = MarketSafetyShield()
         self.tracker = PerformanceTracker(self.broker)
+        self.signal_queue = SignalQueue()
         
         # Initialize Phase 1 Strategies
         self.strat_s3 = VolatilitySqueezeStrategy()
@@ -196,8 +198,54 @@ class LiveScannerEngine:
         # 4. Scan 50 Coins for Strategy Signals (S3 & I1 on COMPLETED CLOSED CANDLES)
         print(f"\n{Fore.BLUE}--> Step 4: Scanning 50 Coins for S3 (15m Squeeze) & I1 (1H Pullback) [Closed-Bar Evaluation]...{Style.RESET_ALL}")
         signals_found = 0
-        
+
         if safety["is_safe"]:
+            # ----------------------------------------------------------------
+            # 4-PRE: Retry any previously queued signals (from failed cycles)
+            # ----------------------------------------------------------------
+            pending = self.signal_queue.get_valid_pending(current_prices)
+            if pending:
+                print(f"{Fore.YELLOW}  [QUEUE RETRY] {len(pending)} pending signal(s) from previous cycles — retrying now...{Style.RESET_ALL}")
+            for sig in pending:
+                symbol = sig["symbol"]
+                curr_p = sig.get("current_price_now", current_prices.get(symbol))
+                if not curr_p or not self.broker.can_open_position(symbol):
+                    continue
+                pos = self.broker.open_long_position(
+                    symbol=symbol,
+                    strategy_name=sig["strategy"],
+                    current_price=curr_p,
+                    stop_loss=sig["stop_loss"],
+                    tp1=sig["tp1"],
+                    tp2=sig["tp2"],
+                    timeframe=sig.get("timeframe", "unknown"),
+                    zone_candle_time=sig.get("zone_candle_time"),
+                    metadata=sig.get("metadata")
+                )
+                if pos:
+                    signals_found += 1
+                    self.signal_queue.remove(symbol)
+                    print(f"{Fore.GREEN}  [QUEUE BUY] {symbol} @ ${curr_p:,.4f} | SL: ${sig['stop_loss']:,.4f} | TP1: ${sig['tp1']:,.4f} | TP2: ${sig['tp2']:,.4f} [RETRIED FROM QUEUE]{Style.RESET_ALL}")
+                    self.notifier.alert_buy(symbol, sig["strategy"], curr_p, sig["stop_loss"], sig["tp1"], sig["tp2"], sig.get("reason", "Queued signal retry"))
+                    email_sent = self.email_notifier.send_trade_signal_email(
+                        symbol=symbol,
+                        strategy=sig["strategy"],
+                        current_price=curr_p,
+                        stop_loss=sig["stop_loss"],
+                        tp1=sig["tp1"],
+                        tp2=sig["tp2"],
+                        reason=f"[QUEUED RETRY] {sig.get('reason', '')}",
+                        metadata=sig.get("metadata"),
+                        safety_info=safety,
+                        candle_time=sig.get("zone_candle_time"),
+                        timeframe=sig.get("timeframe", "unknown")
+                    )
+                    if email_sent:
+                        print(f"{Fore.CYAN}    [EMAIL SENT] Queued signal executed — 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+
+            # ----------------------------------------------------------------
+            # 4-MAIN: Fresh scan of all 50 coins
+            # ----------------------------------------------------------------
             for symbol in COINS_UNIVERSE:
                 curr_p = current_prices.get(symbol)
                 if not curr_p:
@@ -207,21 +255,18 @@ class LiveScannerEngine:
                         current_prices[symbol] = curr_p
                 if not curr_p:
                     continue
-                    
+
                 if not self.broker.can_open_position(symbol):
                     continue
 
                 # 4A. Evaluate S3: 15m Volatility Squeeze on COMPLETED closed candle
                 df_15m = self.client.get_klines(symbol, TIMEFRAME_S3, limit=65)
                 if not df_15m.empty and len(df_15m) >= 50:
-                    # Drop the unclosed live bar to evaluate strictly on confirmed completed volume and close
                     closed_15m = df_15m.iloc[:-1]
                     s3_signal = self.strat_s3.evaluate(symbol, closed_15m)
                     if s3_signal and s3_signal.action == "BUY":
                         signals_found += 1
                         zone_time = closed_15m.index[-1].isoformat()
-                        
-                        # Execute at live current market price
                         pos = self.broker.open_long_position(
                             symbol=symbol,
                             strategy_name=s3_signal.strategy_name,
@@ -234,6 +279,7 @@ class LiveScannerEngine:
                             metadata=s3_signal.metadata
                         )
                         if pos:
+                            self.signal_queue.remove(symbol)  # Clear any old queue entry
                             print(f"{Fore.GREEN}  [BUY S3] {symbol} @ ${curr_p:,.4f} | SL: ${s3_signal.stop_loss:,.4f} | TP1: ${s3_signal.tp1:,.4f} | TP2: ${s3_signal.tp2:,.4f}{Style.RESET_ALL}")
                             self.notifier.alert_buy(symbol, s3_signal.strategy_name, curr_p, s3_signal.stop_loss, s3_signal.tp1, s3_signal.tp2, s3_signal.reason)
                             email_sent = self.email_notifier.send_trade_signal_email(
@@ -251,12 +297,21 @@ class LiveScannerEngine:
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
-                            continue
+                        else:
+                            # Execution failed — save to queue for next cycle
+                            self.signal_queue.enqueue({
+                                "symbol": symbol, "strategy": s3_signal.strategy_name,
+                                "entry_price": curr_p, "stop_loss": s3_signal.stop_loss,
+                                "tp1": s3_signal.tp1, "tp2": s3_signal.tp2,
+                                "timeframe": "15m", "zone_candle_time": zone_time,
+                                "reason": s3_signal.reason, "metadata": s3_signal.metadata
+                            })
+                        continue
 
                 # 4B. Evaluate I1: MTF Pullback (4H Trend + 1H Execution) on COMPLETED closed candles
                 df_1h = self.client.get_klines(symbol, TIMEFRAME_I1_EXEC, limit=85)
                 df_4h = self.client.get_klines(symbol, TIMEFRAME_I1_TREND, limit=225)
-                
+
                 if not df_1h.empty and not df_4h.empty and len(df_1h) >= 60 and len(df_4h) >= 220:
                     closed_1h = df_1h.iloc[:-1]
                     closed_4h = df_4h.iloc[:-1]
@@ -264,7 +319,6 @@ class LiveScannerEngine:
                     if i1_signal and i1_signal.action == "BUY":
                         signals_found += 1
                         zone_time = closed_1h.index[-1].isoformat()
-                        
                         pos = self.broker.open_long_position(
                             symbol=symbol,
                             strategy_name=i1_signal.strategy_name,
@@ -277,6 +331,7 @@ class LiveScannerEngine:
                             metadata=i1_signal.metadata
                         )
                         if pos:
+                            self.signal_queue.remove(symbol)  # Clear any old queue entry
                             print(f"{Fore.GREEN}  [BUY I1] {symbol} @ ${curr_p:,.4f} | SL: ${i1_signal.stop_loss:,.4f} | TP1: ${i1_signal.tp1:,.4f} | TP2: ${i1_signal.tp2:,.4f}{Style.RESET_ALL}")
                             self.notifier.alert_buy(symbol, i1_signal.strategy_name, curr_p, i1_signal.stop_loss, i1_signal.tp1, i1_signal.tp2, i1_signal.reason)
                             email_sent = self.email_notifier.send_trade_signal_email(
@@ -294,8 +349,17 @@ class LiveScannerEngine:
                             )
                             if email_sent:
                                 print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+                        else:
+                            # Execution failed — save to queue for next cycle
+                            self.signal_queue.enqueue({
+                                "symbol": symbol, "strategy": i1_signal.strategy_name,
+                                "entry_price": curr_p, "stop_loss": i1_signal.stop_loss,
+                                "tp1": i1_signal.tp1, "tp2": i1_signal.tp2,
+                                "timeframe": "1h (4h Macro Trend)", "zone_candle_time": zone_time,
+                                "reason": i1_signal.reason, "metadata": i1_signal.metadata
+                            })
 
-        print(f"{Fore.MAGENTA}  Scanning complete. New Signals Executed: {signals_found}{Style.RESET_ALL}")
+        print(f"{Fore.MAGENTA}  Scanning complete. New Signals Executed: {signals_found} | Pending Queue: {len(self.signal_queue)}{Style.RESET_ALL}")
 
         # 5. Check 12-Hour Summary Schedule (06:00 PKT / 18:00 PKT)
         self.check_and_send_12h_summary()
