@@ -63,4 +63,4 @@ TIMEFRAME_I2_RANK = "1d"  # I2: Cross-Sectional Momentum (Ranking)
 TIMEFRAME_I2_EXEC = "4h"  # I2: Execution & Rebalance
 
 # Binance Public REST Base URL
-BINANCE_API_BASE = "https://api.binance.com"
+BINANCE_API_BASE = "https://data-api.binance.vision"
