@@ -133,14 +133,29 @@ class LiveScannerEngine:
                 
             if curr_p:
                 current_prices[symbol] = curr_p
-                df_15m = self.client.get_klines(symbol, "15m", limit=3)
+                df_15m = self.client.get_klines(symbol, "15m", limit=20)
                 if not df_15m.empty:
-                    last_high = float(df_15m['high'].iloc[-1])
-                    last_low = float(df_15m['low'].iloc[-1])
+                    # Filter candles that formed since the position was opened
+                    entry_t = pos.get("entry_time")
+                    df_candles = df_15m
+                    if entry_t:
+                        try:
+                            import pandas as pd
+                            entry_dt = pd.to_datetime(entry_t)
+                            if entry_dt.tzinfo is not None:
+                                entry_dt = entry_dt.tz_convert(None)
+                            df_subset = df_15m[df_15m.index >= entry_dt]
+                            if not df_subset.empty:
+                                df_candles = df_subset
+                        except Exception:
+                            df_candles = df_15m
+                            
+                    period_high = float(df_candles['high'].max())
+                    period_low = float(df_candles['low'].min())
                 else:
-                    last_high, last_low = curr_p, curr_p
+                    period_high, period_low = curr_p, curr_p
                     
-                event_data = self.broker.update_position_market_price(symbol, curr_p, last_high, last_low)
+                event_data = self.broker.update_position_market_price(symbol, curr_p, period_high, period_low)
                 if event_data:
                     if event_data.get("event") == "MILESTONE_TP1":
                         print(f"{Fore.GREEN}  [TP1 MILESTONE] {symbol} hit TP1 @ ${event_data['exit_price']:,.4f} | 50% Profit Locked: ${event_data['pnl_usdt']:+,.2f} | SL moved to Breakeven{Style.RESET_ALL}")

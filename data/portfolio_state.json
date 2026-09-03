@@ -1,49 +1,9 @@
 {
-  "cash_usdt": 407.5,
+  "cash_usdt": 510.03386145972325,
   "starting_balance": 500.0,
   "equity_peak": 507.79,
-  "open_positions": {
-    "FILUSDT": {
-      "trade_id": "T_20260902172727_FILUSDT",
-      "symbol": "FILUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-02T17:00:00",
-      "signal_time": "2026-09-02T17:27:27.166442+00:00",
-      "entry_time": "2026-09-02T17:27:27.166442+00:00",
-      "entry_price": 0.7910953499999999,
-      "current_price": 0.8007,
-      "initial_quantity": 126.40701275769099,
-      "remaining_quantity": 126.40701275769099,
-      "quantity": 126.40701275769099,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.779512,
-      "initial_stop_loss": 0.779512,
-      "tp1": 0.807495,
-      "tp2": 0.816816,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.802,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.008658,
-        "mom_hist": 0.0072,
-        "bb_upper": 0.795599
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-08-31T18:12:31.163933",
-  "last_updated": "2026-09-03T01:03:19.914680+00:00",
+  "last_updated": "2026-09-03T07:41:18.122668+00:00",
   "last_12h_summary_slot": "2026-09-03_06_AM"
 }

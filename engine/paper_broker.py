@@ -198,7 +198,67 @@ class PaperBroker:
             self.save()
             return {"event": "CLOSE", "trade": trade_record, "reason": pos["exit_reason"]}
 
-        # 2. Check TP1 Trigger (50% partial profit milestone)
+        # 2. Check TP Targets
+        # Case A: Price reached or exceeded TP2 (Full Win)
+        if high_price >= tp2:
+            # If TP1 was not yet recorded, execute TP1 first, then TP2
+            if not pos["tp1_reached"]:
+                tp1_exec_price = tp1 * (1.0 - SLIPPAGE_RATE)
+                tp1_qty = pos["initial_quantity"] * 0.50
+                tp1_gross = tp1_qty * tp1_exec_price
+                tp1_exit_fee = tp1_gross * SPOT_FEE_RATE
+                tp1_net = tp1_gross - tp1_exit_fee
+                tp1_cost = pos["initial_cost_usdt"] * 0.50
+                tp1_entry_fee = pos["fees_paid"] * 0.50
+                tp1_leg_pnl = tp1_net - tp1_cost
+                
+                self.state["cash_usdt"] += tp1_net
+                pos["tp1_reached"] = True
+                pos["tp1_hit_time"] = now_iso
+                pos["tp1_exit_price"] = tp1_exec_price
+                pos["remaining_quantity"] -= tp1_qty
+                pos["quantity"] = pos["remaining_quantity"]
+                pos["remaining_cost_usdt"] -= tp1_cost
+                pos["realized_pnl_usdt"] += tp1_leg_pnl
+                pos["total_fees_paid"] = pos.get("total_fees_paid", pos["fees_paid"]) + tp1_exit_fee
+
+            # Now execute TP2 on remaining position
+            tp2_exec_price = tp2 * (1.0 - SLIPPAGE_RATE)
+            close_qty = pos["remaining_quantity"]
+            gross_return = close_qty * tp2_exec_price
+            exit_fee = gross_return * SPOT_FEE_RATE
+            net_return = gross_return - exit_fee
+            
+            cost_basis = pos["remaining_cost_usdt"]
+            leg_pnl_usdt = net_return - cost_basis
+            
+            self.state["cash_usdt"] += net_return
+            pos["tp2_reached"] = True
+            pos["tp2_hit_time"] = now_iso
+            pos["tp2_exit_price"] = tp2_exec_price
+            pos["exit_time"] = now_iso
+            pos["exit_reason"] = "TP2_HIT_FULL"
+            
+            total_net_pnl = pos["realized_pnl_usdt"] + leg_pnl_usdt
+            total_cost = pos["initial_cost_usdt"]
+            net_pnl_pct = (total_net_pnl / total_cost) * 100.0 if total_cost > 0 else 0.0
+            total_all_fees = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
+            
+            pos["status"] = "WIN"
+            pos["net_pnl_usdt"] = round(total_net_pnl, 4)
+            pos["net_pnl_pct"] = round(net_pnl_pct, 2)
+            pos["fees_paid"] = round(total_all_fees, 4)
+            pos["remaining_quantity"] = 0.0
+            pos["remaining_cost_usdt"] = 0.0
+            
+            # Archive single unified trade
+            trade_record = dict(pos)
+            self.trade_history.append(trade_record)
+            del self.state["open_positions"][symbol]
+            self.save()
+            return {"event": "CLOSE", "trade": trade_record, "reason": "TP2_HIT_FULL"}
+
+        # Case B: Price reached TP1 only (Milestone 50% profit lock)
         if not pos["tp1_reached"] and high_price >= tp1:
             exec_price = tp1 * (1.0 - SLIPPAGE_RATE)
             close_qty = pos["initial_quantity"] * 0.50
@@ -212,7 +272,6 @@ class PaperBroker:
             leg_pnl_usdt = net_return - cost_basis
             
             self.state["cash_usdt"] += net_return
-            
             pos["tp1_reached"] = True
             pos["tp1_hit_time"] = now_iso
             pos["tp1_exit_price"] = exec_price
@@ -237,46 +296,6 @@ class PaperBroker:
                 "pnl_pct": round((leg_pnl_usdt / cost_basis) * 100.0, 2),
                 "reason": "TP1_HIT_50PCT"
             }
-
-        # 3. Check TP2 Trigger (Full 100% exit)
-        if pos["tp1_reached"] and high_price >= tp2:
-            exec_price = tp2 * (1.0 - SLIPPAGE_RATE)
-            close_qty = pos["remaining_quantity"]
-            gross_return = close_qty * exec_price
-            exit_fee = gross_return * SPOT_FEE_RATE
-            net_return = gross_return - exit_fee
-            
-            cost_basis = pos["remaining_cost_usdt"]
-            entry_fee_portion = pos["fees_paid"] * (close_qty / pos["initial_quantity"])
-            total_fees = entry_fee_portion + exit_fee
-            leg_pnl_usdt = net_return - cost_basis
-            
-            self.state["cash_usdt"] += net_return
-            
-            pos["tp2_reached"] = True
-            pos["tp2_hit_time"] = now_iso
-            pos["tp2_exit_price"] = exec_price
-            pos["exit_time"] = now_iso
-            pos["exit_reason"] = "TP2_HIT_FULL"
-            
-            total_net_pnl = pos["realized_pnl_usdt"] + leg_pnl_usdt
-            total_cost = pos["initial_cost_usdt"]
-            net_pnl_pct = (total_net_pnl / total_cost) * 100.0 if total_cost > 0 else 0.0
-            total_all_fees = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
-            
-            pos["status"] = "WIN"
-            pos["net_pnl_usdt"] = round(total_net_pnl, 4)
-            pos["net_pnl_pct"] = round(net_pnl_pct, 2)
-            pos["fees_paid"] = round(total_all_fees, 4)
-            pos["remaining_quantity"] = 0.0
-            pos["remaining_cost_usdt"] = 0.0
-            
-            # Archive single unified trade
-            trade_record = dict(pos)
-            self.trade_history.append(trade_record)
-            del self.state["open_positions"][symbol]
-            self.save()
-            return {"event": "CLOSE", "trade": trade_record, "reason": "TP2_HIT_FULL"}
 
         self.save()
         return None
