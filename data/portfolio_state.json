@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 307.167191328556,
+  "cash_usdt": 207.092191328556,
   "starting_balance": 500.0,
   "equity_peak": 507.79,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-03T17:28:07.073400+00:00",
       "entry_time": "2026-09-03T17:28:07.073400+00:00",
       "entry_price": 0.050055014999999994,
-      "current_price": 0.04983,
+      "current_price": 0.04984,
       "initial_quantity": 1997.8018186589297,
       "remaining_quantity": 1997.8018186589297,
       "quantity": 1997.8018186589297,
@@ -47,7 +47,7 @@
       "signal_time": "2026-09-03T17:28:25.692803+00:00",
       "entry_time": "2026-09-03T17:28:25.692803+00:00",
       "entry_price": 0.80470215,
-      "current_price": 0.7944,
+      "current_price": 0.7907,
       "initial_quantity": 124.26958222989711,
       "remaining_quantity": 124.26958222989711,
       "quantity": 124.26958222989711,
@@ -76,9 +76,48 @@
         "rsi_1h": 57.34,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "MANAUSDT": {
+      "trade_id": "T_20260903234607_MANAUSDT",
+      "symbol": "MANAUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-03T23:30:00",
+      "signal_time": "2026-09-03T23:46:07.135797+00:00",
+      "entry_time": "2026-09-03T23:46:07.135797+00:00",
+      "entry_price": 0.07613805,
+      "current_price": 0.07613805,
+      "initial_quantity": 1313.403744908098,
+      "remaining_quantity": 1313.403744908098,
+      "quantity": 1313.403744908098,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.075308,
+      "initial_stop_loss": 0.075308,
+      "tp1": 0.076861,
+      "tp2": 0.076725,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.07613805,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.000312,
+        "mom_hist": 0.0002,
+        "bb_upper": 0.075933
+      }
     }
   },
   "start_time": "2026-08-31T18:12:31.163933",
-  "last_updated": "2026-09-03T23:30:41.135827+00:00",
+  "last_updated": "2026-09-03T23:46:07.135826+00:00",
   "last_12h_summary_slot": "2026-09-03_06_PM"
 }
