@@ -108,7 +108,11 @@ class LiveScannerEngine:
         print(f"{Fore.CYAN}{'='*80}{Style.RESET_ALL}")
         
         tickers = self.client.get_24h_tickers()
+        if not tickers:
+            print(f"{Fore.RED}[CRITICAL] Binance 24h tickers API returned empty after retries. Aborting this cycle to avoid false signals.{Style.RESET_ALL}")
+            return
         current_prices = {sym: data["last_price"] for sym, data in tickers.items()}
+        print(f"{Fore.GREEN}  [OK] Tickers loaded: {len(current_prices)} symbols.{Style.RESET_ALL}")
         
         # 1. Global Market Safety Shield Assessment
         print(f"\n{Fore.BLUE}--> Step 1: Evaluating Market Safety Shield & Timing Filters...{Style.RESET_ALL}")
@@ -196,6 +200,11 @@ class LiveScannerEngine:
         if safety["is_safe"]:
             for symbol in COINS_UNIVERSE:
                 curr_p = current_prices.get(symbol)
+                if not curr_p:
+                    # Fallback: fetch individual price if bulk tickers missed this symbol
+                    curr_p = self.client.get_current_price(symbol)
+                    if curr_p:
+                        current_prices[symbol] = curr_p
                 if not curr_p:
                     continue
                     

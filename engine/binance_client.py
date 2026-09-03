@@ -70,22 +70,33 @@ class BinanceSpotClient:
         return pd.DataFrame()
 
     def get_24h_tickers(self) -> Dict[str, Dict]:
-        """Fetch 24h ticker price change and quote volume for all symbols."""
+        """Fetch 24h ticker price change and quote volume for all symbols.
+        Retries up to 3 times with increasing backoff on failure.
+        """
         endpoint = f"{self.base_url}/api/v3/ticker/24hr"
-        try:
-            resp = self.session.get(endpoint, timeout=self.timeout)
-            if resp.status_code == 200:
-                data = resp.json()
-                return {
-                    item["symbol"]: {
-                        "last_price": float(item["lastPrice"]),
-                        "quote_volume": float(item["quoteVolume"]),
-                        "price_change_pct": float(item["priceChangePercent"])
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                # Use a longer timeout (30s) since this endpoint returns ~2000 symbols
+                resp = self.session.get(endpoint, timeout=30)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    result = {
+                        item["symbol"]: {
+                            "last_price": float(item["lastPrice"]),
+                            "quote_volume": float(item["quoteVolume"]),
+                            "price_change_pct": float(item["priceChangePercent"])
+                        }
+                        for item in data if item["symbol"].endswith("USDT")
                     }
-                    for item in data if item["symbol"].endswith("USDT")
-                }
-        except Exception:
-            pass
+                    if result:
+                        return result
+                elif resp.status_code == 429:
+                    time.sleep(3 * (attempt + 1))
+                else:
+                    time.sleep(2 * (attempt + 1))
+            except Exception:
+                time.sleep(2 * (attempt + 1))
         return {}
 
     def get_current_price(self, symbol: str) -> Optional[float]:
