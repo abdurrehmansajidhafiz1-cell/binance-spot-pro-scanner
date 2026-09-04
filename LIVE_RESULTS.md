@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-1.13-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-22-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-04 18:46:16 PKT (13:46:16 UTC)`  
+> **Last Updated:** `2026-09-04 19:01:16 PKT (14:01:16 UTC)`  
 > **Testing Start Date:** `2026-08-31 23:12:31 PKT (18:12:31 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `22 Unique Trades` |
-| **Current Equity** | `$500.76 USDT` | **Completed Trades** | `21 Trades` |
+| **Current Equity** | `$500.74 USDT` | **Completed Trades** | `21 Trades` |
 | **Available Cash** | `$401.33 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `$+0.76 USDT` | **Win / Loss Ratio** | `10 Win / 11 Loss` |
+| **Net PnL ($)** | `$+0.74 USDT` | **Win / Loss Ratio** | `10 Win / 11 Loss` |
 | **Net Return (%)** | `+0.15%` | **Win Rate** | `47.62%` |
 | **Peak Equity** | `$507.79 USDT` | **Profit Factor** | `1.13` |
-| **Max Drawdown** | `-1.38%` | **Total Fees Deducted** | `$3.22 USDT` |
+| **Max Drawdown** | `-1.39%` | **Total Fees Deducted** | `$3.22 USDT` |
 
 ---
 
@@ -30,7 +30,7 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|----------------------------------------|------------------|----------|
-| KAVAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-03 21:00:00 PKT (16:00:00 UTC) | 2026-09-03 22:28:07 PKT (17:28:07 UTC) | $0.0501<br><small>2026-09-03 22:28:07 PKT (17:28:07 UTC)</small> | $0.0498         | $0.0481     | $0.0525 (Pending)<br>$0.0551 (Pending) | -0.57 (-0.57%)   | 🟡 ACTIVE |
+| KAVAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-03 21:00:00 PKT (16:00:00 UTC) | 2026-09-03 22:28:07 PKT (17:28:07 UTC) | $0.0501<br><small>2026-09-03 22:28:07 PKT (17:28:07 UTC)</small> | $0.0498         | $0.0481     | $0.0525 (Pending)<br>$0.0551 (Pending) | -0.59 (-0.59%)   | 🟡 ACTIVE |
 
 ---
 
