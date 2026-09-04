@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 301.25564475644563,
+  "cash_usdt": 201.18064475644564,
   "starting_balance": 500.0,
   "equity_peak": 507.79,
   "open_positions": {
@@ -47,7 +47,7 @@
       "signal_time": "2026-09-04T16:01:15.914500+00:00",
       "entry_time": "2026-09-04T16:01:15.914500+00:00",
       "entry_price": 4.8834405,
-      "current_price": 4.924,
+      "current_price": 4.827,
       "initial_quantity": 20.47736631581771,
       "remaining_quantity": 20.47736631581771,
       "quantity": 20.47736631581771,
@@ -68,7 +68,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 4.938,
+      "highest_price": 4.945,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -76,9 +76,48 @@
         "rsi_1h": 58.69,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "BNBUSDT": {
+      "trade_id": "T_20260904170104_BNBUSDT",
+      "symbol": "BNBUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-09-04T16:00:00",
+      "signal_time": "2026-09-04T17:01:04.073838+00:00",
+      "entry_time": "2026-09-04T17:01:04.073838+00:00",
+      "entry_price": 719.57961,
+      "current_price": 719.57961,
+      "initial_quantity": 0.138970030015164,
+      "remaining_quantity": 0.138970030015164,
+      "quantity": 0.138970030015164,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 707.08045,
+      "initial_stop_loss": 707.08045,
+      "tp1": 738.004325,
+      "tp2": 756.558649,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 719.57961,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 1.72,
+        "rsi_1h": 53.34,
+        "supertrend_4h": "BULLISH"
+      }
     }
   },
   "start_time": "2026-08-31T18:12:31.163933",
-  "last_updated": "2026-09-04T16:45:34.694403+00:00",
+  "last_updated": "2026-09-04T17:01:04.073868+00:00",
   "last_12h_summary_slot": "2026-09-04_06_PM"
 }
