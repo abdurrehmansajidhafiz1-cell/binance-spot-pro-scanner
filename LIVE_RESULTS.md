@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--0.46%25-red?style=for-the-badge)](LIVE_RESULTS.md)
-[![Win Rate](https://img.shields.io/badge/Win_Rate-52.9%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
-[![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.92-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-21-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--2.21%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Win Rate](https://img.shields.io/badge/Win_Rate-45.0%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
+[![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.62-orange?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-22-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-04 17:15:50 PKT (12:15:50 UTC)`  
+> **Last Updated:** `2026-09-04 17:31:19 PKT (12:31:19 UTC)`  
 > **Testing Start Date:** `2026-08-31 23:12:31 PKT (18:12:31 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -16,28 +16,26 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `21 Unique Trades` |
-| **Current Equity** | `$497.72 USDT` | **Completed Trades** | `17 Trades` |
-| **Available Cash** | `$97.12 USDT` | **Active / In-Trade** | `4 Trade` |
-| **Net PnL ($)** | `$-2.28 USDT` | **Win / Loss Ratio** | `9 Win / 8 Loss` |
-| **Net Return (%)** | `-0.46%` | **Win Rate** | `52.94%` |
-| **Peak Equity** | `$507.79 USDT` | **Profit Factor** | `0.92` |
-| **Max Drawdown** | `-1.98%` | **Total Fees Deducted** | `$2.84 USDT` |
+| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `22 Unique Trades` |
+| **Current Equity** | `$488.96 USDT` | **Completed Trades** | `20 Trades` |
+| **Available Cash** | `$289.48 USDT` | **Active / In-Trade** | `2 Trade` |
+| **Net PnL ($)** | `$-11.04 USDT` | **Win / Loss Ratio** | `9 Win / 11 Loss` |
+| **Net Return (%)** | `-2.21%` | **Win Rate** | `45.00%` |
+| **Peak Equity** | `$507.79 USDT` | **Profit Factor** | `0.62` |
+| **Max Drawdown** | `-3.71%` | **Total Fees Deducted** | `$3.14 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (4)
+## 🟡 Active Open Positions (2)
 
-| Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | Targets (TP1 / TP2)                        | Unrealized PnL   | Status   |
-|----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|--------------------------------------------|------------------|----------|
-| KAVAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-03 21:00:00 PKT (16:00:00 UTC) | 2026-09-03 22:28:07 PKT (17:28:07 UTC) | $0.0501<br><small>2026-09-03 22:28:07 PKT (17:28:07 UTC)</small>   | $0.0503         | $0.0481     | $0.0525 (Pending)<br>$0.0551 (Pending)     | +0.53 (+0.53%)   | 🟡 ACTIVE |
-| ICPUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-04 06:00:00 PKT (01:00:00 UTC) | 2026-09-04 07:01:13 PKT (02:01:13 UTC) | $2.5343<br><small>2026-09-04 07:01:13 PKT (02:01:13 UTC)</small>   | $2.5820         | $2.4836     | $2.6147 (Pending)<br>$2.6933 (Pending)     | +1.88 (+1.88%)   | 🟡 ACTIVE |
-| ALGOUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-04 08:00:00 PKT (03:00:00 UTC) | 2026-09-04 09:01:07 PKT (04:01:07 UTC) | $0.0944<br><small>2026-09-04 09:01:07 PKT (04:01:07 UTC)</small>   | $0.0928         | $0.0914     | $0.0996 (Pending)<br>$0.1046 (Pending)     | -1.74 (-1.74%)   | 🟡 ACTIVE |
-| SOLUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-04 13:00:00 PKT (08:00:00 UTC) | 2026-09-04 14:30:56 PKT (09:30:56 UTC) | $104.1520<br><small>2026-09-04 14:30:56 PKT (09:30:56 UTC)</small> | $104.0800       | $102.0906   | $107.8392 (Pending)<br>$111.2883 (Pending) | -0.07 (-0.07%)   | 🟡 ACTIVE |
+| Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
+|----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|----------------------------------------|------------------|----------|
+| KAVAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-03 21:00:00 PKT (16:00:00 UTC) | 2026-09-03 22:28:07 PKT (17:28:07 UTC) | $0.0501<br><small>2026-09-03 22:28:07 PKT (17:28:07 UTC)</small> | $0.0498         | $0.0481     | $0.0525 (Pending)<br>$0.0551 (Pending) | -0.47 (-0.47%)   | 🟡 ACTIVE |
+| PEPEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-04 17:15:00 PKT (12:15:00 UTC) | 2026-09-04 17:31:02 PKT (12:31:02 UTC) | $0.0000<br><small>2026-09-04 17:31:02 PKT (12:31:02 UTC)</small> | $0.0000         | $0.0000     | $0.0000 (Pending)<br>$0.0000 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
 
 ---
 
-## 📜 Completed Trades Postmortem History (17)
+## 📜 Completed Trades Postmortem History (20)
 
 > **PKR Column Guide:**
 > - 💵 `$100 Trade` → Actual realized profit/fees in PKR (actual budget used)
@@ -46,6 +44,9 @@
 
 | Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time                                                   | TP1 Price & Hit Time                                                 | TP2 Price & Hit Time                                                 | SL Hit Time                            | Net PnL ($ / %)   | PKR Calculations (Rate: ₨278/$)                                                                             | Final Result   |
 |----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------|-------------------|-------------------------------------------------------------------------------------------------------------|----------------|
+| SOLUSDT  | I1_MTF_TREND_PULLBACK | **1h (4h Macro Trend)** | 2026-09-04 13:00:00 PKT (08:00:00 UTC) | 2026-09-04 14:30:56 PKT (09:30:56 UTC) | $104.1520<br><small>2026-09-04 14:30:56 PKT (09:30:56 UTC)</small>   | $107.8392<br><small>-</small>                                        | $111.2883<br><small>-</small>                                        | 2026-09-04 17:30:36 PKT (12:30:36 UTC) | -2.10 (-2.10%)    | 💵 **$100 Trade:** `-584 PKR` profit | Fees: `41 PKR`<br>📌 **$35 Ref:** `-205 PKR` profit | Fees: `14 PKR`   | 🔴 LOSS         |
+| ALGOUSDT | I1_MTF_TREND_PULLBACK | **1h (4h Macro Trend)** | 2026-09-04 08:00:00 PKT (03:00:00 UTC) | 2026-09-04 09:01:07 PKT (04:01:07 UTC) | $0.0944<br><small>2026-09-04 09:01:07 PKT (04:01:07 UTC)</small>     | $0.0996<br><small>-</small>                                          | $0.1046<br><small>-</small>                                          | 2026-09-04 17:30:36 PKT (12:30:36 UTC) | -3.34 (-3.34%)    | 💵 **$100 Trade:** `-927 PKR` profit | Fees: `41 PKR`<br>📌 **$35 Ref:** `-325 PKR` profit | Fees: `14 PKR`   | 🔴 LOSS         |
+| ICPUSDT  | I1_MTF_TREND_PULLBACK | **1h (4h Macro Trend)** | 2026-09-04 06:00:00 PKT (01:00:00 UTC) | 2026-09-04 07:01:13 PKT (02:01:13 UTC) | $2.5343<br><small>2026-09-04 07:01:13 PKT (02:01:13 UTC)</small>     | $2.6147<br><small>-</small>                                          | $2.6933<br><small>-</small>                                          | 2026-09-04 17:30:36 PKT (12:30:36 UTC) | -2.12 (-2.12%)    | 💵 **$100 Trade:** `-590 PKR` profit | Fees: `41 PKR`<br>📌 **$35 Ref:** `-207 PKR` profit | Fees: `14 PKR`   | 🔴 LOSS         |
 | ETHUSDT  | S3_VOLATILITY_SQUEEZE | **15m**                 | 2026-09-04 13:45:00 PKT (08:45:00 UTC) | 2026-09-04 14:00:58 PKT (09:00:58 UTC) | $2,527.0329<br><small>2026-09-04 14:00:58 PKT (09:00:58 UTC)</small> | $2,552.4215<br><small>2026-09-04 14:30:37 PKT (09:30:37 UTC)</small> | $2,544.0185<br><small>2026-09-04 14:30:37 PKT (09:30:37 UTC)</small> | -                                      | +0.71 (+0.71%)    | 💵 **$100 Trade:** `+198 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `+69 PKR` profit | Fees: `15 PKR`    | 🟢 FULL WIN     |
 | LINKUSDT | S3_VOLATILITY_SQUEEZE | **15m**                 | 2026-09-04 08:00:00 PKT (03:00:00 UTC) | 2026-09-04 08:15:50 PKT (03:15:50 UTC) | $11.9380<br><small>2026-09-04 08:15:50 PKT (03:15:50 UTC)</small>    | $12.0543<br><small>2026-09-04 14:00:42 PKT (09:00:42 UTC)</small>    | $12.0620<br><small>2026-09-04 14:00:42 PKT (09:00:42 UTC)</small>    | -                                      | +0.88 (+0.88%)    | 💵 **$100 Trade:** `+245 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `+86 PKR` profit | Fees: `15 PKR`    | 🟢 FULL WIN     |
 | ARBUSDT  | S3_VOLATILITY_SQUEEZE | **15m**                 | 2026-09-04 05:45:00 PKT (00:45:00 UTC) | 2026-09-04 06:01:07 PKT (01:01:07 UTC) | $0.1456<br><small>2026-09-04 06:01:07 PKT (01:01:07 UTC)</small>     | $0.1469<br><small>-</small>                                          | $0.1504<br><small>-</small>                                          | 2026-09-04 06:30:35 PKT (01:30:35 UTC) | -2.74 (-2.74%)    | 💵 **$100 Trade:** `-761 PKR` profit | Fees: `41 PKR`<br>📌 **$35 Ref:** `-266 PKR` profit | Fees: `14 PKR`   | 🔴 LOSS         |
