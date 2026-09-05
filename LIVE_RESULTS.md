@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return-+1.68%25-brightgreen?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return-+1.35%25-brightgreen?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-52.0%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-1.62-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-30-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-05 06:45:45 PKT (01:45:45 UTC)`  
+> **Last Updated:** `2026-09-05 07:00:56 PKT (02:00:56 UTC)`  
 > **Testing Start Date:** `2026-08-31 23:12:31 PKT (18:12:31 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `30 Unique Trades` |
-| **Current Equity** | `$508.40 USDT` | **Completed Trades** | `25 Trades` |
+| **Current Equity** | `$506.75 USDT` | **Completed Trades** | `25 Trades` |
 | **Available Cash** | `$12.66 USDT` | **Active / In-Trade** | `5 Trade` |
-| **Net PnL ($)** | `$+8.40 USDT` | **Win / Loss Ratio** | `13 Win / 12 Loss` |
-| **Net Return (%)** | `+1.68%` | **Win Rate** | `52.00%` |
-| **Peak Equity** | `$508.40 USDT` | **Profit Factor** | `1.62` |
-| **Max Drawdown** | `-0.00%` | **Total Fees Deducted** | `$4.13 USDT` |
+| **Net PnL ($)** | `$+6.75 USDT` | **Win / Loss Ratio** | `13 Win / 12 Loss` |
+| **Net Return (%)** | `+1.35%` | **Win Rate** | `52.00%` |
+| **Peak Equity** | `$507.79 USDT` | **Profit Factor** | `1.62` |
+| **Max Drawdown** | `-0.20%` | **Total Fees Deducted** | `$4.13 USDT` |
 
 ---
 
@@ -30,11 +30,11 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | Targets (TP1 / TP2)                        | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|--------------------------------------------|------------------|----------|
-| KAVAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-03 21:00:00 PKT (16:00:00 UTC) | 2026-09-03 22:28:07 PKT (17:28:07 UTC) | $0.0501<br><small>2026-09-03 22:28:07 PKT (17:28:07 UTC)</small>   | $0.0498         | $0.0481     | $0.0525 (Pending)<br>$0.0551 (Pending)     | -0.41 (-0.41%)   | 🟡 ACTIVE |
-| EGLDUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-04 20:00:00 PKT (15:00:00 UTC) | 2026-09-04 21:01:15 PKT (16:01:15 UTC) | $4.8834<br><small>2026-09-04 21:01:15 PKT (16:01:15 UTC)</small>   | $4.6720         | $4.5088     | $5.4892 (Pending)<br>$6.0775 (Pending)     | -4.33 (-4.33%)   | 🟡 ACTIVE |
-| BNBUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-04 21:00:00 PKT (16:00:00 UTC) | 2026-09-04 22:01:04 PKT (17:01:04 UTC) | $719.5796<br><small>2026-09-04 22:01:04 PKT (17:01:04 UTC)</small> | $722.6500       | $707.0805   | $738.0043 (Pending)<br>$756.5586 (Pending) | +0.43 (+0.43%)   | 🟡 ACTIVE |
-| STXUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-05 05:15:00 PKT (00:15:00 UTC) | 2026-09-05 05:31:03 PKT (00:31:03 UTC) | $0.2675<br><small>2026-09-05 05:31:03 PKT (00:31:03 UTC)</small>   | $0.2672         | $0.2635     | $0.2699 (Pending)<br>$0.2699 (Pending)     | -0.12 (-0.12%)   | 🟡 ACTIVE |
-| SUIUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-05 06:00:00 PKT (01:00:00 UTC) | 2026-09-05 06:15:48 PKT (01:15:48 UTC) | $0.7649<br><small>2026-09-05 06:15:48 PKT (01:15:48 UTC)</small>   | $0.7662         | $0.7552     | $0.7721 (Pending)<br>$0.7725 (Pending)     | +0.17 (+0.17%)   | 🟡 ACTIVE |
+| KAVAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-03 21:00:00 PKT (16:00:00 UTC) | 2026-09-03 22:28:07 PKT (17:28:07 UTC) | $0.0501<br><small>2026-09-03 22:28:07 PKT (17:28:07 UTC)</small>   | $0.0498         | $0.0481     | $0.0525 (Pending)<br>$0.0551 (Pending)     | -0.45 (-0.45%)   | 🟡 ACTIVE |
+| EGLDUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-04 20:00:00 PKT (15:00:00 UTC) | 2026-09-04 21:01:15 PKT (16:01:15 UTC) | $4.8834<br><small>2026-09-04 21:01:15 PKT (16:01:15 UTC)</small>   | $4.6610         | $4.5088     | $5.4892 (Pending)<br>$6.0775 (Pending)     | -4.55 (-4.55%)   | 🟡 ACTIVE |
+| BNBUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-04 21:00:00 PKT (16:00:00 UTC) | 2026-09-04 22:01:04 PKT (17:01:04 UTC) | $719.5796<br><small>2026-09-04 22:01:04 PKT (17:01:04 UTC)</small> | $720.2000       | $707.0805   | $738.0043 (Pending)<br>$756.5586 (Pending) | +0.09 (+0.09%)   | 🟡 ACTIVE |
+| STXUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-05 05:15:00 PKT (00:15:00 UTC) | 2026-09-05 05:31:03 PKT (00:31:03 UTC) | $0.2675<br><small>2026-09-05 05:31:03 PKT (00:31:03 UTC)</small>   | $0.2656         | $0.2635     | $0.2699 (Pending)<br>$0.2699 (Pending)     | -0.72 (-0.72%)   | 🟡 ACTIVE |
+| SUIUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-05 06:00:00 PKT (01:00:00 UTC) | 2026-09-05 06:15:48 PKT (01:15:48 UTC) | $0.7649<br><small>2026-09-05 06:15:48 PKT (01:15:48 UTC)</small>   | $0.7628         | $0.7552     | $0.7721 (Pending)<br>$0.7725 (Pending)     | -0.27 (-0.27%)   | 🟡 ACTIVE |
 
 ---
 
