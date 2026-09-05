@@ -274,7 +274,7 @@ class PaperBroker:
             net_pnl_pct = (total_net_pnl / total_cost) * 100.0 if total_cost > 0 else 0.0
             total_all_fees = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
             
-            pos["status"] = "WIN"
+            pos["status"] = "WIN" if total_net_pnl > 0 else ("LOSS" if total_net_pnl < 0 else "BREAKEVEN")
             pos["net_pnl_usdt"] = round(total_net_pnl, 4)
             pos["net_pnl_pct"] = round(net_pnl_pct, 2)
             pos["fees_paid"] = round(total_all_fees, 4)

@@ -72,25 +72,28 @@ class VolatilitySqueezeStrategy(BaseStrategy):
             # Stop Loss: Keltner Midline - 0.5 * ATR
             sl_price = max(kc_mid.iloc[curr_idx] - (0.5 * curr_atr), curr_price * 0.975) # max 2.5% risk
             
-            # TP1: +1.0% quick fee lock / mean target
-            tp1_price = curr_price * 1.010
+            # TP1: +1.2% quick fee lock / mean target (guaranteed minimum 1.2% above entry to beat slippage & fees)
+            tp1_price = max(curr_price * 1.012, curr_price + (1.0 * curr_atr))
             
-            # TP2: +2.0 * ATR full volatility expansion
-            tp2_price = curr_price + (2.0 * curr_atr)
+            # TP2: +2.0 * ATR full volatility expansion (guaranteed minimum 2.0% above entry)
+            tp2_price = max(curr_price + (2.0 * curr_atr), curr_price * 1.020)
+            
+            # Dynamic decimal precision for micro-penny tokens (e.g. FLOKI, PEPE)
+            dec_places = 8 if curr_price < 0.01 else (6 if curr_price < 1.0 else 4)
             
             return Signal(
                 symbol=symbol,
                 action="BUY",
                 price=curr_price,
-                stop_loss=round(sl_price, 6),
-                tp1=round(tp1_price, 6),
-                tp2=round(tp2_price, 6),
+                stop_loss=round(sl_price, dec_places),
+                tp1=round(tp1_price, dec_places),
+                tp2=round(tp2_price, dec_places),
                 strategy_name=self.name,
                 reason="Squeeze Expansion Breakout above Upper BB with OBV + Volume Confirmation",
                 metadata={
-                    "atr": round(curr_atr, 6),
+                    "atr": round(curr_atr, dec_places),
                     "mom_hist": round(float(mom_hist.iloc[curr_idx]), 4),
-                    "bb_upper": round(float(bb_upper.iloc[curr_idx]), 6),
+                    "bb_upper": round(float(bb_upper.iloc[curr_idx]), dec_places),
                     "rsi_15m": round(float(curr_rsi), 2)
                 }
             )

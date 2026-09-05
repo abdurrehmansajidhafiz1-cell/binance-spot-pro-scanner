@@ -82,13 +82,16 @@ class MultiTimeframePullbackStrategy(BaseStrategy):
             # TP2: 3.0R (~5.0% - 8.0%)
             tp2_price = curr_price + (3.0 * risk_distance)
             
+            # Dynamic decimal precision for micro-penny tokens
+            dec_places = 8 if curr_price < 0.01 else (6 if curr_price < 1.0 else 4)
+            
             return Signal(
                 symbol=symbol,
                 action="BUY",
                 price=curr_price,
-                stop_loss=round(sl_price, 6),
-                tp1=round(tp1_price, 6),
-                tp2=round(tp2_price, 6),
+                stop_loss=round(sl_price, dec_places),
+                tp1=round(tp1_price, dec_places),
+                tp2=round(tp2_price, dec_places),
                 strategy_name=self.name,
                 reason="4H Macro Trend confirmed + 1H EMA21 Pullback Reversal with RSI Reset",
                 metadata={

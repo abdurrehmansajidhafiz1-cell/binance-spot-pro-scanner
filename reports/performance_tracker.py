@@ -11,6 +11,25 @@ from config.settings import LIVE_RESULTS_MD, STARTING_BALANCE_USDT, PKR_PER_USD,
 from engine.time_utils import format_dual_time, parse_to_utc, get_current_utc
 
 
+def format_price(price: Any) -> str:
+    if price is None:
+        return "-"
+    try:
+        p = float(price)
+    except (ValueError, TypeError):
+        return str(price)
+    if p == 0:
+        return "$0.00"
+    if abs(p) < 0.001:
+        return f"${p:,.8f}"
+    elif abs(p) < 1.0:
+        return f"${p:,.4f}"
+    elif abs(p) < 1000.0:
+        return f"${p:,.4f}"
+    else:
+        return f"${p:,.2f}"
+
+
 class PerformanceTracker:
     def __init__(self, broker):
         self.broker = broker
@@ -122,8 +141,8 @@ class PerformanceTracker:
             pnl_pct = ((curr_p - entry_p) / entry_p) * 100.0
             pnl_val = (pos.get("remaining_quantity", pos["quantity"]) * curr_p) - pos.get("remaining_cost_usdt", pos["initial_cost_usdt"]) + pos.get("realized_pnl_usdt", 0.0)
             
-            tp1_status = f"${pos['tp1']:,.4f} " + ("(HIT)" if pos.get("tp1_reached") else "(Pending)")
-            tp2_status = f"${pos['tp2']:,.4f} " + ("(HIT)" if pos.get("tp2_reached") else "(Pending)")
+            tp1_status = f"{format_price(pos['tp1'])} " + ("(HIT)" if pos.get("tp1_reached") else "(Pending)")
+            tp2_status = f"{format_price(pos['tp2'])} " + ("(HIT)" if pos.get("tp2_reached") else "(Pending)")
             tf_display = pos.get("timeframe", "15m" if "S3" in pos["strategy"] else "1h (4h Trend)")
             
             open_pos_rows.append([
@@ -132,9 +151,9 @@ class PerformanceTracker:
                 f"<b>{tf_display}</b>",
                 format_dual_time(pos.get("zone_candle_time")),
                 format_dual_time(pos.get("signal_time")),
-                f"${entry_p:,.4f}<br><small>{format_dual_time(pos.get('entry_time'))}</small>",
-                f"${curr_p:,.4f}",
-                f"${pos['stop_loss']:,.4f}",
+                f"{format_price(entry_p)}<br><small>{format_dual_time(pos.get('entry_time'))}</small>",
+                format_price(curr_p),
+                format_price(pos['stop_loss']),
                 f"{tp1_status}<br>{tp2_status}",
                 f"{pnl_val:+,.2f} ({pnl_pct:+.2f}%)",
                 "🟡 ACTIVE"
@@ -153,7 +172,12 @@ class PerformanceTracker:
             pnl_val   = t.get("net_pnl_usdt", 0.0)
             pnl_pct   = t.get("net_pnl_pct", 0.0)
             fees_usd  = t.get("fees_paid", 0.0)
-            result_badge = "🟢 FULL WIN" if "TP2" in t.get("exit_reason", "") else ("🟢 PARTIAL WIN" if pnl_val > 0 else "🔴 LOSS")
+            if pnl_val > 0:
+                result_badge = "🟢 FULL WIN" if "TP2" in t.get("exit_reason", "") else "🟢 PARTIAL WIN"
+            elif pnl_val < 0:
+                result_badge = "🔴 LOSS"
+            else:
+                result_badge = "⚪ BREAKEVEN"
             tf_display = t.get("timeframe", "15m" if "S3" in t["strategy"] else "1h")
             
             tp1_hit_str = format_dual_time(t.get("tp1_hit_time")) if t.get("tp1_hit_time") else "-"
@@ -183,9 +207,9 @@ class PerformanceTracker:
                 f"**{tf_display}**",
                 format_dual_time(t.get("zone_candle_time")),
                 format_dual_time(t.get("signal_time")),
-                f"${t['entry_price']:,.4f}<br><small>{format_dual_time(t.get('entry_time'))}</small>",
-                f"${t.get('tp1', 0):,.4f}<br><small>{tp1_hit_str}</small>",
-                f"${t.get('tp2', 0):,.4f}<br><small>{tp2_hit_str}</small>",
+                f"{format_price(t.get('entry_price'))}<br><small>{format_dual_time(t.get('entry_time'))}</small>",
+                f"{format_price(t.get('tp1'))}<br><small>{tp1_hit_str}</small>",
+                f"{format_price(t.get('tp2'))}<br><small>{tp2_hit_str}</small>",
                 sl_hit_str,
                 f"{pnl_val:+,.2f} ({pnl_pct:+.2f}%)",
                 pkr_block,
@@ -222,10 +246,10 @@ class PerformanceTracker:
 | **Starting Balance** | `${metrics['starting_balance']:,.2f} USDT` | **Total Qualified Trades** | `{metrics['total_qualified_trades']} Unique Trades` |
 | **Current Equity** | `${metrics['current_equity']:,.2f} USDT` | **Completed Trades** | `{metrics['completed_trades_count']} Trades` |
 | **Available Cash** | `${metrics['cash_usdt']:,.2f} USDT` | **Active / In-Trade** | `{metrics['active_trades_count']} Trade` |
-| **Net PnL ($)** | `${metrics['total_pnl_usdt']:+,.2f} USDT` | **Win / Loss Ratio** | `{metrics['win_count']} Win / {metrics['loss_count']} Loss` |
+| **Net PnL ($)** | `{'+$' if metrics['total_pnl_usdt'] >= 0 else '-$'}{abs(metrics['total_pnl_usdt']):,.2f} USDT` | **Win / Loss Ratio** | `{metrics['win_count']} Win / {metrics['loss_count']} Loss` |
 | **Net Return (%)** | `{metrics['total_return_pct']:+.2f}%` | **Win Rate** | `{metrics['win_rate']:.2f}%` |
 | **Peak Equity** | `${metrics['equity_peak']:,.2f} USDT` | **Profit Factor** | `{metrics['profit_factor']:.2f}` |
-| **Max Drawdown** | `-{metrics['max_drawdown_pct']:.2f}%` | **Total Fees Deducted** | `${metrics['total_fees_paid']:,.2f} USDT` |
+| **Max Drawdown** | `{"-" if metrics['max_drawdown_pct'] > 0 else ""}{metrics['max_drawdown_pct']:.2f}%` | **Total Fees Deducted** | `${metrics['total_fees_paid']:,.2f} USDT` |
 
 ---
 
