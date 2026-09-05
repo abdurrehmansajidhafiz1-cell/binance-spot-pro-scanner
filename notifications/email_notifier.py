@@ -486,4 +486,113 @@ EXECUTIVE SUMMARY:
 </body>
 </html>
 """
+    def send_btc_emergency_dump_alert(self, btc_drop_pct: float,
+                                       active_positions: List[Dict[str, Any]],
+                                       btc_price: float) -> bool:
+        """
+        P6: Dispatches an urgent, high-priority alert when BTC drops >= 1.2% in 15 minutes
+        while positions are active. Explicitly advises the user to move Stop Loss to Entry Price.
+        """
+        dual_time = format_dual_time()
+        pos_count = len(active_positions)
+        symbols_str = ", ".join([p.get("symbol", "") for p in active_positions])
+
+        subject = f"🚨 URGENT ACTION: BTC Flash Dump ({btc_drop_pct:.2f}%) — Move SL to Entry Price for {symbols_str}"
+
+        # Plain text
+        text_content = f"""🚨 URGENT CAPITAL PROTECTION ALERT
+Time: {dual_time}
+
+Yaar, aapki {pos_count} trade(s) [{symbols_str}] is waqt open/active hain aur Bitcoin ne pichle 15 minutes mein {btc_drop_pct:.2f}% dump kiya hai (BTC: ${btc_price:,.2f}).
+
+Is wajah se apni active trade ka Stop Loss Entry Price par shift kar dein, taake trade ka capital protect ho sake!
+
+Active Trade Details:
+"""
+        for p in active_positions:
+            sym = p.get("symbol", "")
+            strat = p.get("strategy", "")
+            ep = p.get("entry_price", 0)
+            be_sl = ep * 1.001
+            text_content += f"- {sym} ({strat}): Entry ${ep:,.4f} -> Recommended New SL: ${be_sl:,.4f}\n"
+
+        # HTML Table of positions
+        pos_rows_html = ""
+        for p in active_positions:
+            sym = p.get("symbol", "")
+            strat = p.get("strategy", "")
+            ep = p.get("entry_price", 0)
+            curr = p.get("current_price", ep)
+            old_sl = p.get("old_sl", p.get("stop_loss", 0))
+            be_sl = ep * 1.001
+            pos_rows_html += f"""
+            <tr>
+                <td style="padding:10px; font-weight:bold; color:#1e293b;">{sym}</td>
+                <td style="padding:10px; font-size:12px; color:#64748b;">{strat}</td>
+                <td style="padding:10px; font-weight:bold;">${ep:,.4f}</td>
+                <td style="padding:10px; color:#475569;">${curr:,.4f}</td>
+                <td style="padding:10px; color:#dc2626; text-decoration:line-through;">${old_sl:,.4f}</td>
+                <td style="padding:10px; font-weight:bold; color:#16a34a; background:#f0fdf4;">${be_sl:,.4f} (Entry + Fee)</td>
+            </tr>
+            """
+
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; }}
+    .container {{ max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 2px solid #ef4444; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15); }}
+    .header {{ background: linear-gradient(135deg, #dc2626, #b91c1c); color: #ffffff; padding: 25px; text-align: center; }}
+    .header h1 {{ margin: 0; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }}
+    .header p {{ margin: 8px 0 0 0; opacity: 0.95; font-size: 14px; }}
+    .content {{ padding: 25px; color: #334155; }}
+    .urgent-banner {{ background: #fef2f2; border-left: 5px solid #ef4444; padding: 15px; border-radius: 6px; margin-bottom: 20px; }}
+    .urgent-banner p {{ margin: 0; font-size: 15px; line-height: 1.5; color: #991b1b; font-weight: 600; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }}
+    th {{ background: #f1f5f9; padding: 10px; text-align: left; color: #475569; font-weight: 700; border-bottom: 2px solid #cbd5e1; }}
+    tr:nth-child(even) {{ background: #f8fafc; }}
+    .footer {{ background: #f1f5f9; padding: 15px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; }}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚨 URGENT CAPITAL PROTECTION ALERT</h1>
+        <p>BTC Flash Dump Triggered • Action Required</p>
+    </div>
+    <div class="content">
+        <div class="urgent-banner">
+            <p>
+                ⚠️ <b>Yaar, aapki {pos_count} trade(s) is waqt open/active hain aur Bitcoin ne pichle 15 minutes mein {btc_drop_pct:.2f}% dump kiya hai (BTC: ${btc_price:,.2f}).</b>
+                <br><br>
+                Is wajah se apni active trade ka Stop Loss <b>Entry Price par shift kar dein</b>, taake market cascade mein trade ka capital 100% protect ho sake!
+            </p>
+        </div>
+
+        <h3 style="margin: 20px 0 10px 0; color: #1e293b; font-size: 16px;">Active Positions SL Adjustment Guide</h3>
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Strategy</th>
+                <th>Entry Price</th>
+                <th>Current Price</th>
+                <th>Old Stop Loss</th>
+                <th>Recommended New SL</th>
+            </tr>
+            {pos_rows_html}
+        </table>
+
+        <div style="margin-top: 20px; padding: 12px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; font-size: 13px; color: #166534;">
+            ✅ <b>Automatic Paper Defense:</b> Scanner broker ne paper account mein Stop Loss ko Breakeven par shift kar diya hai. Agar aap live exchange par trade kar rahe hain to wahan bhi foran SL shift kar dein.
+        </div>
+    </div>
+    <div class="footer">
+        Timestamp: {dual_time} • Binance Spot Risk Management Protocol
+    </div>
+</div>
+</body>
+</html>
+"""
         return self.send_email(subject, html_content, text_content)

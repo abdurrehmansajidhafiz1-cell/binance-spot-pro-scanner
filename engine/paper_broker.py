@@ -54,13 +54,32 @@ class PaperBroker:
         return raw_quantity, position_cost_usdt
 
     def can_open_position(self, symbol: str) -> bool:
-        """Check if portfolio capacity allows new trade."""
+        """Check if portfolio capacity allows new trade, including 60-min re-entry cooldown."""
         if symbol in self.open_positions:
             return False
         if len(self.open_positions) >= MAX_CONCURRENT_POSITIONS:
             return False
         if self.cash < 101.0: # Minimum $101 cash threshold (covers $100 trade + fees)
             return False
+
+        # P5: 60-Minute Re-Entry Cooldown (Anti-Double-Dip)
+        now_utc = get_current_utc()
+        for t in reversed(self.trade_history):
+            if t.get("symbol") == symbol:
+                exit_time_str = t.get("exit_time")
+                if exit_time_str:
+                    try:
+                        clean_str = exit_time_str.replace("Z", "+00:00")
+                        exit_dt = datetime.fromisoformat(clean_str)
+                        if exit_dt.tzinfo is None:
+                            exit_dt = exit_dt.replace(tzinfo=timezone.utc)
+                        elapsed_mins = (now_utc - exit_dt).total_seconds() / 60.0
+                        if elapsed_mins < 60.0:
+                            print(f"  [COOLDOWN] {symbol} closed {elapsed_mins:.1f}m ago (< 60m cooldown). Skipping.")
+                            return False
+                    except Exception:
+                        pass
+                break
         return True
 
     def open_long_position(self, symbol: str, strategy_name: str, current_price: float,
@@ -158,7 +177,18 @@ class PaperBroker:
         tp1 = pos["tp1"]
         tp2 = pos["tp2"]
         now_iso = get_current_utc().isoformat()
-        
+
+        # P2: Intermediate Breakeven Milestone for I1 Swing Trades
+        # If I1 reaches +1.5% unrealized profit, lock Stop Loss at Breakeven + fee buffer (+0.15%)
+        if "I1" in pos.get("strategy", "") and not pos.get("intermediate_be_reached", False):
+            unrealized_gain_pct = ((high_price - entry_price) / entry_price) * 100.0
+            if unrealized_gain_pct >= 1.5:
+                be_sl = entry_price * 1.0015
+                if be_sl > pos["stop_loss"]:
+                    pos["stop_loss"] = be_sl
+                    pos["intermediate_be_reached"] = True
+                    print(f"  [INTERMEDIATE BREAKEVEN] {symbol} hit +{unrealized_gain_pct:.2f}% gain -> SL locked at Breakeven (${be_sl:,.4f})")
+
         # 1. Check Stop Loss Trigger
         if low_price <= stop_loss:
             exec_price = stop_loss * (1.0 - SLIPPAGE_RATE)
@@ -299,6 +329,34 @@ class PaperBroker:
 
         self.save()
         return None
+
+    def emergency_tighten_positions_to_breakeven(self) -> List[Dict]:
+        """
+        P6: Emergency action when BTC dumps >= 1.2% in 15m.
+        Tightens Stop Loss of all active open positions to Breakeven (+0.1% buffer)
+        to protect capital against systemic cascades. Returns list of affected positions.
+        """
+        tightened = []
+        for symbol, pos in self.open_positions.items():
+            entry_price = pos["entry_price"]
+            be_sl = entry_price * 1.001
+            # If current SL is below breakeven, raise it
+            if be_sl > pos["stop_loss"]:
+                old_sl = pos["stop_loss"]
+                pos["stop_loss"] = be_sl
+                pos["emergency_be_triggered"] = True
+                tightened.append({
+                    "symbol": symbol,
+                    "strategy": pos["strategy"],
+                    "entry_price": entry_price,
+                    "old_sl": old_sl,
+                    "new_sl": be_sl,
+                    "current_price": pos.get("current_price", entry_price)
+                })
+                print(f"  [EMERGENCY SL TIGHTEN] {symbol} SL moved from ${old_sl:,.4f} -> Breakeven ${be_sl:,.4f}")
+        if tightened:
+            self.save()
+        return tightened
 
     def save(self):
         """Save state and trade history."""

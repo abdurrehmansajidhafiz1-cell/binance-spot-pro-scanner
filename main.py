@@ -132,6 +132,41 @@ class LiveScannerEngine:
 
         # 2. Update and Manage Existing Open Positions
         print(f"\n{Fore.BLUE}--> Step 2: Checking Active Positions ({len(self.broker.open_positions)} open)...{Style.RESET_ALL}")
+        
+        # P6: Active Position Capital Protection on BTC Flash Dump (>= 1.2% in 15m)
+        if len(self.broker.open_positions) > 0:
+            btc_15m = self.client.get_klines("BTCUSDT", "15m", limit=3)
+            if not btc_15m.empty and len(btc_15m) >= 2:
+                latest_btc = btc_15m.iloc[-1]
+                btc_o = float(latest_btc['open'])
+                btc_l = float(latest_btc['low'])
+                btc_c = float(latest_btc['close'])
+                btc_drop_pct = ((btc_l - btc_o) / btc_o) * 100.0
+                
+                if btc_drop_pct <= -1.2:
+                    print(f"{Fore.RED}  [EMERGENCY TRIGGER] BTC Flash Dump detected ({btc_drop_pct:.2f}% drop in 15m candle)!{Style.RESET_ALL}")
+                    tightened = self.broker.emergency_tighten_positions_to_breakeven()
+                    if tightened:
+                        last_alert_time = self.broker.state.get("last_emergency_dump_alert_time")
+                        should_alert = True
+                        if last_alert_time:
+                            try:
+                                last_dt = datetime.fromisoformat(last_alert_time.replace("Z", "+00:00"))
+                                if (get_current_utc() - last_dt).total_seconds() < 1800:
+                                    should_alert = False
+                            except Exception:
+                                pass
+                        if should_alert:
+                            self.broker.state["last_emergency_dump_alert_time"] = get_current_utc().isoformat()
+                            self.broker.save()
+                            email_sent = self.email_notifier.send_btc_emergency_dump_alert(
+                                btc_drop_pct=abs(btc_drop_pct),
+                                active_positions=tightened,
+                                btc_price=btc_c
+                            )
+                            if email_sent:
+                                print(f"{Fore.CYAN}    [EMAIL SENT] URGENT: BTC Flash Dump capital protection alert dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+
         for symbol, pos in list(self.broker.open_positions.items()):
             curr_p = current_prices.get(symbol)
             if not curr_p:
@@ -259,11 +294,13 @@ class LiveScannerEngine:
                 if not self.broker.can_open_position(symbol):
                     continue
 
-                # 4A. Evaluate S3: 15m Volatility Squeeze on COMPLETED closed candle
+                # 4A. Evaluate S3: 15m Volatility Squeeze on COMPLETED closed candle with 1H Trend Confluence
                 df_15m = self.client.get_klines(symbol, TIMEFRAME_S3, limit=65)
                 if not df_15m.empty and len(df_15m) >= 50:
                     closed_15m = df_15m.iloc[:-1]
-                    s3_signal = self.strat_s3.evaluate(symbol, closed_15m)
+                    df_1h_check = self.client.get_klines(symbol, "1h", limit=30)
+                    closed_1h = df_1h_check.iloc[:-1] if not df_1h_check.empty and len(df_1h_check) >= 25 else None
+                    s3_signal = self.strat_s3.evaluate(symbol, closed_15m, df_1h=closed_1h)
                     if s3_signal and s3_signal.action == "BUY":
                         signals_found += 1
                         zone_time = closed_15m.index[-1].isoformat()
