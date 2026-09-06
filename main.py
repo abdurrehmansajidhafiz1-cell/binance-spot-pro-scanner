@@ -94,7 +94,8 @@ class LiveScannerEngine:
             unresolved_count=summary_data["unresolved_count"],
             net_pnl_usdt=summary_data["net_pnl_usdt"],
             trades_details=summary_data["closed_trades"],
-            open_positions_details=summary_data["open_positions"]
+            open_positions_details=summary_data["open_positions"],
+            cumulative_data=summary_data
         )
         
         if sent:
@@ -472,7 +473,8 @@ def main():
             unresolved_count=summary_data["unresolved_count"],
             net_pnl_usdt=summary_data["net_pnl_usdt"],
             trades_details=summary_data["closed_trades"],
-            open_positions_details=summary_data["open_positions"]
+            open_positions_details=summary_data["open_positions"],
+            cumulative_data=summary_data
         )
         if sent:
             print(f"{Fore.GREEN}[SUCCESS] 12-Hour Summary Email successfully delivered to {RECEIVER_EMAIL}! Please check your Inbox.{Style.RESET_ALL}")

@@ -93,7 +93,8 @@ class PerformanceTracker:
 
     def get_12h_summary_data(self, hours: int = 12) -> Dict[str, Any]:
         """
-        Extract trading activity from the last 12 hours based on unique trades.
+        Extract trading activity from the last 12 hours based on unique trades,
+        combined with Day 1 to present cumulative performance metrics.
         """
         now_utc = get_current_utc()
         cutoff_utc = now_utc - timedelta(hours=hours)
@@ -116,6 +117,15 @@ class PerformanceTracker:
         total_qualified = len(closed_in_12h) + unresolved_count
         net_pnl_usdt = sum(t.get("net_pnl_usdt", 0.0) for t in closed_in_12h)
         
+        # Day 1 to Present Cumulative Analytics
+        all_winning = [t for t in history if t.get("net_pnl_usdt", 0) > 0]
+        all_losing = [t for t in history if t.get("net_pnl_usdt", 0) < 0]
+        all_completed = len(history)
+        all_win_rate = (len(all_winning) / all_completed * 100.0) if all_completed > 0 else 0.0
+        all_net_pnl = sum(t.get("net_pnl_usdt", 0.0) for t in history)
+        all_total_qualified = all_completed + len(open_positions)
+        all_total_fees = sum(t.get("fees_paid", 0.0) for t in history)
+
         return {
             "period_start_utc": cutoff_utc,
             "period_end_utc": now_utc,
@@ -125,7 +135,17 @@ class PerformanceTracker:
             "unresolved_count": unresolved_count,
             "net_pnl_usdt": net_pnl_usdt,
             "closed_trades": closed_in_12h,
-            "open_positions": open_in_12h
+            "open_positions": open_in_12h,
+            # Day 1 Cumulative Data
+            "all_history": history,
+            "all_total_qualified": all_total_qualified,
+            "all_completed_count": all_completed,
+            "all_win_count": len(all_winning),
+            "all_loss_count": len(all_losing),
+            "all_win_rate": all_win_rate,
+            "all_net_pnl": all_net_pnl,
+            "all_total_fees": all_total_fees,
+            "start_time": self.broker.state.get("start_time")
         }
 
     def generate_markdown_report(self, current_prices: Dict[str, float]) -> str:

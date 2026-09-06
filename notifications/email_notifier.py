@@ -8,7 +8,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any, List
-from engine.time_utils import format_dual_time, get_current_utc
+from engine.time_utils import format_dual_time, get_current_utc, format_price
+from config.settings import PKR_PER_USD
 
 
 class EmailNotifier:
@@ -293,102 +294,175 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
                                total_qualified: int, win_count: int, loss_count: int,
                                unresolved_count: int, net_pnl_usdt: float,
                                trades_details: List[Dict[str, Any]],
-                               open_positions_details: List[Dict[str, Any]]) -> bool:
+                               open_positions_details: List[Dict[str, Any]],
+                               cumulative_data: Optional[Dict[str, Any]] = None) -> bool:
         """
-        Dispatches the 12-Hour Trading Activity Summary Email with dual PKT + UTC timestamps.
+        Dispatches the 12-Hour Trading Activity Summary Email with dual PKT + UTC timestamps,
+        plus comprehensive Day 1 to present cumulative performance and complete trade history.
         """
         start_str = format_dual_time(period_start_utc)
         end_str = format_dual_time(period_end_utc)
+        now_dual_str = format_dual_time()
         
-        subject = f"📊 [12-HOUR SUMMARY] Binance Spot Activity Report | {format_dual_time()}"
-        
-        # Build Table of Closed Trades
+        # Cumulative Day 1 stats extraction
+        cum = cumulative_data or {}
+        cum_start_str = format_dual_time(cum.get("start_time")) if cum.get("start_time") else "Day 1 (2026-08-31)"
+        cum_total_qualified = cum.get("all_total_qualified", total_qualified)
+        cum_completed = cum.get("all_completed_count", len(trades_details))
+        cum_wins = cum.get("all_win_count", win_count)
+        cum_losses = cum.get("all_loss_count", loss_count)
+        cum_win_rate = cum.get("all_win_rate", (win_count / (win_count + loss_count) * 100.0) if (win_count + loss_count) > 0 else 0.0)
+        cum_net_pnl = cum.get("all_net_pnl", net_pnl_usdt)
+        cum_pkr_pnl = cum_net_pnl * PKR_PER_USD
+        all_history = cum.get("all_history", [])
+
+        subject = f"📊 [12-HOUR SUMMARY] Binance Spot Activity & Day-1 Report | {now_dual_str}"
+
+        # 1. 12-Hour Closed Trades
         trade_rows_html = []
         trade_rows_text = []
-        
         for t in trades_details:
             entry_time_str = format_dual_time(t.get("entry_time"))
             exit_time_str = format_dual_time(t.get("exit_time"))
             pnl_val = t.get("net_pnl_usdt", 0.0)
             pnl_pct = t.get("net_pnl_pct", 0.0)
             status = "🟢 WIN" if pnl_val > 0 else "🔴 LOSS"
-            
+            pkr_val = pnl_val * PKR_PER_USD
             tf_val = t.get("timeframe", "15m" if "S3" in t.get("strategy", "") else "1h")
+            
             trade_rows_text.append(
                 f"• {status} | {t.get('symbol')} ({t.get('strategy')}) [TF: {tf_val}]\n"
-                f"  Entry: ${t.get('entry_price', 0):,.4f} at {entry_time_str}\n"
-                f"  Exit:  ${t.get('exit_price', 0):,.4f} at {exit_time_str}\n"
-                f"  PnL:   ${pnl_val:+,.2f} ({pnl_pct:+.2f}%) | Reason: {t.get('exit_reason')}\n"
+                f"  Entry: {format_price(t.get('entry_price'))} at {entry_time_str}\n"
+                f"  Exit:  {format_price(t.get('exit_price'))} at {exit_time_str}\n"
+                f"  PnL:   ${pnl_val:+,.2f} ({pnl_pct:+.2f}%) | PKR: {pkr_val:+,.0f} PKR | Reason: {t.get('exit_reason')}\n"
             )
-            
             row_bg = "#dcfce7" if pnl_val > 0 else "#fee2e2"
             pnl_color = "#166534" if pnl_val > 0 else "#991b1b"
-            
             trade_rows_html.append(f"""
             <tr style="background:{row_bg};">
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700;">{t.get('symbol')}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{t.get('strategy')}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:#0284c7;">{tf_val}</td>
-                <td style="padding:8px; border:1px solid #cbd5e1;">${t.get('entry_price', 0):,.4f}<br><small style="color:#64748b;">{entry_time_str}</small></td>
-                <td style="padding:8px; border:1px solid #cbd5e1;">${t.get('exit_price', 0):,.4f}<br><small style="color:#64748b;">{exit_time_str}</small></td>
-                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:{pnl_color};">${pnl_val:+,.2f} ({pnl_pct:+.2f}%)</td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">{format_price(t.get('entry_price'))}<br><small style="color:#64748b;">{entry_time_str}</small></td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">{format_price(t.get('exit_price'))}<br><small style="color:#64748b;">{exit_time_str}</small></td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:{pnl_color};">${pnl_val:+,.2f} ({pnl_pct:+.2f}%)<br><small>{pkr_val:+,.0f} PKR</small></td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{t.get('exit_reason')}</td>
             </tr>
             """)
 
-        # Build Table of Unresolved / Active Trades
+        # 2. Unresolved / Active Trades
         unresolved_rows_html = []
         unresolved_rows_text = []
-        
         for pos in open_positions_details:
             entry_time_str = format_dual_time(pos.get("entry_time"))
             curr_p = pos.get("current_price", pos.get("entry_price", 0))
             entry_p = pos.get("entry_price", 1)
             unrealized_pct = ((curr_p - entry_p) / entry_p) * 100.0
             pos_tf = pos.get("timeframe", "15m" if "S3" in pos.get("strategy", "") else "1h")
-            
             unresolved_rows_text.append(
                 f"• 🟡 ACTIVE | {pos.get('symbol')} ({pos.get('strategy')}) [TF: {pos_tf}]\n"
-                f"  Entry: ${entry_p:,.4f} at {entry_time_str}\n"
-                f"  Current Price: ${curr_p:,.4f} | Unrealized: {unrealized_pct:+.2f}%\n"
-                f"  Stop Loss: ${pos.get('stop_loss', 0):,.4f} | TP1: ${pos.get('tp1', 0):,.4f}\n"
+                f"  Entry: {format_price(entry_p)} at {entry_time_str}\n"
+                f"  Current: {format_price(curr_p)} | Unrealized: {unrealized_pct:+.2f}%\n"
+                f"  Stop Loss: {format_price(pos.get('stop_loss'))} | TP1: {format_price(pos.get('tp1'))}\n"
             )
-            
             unresolved_rows_html.append(f"""
             <tr style="background:#fef9c3;">
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700;">{pos.get('symbol')}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">{pos.get('strategy')}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:#0284c7;">{pos_tf}</td>
-                <td style="padding:8px; border:1px solid #cbd5e1;">${entry_p:,.4f}<br><small style="color:#64748b;">{entry_time_str}</small></td>
-                <td style="padding:8px; border:1px solid #cbd5e1;">${curr_p:,.4f}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">{format_price(entry_p)}<br><small style="color:#64748b;">{entry_time_str}</small></td>
+                <td style="padding:8px; border:1px solid #cbd5e1;">{format_price(curr_p)}</td>
                 <td style="padding:8px; border:1px solid #cbd5e1; font-weight:700; color:{'#166534' if unrealized_pct >= 0 else '#991b1b'};">{unrealized_pct:+.2f}%</td>
-                <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">SL: ${pos.get('stop_loss', 0):,.4f}<br>TP1: ${pos.get('tp1', 0):,.4f}</td>
+                <td style="padding:8px; border:1px solid #cbd5e1; font-size:12px;">SL: {format_price(pos.get('stop_loss'))}<br>TP1: {format_price(pos.get('tp1'))}</td>
+            </tr>
+            """)
+
+        # 3. Day 1 Cumulative Completed Trades Table
+        cum_rows_html = []
+        cum_rows_text = []
+        for idx, t in enumerate(reversed(all_history), start=1):
+            pnl_val = t.get("net_pnl_usdt", 0.0)
+            pnl_pct = t.get("net_pnl_pct", 0.0)
+            pkr_val = pnl_val * PKR_PER_USD
+            entry_time_str = format_dual_time(t.get("entry_time"))
+            exit_time_str = format_dual_time(t.get("exit_time"))
+            tf_val = t.get("timeframe", "15m" if "S3" in t.get("strategy", "") else "1h")
+            if pnl_val > 0:
+                badge = "🟢 FULL WIN" if "TP2" in t.get("exit_reason", "") else "🟢 PARTIAL WIN"
+                row_bg = "#dcfce7"
+                pnl_color = "#166534"
+            elif pnl_val < 0:
+                badge = "🔴 LOSS"
+                row_bg = "#fee2e2"
+                pnl_color = "#991b1b"
+            else:
+                badge = "⚪ BREAKEVEN"
+                row_bg = "#f1f5f9"
+                pnl_color = "#475569"
+
+            cum_rows_text.append(
+                f"  [{idx:02d}] {badge} | {t.get('symbol')} ({t.get('strategy')})\n"
+                f"       Entry: {format_price(t.get('entry_price'))} ({entry_time_str})\n"
+                f"       Exit:  {format_price(t.get('exit_price'))} ({exit_time_str})\n"
+                f"       PnL:   ${pnl_val:+,.2f} ({pnl_pct:+.2f}%) | {pkr_val:+,.0f} PKR\n"
+            )
+            cum_rows_html.append(f"""
+            <tr style="background:{row_bg};">
+                <td style="padding:6px; border:1px solid #cbd5e1; font-size:11px; text-align:center;">{idx}</td>
+                <td style="padding:6px; border:1px solid #cbd5e1; font-weight:700;">{t.get('symbol')}</td>
+                <td style="padding:6px; border:1px solid #cbd5e1; font-size:11px;">{t.get('strategy')}</td>
+                <td style="padding:6px; border:1px solid #cbd5e1; font-size:11px; font-weight:700; color:#0284c7;">{tf_val}</td>
+                <td style="padding:6px; border:1px solid #cbd5e1; font-size:11px;">{format_price(t.get('entry_price'))}<br><small style="color:#64748b;">{entry_time_str}</small></td>
+                <td style="padding:6px; border:1px solid #cbd5e1; font-size:11px;">{format_price(t.get('exit_price'))}<br><small style="color:#64748b;">{exit_time_str}</small></td>
+                <td style="padding:6px; border:1px solid #cbd5e1; font-weight:700; font-size:11px; color:{pnl_color};">${pnl_val:+,.2f} ({pnl_pct:+.2f}%)<br><small>{pkr_val:+,.0f} PKR</small></td>
+                <td style="padding:6px; border:1px solid #cbd5e1; font-size:11px; font-weight:700;">{badge}</td>
             </tr>
             """)
 
         closed_table_html = "".join(trade_rows_html) if trade_rows_html else "<tr><td colspan='7' style='padding:12px; text-align:center; color:#64748b;'>No closed trades in this 12-hour window.</td></tr>"
         unresolved_table_html = "".join(unresolved_rows_html) if unresolved_rows_html else "<tr><td colspan='7' style='padding:12px; text-align:center; color:#64748b;'>No unresolved / active trades currently open.</td></tr>"
+        cum_table_html = "".join(cum_rows_html) if cum_rows_html else "<tr><td colspan='8' style='padding:12px; text-align:center; color:#64748b;'>No trade history recorded yet.</td></tr>"
+
+        pnl_12h_pkr = net_pnl_usdt * PKR_PER_USD
 
         text_content = f"""
 ================================================================================
-12-HOUR BINANCE SPOT TRADING ACTIVITY REPORT
+BINANCE SPOT SCALPER PRO — 12-HOUR & DAY-1 CUMULATIVE REPORT
 ================================================================================
-Window: {start_str}  -->  {end_str}
+Current Time: {now_dual_str}
+12-Hour Window: {start_str}  -->  {end_str}
+Day 1 Inception Date: {cum_start_str}
 
-EXECUTIVE SUMMARY:
-• Total Qualified Trades: {total_qualified}
-• Realized Wins:         {win_count}
-• Realized Losses:       {loss_count}
-• Unresolved / Active:   {unresolved_count}
-• Net Realized PnL:      ${net_pnl_usdt:+,.2f} USDT
+================================================================================
+🏆 DAY 1 TO PRESENT CUMULATIVE PERFORMANCE SCORECARD:
+================================================================================
+• Total Qualified Trades: {cum_total_qualified} Unique Trades
+• Total Completed Trades: {cum_completed} Trades
+• Realized Wins:         {cum_wins} Wins
+• Realized Losses:       {cum_losses} Losses
+• Overall Win Rate:      {cum_win_rate:.2f}%
+• Total Net Realized PnL: ${cum_net_pnl:+,.2f} USDT ({cum_pkr_pnl:+,.0f} PKR)
+
+================================================================================
+⏱️ LAST 12-HOUR ACTIVITY WINDOW:
+================================================================================
+• Total Qualified (12h): {total_qualified}
+• Realized Wins (12h):   {win_count}
+• Realized Losses (12h): {loss_count}
+• Currently Active:      {unresolved_count}
+• Net Realized PnL (12h): ${net_pnl_usdt:+,.2f} USDT ({pnl_12h_pkr:+,.0f} PKR)
 
 --------------------------------------------------------------------------------
-1. REALIZED CLOSED TRADES:
+1. REALIZED CLOSED TRADES IN LAST 12 HOURS:
 {chr(10).join(trade_rows_text) if trade_rows_text else 'None'}
 
 --------------------------------------------------------------------------------
-2. UNRESOLVED / ACTIVE POSITIONS:
+2. CURRENTLY ACTIVE / UNRESOLVED POSITIONS:
 {chr(10).join(unresolved_rows_text) if unresolved_rows_text else 'None'}
+
+--------------------------------------------------------------------------------
+3. ALL COMPLETED TRADES FROM DAY 1 TO PRESENT ({len(all_history)}):
+{chr(10).join(cum_rows_text) if cum_rows_text else 'None'}
 ================================================================================
 """
 
@@ -399,63 +473,92 @@ EXECUTIVE SUMMARY:
 <meta charset="utf-8">
 <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; margin: 0; padding: 20px; }}
-    .card {{ background: #ffffff; border-radius: 12px; max-width: 750px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #e2e8f0; }}
-    .header {{ background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: #ffffff; padding: 24px; text-align: center; }}
-    .header h1 {{ margin: 0; font-size: 22px; font-weight: 700; }}
-    .header p {{ margin: 6px 0 0 0; font-size: 13px; color: #c7d2fe; }}
+    .card {{ background: #ffffff; border-radius: 12px; max-width: 820px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #e2e8f0; }}
+    .header {{ background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 24px; text-align: center; }}
+    .header h1 {{ margin: 0; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }}
+    .header p {{ margin: 6px 0 0 0; font-size: 13px; color: #94a3b8; }}
     .content {{ padding: 24px; }}
     .section {{ margin-bottom: 24px; }}
-    .section-title {{ font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }}
+    .section-title {{ font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }}
     .metric-grid {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }}
     .metric-box {{ background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center; }}
     .metric-label {{ font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; }}
-    .metric-value {{ font-size: 18px; font-weight: 700; color: #0f172a; margin-top: 4px; }}
-    table {{ width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }}
-    th {{ background: #f1f5f9; padding: 8px; border: 1px solid #cbd5e1; text-align: left; }}
-    .footer {{ background: #f1f5f9; text-align: center; padding: 16px; font-size: 12px; color: #64748b; }}
+    .metric-value {{ font-size: 17px; font-weight: 700; color: #0f172a; margin-top: 4px; }}
+    table {{ width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }}
+    th {{ background: #f1f5f9; padding: 8px; border: 1px solid #cbd5e1; text-align: left; font-size: 11px; text-transform: uppercase; color: #475569; }}
+    .footer {{ background: #f1f5f9; text-align: center; padding: 16px; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; }}
 </style>
 </head>
 <body>
 <div class="card">
     <div class="header">
-        <h1>📊 12-HOUR TRADING ACTIVITY SUMMARY</h1>
-        <p>Period: <b>{start_str}</b> &nbsp;➔&nbsp; <b>{end_str}</b></p>
+        <h1>📊 12-HOUR ACTIVITY & DAY-1 CUMULATIVE REPORT</h1>
+        <p>Current Time: <b>{now_dual_str}</b><br>12h Window: {start_str} ➔ {end_str}</p>
     </div>
     <div class="content">
-        <!-- 12h Metrics -->
+        <!-- Day 1 Cumulative Scorecard -->
         <div class="section">
-            <div class="section-title">📈 12-Hour Performance Scorecard</div>
+            <div class="section-title">🏆 Day 1 to Present Cumulative Performance (Since {cum_start_str})</div>
             <div class="metric-grid">
                 <div class="metric-box">
-                    <div class="metric-label">Total Qualified</div>
+                    <div class="metric-label">All-Time Qualified</div>
+                    <div class="metric-value">{cum_total_qualified}</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">All-Time Wins</div>
+                    <div class="metric-value" style="color:#16a34a;">{cum_wins}</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">All-Time Losses</div>
+                    <div class="metric-value" style="color:#dc2626;">{cum_losses}</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">All-Time Win Rate</div>
+                    <div class="metric-value" style="color:#2563eb;">{cum_win_rate:.1f}%</div>
+                </div>
+            </div>
+            <div style="margin-top:10px; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:8px; padding:12px; text-align:center;">
+                <span style="font-size:12px; color:#065f46; font-weight:600;">DAY-1 TO PRESENT TOTAL REALIZED NET PNL:</span><br>
+                <span style="font-size:20px; font-weight:800; color:{'#166534' if cum_net_pnl >= 0 else '#991b1b'};">
+                    ${cum_net_pnl:+,.2f} USDT ({cum_pkr_pnl:+,.0f} PKR)
+                </span>
+            </div>
+        </div>
+
+        <!-- 12h Activity Metrics -->
+        <div class="section">
+            <div class="section-title">⏱️ Last 12-Hour Activity Window</div>
+            <div class="metric-grid">
+                <div class="metric-box">
+                    <div class="metric-label">12h Qualified</div>
                     <div class="metric-value">{total_qualified}</div>
                 </div>
                 <div class="metric-box">
-                    <div class="metric-label">Wins</div>
+                    <div class="metric-label">12h Wins</div>
                     <div class="metric-value" style="color:#16a34a;">{win_count}</div>
                 </div>
                 <div class="metric-box">
-                    <div class="metric-label">Losses</div>
+                    <div class="metric-label">12h Losses</div>
                     <div class="metric-value" style="color:#dc2626;">{loss_count}</div>
                 </div>
                 <div class="metric-box">
-                    <div class="metric-label">Active / Unresolved</div>
-                    <div class="metric-value" style="color:#d97706;">{unresolved_count}</div>
+                    <div class="metric-label">12h Net PnL</div>
+                    <div class="metric-value" style="color:{'#16a34a' if net_pnl_usdt >= 0 else '#dc2626'};">${net_pnl_usdt:+,.2f}</div>
                 </div>
             </div>
         </div>
 
-        <!-- Realized Closed Trades -->
+        <!-- Realized Closed Trades in Last 12h -->
         <div class="section">
             <div class="section-title">✅ Realized Closed Trades in Last 12h ({len(trades_details)})</div>
             <table>
                 <tr>
                     <th>Symbol</th>
                     <th>Strategy</th>
-                    <th>TradingView TF</th>
+                    <th>TF</th>
                     <th>Entry Price & Time</th>
                     <th>Exit Price & Time</th>
-                    <th>Net PnL</th>
+                    <th>Net PnL ($ / PKR)</th>
                     <th>Exit Reason</th>
                 </tr>
                 {closed_table_html}
@@ -464,12 +567,12 @@ EXECUTIVE SUMMARY:
 
         <!-- Unresolved / Active Positions -->
         <div class="section">
-            <div class="section-title">🟡 Unresolved / Still Active Positions ({len(open_positions_details)})</div>
+            <div class="section-title">🟡 Currently Active Positions ({len(open_positions_details)})</div>
             <table>
                 <tr>
                     <th>Symbol</th>
                     <th>Strategy</th>
-                    <th>TradingView TF</th>
+                    <th>TF</th>
                     <th>Entry Price & Time</th>
                     <th>Current Price</th>
                     <th>Unrealized PnL</th>
@@ -478,14 +581,33 @@ EXECUTIVE SUMMARY:
                 {unresolved_table_html}
             </table>
         </div>
+
+        <!-- Full Cumulative History from Day 1 -->
+        <div class="section">
+            <div class="section-title">📜 Complete Completed Trades History (Day 1 to Present: {len(all_history)} Trades)</div>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Symbol</th>
+                    <th>Strategy</th>
+                    <th>TF</th>
+                    <th>Entry Price & Time</th>
+                    <th>Exit Price & Time</th>
+                    <th>Net PnL ($ / PKR)</th>
+                    <th>Result</th>
+                </tr>
+                {cum_table_html}
+            </table>
+        </div>
     </div>
     <div class="footer">
-        Binance Spot Autonomous Quantitative Scanner • 12-Hour Scheduled Summary
+        Binance Spot Autonomous Quantitative Scanner • Scheduled 12-Hour Summary
     </div>
 </div>
 </body>
 </html>
 """
+        return self.send_email(subject, html_content, text_content)
     def send_btc_emergency_dump_alert(self, btc_drop_pct: float,
                                        active_positions: List[Dict[str, Any]],
                                        btc_price: float) -> bool:

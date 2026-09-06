@@ -61,3 +61,24 @@ def get_pkt_hour() -> int:
     utc_now = get_current_utc()
     pkt_now = utc_now + PKT_OFFSET
     return pkt_now.hour
+
+
+def format_price(price: Any) -> str:
+    """Formats asset price with dynamic decimals (e.g. 8 decimals for micro-penny tokens)."""
+    if price is None:
+        return "-"
+    try:
+        p = float(price)
+    except (ValueError, TypeError):
+        return str(price)
+    if p == 0:
+        return "$0.00"
+    if abs(p) < 0.001:
+        return f"${p:,.8f}"
+    elif abs(p) < 1.0:
+        return f"${p:,.4f}"
+    elif abs(p) < 1000.0:
+        return f"${p:,.4f}"
+    else:
+        return f"${p:,.2f}"
+
