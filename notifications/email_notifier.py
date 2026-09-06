@@ -608,6 +608,7 @@ Day 1 Inception Date: {cum_start_str}
 </html>
 """
         return self.send_email(subject, html_content, text_content)
+
     def send_btc_emergency_dump_alert(self, btc_drop_pct: float,
                                        active_positions: List[Dict[str, Any]],
                                        btc_price: float) -> bool:

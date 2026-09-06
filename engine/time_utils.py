@@ -3,7 +3,7 @@ Time utilities for formatting dual timestamps (Pakistan Standard Time PKT + UTC)
 PKT is UTC+5.
 """
 from datetime import datetime, timezone, timedelta
-from typing import Union, Optional
+from typing import Union, Optional, Any
 
 PKT_OFFSET = timedelta(hours=5)
 
