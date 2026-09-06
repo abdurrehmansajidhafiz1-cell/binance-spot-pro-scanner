@@ -161,10 +161,27 @@ class PerformanceTracker:
             pnl_pct = ((curr_p - entry_p) / entry_p) * 100.0
             pnl_val = (pos.get("remaining_quantity", pos["quantity"]) * curr_p) - pos.get("remaining_cost_usdt", pos["initial_cost_usdt"]) + pos.get("realized_pnl_usdt", 0.0)
             
+            is_i1 = "I1" in pos.get("strategy", "")
+            is_be_locked = pos.get("intermediate_be_reached", False) or pos.get("tp1_reached", False)
+            
+            if is_i1:
+                be_target_p = entry_p * 1.015
+                if pos.get("intermediate_be_reached", False):
+                    be_status = f"{format_price(be_target_p)} (+1.50%)<br><b>🟢 HIT (🛡️ Safe / SL Locked)</b>"
+                else:
+                    be_status = f"{format_price(be_target_p)} (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>"
+            else:
+                if pos.get("tp1_reached", False):
+                    be_status = f"{format_price(pos['tp1'])} (TP1)<br><b>🟢 HIT (🛡️ Safe / SL Locked)</b>"
+                else:
+                    be_status = f"{format_price(pos['tp1'])} (TP1)<br><small style='color:#64748b;'>⚪ Pending</small>"
+
             tp1_status = f"{format_price(pos['tp1'])} " + ("(HIT)" if pos.get("tp1_reached") else "(Pending)")
             tp2_status = f"{format_price(pos['tp2'])} " + ("(HIT)" if pos.get("tp2_reached") else "(Pending)")
             tf_display = pos.get("timeframe", "15m" if "S3" in pos["strategy"] else "1h (4h Trend)")
             
+            status_display = "🟡 ACTIVE<br><b style='color:#16a34a;'>🛡️ Risk-Free Locked</b>" if is_be_locked else "🟡 ACTIVE"
+
             open_pos_rows.append([
                 sym,
                 pos["strategy"],
@@ -174,15 +191,16 @@ class PerformanceTracker:
                 f"{format_price(entry_p)}<br><small>{format_dual_time(pos.get('entry_time'))}</small>",
                 format_price(curr_p),
                 format_price(pos['stop_loss']),
+                be_status,
                 f"{tp1_status}<br>{tp2_status}",
                 f"{pnl_val:+,.2f} ({pnl_pct:+.2f}%)",
-                "🟡 ACTIVE"
+                status_display
             ])
 
         open_headers = [
             "Symbol", "Strategy", "TradingView Timeframe", "Zone Formed (PKT/UTC)", "Signal Time (PKT/UTC)",
             "Entry Price & Time (PKT/UTC)", "Current Price", "Stop Loss",
-            "Targets (TP1 / TP2)", "Unrealized PnL", "Status"
+            "🛡️ Break-Even Milestone", "Targets (TP1 / TP2)", "Unrealized PnL", "Status"
         ]
         open_table_md = tabulate(open_pos_rows, headers=open_headers, tablefmt="github") if open_pos_rows else "_No active open positions currently._"
 
@@ -192,12 +210,24 @@ class PerformanceTracker:
             pnl_val   = t.get("net_pnl_usdt", 0.0)
             pnl_pct   = t.get("net_pnl_pct", 0.0)
             fees_usd  = t.get("fees_paid", 0.0)
+            is_be_exit = "BREAKEVEN" in t.get("exit_reason", "") or t.get("status") == "BREAKEVEN" or t.get("intermediate_be_reached", False)
+            
             if pnl_val > 0:
-                result_badge = "🟢 FULL WIN" if "TP2" in t.get("exit_reason", "") else "🟢 PARTIAL WIN"
+                if "TP2" in t.get("exit_reason", ""):
+                    result_badge = "🟢 FULL WIN"
+                elif t.get("tp1_reached"):
+                    result_badge = "🟢 PARTIAL WIN"
+                elif is_be_exit:
+                    result_badge = "🛡️ BREAKEVEN PROTECTED"
+                else:
+                    result_badge = "🟢 WIN"
             elif pnl_val < 0:
-                result_badge = "🔴 LOSS"
+                if is_be_exit:
+                    result_badge = "🛡️ BREAKEVEN PROTECTED"
+                else:
+                    result_badge = "🔴 LOSS"
             else:
-                result_badge = "⚪ BREAKEVEN"
+                result_badge = "🛡️ BREAKEVEN PROTECTED"
             tf_display = t.get("timeframe", "15m" if "S3" in t["strategy"] else "1h")
             
             tp1_hit_str = format_dual_time(t.get("tp1_hit_time")) if t.get("tp1_hit_time") else "-"
@@ -275,12 +305,23 @@ class PerformanceTracker:
 
 ## 🟡 Active Open Positions ({metrics['active_trades_count']})
 
+> **🛡️ Rule 1 (Break-Even Capital Defense Protocol):**
+> - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
+> - **S3 Strategy:** Jab TP1 hit hota hai, toh 50% profit lock hone ke sath baqi position ka Stop Loss Breakeven par shift ho jata hai.
+> - **Milestone Indicators:** `🟢 HIT (🛡️ Safe / SL Locked)` = Trade risk-free ho chuki hai | `⚪ Pending` = Break-even target ka intezar hai.
+
 {open_table_md}
 
 ---
 
 ## 📜 Completed Trades Postmortem History ({metrics['completed_trades_count']})
 
+> **Result Badges Guide:**
+> - `🟢 FULL WIN` → TP2 reached (100% profit target captured)
+> - `🟢 PARTIAL WIN` → TP1 reached, remainder closed at Breakeven SL
+> - `🛡️ BREAKEVEN PROTECTED` → Early Break-Even hit (+1.50%), trade closed at Entry/Fees with capital 100% safe (Zero Loss)
+> - `🔴 LOSS` → Hard Stop Loss hit before reaching Break-Even
+>
 > **PKR Column Guide:**
 > - 💵 `$100 Trade` → Actual realized profit/fees in PKR (actual budget used)
 > - 📌 `$35 Ref` → Reference-only: what the same trade would have earned with $35 budget (no actual trades at $35)

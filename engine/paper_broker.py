@@ -221,14 +221,24 @@ class PaperBroker:
             pos["sl_hit_time"] = now_iso
             pos["sl_exit_price"] = exec_price
             pos["exit_time"] = now_iso
-            pos["exit_reason"] = "BREAKEVEN_SL" if pos["tp1_reached"] else "STOP_LOSS"
+            if pos["tp1_reached"]:
+                pos["exit_reason"] = "BREAKEVEN_SL"
+            elif pos.get("intermediate_be_reached"):
+                pos["exit_reason"] = "BREAKEVEN_PROTECTED"
+            else:
+                pos["exit_reason"] = "STOP_LOSS"
             
             total_net_pnl = pos["realized_pnl_usdt"] + leg_pnl_usdt
             total_cost = pos["initial_cost_usdt"]
             net_pnl_pct = (total_net_pnl / total_cost) * 100.0 if total_cost > 0 else 0.0
             total_all_fees = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
             
-            pos["status"] = "WIN" if total_net_pnl > 0 else ("LOSS" if total_net_pnl < 0 else "BREAKEVEN")
+            if total_net_pnl > 0.05:
+                pos["status"] = "WIN"
+            elif pos.get("intermediate_be_reached") or pos.get("tp1_reached") or abs(total_net_pnl) <= 0.15:
+                pos["status"] = "BREAKEVEN"
+            else:
+                pos["status"] = "LOSS"
             pos["net_pnl_usdt"] = round(total_net_pnl, 4)
             pos["net_pnl_pct"] = round(net_pnl_pct, 2)
             pos["fees_paid"] = round(total_all_fees, 4)
