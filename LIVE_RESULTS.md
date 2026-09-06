@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return-+2.75%25-brightgreen?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return-+2.76%25-brightgreen?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-58.3%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-1.26-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-53-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-07 02:45:45 PKT (21:45:45 UTC)`  
+> **Last Updated:** `2026-09-07 03:01:01 PKT (22:01:01 UTC)`  
 > **Testing Start Date:** `2026-08-31 23:12:31 PKT (18:12:31 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,11 +17,11 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `53 Unique Trades` |
-| **Current Equity** | `$513.73 USDT` | **Completed Trades** | `48 Trades` |
+| **Current Equity** | `$513.80 USDT` | **Completed Trades** | `48 Trades` |
 | **Available Cash** | `$59.18 USDT` | **Active / In-Trade** | `5 Trade` |
-| **Net PnL ($)** | `+$13.73 USDT` | **Win / Loss Ratio** | `28 Win / 20 Loss` |
-| **Net Return (%)** | `+2.75%` | **Win Rate** | `58.33%` |
-| **Peak Equity** | `$513.73 USDT` | **Profit Factor** | `1.26` |
+| **Net PnL ($)** | `+$13.80 USDT` | **Win / Loss Ratio** | `28 Win / 20 Loss` |
+| **Net Return (%)** | `+2.76%` | **Win Rate** | `58.33%` |
+| **Peak Equity** | `$513.80 USDT` | **Profit Factor** | `1.26` |
 | **Max Drawdown** | `0.00%` | **Total Fees Deducted** | `$7.58 USDT` |
 
 ---
@@ -36,10 +36,10 @@
 | Symbol    | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                        | Unrealized PnL   | Status                                                        |
 |-----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|--------------------------------------------|------------------|---------------------------------------------------------------|
 | KAVAUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-03 21:00:00 PKT (16:00:00 UTC) | 2026-09-03 22:28:07 PKT (17:28:07 UTC) | $0.0501<br><small>2026-09-03 22:28:07 PKT (17:28:07 UTC)</small>   | $0.0529         | $0.0502     | $0.0508 (+1.50%)<br><b>🟢 HIT (🛡️ Safe / SL Locked)</b>                | $0.0525 (HIT)<br>$0.0551 (Pending)         | +5.18 (+5.60%)   | 🟡 ACTIVE<br><b style='color:#16a34a;'>🛡️ Risk-Free Locked</b> |
-| MANAUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-06 17:00:00 PKT (12:00:00 UTC) | 2026-09-06 18:16:08 PKT (13:16:08 UTC) | $0.0757<br><small>2026-09-06 18:16:08 PKT (13:16:08 UTC)</small>   | $0.0765         | $0.0740     | $0.0769 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $0.0780 (Pending)<br>$0.0803 (Pending)     | +1.01 (+1.01%)   | 🟡 ACTIVE                                                      |
-| ATOMUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-06 20:00:00 PKT (15:00:00 UTC) | 2026-09-06 21:01:16 PKT (16:01:16 UTC) | $1.5868<br><small>2026-09-06 21:01:16 PKT (16:01:16 UTC)</small>   | $1.5930         | $1.5466     | $1.6106 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $1.6450 (Pending)<br>$1.7041 (Pending)     | +0.39 (+0.39%)   | 🟡 ACTIVE                                                      |
-| THETAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-06 20:00:00 PKT (15:00:00 UTC) | 2026-09-06 21:01:22 PKT (16:01:22 UTC) | $0.1847<br><small>2026-09-06 21:01:22 PKT (16:01:22 UTC)</small>   | $0.1847         | $0.1778     | $0.1875 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $0.1947 (Pending)<br>$0.2049 (Pending)     | +0.00 (+0.00%)   | 🟡 ACTIVE                                                      |
-| ETHUSDT   | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-07 01:00:00 PKT (20:00:00 UTC) | 2026-09-07 02:01:00 PKT (21:01:00 UTC) | $2,501.00<br><small>2026-09-07 02:01:00 PKT (21:01:00 UTC)</small> | $2,509.48       | $2,466.50   | $2,538.51 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $2,548.84 (Pending)<br>$2,598.25 (Pending) | +0.34 (+0.34%)   | 🟡 ACTIVE                                                      |
+| MANAUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-06 17:00:00 PKT (12:00:00 UTC) | 2026-09-06 18:16:08 PKT (13:16:08 UTC) | $0.0757<br><small>2026-09-06 18:16:08 PKT (13:16:08 UTC)</small>   | $0.0764         | $0.0740     | $0.0769 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $0.0780 (Pending)<br>$0.0803 (Pending)     | +0.87 (+0.87%)   | 🟡 ACTIVE                                                      |
+| ATOMUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-06 20:00:00 PKT (15:00:00 UTC) | 2026-09-06 21:01:16 PKT (16:01:16 UTC) | $1.5868<br><small>2026-09-06 21:01:16 PKT (16:01:16 UTC)</small>   | $1.5890         | $1.5466     | $1.6106 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $1.6450 (Pending)<br>$1.7041 (Pending)     | +0.14 (+0.14%)   | 🟡 ACTIVE                                                      |
+| THETAUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-06 20:00:00 PKT (15:00:00 UTC) | 2026-09-06 21:01:22 PKT (16:01:22 UTC) | $0.1847<br><small>2026-09-06 21:01:22 PKT (16:01:22 UTC)</small>   | $0.1858         | $0.1778     | $0.1875 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $0.1947 (Pending)<br>$0.2049 (Pending)     | +0.60 (+0.60%)   | 🟡 ACTIVE                                                      |
+| ETHUSDT   | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-07 01:00:00 PKT (20:00:00 UTC) | 2026-09-07 02:01:00 PKT (21:01:00 UTC) | $2,501.00<br><small>2026-09-07 02:01:00 PKT (21:01:00 UTC)</small> | $2,506.15       | $2,466.50   | $2,538.51 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $2,548.84 (Pending)<br>$2,598.25 (Pending) | +0.21 (+0.21%)   | 🟡 ACTIVE                                                      |
 
 ---
 
