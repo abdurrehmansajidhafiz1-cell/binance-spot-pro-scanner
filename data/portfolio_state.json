@@ -12,7 +12,7 @@
       "signal_time": "2026-09-03T17:28:07.073400+00:00",
       "entry_time": "2026-09-03T17:28:07.073400+00:00",
       "entry_price": 0.050055014999999994,
-      "current_price": 0.0528,
+      "current_price": 0.05295,
       "initial_quantity": 1997.8018186589297,
       "remaining_quantity": 998.9009093294649,
       "quantity": 998.9009093294649,
@@ -88,13 +88,13 @@
       "signal_time": "2026-09-06T14:31:00.003522+00:00",
       "entry_time": "2026-09-06T14:31:00.003522+00:00",
       "entry_price": 0.6133065,
-      "current_price": 0.62,
+      "current_price": 0.623,
       "initial_quantity": 163.05061172513254,
       "remaining_quantity": 163.05061172513254,
       "quantity": 163.05061172513254,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.603562,
+      "stop_loss": 0.61422645975,
       "initial_stop_loss": 0.603562,
       "tp1": 0.649656,
       "tp2": 0.677313,
@@ -109,14 +109,15 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.621,
+      "highest_price": 0.623,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
         "risk_distance_pct": 2.96,
         "rsi_1h": 55.88,
         "supertrend_4h": "BULLISH"
-      }
+      },
+      "intermediate_be_reached": true
     },
     "ATOMUSDT": {
       "trade_id": "T_20260906160116_ATOMUSDT",
@@ -127,7 +128,7 @@
       "signal_time": "2026-09-06T16:01:16.394124+00:00",
       "entry_time": "2026-09-06T16:01:16.394124+00:00",
       "entry_price": 1.586793,
-      "current_price": 1.587,
+      "current_price": 1.589,
       "initial_quantity": 63.02019229981479,
       "remaining_quantity": 63.02019229981479,
       "quantity": 63.02019229981479,
@@ -148,7 +149,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 1.588,
+      "highest_price": 1.595,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -166,7 +167,7 @@
       "signal_time": "2026-09-06T16:01:22.610908+00:00",
       "entry_time": "2026-09-06T16:01:22.610908+00:00",
       "entry_price": 0.18469229999999998,
-      "current_price": 0.1856,
+      "current_price": 0.1851,
       "initial_quantity": 541.4410887730567,
       "remaining_quantity": 541.4410887730567,
       "quantity": 541.4410887730567,
@@ -198,6 +199,6 @@
     }
   },
   "start_time": "2026-08-31T18:12:31.163933",
-  "last_updated": "2026-09-06T16:30:36.136543+00:00",
+  "last_updated": "2026-09-06T16:45:33.200835+00:00",
   "last_12h_summary_slot": "2026-09-06_06_PM"
 }
