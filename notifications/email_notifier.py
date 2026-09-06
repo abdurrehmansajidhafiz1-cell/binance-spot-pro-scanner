@@ -117,7 +117,27 @@ class EmailNotifier:
             entry_style_text = f"• Single Market Entry: Buy 100% ($100.00 USDT) at ${current_price:,.4f} (~{qty_100:.4f} {symbol[:-4]})"
             entry_style_html = f"<p><b>Fast Breakout Entry:</b> Buy 100% (<b>$100.00 USDT</b>) at current price <b>${current_price:,.4f}</b> (~{qty_100:.4f} {symbol[:-4]}).</p>"
 
-        be_price = current_price * 1.0025
+        is_i1 = "I1" in strategy
+        if is_i1:
+            be_trigger_price = current_price * 1.015
+            be_trigger_gain = 1.50
+            be_sl_price = current_price * 1.0015
+            be_rule_desc = (
+                f"• 🛡️ EARLY BREAK-EVEN MILESTONE: {format_price(be_trigger_price)} (+{be_trigger_gain:.2f}%)\n"
+                f"  -> Jaise hi price {format_price(be_trigger_price)} pohnche (chahe abhi TP1 hit na hua ho),\n"
+                f"     apna Stop Loss foran barha kar {format_price(be_sl_price)} (Entry Price + Fees) par shift kar dein!\n"
+                f"  -> Is se trade 100% Risk-Free ho jayegi. Scanner live market mein is level ko detect karte hi aapko email alert bhejega!"
+            )
+        else:
+            be_trigger_price = tp1
+            be_trigger_gain = tp1_gain_pct
+            be_sl_price = current_price * 1.0025
+            be_rule_desc = (
+                f"• 🛡️ BREAK-EVEN AT TP1: {format_price(be_trigger_price)} (+{be_trigger_gain:.2f}%)\n"
+                f"  -> Jaise hi TP1 hit ho aur aap 50% sell kar dein,\n"
+                f"     baqi bache hue coins ka Stop Loss foran {format_price(be_sl_price)} (Entry Price + Fees) par shift kar dein!"
+            )
+
         subject = f"🟢 [BINANCE SPOT SIGNAL] {symbol} ({timeframe}) | Strategy: {strategy} | Capital: $100 USDT"
 
         text_content = f"""
@@ -138,15 +158,14 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
 • Hard Stop Loss:     ${stop_loss:,.4f} (-{risk_pct:.2f}%)
 • Maximum Dollar Risk: -${max_loss_usdt:.2f} USDT
 
-3. TAKE PROFIT TARGETS:
+3. TAKE PROFIT TARGETS & BREAK-EVEN:
+• 🛡️ Break-Even Milestone: {format_price(be_trigger_price)} (+{be_trigger_gain:.2f}%) -> Shift SL to {format_price(be_sl_price)} (Zero-Risk)
 • TP1 (Sell 50% Position): ${tp1:,.4f} (+{tp1_gain_pct:.2f}%) -> Locks ~$52.00 USDT back to Cash
 • TP2 (Sell Remaining 50%): ${tp2:,.4f} (+{tp2_gain_pct:.2f}%) -> Captures full trend expansion
 
 4. BREAK-EVEN & TRAILING STOP INSTRUCTIONS:
-• As soon as TP1 (${tp1:,.4f}) is reached:
-  -> IMMEDIATELY move your Stop Loss on remaining coins to ${be_price:,.4f} (Entry + Fees).
-  -> This guarantees a 100% Risk-Free / Profitable trade!
-• If price continues higher, trail Stop Loss below 1H SuperTrend.
+{be_rule_desc}
+• If price continues higher after TP1, trail Stop Loss below 1H SuperTrend.
 
 5. DETECTION REASON & MARKET STATE:
 • Trigger Reason: {reason}
@@ -242,12 +261,17 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
 
         <!-- SL & TP -->
         <div class="section">
-            <div class="section-title">🛑 Step 2: Stop Loss & Profit Targets</div>
+            <div class="section-title">🛑 Step 2: Stop Loss, Break-Even & Profit Targets</div>
             <table style="width:100%; border-collapse: collapse; margin-top: 8px; font-size:14px;">
                 <tr style="background:#fee2e2;">
                     <td style="padding:10px; border:1px solid #fca5a5; font-weight:700; color:#991b1b;">Stop Loss (Hard Stop)</td>
                     <td style="padding:10px; border:1px solid #fca5a5; font-weight:700; color:#991b1b;">${stop_loss:,.4f}</td>
                     <td style="padding:10px; border:1px solid #fca5a5; color:#991b1b;">-{risk_pct:.2f}% (-${max_loss_usdt:.2f} USDT)</td>
+                </tr>
+                <tr style="background:#eff6ff;">
+                    <td style="padding:10px; border:1px solid #bfdbfe; font-weight:700; color:#1d4ed8;">🛡️ Break-Even Milestone</td>
+                    <td style="padding:10px; border:1px solid #bfdbfe; font-weight:700; color:#1d4ed8;">{format_price(be_trigger_price)}</td>
+                    <td style="padding:10px; border:1px solid #bfdbfe; color:#1d4ed8;">+{be_trigger_gain:.2f}% ➔ Move SL to {format_price(be_sl_price)} (Zero-Risk)</td>
                 </tr>
                 <tr style="background:#dcfce7;">
                     <td style="padding:10px; border:1px solid #86efac; font-weight:700; color:#166534;">Take Profit 1 (Sell 50%)</td>
@@ -266,9 +290,11 @@ BINANCE SPOT TRADE EXECUTION PLAN — {symbol}
         <div class="section">
             <div class="section-title">🔄 Step 3: Break-Even & Trade Management Rules</div>
             <div class="plan-box">
-                <b>1. Breakeven Shift Rule:</b> Jaise hi price <b>${tp1:,.4f} (TP1)</b> hit kare aur aap 50% sell kar dein, apne baqi bache hue coins ka Stop Loss foran barha kar <b>${be_price:,.4f}</b> (Breakeven + Fees) par shift kar dein.<br><br>
-                <b>2. Zero-Loss Guarantee:</b> Iske baad ye trade 100% risk-free ho jayegi.<br><br>
-                <b>3. Trailing Rule:</b> Price mazid ooper jaye to SL ko 1H SuperTrend line ke sath-sath trail karte jayein.
+                <b>1. Early Break-Even Level:</b> Jab price <b>{format_price(be_trigger_price)} (+{be_trigger_gain:.2f}%)</b> par pohnche, toh Stop Loss foran barha kar <b>{format_price(be_sl_price)}</b> (Entry Price + Fees) par shift kar dein.<br><br>
+                <b>2. Live Alert Notification:</b> Scanner live market mein is level ko detect karte hi aapko alag email alert bhi bhejega taake aap foran Stop Loss shift kar sakein.<br><br>
+                <b>3. TP1 Profit Lock:</b> Jaise hi price <b>${tp1:,.4f} (TP1)</b> hit kare, 50% position sell kar ke profit pocket kar lein.<br><br>
+                <b>4. Zero-Loss Guarantee:</b> Break-Even lagne ke baad ye trade 100% risk-free ho jayegi. Agar market yahan se achanak dump bhi kare toh aapko ek rupee ka loss nahi hoga.<br><br>
+                <b>5. Trailing Rule:</b> Price mazid ooper jaye to SL ko 1H SuperTrend line ke sath-sath trail karte jayein.
             </div>
         </div>
 
@@ -709,6 +735,122 @@ Active Trade Details:
 
         <div style="margin-top: 20px; padding: 12px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; font-size: 13px; color: #166534;">
             ✅ <b>Automatic Paper Defense:</b> Scanner broker ne paper account mein Stop Loss ko Breakeven par shift kar diya hai. Agar aap live exchange par trade kar rahe hain to wahan bhi foran SL shift kar dein.
+        </div>
+    </div>
+    <div class="footer">
+        Timestamp: {dual_time} • Binance Spot Risk Management Protocol
+    </div>
+</div>
+</body>
+</html>
+"""
+        return self.send_email(subject, html_content, text_content)
+
+    def send_breakeven_alert_email(self, symbol: str, strategy: str,
+                                   entry_price: float, current_price: float,
+                                   old_stop_loss: float, new_stop_loss: float,
+                                   gain_pct: float, timeframe: str) -> bool:
+        """
+        Dispatches an immediate high-priority alert when an open position reaches its
+        Break-Even profit milestone. Advises the user to shift Stop Loss to Entry Price + Fees.
+        """
+        dual_time = format_dual_time()
+        subject = f"🛡️ [BREAK-EVEN LOCKED] {symbol} ({timeframe}) Reached Risk-Free Level (+{gain_pct:.2f}%) — Move SL to {format_price(new_stop_loss)}"
+
+        text_content = f"""🛡️ CAPITAL PROTECTION ALERT: BREAK-EVEN MILESTONE REACHED
+Time: {dual_time}
+Pair: {symbol} ({strategy}) | Timeframe: {timeframe}
+
+Yaar, aapki {symbol} trade ne live market mein +{gain_pct:.2f}% gain hit kar liya hai!
+Current Price: {format_price(current_price)} (Entry: {format_price(entry_price)})
+
+Ab is trade ka Stop Loss foran Entry Price par shift kar dein taake trade 100% Risk-Free ho jaye!
+
+TRADE DETAILS & NEW STOP LOSS:
+• Symbol:                {symbol}
+• Strategy:              {strategy}
+• Timeframe:             {timeframe}
+• Entry Price:           {format_price(entry_price)}
+• Current Trigger Price: {format_price(current_price)} (+{gain_pct:.2f}%)
+• Old Stop Loss:         {format_price(old_stop_loss)} (RISK REMOVED)
+• RECOMMENDED NEW SL:    {format_price(new_stop_loss)} (Entry Price + Fees)
+
+Zero-Loss Guarantee:
+Agar market yahan se achanak dump bhi ho jaye, toh aapka capital 100% safe rahega aur ek rupee ka loss nahi hoga.
+Paper broker ne system mein Stop Loss ko {format_price(new_stop_loss)} par lock kar diya hai.
+================================================================================
+"""
+
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; }}
+    .container {{ max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 2px solid #3b82f6; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15); }}
+    .header {{ background: linear-gradient(135deg, #1e40af, #2563eb); color: #ffffff; padding: 25px; text-align: center; }}
+    .header h1 {{ margin: 0; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }}
+    .header p {{ margin: 8px 0 0 0; opacity: 0.95; font-size: 14px; }}
+    .content {{ padding: 25px; color: #334155; }}
+    .alert-banner {{ background: #eff6ff; border-left: 5px solid #3b82f6; padding: 15px; border-radius: 6px; margin-bottom: 20px; }}
+    .alert-banner p {{ margin: 0; font-size: 14px; line-height: 1.6; color: #1e3a8a; font-weight: 600; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }}
+    th {{ background: #f1f5f9; padding: 10px; text-align: left; color: #475569; font-weight: 700; border-bottom: 2px solid #cbd5e1; }}
+    td {{ padding: 10px; border-bottom: 1px solid #e2e8f0; }}
+    .footer {{ background: #f1f5f9; padding: 15px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; }}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🛡️ BREAK-EVEN MILESTONE REACHED</h1>
+        <p>Zero-Risk Capital Defense • Action Required</p>
+    </div>
+    <div class="content">
+        <div class="alert-banner">
+            <p>
+                Yaar, aapki <b>{symbol} ({strategy})</b> trade ne live market mein <b>+{gain_pct:.2f}% gain</b> hit kar liya hai!<br><br>
+                Ab apni trade ka Stop Loss foran <b>Entry Price par shift kar dein</b>. Iske baad ye trade <b>100% Risk-Free</b> ho jayegi — agar market yahan se dump bhi kare toh aapko ek rupee ka loss nahi hoga!
+            </p>
+        </div>
+
+        <h3 style="margin: 20px 0 10px 0; color: #1e293b; font-size: 16px;">Trade Parameters & Stop Loss Adjustment</h3>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+                <th>Status / Guidance</th>
+            </tr>
+            <tr>
+                <td><b>Pair / Strategy</b></td>
+                <td><b>{symbol}</b> ({strategy})</td>
+                <td>Timeframe: <b>{timeframe}</b></td>
+            </tr>
+            <tr>
+                <td><b>Entry Price</b></td>
+                <td><b>{format_price(entry_price)}</b></td>
+                <td>Purchased Price</td>
+            </tr>
+            <tr>
+                <td><b>Milestone Price Hit</b></td>
+                <td style="color:#16a34a; font-weight:bold;">{format_price(current_price)}</td>
+                <td style="color:#16a34a; font-weight:bold;">+{gain_pct:.2f}% Unrealized Gain</td>
+            </tr>
+            <tr style="background:#fee2e2;">
+                <td><b>Old Stop Loss</b></td>
+                <td style="color:#dc2626; text-decoration:line-through; font-weight:bold;">{format_price(old_stop_loss)}</td>
+                <td style="color:#dc2626;">Initial Risk (Now Removed)</td>
+            </tr>
+            <tr style="background:#dcfce7;">
+                <td><b>Recommended New SL</b></td>
+                <td style="color:#166534; font-weight:bold; font-size:15px;">{format_price(new_stop_loss)}</td>
+                <td style="color:#166534; font-weight:bold;">Entry Price + Fee Buffer</td>
+            </tr>
+        </table>
+
+        <div style="margin-top: 20px; padding: 12px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; font-size: 13px; color: #166534;">
+            ✅ <b>Automatic Paper Defense:</b> Scanner broker ne system ke andar Stop Loss ko <b>{format_price(new_stop_loss)}</b> par lock kar diya hai. Agar aap manual exchange par trade kar rahe hain toh wahan bhi foran Stop Loss shift kar dein.
         </div>
     </div>
     <div class="footer">

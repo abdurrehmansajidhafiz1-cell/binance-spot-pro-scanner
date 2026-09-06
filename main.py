@@ -199,7 +199,21 @@ class LiveScannerEngine:
                     
                 event_data = self.broker.update_position_market_price(symbol, curr_p, period_high, period_low)
                 if event_data:
-                    if event_data.get("event") == "MILESTONE_TP1":
+                    if event_data.get("event") == "BREAKEVEN_LOCKED":
+                        print(f"{Fore.CYAN}  [BREAKEVEN ALERT] {symbol} hit +{event_data['gain_pct']:.2f}% -> Dispatching Break-Even Email...{Style.RESET_ALL}")
+                        be_sent = self.email_notifier.send_breakeven_alert_email(
+                            symbol=event_data["symbol"],
+                            strategy=event_data["strategy"],
+                            entry_price=event_data["entry_price"],
+                            current_price=event_data["current_price"],
+                            old_stop_loss=event_data["old_stop_loss"],
+                            new_stop_loss=event_data["new_stop_loss"],
+                            gain_pct=event_data["gain_pct"],
+                            timeframe=event_data["timeframe"]
+                        )
+                        if be_sent:
+                            print(f"{Fore.GREEN}    [EMAIL DELIVERED] Break-Even risk-free notification delivered to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+                    elif event_data.get("event") == "MILESTONE_TP1":
                         print(f"{Fore.GREEN}  [TP1 MILESTONE] {symbol} hit TP1 @ ${event_data['exit_price']:,.4f} | 50% Profit Locked: ${event_data['pnl_usdt']:+,.2f} | SL moved to Breakeven{Style.RESET_ALL}")
                     elif event_data.get("event") == "CLOSE":
                         trade = event_data["trade"]
@@ -436,8 +450,8 @@ class LiveScannerEngine:
 
 def main():
     parser = argparse.ArgumentParser(description="Binance Spot Phase 1 Live Paper Trading Scanner")
-    parser.add_argument("--mode", choices=["scan", "live-paper", "report", "test-email", "test-summary"], default="scan",
-                        help="Execution mode: 'scan', 'live-paper', 'report', 'test-email', 'test-summary'")
+    parser.add_argument("--mode", choices=["scan", "live-paper", "report", "test-email", "test-summary", "test-breakeven"], default="scan",
+                        help="Execution mode: 'scan', 'live-paper', 'report', 'test-email', 'test-summary', 'test-breakeven'")
     parser.add_argument("--interval", type=int, default=60, help="Interval in seconds for continuous mode (default: 60s)")
     args = parser.parse_args()
 
@@ -480,6 +494,23 @@ def main():
             print(f"{Fore.GREEN}[SUCCESS] 12-Hour Summary Email successfully delivered to {RECEIVER_EMAIL}! Please check your Inbox.{Style.RESET_ALL}")
         else:
             print(f"{Fore.RED}[FAILED] 12-Hour Summary Email delivery failed.{Style.RESET_ALL}")
+
+    elif args.mode == "test-breakeven":
+        print(f"{Fore.CYAN}Sending Test Break-Even Capital Protection Alert Email to {RECEIVER_EMAIL}...{Style.RESET_ALL}")
+        sent = engine.email_notifier.send_breakeven_alert_email(
+            symbol="KAVAUSDT",
+            strategy="I1_MTF_TREND_PULLBACK",
+            entry_price=0.050055,
+            current_price=0.050930,
+            old_stop_loss=0.048100,
+            new_stop_loss=0.050130,
+            gain_pct=1.75,
+            timeframe="1h (4h Macro Trend)"
+        )
+        if sent:
+            print(f"{Fore.GREEN}[SUCCESS] Break-Even Alert Email successfully delivered to {RECEIVER_EMAIL}! Please check your Inbox.{Style.RESET_ALL}")
+        else:
+            print(f"{Fore.RED}[FAILED] Break-Even Alert Email delivery failed.{Style.RESET_ALL}")
             
     elif args.mode == "scan":
         engine.run_scan_cycle()

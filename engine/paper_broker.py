@@ -178,6 +178,7 @@ class PaperBroker:
         tp2 = pos["tp2"]
         now_iso = get_current_utc().isoformat()
 
+        be_event = None
         # P2: Intermediate Breakeven Milestone for I1 Swing Trades
         # If I1 reaches +1.5% unrealized profit, lock Stop Loss at Breakeven + fee buffer (+0.15%)
         if "I1" in pos.get("strategy", "") and not pos.get("intermediate_be_reached", False):
@@ -185,9 +186,22 @@ class PaperBroker:
             if unrealized_gain_pct >= 1.5:
                 be_sl = entry_price * 1.0015
                 if be_sl > pos["stop_loss"]:
+                    old_sl = pos["stop_loss"]
                     pos["stop_loss"] = be_sl
                     pos["intermediate_be_reached"] = True
                     print(f"  [INTERMEDIATE BREAKEVEN] {symbol} hit +{unrealized_gain_pct:.2f}% gain -> SL locked at Breakeven (${be_sl:,.4f})")
+                    be_event = {
+                        "event": "BREAKEVEN_LOCKED",
+                        "symbol": symbol,
+                        "strategy": pos.get("strategy", ""),
+                        "entry_price": entry_price,
+                        "current_price": current_price,
+                        "trigger_price": high_price,
+                        "old_stop_loss": old_sl,
+                        "new_stop_loss": be_sl,
+                        "gain_pct": round(unrealized_gain_pct, 2),
+                        "timeframe": pos.get("timeframe", "1h (4h Macro Trend)")
+                    }
 
         # 1. Check Stop Loss Trigger
         if low_price <= stop_loss:
@@ -328,6 +342,8 @@ class PaperBroker:
             }
 
         self.save()
+        if be_event:
+            return be_event
         return None
 
     def emergency_tighten_positions_to_breakeven(self) -> List[Dict]:
