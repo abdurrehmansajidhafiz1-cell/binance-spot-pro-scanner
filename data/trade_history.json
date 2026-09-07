@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "trade_id": "T_20260907121607_FILUSDT",
+    "symbol": "FILUSDT",
+    "strategy": "S3_VOLATILITY_SQUEEZE",
+    "timeframe": "15m",
+    "zone_candle_time": "2026-09-07T12:00:00",
+    "signal_time": "2026-09-07T12:16:07.193217+00:00",
+    "entry_time": "2026-09-07T12:16:07.193217+00:00",
+    "entry_price": 0.8273134499999999,
+    "current_price": 0.8558,
+    "initial_quantity": 120.87317086407819,
+    "remaining_quantity": 0.0,
+    "quantity": 60.436585432039095,
+    "initial_cost_usdt": 100.0,
+    "remaining_cost_usdt": 0.0,
+    "stop_loss": 0.8293817336249999,
+    "initial_stop_loss": 0.815997,
+    "tp1": 0.836418,
+    "tp2": 0.84303,
+    "tp1_reached": true,
+    "tp1_hit_time": "2026-09-07T12:45:31.873759+00:00",
+    "tp1_exit_price": 0.835999791,
+    "tp2_reached": false,
+    "tp2_hit_time": null,
+    "tp2_exit_price": null,
+    "sl_hit_time": "2026-09-07T13:00:43.218844+00:00",
+    "sl_exit_price": 0.8289670427581874,
+    "exit_time": "2026-09-07T13:00:43.218844+00:00",
+    "exit_reason": "BREAKEVEN_SL",
+    "status": "WIN",
+    "highest_price": 0.8587,
+    "fees_paid": 0.1505,
+    "realized_pnl_usdt": 0.4870790603458701,
+    "metadata": {
+      "atr": 0.006079,
+      "mom_hist": 0.0035,
+      "bb_upper": 0.825508,
+      "rsi_15m": 64.3
+    },
+    "total_fees_paid": 0.11289372959245375,
+    "net_pnl_usdt": 0.5494,
+    "net_pnl_pct": 0.55
+  }
+]
