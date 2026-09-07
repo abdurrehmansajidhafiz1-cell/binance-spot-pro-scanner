@@ -361,13 +361,62 @@ class LiveScannerEngine:
                         continue
 
                 # 4B. Evaluate I1: MTF Pullback (4H Trend + 1H Execution) on COMPLETED closed candles
+                # ── FILTER 4 (Pre-Check): Weak Coin Volume + 24H SL Cooldown ─────────────
+                # F4a — Skip coins with 24h traded volume < $5M USDT (illiquid / penny coins).
+                #        Root-cause: GALA stopped out in 30 min due to thin order book.
+                # F4b — If this coin's I1 stop-loss was hit in the last 24 hours, skip it.
+                #        Root-cause: ADA fired an I1 signal on Day 8 the very next morning
+                #        after losing on Day 7 — persistently weak relative strength.
+                coin_ticker = tickers.get(symbol, {})
+                coin_24h_volume = coin_ticker.get("quote_volume", 0.0)
+                if coin_24h_volume < 5_000_000:
+                    continue  # F4a: Too illiquid for I1 pullback trades
+
+                # F4b: Check 24h SL cooldown from trade_history
+                now_utc = get_current_utc()
+                cooldown_hours = 24
+                recent_i1_sl = False
+                try:
+                    trade_hist = self.state_manager.load_trade_history()
+                    for past_trade in reversed(trade_hist):
+                        if (past_trade.get("symbol") == symbol and
+                                "I1" in past_trade.get("strategy", "") and
+                                past_trade.get("exit_reason") == "STOP_LOSS"):
+                            sl_time_str = past_trade.get("exit_time")
+                            if sl_time_str:
+                                sl_dt = datetime.fromisoformat(
+                                    sl_time_str.replace("Z", "+00:00")
+                                ).astimezone(timezone.utc).replace(tzinfo=None)
+                                if (now_utc.replace(tzinfo=None) - sl_dt).total_seconds() < cooldown_hours * 3600:
+                                    recent_i1_sl = True
+                            break
+                except Exception:
+                    pass
+                if recent_i1_sl:
+                    print(f"{Fore.YELLOW}  [I1 COOLDOWN] {symbol} — I1 SL hit in last {cooldown_hours}h. Skipping.{Style.RESET_ALL}")
+                    continue  # F4b: Coin on cooldown after recent I1 stop-loss
+
                 df_1h = self.client.get_klines(symbol, TIMEFRAME_I1_EXEC, limit=85)
                 df_4h = self.client.get_klines(symbol, TIMEFRAME_I1_TREND, limit=225)
+
 
                 if not df_1h.empty and not df_4h.empty and len(df_1h) >= 60 and len(df_4h) >= 220:
                     closed_1h = df_1h.iloc[:-1]
                     closed_4h = df_4h.iloc[:-1]
-                    i1_signal = self.strat_i1.evaluate(symbol, closed_1h, df_4h=closed_4h)
+
+                    # ── FILTER 2 data: Fetch BTC 1H for health gate ──────────
+                    df_btc_1h_raw = self.client.get_klines("BTCUSDT", TIMEFRAME_I1_EXEC, limit=30)
+                    closed_btc_1h = df_btc_1h_raw.iloc[:-1] if not df_btc_1h_raw.empty and len(df_btc_1h_raw) >= 25 else None
+
+                    # ── FILTER 3 data: Fetch symbol 15M for reversal candle ──
+                    df_15m_raw = self.client.get_klines(symbol, TIMEFRAME_S3, limit=10)
+                    closed_15m_i1 = df_15m_raw.iloc[:-1] if not df_15m_raw.empty and len(df_15m_raw) >= 4 else None
+
+                    i1_signal = self.strat_i1.evaluate(
+                        symbol, closed_1h, df_4h=closed_4h,
+                        df_btc_1h=closed_btc_1h,
+                        df_15m=closed_15m_i1
+                    )
                     if i1_signal and i1_signal.action == "BUY":
                         signals_found += 1
                         zone_time = closed_1h.index[-1].isoformat()
@@ -410,6 +459,7 @@ class LiveScannerEngine:
                                 "timeframe": "1h (4h Macro Trend)", "zone_candle_time": zone_time,
                                 "reason": i1_signal.reason, "metadata": i1_signal.metadata
                             })
+
 
         print(f"{Fore.MAGENTA}  Scanning complete. New Signals Executed: {signals_found} | Pending Queue: {len(self.signal_queue)}{Style.RESET_ALL}")
 
