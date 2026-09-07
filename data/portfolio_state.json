@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 299.85,
+  "cash_usdt": 350.3370790603459,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,19 +12,19 @@
       "signal_time": "2026-09-07T12:16:07.193217+00:00",
       "entry_time": "2026-09-07T12:16:07.193217+00:00",
       "entry_price": 0.8273134499999999,
-      "current_price": 0.8285,
+      "current_price": 0.8392,
       "initial_quantity": 120.87317086407819,
-      "remaining_quantity": 120.87317086407819,
-      "quantity": 120.87317086407819,
+      "remaining_quantity": 60.436585432039095,
+      "quantity": 60.436585432039095,
       "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.815997,
+      "remaining_cost_usdt": 50.0,
+      "stop_loss": 0.8293817336249999,
       "initial_stop_loss": 0.815997,
       "tp1": 0.836418,
       "tp2": 0.84303,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
+      "tp1_reached": true,
+      "tp1_hit_time": "2026-09-07T12:45:31.873759+00:00",
+      "tp1_exit_price": 0.835999791,
       "tp2_reached": false,
       "tp2_hit_time": null,
       "tp2_exit_price": null,
@@ -33,15 +33,16 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.8294,
+      "highest_price": 0.8423,
       "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
+      "realized_pnl_usdt": 0.4870790603458701,
       "metadata": {
         "atr": 0.006079,
         "mom_hist": 0.0035,
         "bb_upper": 0.825508,
         "rsi_15m": 64.3
-      }
+      },
+      "total_fees_paid": 0.11289372959245375
     },
     "AXSUSDT": {
       "trade_id": "T_20260907123125_AXSUSDT",
@@ -52,7 +53,7 @@
       "signal_time": "2026-09-07T12:31:25.047388+00:00",
       "entry_time": "2026-09-07T12:31:25.047388+00:00",
       "entry_price": 0.9674834999999999,
-      "current_price": 0.9674834999999999,
+      "current_price": 0.972,
       "initial_quantity": 103.36093587125777,
       "remaining_quantity": 103.36093587125777,
       "quantity": 103.36093587125777,
@@ -73,7 +74,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.9674834999999999,
+      "highest_price": 0.975,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -85,6 +86,6 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-07T12:31:25.047414+00:00",
+  "last_updated": "2026-09-07T12:45:31.982078+00:00",
   "last_12h_summary_slot": null
 }
