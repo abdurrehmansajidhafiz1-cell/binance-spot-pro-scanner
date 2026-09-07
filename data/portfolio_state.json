@@ -1,50 +1,9 @@
 {
-  "cash_usdt": 395.05967418251566,
+  "cash_usdt": 492.3889027936937,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {
-    "FETUSDT": {
-      "trade_id": "T_20260907193112_FETUSDT",
-      "symbol": "FETUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-07T19:15:00",
-      "signal_time": "2026-09-07T19:31:12.904079+00:00",
-      "entry_time": "2026-09-07T19:31:12.904079+00:00",
-      "entry_price": 0.18619304999999997,
-      "current_price": 0.183,
-      "initial_quantity": 537.0769746776264,
-      "remaining_quantity": 537.0769746776264,
-      "quantity": 537.0769746776264,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.181447,
-      "initial_stop_loss": 0.181447,
-      "tp1": 0.188357,
-      "tp2": 0.190613,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.1867,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.002257,
-        "mom_hist": 0.0018,
-        "bb_upper": 0.185143,
-        "rsi_15m": 66.29
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-07T22:15:31.003748+00:00",
+  "last_updated": "2026-09-07T22:30:33.741572+00:00",
   "last_12h_summary_slot": "2026-09-07_06_PM"
 }
