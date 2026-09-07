@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 1.9558168709953918,
+  "cash_usdt": 101.01820646265544,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-07T13:01:03.078575+00:00",
       "entry_time": "2026-09-07T13:01:03.078575+00:00",
       "entry_price": 2507.343045,
-      "current_price": 2507.39,
+      "current_price": 2498.58,
       "initial_quantity": 0.03988285535934713,
       "remaining_quantity": 0.03988285535934713,
       "quantity": 0.03988285535934713,
@@ -43,46 +43,6 @@
         "rsi_15m": 61.77
       }
     },
-    "SOLUSDT": {
-      "trade_id": "T_20260907130104_SOLUSDT",
-      "symbol": "SOLUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-07T12:45:00",
-      "signal_time": "2026-09-07T13:01:04.889448+00:00",
-      "entry_time": "2026-09-07T13:01:04.889448+00:00",
-      "entry_price": 105.76285499999999,
-      "current_price": 105.65,
-      "initial_quantity": 0.9455115408902304,
-      "remaining_quantity": 0.9455115408902304,
-      "quantity": 0.9455115408902304,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 104.9023,
-      "initial_stop_loss": 104.9023,
-      "tp1": 107.0089,
-      "tp2": 107.8548,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 105.84,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.3527,
-        "mom_hist": 0.2633,
-        "bb_upper": 105.4977,
-        "rsi_15m": 63.07
-      }
-    },
     "XRPUSDT": {
       "trade_id": "T_20260907130107_XRPUSDT",
       "symbol": "XRPUSDT",
@@ -92,7 +52,7 @@
       "signal_time": "2026-09-07T13:01:07.282308+00:00",
       "entry_time": "2026-09-07T13:01:07.282308+00:00",
       "entry_price": 1.4126059499999999,
-      "current_price": 1.4114,
+      "current_price": 1.4042,
       "initial_quantity": 70.79115021425473,
       "remaining_quantity": 70.79115021425473,
       "quantity": 70.79115021425473,
@@ -132,7 +92,7 @@
       "signal_time": "2026-09-07T13:01:16.894895+00:00",
       "entry_time": "2026-09-07T13:01:16.894895+00:00",
       "entry_price": 0.642321,
-      "current_price": 0.642,
+      "current_price": 0.636,
       "initial_quantity": 155.685397176801,
       "remaining_quantity": 155.685397176801,
       "quantity": 155.685397176801,
@@ -172,7 +132,7 @@
       "signal_time": "2026-09-07T13:31:11.669919+00:00",
       "entry_time": "2026-09-07T13:31:11.669919+00:00",
       "entry_price": 0.112056,
-      "current_price": 0.112056,
+      "current_price": 0.1109,
       "initial_quantity": 887.871538988342,
       "remaining_quantity": 887.871538988342,
       "quantity": 887.871538988342,
@@ -205,6 +165,6 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-07T13:31:11.669949+00:00",
+  "last_updated": "2026-09-07T13:45:29.681583+00:00",
   "last_12h_summary_slot": "2026-09-07_06_PM"
 }
