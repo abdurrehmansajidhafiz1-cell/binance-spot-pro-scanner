@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 250.4243049404683,
+  "cash_usdt": 300.23201685619364,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-07T13:01:16.894895+00:00",
       "entry_time": "2026-09-07T13:01:16.894895+00:00",
       "entry_price": 0.642321,
-      "current_price": 0.643,
+      "current_price": 0.64,
       "initial_quantity": 155.685397176801,
       "remaining_quantity": 155.685397176801,
       "quantity": 155.685397176801,
@@ -43,47 +43,6 @@
         "rsi_15m": 66.25
       }
     },
-    "OPUSDT": {
-      "trade_id": "T_20260907133111_OPUSDT",
-      "symbol": "OPUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-07T13:15:00",
-      "signal_time": "2026-09-07T13:31:11.669919+00:00",
-      "entry_time": "2026-09-07T13:31:11.669919+00:00",
-      "entry_price": 0.112056,
-      "current_price": 0.113,
-      "initial_quantity": 887.871538988342,
-      "remaining_quantity": 443.935769494171,
-      "quantity": 443.935769494171,
-      "initial_cost_usdt": 99.49133317287765,
-      "remaining_cost_usdt": 49.74566658643882,
-      "stop_loss": 0.11233614,
-      "initial_stop_loss": 0.109833,
-      "tp1": 0.113243,
-      "tp2": 0.114138,
-      "tp1_reached": true,
-      "tp1_hit_time": "2026-09-07T15:00:46.635750+00:00",
-      "tp1_exit_price": 0.1131863785,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.1137,
-      "fees_paid": 0.07461849987965824,
-      "realized_pnl_usdt": 0.4641298376904288,
-      "metadata": {
-        "atr": 0.000963,
-        "mom_hist": 0.001,
-        "bb_upper": 0.111821,
-        "rsi_15m": 65.32
-      },
-      "total_fees_paid": 0.11230411140640023
-    },
     "DYDXUSDT": {
       "trade_id": "T_20260907140136_DYDXUSDT",
       "symbol": "DYDXUSDT",
@@ -93,7 +52,7 @@
       "signal_time": "2026-09-07T14:01:36.154716+00:00",
       "entry_time": "2026-09-07T14:01:36.154716+00:00",
       "entry_price": 0.12454223999999998,
-      "current_price": 0.12433,
+      "current_price": 0.12346,
       "initial_quantity": 794.8937029990977,
       "remaining_quantity": 794.8937029990977,
       "quantity": 794.8937029990977,
@@ -126,6 +85,6 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-07T15:00:46.751534+00:00",
+  "last_updated": "2026-09-07T15:15:31.481302+00:00",
   "last_12h_summary_slot": "2026-09-07_06_PM"
 }
