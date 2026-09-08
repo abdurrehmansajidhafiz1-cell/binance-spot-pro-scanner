@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--3.75%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--3.78%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-25.0%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.21-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-20-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-21-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-08 21:31:25 PKT (16:31:25 UTC)`  
+> **Last Updated:** `2026-09-08 21:46:26 PKT (16:46:26 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -16,24 +16,26 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `20 Unique Trades` |
-| **Current Equity** | `$481.23 USDT` | **Completed Trades** | `20 Trades` |
-| **Available Cash** | `$481.23 USDT` | **Active / In-Trade** | `0 Trade` |
-| **Net PnL ($)** | `-$18.77 USDT` | **Win / Loss Ratio** | `5 Win / 15 Loss` |
-| **Net Return (%)** | `-3.75%` | **Win Rate** | `25.00%` |
+| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `21 Unique Trades` |
+| **Current Equity** | `$481.10 USDT` | **Completed Trades** | `20 Trades` |
+| **Available Cash** | `$381.15 USDT` | **Active / In-Trade** | `1 Trade` |
+| **Net PnL ($)** | `-$18.90 USDT` | **Win / Loss Ratio** | `5 Win / 15 Loss` |
+| **Net Return (%)** | `-3.78%` | **Win Rate** | `25.00%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.21` |
-| **Max Drawdown** | `-3.75%` | **Total Fees Deducted** | `$2.99 USDT` |
+| **Max Drawdown** | `-3.78%` | **Total Fees Deducted** | `$3.06 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (0)
+## 🟡 Active Open Positions (1)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense Protocol):**
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **S3 Strategy:** Jab TP1 hit hota hai, toh 50% profit lock hone ke sath baqi position ka Stop Loss Breakeven par shift ho jata hai.
 > - **Milestone Indicators:** `🟢 HIT (🛡️ Safe / SL Locked)` = Trade risk-free ho chuki hai | `⚪ Pending` = Break-even target ka intezar hai.
 
-_No active open positions currently._
+| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                          | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
+|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------|----------------------------------------|------------------|----------|
+| EGLDUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 21:30:00 PKT (16:30:00 UTC) | 2026-09-08 21:46:05 PKT (16:46:05 UTC) | $4.7314<br><small>2026-09-08 21:46:05 PKT (16:46:05 UTC)</small> | $4.7290         | $4.6599     | $4.7868 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $4.7868 (Pending)<br>$4.8246 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
 
 ---
 
