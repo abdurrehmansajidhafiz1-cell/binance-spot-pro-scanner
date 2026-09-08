@@ -213,6 +213,23 @@ class LiveScannerEngine:
                         )
                         if be_sent:
                             print(f"{Fore.GREEN}    [EMAIL DELIVERED] Break-Even risk-free notification delivered to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+                    # ── S3 IMPROVEMENT 3: Early Break-Even Email for S3 Scalp Trades ──
+                    # Fires when S3 trade hits +0.75% unrealized gain → SL locked at entry +0.10%
+                    elif event_data.get("event") == "S3_EARLY_BE_LOCKED":
+                        new_sl_price = event_data["new_stop_loss"]
+                        print(f"{Fore.CYAN}  [S3 EARLY BE ALERT] {symbol} hit +{event_data['gain_pct']:.2f}% -> SL locked at ${new_sl_price:,.6f} — Dispatching Early BE Email...{Style.RESET_ALL}")
+                        s3_be_sent = self.email_notifier.send_s3_early_breakeven_email(
+                            symbol=event_data["symbol"],
+                            strategy=event_data["strategy"],
+                            entry_price=event_data["entry_price"],
+                            current_price=event_data["current_price"],
+                            old_stop_loss=event_data["old_stop_loss"],
+                            new_stop_loss=new_sl_price,
+                            gain_pct=event_data["gain_pct"],
+                            timeframe=event_data["timeframe"]
+                        )
+                        if s3_be_sent:
+                            print(f"{Fore.GREEN}    [EMAIL DELIVERED] S3 Early Break-Even notification delivered to {RECEIVER_EMAIL}{Style.RESET_ALL}")
                     elif event_data.get("event") == "MILESTONE_TP1":
                         print(f"{Fore.GREEN}  [TP1 MILESTONE] {symbol} hit TP1 @ ${event_data['exit_price']:,.4f} | 50% Profit Locked: ${event_data['pnl_usdt']:+,.2f} | SL moved to Breakeven{Style.RESET_ALL}")
                     elif event_data.get("event") == "CLOSE":
@@ -248,6 +265,22 @@ class LiveScannerEngine:
         # 4. Scan 50 Coins for Strategy Signals (S3 & I1 on COMPLETED CLOSED CANDLES)
         print(f"\n{Fore.BLUE}--> Step 4: Scanning 50 Coins for S3 (15m Squeeze) & I1 (1H Pullback) [Closed-Bar Evaluation]...{Style.RESET_ALL}")
         signals_found = 0
+
+        # ── S3 IMPROVEMENT 1: BTC 1H Health Gate (Pre-fetch once, reuse for all coins) ──
+        # If BTC 1H Close < BTC 1H EMA20, ALL S3 altcoin long signals are blocked this cycle.
+        # Evidence: 7 of 11 new-cycle S3 losses happened during BTC 1H downtrends (Day 1-2 data).
+        btc_1h_for_gate = self.client.get_klines("BTCUSDT", "1h", limit=30)
+        btc_1h_closed_for_gate = btc_1h_for_gate.iloc[:-1] if not btc_1h_for_gate.empty and len(btc_1h_for_gate) >= 25 else None
+        s3_btc_gate_ok = True  # Default: gate open (assume safe if data unavailable)
+        if btc_1h_closed_for_gate is not None:
+            from engine.indicators import calculate_ema
+            btc_1h_ema20 = calculate_ema(btc_1h_closed_for_gate['close'], 20).iloc[-1]
+            btc_1h_close = btc_1h_closed_for_gate['close'].iloc[-1]
+            s3_btc_gate_ok = btc_1h_close > btc_1h_ema20
+            if not s3_btc_gate_ok:
+                print(f"{Fore.YELLOW}  [S3 BTC GATE] BTC 1H Close (${btc_1h_close:,.1f}) < EMA20 (${btc_1h_ema20:,.1f}) — S3 Altcoin Longs BLOCKED this cycle.{Style.RESET_ALL}")
+            else:
+                print(f"{Fore.GREEN}  [S3 BTC GATE] BTC 1H Bullish (Close ${btc_1h_close:,.1f} > EMA20 ${btc_1h_ema20:,.1f}) — S3 Longs Permitted.{Style.RESET_ALL}")
 
         if safety["is_safe"]:
             # ----------------------------------------------------------------
@@ -293,13 +326,14 @@ class LiveScannerEngine:
                     if email_sent:
                         print(f"{Fore.CYAN}    [EMAIL SENT] Queued signal executed — 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
 
-            # ----------------------------------------------------------------
-            # 4-MAIN: Fresh scan of all 50 coins
-            # ----------------------------------------------------------------
+            # ── S3 IMPROVEMENT 2: Anti-Clustering — Collect ALL qualifying S3 signals first,
+            #    then execute ONLY the single best signal (highest mom_hist = strongest momentum).
+            #    Root-cause: On BTC dump days, 4-7 altcoins fired S3 simultaneously → correlated losses.
+            s3_candidates = []  # List of (symbol, signal, curr_p, closed_15m) tuples
+
             for symbol in COINS_UNIVERSE:
                 curr_p = current_prices.get(symbol)
                 if not curr_p:
-                    # Fallback: fetch individual price if bulk tickers missed this symbol
                     curr_p = self.client.get_current_price(symbol)
                     if curr_p:
                         current_prices[symbol] = curr_p
@@ -309,6 +343,10 @@ class LiveScannerEngine:
                 if not self.broker.can_open_position(symbol):
                     continue
 
+                # ── S3 IMPROVEMENT 1: BTC Health Gate — skip S3 eval entirely if gate is closed ──
+                if not s3_btc_gate_ok:
+                    break  # No point scanning coins — gate blocks all S3 for this cycle
+
                 # 4A. Evaluate S3: 15m Volatility Squeeze on COMPLETED closed candle with 1H Trend Confluence
                 df_15m = self.client.get_klines(symbol, TIMEFRAME_S3, limit=65)
                 if not df_15m.empty and len(df_15m) >= 50:
@@ -317,50 +355,77 @@ class LiveScannerEngine:
                     closed_1h = df_1h_check.iloc[:-1] if not df_1h_check.empty and len(df_1h_check) >= 25 else None
                     s3_signal = self.strat_s3.evaluate(symbol, closed_15m, df_1h=closed_1h)
                     if s3_signal and s3_signal.action == "BUY":
-                        signals_found += 1
-                        zone_time = closed_15m.index[-1].isoformat()
-                        pos = self.broker.open_long_position(
-                            symbol=symbol,
-                            strategy_name=s3_signal.strategy_name,
-                            current_price=curr_p,
-                            stop_loss=s3_signal.stop_loss,
-                            tp1=s3_signal.tp1,
-                            tp2=s3_signal.tp2,
-                            timeframe="15m",
-                            zone_candle_time=zone_time,
-                            metadata=s3_signal.metadata
-                        )
-                        if pos:
-                            self.signal_queue.remove(symbol)  # Clear any old queue entry
-                            print(f"{Fore.GREEN}  [BUY S3] {symbol} @ ${curr_p:,.4f} | SL: ${s3_signal.stop_loss:,.4f} | TP1: ${s3_signal.tp1:,.4f} | TP2: ${s3_signal.tp2:,.4f}{Style.RESET_ALL}")
-                            self.notifier.alert_buy(symbol, s3_signal.strategy_name, curr_p, s3_signal.stop_loss, s3_signal.tp1, s3_signal.tp2, s3_signal.reason)
-                            email_sent = self.email_notifier.send_trade_signal_email(
-                                symbol=symbol,
-                                strategy=s3_signal.strategy_name,
-                                current_price=curr_p,
-                                stop_loss=s3_signal.stop_loss,
-                                tp1=s3_signal.tp1,
-                                tp2=s3_signal.tp2,
-                                reason=s3_signal.reason,
-                                metadata=s3_signal.metadata,
-                                safety_info=safety,
-                                candle_time=zone_time,
-                                timeframe="15m"
-                            )
-                            if email_sent:
-                                print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
-                        else:
-                            # Execution failed — save to queue for next cycle
-                            self.signal_queue.enqueue({
-                                "symbol": symbol, "strategy": s3_signal.strategy_name,
-                                "entry_price": curr_p, "stop_loss": s3_signal.stop_loss,
-                                "tp1": s3_signal.tp1, "tp2": s3_signal.tp2,
-                                "timeframe": "15m", "zone_candle_time": zone_time,
-                                "reason": s3_signal.reason, "metadata": s3_signal.metadata
-                            })
-                        continue
+                        # Store candidate; momentum score extracted from metadata for ranking
+                        mom_score = s3_signal.metadata.get("mom_hist", 0.0) if s3_signal.metadata else 0.0
+                        s3_candidates.append((symbol, s3_signal, curr_p, closed_15m, mom_score))
 
-                # 4B. Evaluate I1: MTF Pullback (4H Trend + 1H Execution) on COMPLETED closed candles
+            # ── Execute ONLY the strongest S3 candidate (Improvement 2) ──
+            if s3_candidates:
+                # Sort descending by momentum histogram — highest = freshest, strongest breakout
+                s3_candidates.sort(key=lambda x: x[4], reverse=True)
+                best_sym, best_sig, best_price, best_15m, best_score = s3_candidates[0]
+                skipped_count = len(s3_candidates) - 1
+                if skipped_count > 0:
+                    skipped_names = ", ".join(c[0] for c in s3_candidates[1:])
+                    print(f"{Fore.YELLOW}  [S3 ANTI-CLUSTER] {len(s3_candidates)} S3 signals found. Best: {best_sym} (mom_hist={best_score:.4f}). Suppressed: {skipped_names}{Style.RESET_ALL}")
+                else:
+                    print(f"{Fore.CYAN}  [S3 SIGNAL] Single qualifying signal: {best_sym} (mom_hist={best_score:.4f}){Style.RESET_ALL}")
+
+                signals_found += 1
+                zone_time = best_15m.index[-1].isoformat()
+                pos = self.broker.open_long_position(
+                    symbol=best_sym,
+                    strategy_name=best_sig.strategy_name,
+                    current_price=best_price,
+                    stop_loss=best_sig.stop_loss,
+                    tp1=best_sig.tp1,
+                    tp2=best_sig.tp2,
+                    timeframe="15m",
+                    zone_candle_time=zone_time,
+                    metadata=best_sig.metadata
+                )
+                if pos:
+                    self.signal_queue.remove(best_sym)
+                    print(f"{Fore.GREEN}  [BUY S3] {best_sym} @ ${best_price:,.4f} | SL: ${best_sig.stop_loss:,.4f} | TP1: ${best_sig.tp1:,.4f} | TP2: ${best_sig.tp2:,.4f}{Style.RESET_ALL}")
+                    self.notifier.alert_buy(best_sym, best_sig.strategy_name, best_price, best_sig.stop_loss, best_sig.tp1, best_sig.tp2, best_sig.reason)
+                    email_sent = self.email_notifier.send_trade_signal_email(
+                        symbol=best_sym,
+                        strategy=best_sig.strategy_name,
+                        current_price=best_price,
+                        stop_loss=best_sig.stop_loss,
+                        tp1=best_sig.tp1,
+                        tp2=best_sig.tp2,
+                        reason=best_sig.reason,
+                        metadata=best_sig.metadata,
+                        safety_info=safety,
+                        candle_time=zone_time,
+                        timeframe="15m"
+                    )
+                    if email_sent:
+                        print(f"{Fore.CYAN}    [EMAIL SENT] 100 USDT Actionable Plan dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+                else:
+                    self.signal_queue.enqueue({
+                        "symbol": best_sym, "strategy": best_sig.strategy_name,
+                        "entry_price": best_price, "stop_loss": best_sig.stop_loss,
+                        "tp1": best_sig.tp1, "tp2": best_sig.tp2,
+                        "timeframe": "15m", "zone_candle_time": zone_time,
+                        "reason": best_sig.reason, "metadata": best_sig.metadata
+                    })
+
+            # ── NOW scan for I1 signals (separate loop — I1 not affected by S3 changes) ──
+            for symbol in COINS_UNIVERSE:
+                curr_p = current_prices.get(symbol)
+                if not curr_p:
+                    curr_p = self.client.get_current_price(symbol)
+                    if curr_p:
+                        current_prices[symbol] = curr_p
+                if not curr_p:
+                    continue
+
+                if not self.broker.can_open_position(symbol):
+                    continue
+
+
                 # ── FILTER 4 (Pre-Check): Weak Coin Volume + 24H SL Cooldown ─────────────
                 # F4a — Skip coins with 24h traded volume < $5M USDT (illiquid / penny coins).
                 #        Root-cause: GALA stopped out in 30 min due to thin order book.

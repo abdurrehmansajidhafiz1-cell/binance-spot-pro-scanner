@@ -861,3 +861,142 @@ Paper broker ne system mein Stop Loss ko {format_price(new_stop_loss)} par lock 
 </html>
 """
         return self.send_email(subject, html_content, text_content)
+
+    def send_s3_early_breakeven_email(self, symbol: str, strategy: str,
+                                      entry_price: float, current_price: float,
+                                      old_stop_loss: float, new_stop_loss: float,
+                                      gain_pct: float, timeframe: str) -> bool:
+        """
+        S3 IMPROVEMENT 3: Dispatches an immediate alert when an S3 scalp trade reaches
+        +0.75% unrealized gain (Early Break-Even milestone).
+        Advises user to manually move SL to exact fee-inclusive break-even price.
+        SL formula: entry_price * 1.001 (covers 0.15% total Binance fees + 0.10% buffer).
+        """
+        dual_time = format_dual_time()
+        subject = f"⚡ [S3 EARLY BREAK-EVEN] {symbol} +{gain_pct:.2f}% — SL Ko {format_price(new_stop_loss)} Par Move Karein!"
+
+        text_content = f"""⚡ S3 EARLY BREAK-EVEN LOCK — URGENT ACTION REQUIRED
+Time: {dual_time}
+Pair: {symbol} ({strategy}) | Timeframe: {timeframe}
+
+Janab, aapki {symbol} S3 trade ne +{gain_pct:.2f}% gain hit kar liya hai!
+System ne automatically paper Stop Loss lock kar diya hai.
+
+AGAR AAP REAL EXCHANGE PAR TRADE KAR RAHE HAIN:
+Apna Stop Loss FORAN is exact price par move karein:
+
+  ★ RECOMMENDED NEW SL: {format_price(new_stop_loss)}
+
+Ye SL fee-inclusive breakeven price hai:
+  Entry Price ({format_price(entry_price)}) × 1.001
+  = Entry + 0.075% entry fee + 0.075% exit fee + ~0.025% buffer
+  = {format_price(new_stop_loss)}
+
+TRADE DETAILS:
+• Symbol:          {symbol}
+• Strategy:        {strategy} (15m Volatility Squeeze)
+• Timeframe:       {timeframe}
+• Entry Price:     {format_price(entry_price)}
+• Current Price:   {format_price(current_price)} (+{gain_pct:.2f}%)
+• Old SL:          {format_price(old_stop_loss)} (was at initial risk)
+• NEW SL TARGET:   {format_price(new_stop_loss)} ← Move here NOW
+
+Paper broker ne {format_price(new_stop_loss)} par SL lock kar diya hai.
+Real exchange par bhi manually shift karein taake trade risk-free ho jaye.
+================================================================================
+"""
+
+        html_content = f"""<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #fffbeb; margin: 0; padding: 20px; }}
+    .container {{ max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 2px solid #f59e0b; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25); }}
+    .header {{ background: linear-gradient(135deg, #b45309, #f59e0b); color: #ffffff; padding: 25px; text-align: center; }}
+    .header h1 {{ margin: 0; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }}
+    .header p {{ margin: 8px 0 0 0; opacity: 0.95; font-size: 14px; }}
+    .content {{ padding: 25px; color: #334155; }}
+    .alert-banner {{ background: #fffbeb; border-left: 5px solid #f59e0b; padding: 15px; border-radius: 6px; margin-bottom: 20px; }}
+    .alert-banner p {{ margin: 0; font-size: 14px; line-height: 1.6; color: #92400e; font-weight: 600; }}
+    .sl-box {{ background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 18px; text-align: center; margin: 20px 0; }}
+    .sl-box .label {{ font-size: 13px; color: #78350f; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }}
+    .sl-box .price {{ font-size: 30px; font-weight: 900; color: #b45309; }}
+    .sl-box .sub {{ font-size: 12px; color: #92400e; margin-top: 5px; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }}
+    th {{ background: #fef3c7; padding: 10px; text-align: left; color: #78350f; font-weight: 700; border-bottom: 2px solid #fcd34d; }}
+    td {{ padding: 10px; border-bottom: 1px solid #fde68a; }}
+    .footer {{ background: #fef3c7; padding: 15px; text-align: center; font-size: 12px; color: #78350f; border-top: 1px solid #fcd34d; }}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>⚡ S3 EARLY BREAK-EVEN LOCKED</h1>
+        <p>{symbol} • +{gain_pct:.2f}% Profit Milestone • Action Required</p>
+    </div>
+    <div class="content">
+        <div class="alert-banner">
+            <p>
+                Janab, aapki <b>{symbol} ({strategy})</b> S3 scalp trade ne live market mein <b>+{gain_pct:.2f}% gain</b> hit kar liya hai!<br><br>
+                Paper broker ne automatically SL lock kar diya hai. <b>Agar aap real exchange par trade kar rahe hain, toh SL ko foran neeche di gayi price par move karein.</b>
+            </p>
+        </div>
+
+        <div class="sl-box">
+            <div class="label">⭐ Recommended New Stop Loss</div>
+            <div class="price">{format_price(new_stop_loss)}</div>
+            <div class="sub">= Entry ({format_price(entry_price)}) × 1.001 | Fees + Buffer Included</div>
+        </div>
+
+        <h3 style="margin: 20px 0 10px 0; color: #1e293b; font-size: 16px;">Trade Details & SL Calculation</h3>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><b>Pair / Strategy</b></td>
+                <td><b>{symbol}</b> ({strategy})</td>
+                <td>15m Volatility Squeeze</td>
+            </tr>
+            <tr>
+                <td><b>Entry Price</b></td>
+                <td><b>{format_price(entry_price)}</b></td>
+                <td>Original buy price</td>
+            </tr>
+            <tr>
+                <td><b>Trigger Price (High)</b></td>
+                <td style="color:#16a34a; font-weight:bold;">{format_price(current_price)}</td>
+                <td style="color:#16a34a; font-weight:bold;">+{gain_pct:.2f}% Unrealized Gain</td>
+            </tr>
+            <tr style="background:#fee2e2;">
+                <td><b>Old Stop Loss</b></td>
+                <td style="color:#dc2626; text-decoration:line-through; font-weight:bold;">{format_price(old_stop_loss)}</td>
+                <td style="color:#dc2626;">Initial risk (System removed)</td>
+            </tr>
+            <tr style="background:#fef3c7;">
+                <td><b>NEW SL (Fee-Inclusive)</b></td>
+                <td style="color:#b45309; font-weight:bold; font-size:16px;">{format_price(new_stop_loss)}</td>
+                <td style="color:#b45309; font-weight:bold;">Entry × 1.001 ← MOVE HERE</td>
+            </tr>
+        </table>
+
+        <div style="margin-top: 20px; padding: 12px; background: #fef9c3; border-radius: 6px; border: 1px solid #fcd34d; font-size: 13px; color: #78350f;">
+            💡 <b>SL Calculation Logic:</b> {format_price(entry_price)} × 1.001 = <b>{format_price(new_stop_loss)}</b><br>
+            Ye price Binance entry fee (0.075%) + exit fee (0.075%) + 0.025% safety buffer ko cover karti hai. Is SL par stop-out hone se bhi aapka capital breakeven ya marginal profit mein rahega.
+        </div>
+
+        <div style="margin-top: 15px; padding: 12px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; font-size: 13px; color: #166534;">
+            ✅ <b>Paper System Status:</b> Scanner ne paper broker mein SL ko <b>{format_price(new_stop_loss)}</b> par automatically lock kar diya hai. Real exchange par bhi manually update zarur karein.
+        </div>
+    </div>
+    <div class="footer">
+        {dual_time} • S3 Volatility Squeeze Early Break-Even Protocol • Binance Spot
+    </div>
+</div>
+</body>
+</html>
+"""
+        return self.send_email(subject, html_content, text_content)

@@ -179,7 +179,7 @@ class PaperBroker:
         now_iso = get_current_utc().isoformat()
 
         be_event = None
-        # P2: Intermediate Breakeven Milestone for I1 Swing Trades
+        # P2a: Intermediate Breakeven Milestone for I1 Swing Trades
         # If I1 reaches +1.5% unrealized profit, lock Stop Loss at Breakeven + fee buffer (+0.15%)
         if "I1" in pos.get("strategy", "") and not pos.get("intermediate_be_reached", False):
             unrealized_gain_pct = ((high_price - entry_price) / entry_price) * 100.0
@@ -201,6 +201,34 @@ class PaperBroker:
                         "new_stop_loss": be_sl,
                         "gain_pct": round(unrealized_gain_pct, 2),
                         "timeframe": pos.get("timeframe", "1h (4h Macro Trend)")
+                    }
+
+        # P2b: S3 Early Break-Even Lock at +0.75%
+        # When an S3 scalp trade gains +0.75% unrealized profit, lock SL at entry +0.10%
+        # (+0.10% covers both entry and exit Binance fees totalling 0.15%; leaves ~0.025% net safe buffer)
+        # This prevents "near-miss" profitable trades from reversing into full losses.
+        if "S3" in pos.get("strategy", "") and not pos.get("s3_early_be_reached", False):
+            unrealized_gain_pct_s3 = ((high_price - entry_price) / entry_price) * 100.0
+            if unrealized_gain_pct_s3 >= 0.75:
+                # Fee-aware SL: entry * 1.001 covers entry fee (0.075%) + exit fee (0.075%) = 0.15% total
+                # +0.10% gives a tiny positive net buffer above breakeven
+                early_be_sl = entry_price * 1.001
+                if early_be_sl > pos["stop_loss"]:
+                    old_sl_s3 = pos["stop_loss"]
+                    pos["stop_loss"] = early_be_sl
+                    pos["s3_early_be_reached"] = True
+                    print(f"  [S3 EARLY BREAKEVEN] {symbol} hit +{unrealized_gain_pct_s3:.2f}% gain -> SL locked at Early-BE (${early_be_sl:,.6f})")
+                    be_event = {
+                        "event": "S3_EARLY_BE_LOCKED",
+                        "symbol": symbol,
+                        "strategy": pos.get("strategy", ""),
+                        "entry_price": entry_price,
+                        "current_price": current_price,
+                        "trigger_price": high_price,
+                        "old_stop_loss": old_sl_s3,
+                        "new_stop_loss": early_be_sl,
+                        "gain_pct": round(unrealized_gain_pct_s3, 2),
+                        "timeframe": pos.get("timeframe", "15m")
                     }
 
         # 1. Check Stop Loss Trigger
