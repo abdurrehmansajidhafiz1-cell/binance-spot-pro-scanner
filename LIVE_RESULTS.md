@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--1.34%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--1.37%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-33.3%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.26-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-10-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-12-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-08 05:01:35 PKT (00:01:35 UTC)`  
+> **Last Updated:** `2026-09-08 05:16:15 PKT (00:16:15 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -16,26 +16,28 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `10 Unique Trades` |
-| **Current Equity** | `$493.30 USDT` | **Completed Trades** | `9 Trades` |
-| **Available Cash** | `$392.31 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$6.70 USDT` | **Win / Loss Ratio** | `3 Win / 6 Loss` |
-| **Net Return (%)** | `-1.34%` | **Win Rate** | `33.33%` |
+| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `12 Unique Trades` |
+| **Current Equity** | `$493.17 USDT` | **Completed Trades** | `9 Trades` |
+| **Available Cash** | `$242.68 USDT` | **Active / In-Trade** | `3 Trade` |
+| **Net PnL ($)** | `-$6.83 USDT` | **Win / Loss Ratio** | `3 Win / 6 Loss` |
+| **Net Return (%)** | `-1.37%` | **Win Rate** | `33.33%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.26` |
-| **Max Drawdown** | `-1.34%` | **Total Fees Deducted** | `$1.42 USDT` |
+| **Max Drawdown** | `-1.37%` | **Total Fees Deducted** | `$1.57 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (1)
+## 🟡 Active Open Positions (3)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense Protocol):**
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **S3 Strategy:** Jab TP1 hit hota hai, toh 50% profit lock hone ke sath baqi position ka Stop Loss Breakeven par shift ho jata hai.
 > - **Milestone Indicators:** `🟢 HIT (🛡️ Safe / SL Locked)` = Trade risk-free ho chuki hai | `⚪ Pending` = Break-even target ka intezar hai.
 
-| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                          | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
-|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| ALGOUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 04:00:00 PKT (23:00:00 UTC) | 2026-09-08 04:16:10 PKT (23:16:10 UTC) | $0.0965<br><small>2026-09-08 04:16:10 PKT (23:16:10 UTC)</small> | $0.0975         | $0.0955     | $0.0977 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.0977 (Pending)<br>$0.0984 (Pending) | +0.99 (+0.99%)   | 🟡 ACTIVE |
+| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                          | Targets (TP1 / TP2)                    | Unrealized PnL   | Status                                                        |
+|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------|----------------------------------------|------------------|---------------------------------------------------------------|
+| ALGOUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 04:00:00 PKT (23:00:00 UTC) | 2026-09-08 04:16:10 PKT (23:16:10 UTC) | $0.0965<br><small>2026-09-08 04:16:10 PKT (23:16:10 UTC)</small> | $0.0977         | $0.0968     | $0.0977 (TP1)<br><b>🟢 HIT (🛡️ Safe / SL Locked)</b>              | $0.0977 (HIT)<br>$0.0984 (Pending)     | +1.11 (+1.19%)   | 🟡 ACTIVE<br><b style='color:#16a34a;'>🛡️ Risk-Free Locked</b> |
+| DOGEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 05:00:00 PKT (00:00:00 UTC) | 2026-09-08 05:15:50 PKT (00:15:50 UTC) | $0.0910<br><small>2026-09-08 05:15:50 PKT (00:15:50 UTC)</small> | $0.0910         | $0.0902     | $0.0922 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.0922 (Pending)<br>$0.0929 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE                                                      |
+| EGLDUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 05:00:00 PKT (00:00:00 UTC) | 2026-09-08 05:16:11 PKT (00:16:11 UTC) | $4.7304<br><small>2026-09-08 05:16:11 PKT (00:16:11 UTC)</small> | $4.7280         | $4.6559     | $4.7868 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $4.7868 (Pending)<br>$4.8246 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE                                                      |
 
 ---
 
