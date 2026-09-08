@@ -865,25 +865,37 @@ Paper broker ne system mein Stop Loss ko {format_price(new_stop_loss)} par lock 
     def send_s3_early_breakeven_email(self, symbol: str, strategy: str,
                                       entry_price: float, current_price: float,
                                       old_stop_loss: float, new_stop_loss: float,
-                                      gain_pct: float, timeframe: str) -> bool:
+                                      gain_pct: float, timeframe: str,
+                                      tp1: Optional[float] = None,
+                                      tp2: Optional[float] = None,
+                                      realized_pnl: float = 0.0) -> bool:
         """
         S3 IMPROVEMENT 3: Dispatches an immediate alert when an S3 scalp trade reaches
         +0.75% unrealized gain (Early Break-Even milestone).
-        Advises user to manually move SL to exact fee-inclusive break-even price.
-        SL formula: entry_price * 1.001 (covers 0.15% total Binance fees + 0.10% buffer).
+        1. 50% of initial position is closed/sold at Early BE level.
+        2. Advises user to manually move SL to exact fee-inclusive break-even price.
+        3. Clearly displays TP1 (30% exit) and TP2 (20% exit) targets.
         """
         dual_time = format_dual_time()
-        subject = f"⚡ [S3 EARLY BREAK-EVEN] {symbol} +{gain_pct:.2f}% — SL Ko {format_price(new_stop_loss)} Par Move Karein!"
+        tp1_str = format_price(tp1) if tp1 else "Pending"
+        tp2_str = format_price(tp2) if tp2 else "Pending"
+        pnl_sign = "+" if realized_pnl >= 0 else ""
+        subject = f"⚡ [S3 EARLY BREAK-EVEN] {symbol} +{gain_pct:.2f}% — 50% Position Closed! SL Ko {format_price(new_stop_loss)} Par Move Karein"
 
-        text_content = f"""⚡ S3 EARLY BREAK-EVEN LOCK — URGENT ACTION REQUIRED
+        text_content = f"""⚡ S3 EARLY BREAK-EVEN LOCK — 50% PARTIAL EXIT & CAPITAL DEFENSE
 Time: {dual_time}
 Pair: {symbol} ({strategy}) | Timeframe: {timeframe}
 
-Janab, aapki {symbol} S3 trade ne +{gain_pct:.2f}% gain hit kar liya hai!
-System ne automatically paper Stop Loss lock kar diya hai.
+Janab, aapki {symbol} S3 scalp trade ne +{gain_pct:.2f}% gain hit kar liya hai!
+
+★ ACTION EXECUTED:
+• 50% of original position has been CLOSED/SOLD at Early Break-Even level.
+• Realized Profit on 50% Leg: {pnl_sign}${realized_pnl:,.4f} USDT
+• Remaining 50% position is STILL OPEN targeting TP1 and TP2.
 
 AGAR AAP REAL EXCHANGE PAR TRADE KAR RAHE HAIN:
-Apna Stop Loss FORAN is exact price par move karein:
+1. Apni position ka 50% foran SELL/CLOSE karein.
+2. Baqi 50% position ka Stop Loss FORAN is exact price par move karein:
 
   ★ RECOMMENDED NEW SL: {format_price(new_stop_loss)}
 
@@ -892,17 +904,23 @@ Ye SL fee-inclusive breakeven price hai:
   = Entry + 0.075% entry fee + 0.075% exit fee + ~0.025% buffer
   = {format_price(new_stop_loss)}
 
-TRADE DETAILS:
-• Symbol:          {symbol}
-• Strategy:        {strategy} (15m Volatility Squeeze)
-• Timeframe:       {timeframe}
-• Entry Price:     {format_price(entry_price)}
-• Current Price:   {format_price(current_price)} (+{gain_pct:.2f}%)
-• Old SL:          {format_price(old_stop_loss)} (was at initial risk)
-• NEW SL TARGET:   {format_price(new_stop_loss)} ← Move here NOW
+POSITION EXIT DISTRIBUTION (100% Total):
+• 50% → Early Break-Even (+0.75%) [DONE - REALIZED]
+• 30% → TP1 Target: {tp1_str} [ACTIVE PENDING]
+• 20% → TP2 Target: {tp2_str} [ACTIVE PENDING]
 
-Paper broker ne {format_price(new_stop_loss)} par SL lock kar diya hai.
-Real exchange par bhi manually shift karein taake trade risk-free ho jaye.
+TRADE DETAILS:
+• Symbol:                {symbol}
+• Strategy:              {strategy} (15m Volatility Squeeze)
+• Timeframe:             {timeframe}
+• Entry Price:           {format_price(entry_price)}
+• Current Price:         {format_price(current_price)} (+{gain_pct:.2f}%)
+• Old SL:                {format_price(old_stop_loss)} (initial risk removed)
+• NEW SL TARGET:         {format_price(new_stop_loss)} ← Move here NOW
+• Active Remaining:      50% of position size
+
+Paper broker ne 50% position realize kar di hai aur SL ko {format_price(new_stop_loss)} par lock kar diya hai.
+Real exchange par bhi manually update karein taake trade 100% risk-free profit mein rahe.
 ================================================================================
 """
 
@@ -923,6 +941,7 @@ Real exchange par bhi manually shift karein taake trade risk-free ho jaye.
     .sl-box .label {{ font-size: 13px; color: #78350f; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }}
     .sl-box .price {{ font-size: 30px; font-weight: 900; color: #b45309; }}
     .sl-box .sub {{ font-size: 12px; color: #92400e; margin-top: 5px; }}
+    .distribution-box {{ background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 14px; margin: 15px 0; font-size: 13px; color: #166534; }}
     table {{ width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }}
     th {{ background: #fef3c7; padding: 10px; text-align: left; color: #78350f; font-weight: 700; border-bottom: 2px solid #fcd34d; }}
     td {{ padding: 10px; border-bottom: 1px solid #fde68a; }}
@@ -932,29 +951,38 @@ Real exchange par bhi manually shift karein taake trade risk-free ho jaye.
 <body>
 <div class="container">
     <div class="header">
-        <h1>⚡ S3 EARLY BREAK-EVEN LOCKED</h1>
-        <p>{symbol} • +{gain_pct:.2f}% Profit Milestone • Action Required</p>
+        <h1>⚡ S3 EARLY BREAK-EVEN HIT (50% CLOSED)</h1>
+        <p>{symbol} • +{gain_pct:.2f}% Profit Milestone • Partial Profit Locked</p>
     </div>
     <div class="content">
         <div class="alert-banner">
             <p>
                 Janab, aapki <b>{symbol} ({strategy})</b> S3 scalp trade ne live market mein <b>+{gain_pct:.2f}% gain</b> hit kar liya hai!<br><br>
-                Paper broker ne automatically SL lock kar diya hai. <b>Agar aap real exchange par trade kar rahe hain, toh SL ko foran neeche di gayi price par move karein.</b>
+                ✅ <b>50% Position Realized:</b> Paper broker ne original position ka 50% sell karke profit lock kar diya hai ({pnl_sign}${realized_pnl:,.4f} USDT).<br>
+                🛡️ <b>Action Required:</b> Real exchange par 50% sell karein aur Stop Loss ko foran neeche di gayi price par move karein!
             </p>
         </div>
 
         <div class="sl-box">
-            <div class="label">⭐ Recommended New Stop Loss</div>
+            <div class="label">⭐ Recommended New Stop Loss (For Remaining 50%)</div>
             <div class="price">{format_price(new_stop_loss)}</div>
             <div class="sub">= Entry ({format_price(entry_price)}) × 1.001 | Fees + Buffer Included</div>
         </div>
 
-        <h3 style="margin: 20px 0 10px 0; color: #1e293b; font-size: 16px;">Trade Details & SL Calculation</h3>
+        <div class="distribution-box">
+            <b>📊 100% Position Exit Distribution:</b><br>
+            • <b>50% Position:</b> Closed @ Early Break-Even (+0.75%) → <span style="color:#16a34a; font-weight:bold;">✅ REALIZED</span><br>
+            • <b>30% Position:</b> Target TP1 @ <b>{tp1_str}</b> → <span style="color:#b45309; font-weight:bold;">🟡 PENDING (ACTIVE)</span><br>
+            • <b>20% Position:</b> Target TP2 @ <b>{tp2_str}</b> → <span style="color:#b45309; font-weight:bold;">🟡 PENDING (ACTIVE)</span><br>
+            <i>Total = 50% + 30% + 20% = Exactly 100% of Initial Capital</i>
+        </div>
+
+        <h3 style="margin: 20px 0 10px 0; color: #1e293b; font-size: 16px;">Trade Parameters & Targets</h3>
         <table>
             <tr>
                 <th>Field</th>
                 <th>Value</th>
-                <th>Notes</th>
+                <th>Status</th>
             </tr>
             <tr>
                 <td><b>Pair / Strategy</b></td>
@@ -964,36 +992,41 @@ Real exchange par bhi manually shift karein taake trade risk-free ho jaye.
             <tr>
                 <td><b>Entry Price</b></td>
                 <td><b>{format_price(entry_price)}</b></td>
-                <td>Original buy price</td>
+                <td>Purchased Price</td>
             </tr>
             <tr>
-                <td><b>Trigger Price (High)</b></td>
+                <td><b>Trigger Price</b></td>
                 <td style="color:#16a34a; font-weight:bold;">{format_price(current_price)}</td>
-                <td style="color:#16a34a; font-weight:bold;">+{gain_pct:.2f}% Unrealized Gain</td>
+                <td style="color:#16a34a; font-weight:bold;">+{gain_pct:.2f}% Hit (50% Sold)</td>
             </tr>
             <tr style="background:#fee2e2;">
                 <td><b>Old Stop Loss</b></td>
                 <td style="color:#dc2626; text-decoration:line-through; font-weight:bold;">{format_price(old_stop_loss)}</td>
-                <td style="color:#dc2626;">Initial risk (System removed)</td>
+                <td style="color:#dc2626;">Initial Risk Removed</td>
             </tr>
             <tr style="background:#fef3c7;">
-                <td><b>NEW SL (Fee-Inclusive)</b></td>
+                <td><b>NEW SL (Remaining 50%)</b></td>
                 <td style="color:#b45309; font-weight:bold; font-size:16px;">{format_price(new_stop_loss)}</td>
                 <td style="color:#b45309; font-weight:bold;">Entry × 1.001 ← MOVE HERE</td>
+            </tr>
+            <tr>
+                <td><b>Target TP1 (30% Exit)</b></td>
+                <td style="font-weight:bold;">{tp1_str}</td>
+                <td>Pending 30% original position</td>
+            </tr>
+            <tr>
+                <td><b>Target TP2 (20% Exit)</b></td>
+                <td style="font-weight:bold;">{tp2_str}</td>
+                <td>Pending 20% original position</td>
             </tr>
         </table>
 
         <div style="margin-top: 20px; padding: 12px; background: #fef9c3; border-radius: 6px; border: 1px solid #fcd34d; font-size: 13px; color: #78350f;">
-            💡 <b>SL Calculation Logic:</b> {format_price(entry_price)} × 1.001 = <b>{format_price(new_stop_loss)}</b><br>
-            Ye price Binance entry fee (0.075%) + exit fee (0.075%) + 0.025% safety buffer ko cover karti hai. Is SL par stop-out hone se bhi aapka capital breakeven ya marginal profit mein rahega.
-        </div>
-
-        <div style="margin-top: 15px; padding: 12px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; font-size: 13px; color: #166534;">
-            ✅ <b>Paper System Status:</b> Scanner ne paper broker mein SL ko <b>{format_price(new_stop_loss)}</b> par automatically lock kar diya hai. Real exchange par bhi manually update zarur karein.
+            💡 <b>Zero-Risk Profit Guarantee:</b> 50% portion already +0.75% profit mein close ho chuka hai. Baqi 50% ka SL Entry × 1.001 ({format_price(new_stop_loss)}) par hai. Agar market yahan se achanak reverse bhi ho jaye, toh yeh trade <b>overall profit</b> mein hi close hogi!
         </div>
     </div>
     <div class="footer">
-        {dual_time} • S3 Volatility Squeeze Early Break-Even Protocol • Binance Spot
+        {dual_time} • S3 Volatility Squeeze Partial Exit Protocol • Binance Spot
     </div>
 </div>
 </body>

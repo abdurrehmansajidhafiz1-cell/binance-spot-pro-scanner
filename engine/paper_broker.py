@@ -203,33 +203,59 @@ class PaperBroker:
                         "timeframe": pos.get("timeframe", "1h (4h Macro Trend)")
                     }
 
-        # P2b: S3 Early Break-Even Lock at +0.75%
-        # When an S3 scalp trade gains +0.75% unrealized profit, lock SL at entry +0.10%
-        # (+0.10% covers both entry and exit Binance fees totalling 0.15%; leaves ~0.025% net safe buffer)
-        # This prevents "near-miss" profitable trades from reversing into full losses.
+        # P2b: S3 Early Break-Even Lock at +0.75% with 50% Partial Exit
+        # When an S3 scalp trade reaches +0.75% unrealized profit:
+        # 1. Close 50% of the initial position (locks in guaranteed profit on half)
+        # 2. Lock Stop Loss at entry +0.10% (covers fees + leaves net safe buffer)
+        # 3. Remaining 50% stays open targeting TP1 (30%) and TP2 (20%)
         if "S3" in pos.get("strategy", "") and not pos.get("s3_early_be_reached", False):
             unrealized_gain_pct_s3 = ((high_price - entry_price) / entry_price) * 100.0
             if unrealized_gain_pct_s3 >= 0.75:
-                # Fee-aware SL: entry * 1.001 covers entry fee (0.075%) + exit fee (0.075%) = 0.15% total
-                # +0.10% gives a tiny positive net buffer above breakeven
+                # 1. Execute 50% partial exit at high_price (with slippage)
+                exec_price = high_price * (1.0 - SLIPPAGE_RATE)
+                close_qty = pos["initial_quantity"] * 0.50
+                gross_return = close_qty * exec_price
+                exit_fee = gross_return * SPOT_FEE_RATE
+                net_return = gross_return - exit_fee
+
+                cost_basis = pos["initial_cost_usdt"] * 0.50
+                entry_fee_portion = pos["fees_paid"] * 0.50
+                leg_pnl_usdt = net_return - cost_basis
+
+                self.state["cash_usdt"] += net_return
+                pos["s3_early_be_reached"] = True
+                pos["s3_early_be_hit_time"] = now_iso
+                pos["s3_early_be_exit_price"] = exec_price
+                pos["remaining_quantity"] -= close_qty
+                pos["quantity"] = pos["remaining_quantity"]
+                pos["remaining_cost_usdt"] -= cost_basis
+                pos["realized_pnl_usdt"] += leg_pnl_usdt
+                pos["total_fees_paid"] = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
+
+                # 2. Fee-aware SL: entry * 1.001 covers entry fee (0.075%) + exit fee (0.075%) = 0.15% total
                 early_be_sl = entry_price * 1.001
+                old_sl_s3 = pos["stop_loss"]
                 if early_be_sl > pos["stop_loss"]:
-                    old_sl_s3 = pos["stop_loss"]
                     pos["stop_loss"] = early_be_sl
-                    pos["s3_early_be_reached"] = True
-                    print(f"  [S3 EARLY BREAKEVEN] {symbol} hit +{unrealized_gain_pct_s3:.2f}% gain -> SL locked at Early-BE (${early_be_sl:,.6f})")
-                    be_event = {
-                        "event": "S3_EARLY_BE_LOCKED",
-                        "symbol": symbol,
-                        "strategy": pos.get("strategy", ""),
-                        "entry_price": entry_price,
-                        "current_price": current_price,
-                        "trigger_price": high_price,
-                        "old_stop_loss": old_sl_s3,
-                        "new_stop_loss": early_be_sl,
-                        "gain_pct": round(unrealized_gain_pct_s3, 2),
-                        "timeframe": pos.get("timeframe", "15m")
-                    }
+
+                print(f"  [S3 EARLY BREAKEVEN] {symbol} hit +{unrealized_gain_pct_s3:.2f}% gain -> 50% Position Closed (${leg_pnl_usdt:+.4f} USDT) | SL locked at Early-BE (${early_be_sl:,.6f})")
+                be_event = {
+                    "event": "S3_EARLY_BE_LOCKED",
+                    "symbol": symbol,
+                    "strategy": pos.get("strategy", ""),
+                    "entry_price": entry_price,
+                    "current_price": current_price,
+                    "trigger_price": high_price,
+                    "old_stop_loss": old_sl_s3,
+                    "new_stop_loss": early_be_sl,
+                    "gain_pct": round(unrealized_gain_pct_s3, 2),
+                    "timeframe": pos.get("timeframe", "15m"),
+                    "tp1": pos.get("tp1"),
+                    "tp2": pos.get("tp2"),
+                    "realized_pnl": round(leg_pnl_usdt, 4),
+                    "closed_pct": 50.0,
+                    "remaining_pct": 50.0
+                }
 
         # 1. Check Stop Loss Trigger
         if low_price <= stop_loss:
@@ -251,6 +277,8 @@ class PaperBroker:
             pos["exit_time"] = now_iso
             if pos["tp1_reached"]:
                 pos["exit_reason"] = "BREAKEVEN_SL"
+            elif pos.get("s3_early_be_reached"):
+                pos["exit_reason"] = "EARLY_BE_SL"
             elif pos.get("intermediate_be_reached"):
                 pos["exit_reason"] = "BREAKEVEN_PROTECTED"
             else:
@@ -263,7 +291,7 @@ class PaperBroker:
             
             if total_net_pnl > 0.05:
                 pos["status"] = "WIN"
-            elif pos.get("intermediate_be_reached") or pos.get("tp1_reached") or abs(total_net_pnl) <= 0.15:
+            elif pos.get("s3_early_be_reached") or pos.get("intermediate_be_reached") or pos.get("tp1_reached") or abs(total_net_pnl) <= 0.15:
                 pos["status"] = "BREAKEVEN"
             else:
                 pos["status"] = "LOSS"
@@ -283,15 +311,35 @@ class PaperBroker:
         # 2. Check TP Targets
         # Case A: Price reached or exceeded TP2 (Full Win)
         if high_price >= tp2:
-            # If TP1 was not yet recorded, execute TP1 first, then TP2
+            is_s3 = "S3" in pos.get("strategy", "")
+            # If S3 Early BE was not yet recorded, execute Early BE (50%) first
+            if is_s3 and not pos.get("s3_early_be_reached", False):
+                ebe_exec_price = (entry_price * 1.0075) * (1.0 - SLIPPAGE_RATE)
+                ebe_qty = pos["initial_quantity"] * 0.50
+                ebe_gross = ebe_qty * ebe_exec_price
+                ebe_fee = ebe_gross * SPOT_FEE_RATE
+                ebe_net = ebe_gross - ebe_fee
+                ebe_cost = pos["initial_cost_usdt"] * 0.50
+                ebe_leg_pnl = ebe_net - ebe_cost
+                self.state["cash_usdt"] += ebe_net
+                pos["s3_early_be_reached"] = True
+                pos["s3_early_be_hit_time"] = now_iso
+                pos["s3_early_be_exit_price"] = ebe_exec_price
+                pos["remaining_quantity"] -= ebe_qty
+                pos["quantity"] = pos["remaining_quantity"]
+                pos["remaining_cost_usdt"] -= ebe_cost
+                pos["realized_pnl_usdt"] += ebe_leg_pnl
+                pos["total_fees_paid"] = pos.get("total_fees_paid", pos["fees_paid"]) + ebe_fee
+
+            # If TP1 was not yet recorded, execute TP1 (30% for S3, 50% for I1)
             if not pos["tp1_reached"]:
                 tp1_exec_price = tp1 * (1.0 - SLIPPAGE_RATE)
-                tp1_qty = pos["initial_quantity"] * 0.50
+                tp1_fraction = 0.30 if is_s3 else 0.50
+                tp1_qty = pos["initial_quantity"] * tp1_fraction
                 tp1_gross = tp1_qty * tp1_exec_price
                 tp1_exit_fee = tp1_gross * SPOT_FEE_RATE
                 tp1_net = tp1_gross - tp1_exit_fee
-                tp1_cost = pos["initial_cost_usdt"] * 0.50
-                tp1_entry_fee = pos["fees_paid"] * 0.50
+                tp1_cost = pos["initial_cost_usdt"] * tp1_fraction
                 tp1_leg_pnl = tp1_net - tp1_cost
                 
                 self.state["cash_usdt"] += tp1_net
@@ -304,7 +352,7 @@ class PaperBroker:
                 pos["realized_pnl_usdt"] += tp1_leg_pnl
                 pos["total_fees_paid"] = pos.get("total_fees_paid", pos["fees_paid"]) + tp1_exit_fee
 
-            # Now execute TP2 on remaining position
+            # Now execute TP2 on remaining position (20% for S3, 50% for I1)
             tp2_exec_price = tp2 * (1.0 - SLIPPAGE_RATE)
             close_qty = pos["remaining_quantity"]
             gross_return = close_qty * tp2_exec_price
@@ -340,16 +388,20 @@ class PaperBroker:
             self.save()
             return {"event": "CLOSE", "trade": trade_record, "reason": "TP2_HIT_FULL"}
 
-        # Case B: Price reached TP1 only (Milestone 50% profit lock)
+        # Case B: Price reached TP1 only
+        # S3 exits 30% of original position (leaves 20% for TP2)
+        # I1 exits 50% of original position (leaves 50% for TP2)
         if not pos["tp1_reached"] and high_price >= tp1:
+            is_s3 = "S3" in pos.get("strategy", "")
+            tp1_fraction = 0.30 if is_s3 else 0.50
             exec_price = tp1 * (1.0 - SLIPPAGE_RATE)
-            close_qty = pos["initial_quantity"] * 0.50
+            close_qty = pos["initial_quantity"] * tp1_fraction
             gross_return = close_qty * exec_price
             exit_fee = gross_return * SPOT_FEE_RATE
             net_return = gross_return - exit_fee
             
-            cost_basis = pos["initial_cost_usdt"] * 0.50
-            entry_fee_portion = pos["fees_paid"] * 0.50
+            cost_basis = pos["initial_cost_usdt"] * tp1_fraction
+            entry_fee_portion = pos["fees_paid"] * tp1_fraction
             total_fees = entry_fee_portion + exit_fee
             leg_pnl_usdt = net_return - cost_basis
             
@@ -376,7 +428,9 @@ class PaperBroker:
                 "exit_price": exec_price,
                 "pnl_usdt": round(leg_pnl_usdt, 4),
                 "pnl_pct": round((leg_pnl_usdt / cost_basis) * 100.0, 2),
-                "reason": "TP1_HIT_50PCT"
+                "reason": f"TP1_HIT_{int(tp1_fraction*100)}PCT",
+                "closed_pct": int(tp1_fraction * 100),
+                "remaining_pct": 20 if is_s3 else 50
             }
 
         self.save()

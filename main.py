@@ -217,7 +217,8 @@ class LiveScannerEngine:
                     # Fires when S3 trade hits +0.75% unrealized gain → SL locked at entry +0.10%
                     elif event_data.get("event") == "S3_EARLY_BE_LOCKED":
                         new_sl_price = event_data["new_stop_loss"]
-                        print(f"{Fore.CYAN}  [S3 EARLY BE ALERT] {symbol} hit +{event_data['gain_pct']:.2f}% -> SL locked at ${new_sl_price:,.6f} — Dispatching Early BE Email...{Style.RESET_ALL}")
+                        realized_pnl = event_data.get("realized_pnl", 0.0)
+                        print(f"{Fore.CYAN}  [S3 EARLY BE ALERT] {symbol} hit +{event_data['gain_pct']:.2f}% -> 50% Closed (${realized_pnl:+.4f} USDT) | SL locked at ${new_sl_price:,.6f} — Dispatching Email...{Style.RESET_ALL}")
                         s3_be_sent = self.email_notifier.send_s3_early_breakeven_email(
                             symbol=event_data["symbol"],
                             strategy=event_data["strategy"],
@@ -226,7 +227,10 @@ class LiveScannerEngine:
                             old_stop_loss=event_data["old_stop_loss"],
                             new_stop_loss=new_sl_price,
                             gain_pct=event_data["gain_pct"],
-                            timeframe=event_data["timeframe"]
+                            timeframe=event_data["timeframe"],
+                            tp1=event_data.get("tp1"),
+                            tp2=event_data.get("tp2"),
+                            realized_pnl=realized_pnl
                         )
                         if s3_be_sent:
                             print(f"{Fore.GREEN}    [EMAIL DELIVERED] S3 Early Break-Even notification delivered to {RECEIVER_EMAIL}{Style.RESET_ALL}")
