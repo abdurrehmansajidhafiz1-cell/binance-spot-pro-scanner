@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.24-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-20-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-08 15:01:09 PKT (10:01:09 UTC)`  
+> **Last Updated:** `2026-09-08 15:15:52 PKT (10:15:52 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,9 +35,9 @@
 
 | Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                          | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
 |----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| ICPUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 13:30:00 PKT (08:30:00 UTC) | 2026-09-08 13:46:07 PKT (08:46:07 UTC) | $3.0695<br><small>2026-09-08 13:46:07 PKT (08:46:07 UTC)</small> | $3.0960         | $3.0185     | $3.1099 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $3.1099 (Pending)<br>$3.1345 (Pending) | +0.86 (+0.86%)   | 🟡 ACTIVE |
-| AVAXUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 14:30:00 PKT (09:30:00 UTC) | 2026-09-08 14:45:54 PKT (09:45:54 UTC) | $8.1121<br><small>2026-09-08 14:45:54 PKT (09:45:54 UTC)</small> | $8.1140         | $8.0477     | $8.2043 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $8.2043 (Pending)<br>$8.2691 (Pending) | +0.02 (+0.02%)   | 🟡 ACTIVE |
-| UNIUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 14:30:00 PKT (09:30:00 UTC) | 2026-09-08 14:46:03 PKT (09:46:03 UTC) | $7.1846<br><small>2026-09-08 14:46:03 PKT (09:46:03 UTC)</small> | $7.1290         | $7.0178     | $7.2490 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $7.2490 (Pending)<br>$7.3063 (Pending) | -0.77 (-0.77%)   | 🟡 ACTIVE |
+| ICPUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 13:30:00 PKT (08:30:00 UTC) | 2026-09-08 13:46:07 PKT (08:46:07 UTC) | $3.0695<br><small>2026-09-08 13:46:07 PKT (08:46:07 UTC)</small> | $3.0920         | $3.0726     | $3.1099 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $3.1099 (Pending)<br>$3.1345 (Pending) | +0.73 (+0.73%)   | 🟡 ACTIVE |
+| AVAXUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 14:30:00 PKT (09:30:00 UTC) | 2026-09-08 14:45:54 PKT (09:45:54 UTC) | $8.1121<br><small>2026-09-08 14:45:54 PKT (09:45:54 UTC)</small> | $8.1730         | $8.1202     | $8.2043 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $8.2043 (Pending)<br>$8.2691 (Pending) | +0.75 (+0.75%)   | 🟡 ACTIVE |
+| UNIUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 14:30:00 PKT (09:30:00 UTC) | 2026-09-08 14:46:03 PKT (09:46:03 UTC) | $7.1846<br><small>2026-09-08 14:46:03 PKT (09:46:03 UTC)</small> | $7.0860         | $7.0178     | $7.2490 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $7.2490 (Pending)<br>$7.3063 (Pending) | -1.37 (-1.37%)   | 🟡 ACTIVE |
 | DOTUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-08 14:45:00 PKT (09:45:00 UTC) | 2026-09-08 15:01:06 PKT (10:01:06 UTC) | $1.0875<br><small>2026-09-08 15:01:06 PKT (10:01:06 UTC)</small> | $1.0870         | $1.0637     | $1.1000 (TP1)<br><small style='color:#64748b;'>⚪ Pending</small> | $1.1000 (Pending)<br>$1.1087 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
 
 ---
