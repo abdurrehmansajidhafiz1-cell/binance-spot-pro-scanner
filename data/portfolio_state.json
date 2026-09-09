@@ -12,7 +12,7 @@
       "signal_time": "2026-09-09T05:01:18.186236+00:00",
       "entry_time": "2026-09-09T05:01:18.186236+00:00",
       "entry_price": 79151.99622,
-      "current_price": 79090.87,
+      "current_price": 79004.01,
       "initial_quantity": 0.0012633920150548542,
       "remaining_quantity": 0.0012633920150548542,
       "quantity": 0.0012633920150548542,
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-09T05:01:20.360656+00:00",
       "entry_time": "2026-09-09T05:01:20.360656+00:00",
       "entry_price": 1.4345169,
-      "current_price": 1.4222,
+      "current_price": 1.4217,
       "initial_quantity": 69.70987933289598,
       "remaining_quantity": 69.70987933289598,
       "quantity": 69.70987933289598,
@@ -83,6 +83,6 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-09T10:30:37.806441+00:00",
+  "last_updated": "2026-09-09T10:45:31.775985+00:00",
   "last_12h_summary_slot": "2026-09-08_06_AM"
 }
