@@ -1,49 +1,9 @@
 {
-  "cash_usdt": 377.21485639842786,
+  "cash_usdt": 475.0418078907735,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {
-    "XRPUSDT": {
-      "trade_id": "T_20260909050120_XRPUSDT",
-      "symbol": "XRPUSDT",
-      "strategy": "I1_MTF_TREND_PULLBACK",
-      "timeframe": "1h (4h Macro Trend)",
-      "zone_candle_time": "2026-09-09T04:00:00",
-      "signal_time": "2026-09-09T05:01:20.360656+00:00",
-      "entry_time": "2026-09-09T05:01:20.360656+00:00",
-      "entry_price": 1.4345169,
-      "current_price": 1.4073,
-      "initial_quantity": 69.70987933289598,
-      "remaining_quantity": 69.70987933289598,
-      "quantity": 69.70987933289598,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 1.4051,
-      "initial_stop_loss": 1.4051,
-      "tp1": 1.4834,
-      "tp2": 1.5303,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 1.4458,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "risk_distance_pct": 2.18,
-        "rsi_1h": 65.02,
-        "supertrend_4h": "BULLISH"
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-09T19:45:29.712326+00:00",
+  "last_updated": "2026-09-09T20:00:42.184976+00:00",
   "last_12h_summary_slot": "2026-09-08_06_AM"
 }
