@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 281.49483108358623,
+  "cash_usdt": 181.41983108358625,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-09T05:01:18.186236+00:00",
       "entry_time": "2026-09-09T05:01:18.186236+00:00",
       "entry_price": 79151.99622,
-      "current_price": 79004.01,
+      "current_price": 78936.01,
       "initial_quantity": 0.0012633920150548542,
       "remaining_quantity": 0.0012633920150548542,
       "quantity": 0.0012633920150548542,
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-09T05:01:20.360656+00:00",
       "entry_time": "2026-09-09T05:01:20.360656+00:00",
       "entry_price": 1.4345169,
-      "current_price": 1.4217,
+      "current_price": 1.4233,
       "initial_quantity": 69.70987933289598,
       "remaining_quantity": 69.70987933289598,
       "quantity": 69.70987933289598,
@@ -80,9 +80,48 @@
         "rsi_1h": 65.02,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "TAOUSDT": {
+      "trade_id": "T_20260909110128_TAOUSDT",
+      "symbol": "TAOUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-09-09T10:00:00",
+      "signal_time": "2026-09-09T11:01:28.590030+00:00",
+      "entry_time": "2026-09-09T11:01:28.590030+00:00",
+      "entry_price": 260.23005,
+      "current_price": 260.23005,
+      "initial_quantity": 0.3842753748077902,
+      "remaining_quantity": 0.3842753748077902,
+      "quantity": 0.3842753748077902,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 253.9633,
+      "initial_stop_loss": 253.9633,
+      "tp1": 269.8051,
+      "tp2": 279.3102,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 260.23005,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 2.43,
+        "rsi_1h": 52.51,
+        "supertrend_4h": "BULLISH"
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-09T10:45:31.775985+00:00",
+  "last_updated": "2026-09-09T11:01:28.590059+00:00",
   "last_12h_summary_slot": "2026-09-08_06_AM"
 }
