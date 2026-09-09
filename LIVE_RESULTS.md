@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--3.98%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--3.68%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-30.4%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.24-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-26-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-09 16:16:11 PKT (11:16:11 UTC)`  
+> **Last Updated:** `2026-09-09 16:31:28 PKT (11:31:28 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `26 Unique Trades` |
-| **Current Equity** | `$480.08 USDT` | **Completed Trades** | `23 Trades` |
+| **Current Equity** | `$481.58 USDT` | **Completed Trades** | `23 Trades` |
 | **Available Cash** | `$181.42 USDT` | **Active / In-Trade** | `3 Trade` |
-| **Net PnL ($)** | `-$19.92 USDT` | **Win / Loss Ratio** | `7 Win / 16 Loss` |
-| **Net Return (%)** | `-3.98%` | **Win Rate** | `30.43%` |
+| **Net PnL ($)** | `-$18.42 USDT` | **Win / Loss Ratio** | `7 Win / 16 Loss` |
+| **Net Return (%)** | `-3.68%` | **Win Rate** | `30.43%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.24` |
-| **Max Drawdown** | `-3.98%` | **Total Fees Deducted** | `$3.66 USDT` |
+| **Max Drawdown** | `-3.68%` | **Total Fees Deducted** | `$3.66 USDT` |
 
 ---
 
@@ -35,9 +35,9 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                        | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                                | Targets (TP1 / TP2)                          | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|---------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------------|----------------------------------------------|------------------|----------|
-| BTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-09 09:00:00 PKT (04:00:00 UTC) | 2026-09-09 10:01:18 PKT (05:01:18 UTC) | $79,152.00<br><small>2026-09-09 10:01:18 PKT (05:01:18 UTC)</small> | $78,854.27      | $78,306.96  | $80,339.28 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $80,468.31 (Pending)<br>$81,765.13 (Pending) | -0.38 (-0.38%)   | 🟡 ACTIVE |
-| XRPUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-09 09:00:00 PKT (04:00:00 UTC) | 2026-09-09 10:01:20 PKT (05:01:20 UTC) | $1.4345<br><small>2026-09-09 10:01:20 PKT (05:01:20 UTC)</small>    | $1.4186         | $1.4051     | $1.4560 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>    | $1.4834 (Pending)<br>$1.5303 (Pending)       | -1.11 (-1.11%)   | 🟡 ACTIVE |
-| TAOUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-09 15:00:00 PKT (10:00:00 UTC) | 2026-09-09 16:01:28 PKT (11:01:28 UTC) | $260.2301<br><small>2026-09-09 16:01:28 PKT (11:01:28 UTC)</small>  | $260.6000       | $253.9633   | $264.1335 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $269.8051 (Pending)<br>$279.3102 (Pending)   | +0.14 (+0.14%)   | 🟡 ACTIVE |
+| BTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-09 09:00:00 PKT (04:00:00 UTC) | 2026-09-09 10:01:18 PKT (05:01:18 UTC) | $79,152.00<br><small>2026-09-09 10:01:18 PKT (05:01:18 UTC)</small> | $78,999.99      | $78,306.96  | $80,339.28 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $80,468.31 (Pending)<br>$81,765.13 (Pending) | -0.19 (-0.19%)   | 🟡 ACTIVE |
+| XRPUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-09 09:00:00 PKT (04:00:00 UTC) | 2026-09-09 10:01:20 PKT (05:01:20 UTC) | $1.4345<br><small>2026-09-09 10:01:20 PKT (05:01:20 UTC)</small>    | $1.4226         | $1.4051     | $1.4560 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>    | $1.4834 (Pending)<br>$1.5303 (Pending)       | -0.83 (-0.83%)   | 🟡 ACTIVE |
+| TAOUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-09 15:00:00 PKT (10:00:00 UTC) | 2026-09-09 16:01:28 PKT (11:01:28 UTC) | $260.2301<br><small>2026-09-09 16:01:28 PKT (11:01:28 UTC)</small>  | $263.3000       | $253.9633   | $264.1335 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $269.8051 (Pending)<br>$279.3102 (Pending)   | +1.18 (+1.18%)   | 🟡 ACTIVE |
 
 ---
 
