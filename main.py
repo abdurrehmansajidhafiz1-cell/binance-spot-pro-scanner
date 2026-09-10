@@ -234,6 +234,28 @@ class LiveScannerEngine:
                         )
                         if s3_be_sent:
                             print(f"{Fore.GREEN}    [EMAIL DELIVERED] S3 Early Break-Even notification delivered to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+                    # ── I1 IMPROVEMENT: Break-Even at +0.65% with 50% Partial Close ──
+                    # Fires when I1 trade hits +0.65% unrealized gain.
+                    # 50% of position is closed, SL locked at entry+0.15%. Email dispatched.
+                    elif event_data.get("event") == "I1_BE_LOCKED":
+                        new_sl_price = event_data["new_stop_loss"]
+                        realized_pnl = event_data.get("realized_pnl", 0.0)
+                        print(f"{Fore.CYAN}  [I1 BE ALERT] {symbol} hit +{event_data['gain_pct']:.2f}% -> 50% Closed (${realized_pnl:+.4f} USDT) | SL locked at ${new_sl_price:,.4f} — Dispatching Email...{Style.RESET_ALL}")
+                        i1_be_sent = self.email_notifier.send_s3_early_breakeven_email(
+                            symbol=event_data["symbol"],
+                            strategy=event_data["strategy"],
+                            entry_price=event_data["entry_price"],
+                            current_price=event_data["current_price"],
+                            old_stop_loss=event_data["old_stop_loss"],
+                            new_stop_loss=new_sl_price,
+                            gain_pct=event_data["gain_pct"],
+                            timeframe=event_data["timeframe"],
+                            tp1=event_data.get("tp1"),
+                            tp2=event_data.get("tp2"),
+                            realized_pnl=realized_pnl
+                        )
+                        if i1_be_sent:
+                            print(f"{Fore.GREEN}    [EMAIL DELIVERED] I1 Break-Even notification delivered to {RECEIVER_EMAIL}{Style.RESET_ALL}")
                     elif event_data.get("event") == "MILESTONE_TP1":
                         print(f"{Fore.GREEN}  [TP1 MILESTONE] {symbol} hit TP1 @ ${event_data['exit_price']:,.4f} | 50% Profit Locked: ${event_data['pnl_usdt']:+,.2f} | SL moved to Breakeven{Style.RESET_ALL}")
                     elif event_data.get("event") == "CLOSE":

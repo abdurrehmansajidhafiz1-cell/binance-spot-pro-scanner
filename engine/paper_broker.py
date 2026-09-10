@@ -179,29 +179,62 @@ class PaperBroker:
         now_iso = get_current_utc().isoformat()
 
         be_event = None
-        # P2a: Intermediate Breakeven Milestone for I1 Swing Trades
-        # If I1 reaches +1.5% unrealized profit, lock Stop Loss at Breakeven + fee buffer (+0.15%)
-        if "I1" in pos.get("strategy", "") and not pos.get("intermediate_be_reached", False):
+        # P2a: I1 Break-Even Lock at +0.65% with 50% Partial Exit
+        # When an I1 swing trade reaches +0.65% unrealized profit:
+        # 1. Close 50% of the initial position (locks in guaranteed profit on half)
+        # 2. Lock Stop Loss at entry +0.15% (covers entry + exit fees = 0.15% total)
+        # 3. Remaining 50% stays open targeting TP1 and TP2
+        # Root-cause: Last 4 I1 trades (BTC, XRP, ETH, DOGE) all hit SL at full loss.
+        # MFE analysis showed BTC(+0.77%), XRP(+0.79%), ETH(+0.69%) all bounced above +0.65%
+        # before reversing — lowering BE from +1.5% to +0.65% saves 3/4 of those trades.
+        if "I1" in pos.get("strategy", "") and not pos.get("i1_be_reached", False):
             unrealized_gain_pct = ((high_price - entry_price) / entry_price) * 100.0
-            if unrealized_gain_pct >= 1.5:
+            if unrealized_gain_pct >= 0.65:
+                # 1. Execute 50% partial exit at high_price (with slippage)
+                exec_price = high_price * (1.0 - SLIPPAGE_RATE)
+                close_qty = pos["initial_quantity"] * 0.50
+                gross_return = close_qty * exec_price
+                exit_fee = gross_return * SPOT_FEE_RATE
+                net_return = gross_return - exit_fee
+
+                cost_basis = pos["initial_cost_usdt"] * 0.50
+                leg_pnl_usdt = net_return - cost_basis
+
+                self.state["cash_usdt"] += net_return
+                pos["i1_be_reached"] = True
+                pos["i1_be_hit_time"] = now_iso
+                pos["i1_be_exit_price"] = exec_price
+                pos["remaining_quantity"] -= close_qty
+                pos["quantity"] = pos["remaining_quantity"]
+                pos["remaining_cost_usdt"] -= cost_basis
+                pos["realized_pnl_usdt"] += leg_pnl_usdt
+                pos["total_fees_paid"] = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
+
+                # 2. Lock SL at entry + 0.15% (covers both entry & exit fees)
                 be_sl = entry_price * 1.0015
+                old_sl = pos["stop_loss"]
                 if be_sl > pos["stop_loss"]:
-                    old_sl = pos["stop_loss"]
                     pos["stop_loss"] = be_sl
-                    pos["intermediate_be_reached"] = True
-                    print(f"  [INTERMEDIATE BREAKEVEN] {symbol} hit +{unrealized_gain_pct:.2f}% gain -> SL locked at Breakeven (${be_sl:,.4f})")
-                    be_event = {
-                        "event": "BREAKEVEN_LOCKED",
-                        "symbol": symbol,
-                        "strategy": pos.get("strategy", ""),
-                        "entry_price": entry_price,
-                        "current_price": current_price,
-                        "trigger_price": high_price,
-                        "old_stop_loss": old_sl,
-                        "new_stop_loss": be_sl,
-                        "gain_pct": round(unrealized_gain_pct, 2),
-                        "timeframe": pos.get("timeframe", "1h (4h Macro Trend)")
-                    }
+
+                print(f"  [I1 BE LOCKED] {symbol} hit +{unrealized_gain_pct:.2f}% gain -> 50% Position Closed (${leg_pnl_usdt:+.4f} USDT) | SL locked at BE (${be_sl:,.4f})")
+                be_event = {
+                    "event": "I1_BE_LOCKED",
+                    "symbol": symbol,
+                    "strategy": pos.get("strategy", ""),
+                    "entry_price": entry_price,
+                    "current_price": current_price,
+                    "trigger_price": high_price,
+                    "old_stop_loss": old_sl,
+                    "new_stop_loss": be_sl,
+                    "gain_pct": round(unrealized_gain_pct, 2),
+                    "timeframe": pos.get("timeframe", "1h (4h Macro Trend)"),
+                    "tp1": pos.get("tp1"),
+                    "tp2": pos.get("tp2"),
+                    "realized_pnl": round(leg_pnl_usdt, 4),
+                    "closed_pct": 50.0,
+                    "remaining_pct": 50.0
+                }
+
 
         # P2b: S3 Early Break-Even Lock at +0.75% with 50% Partial Exit
         # When an S3 scalp trade reaches +0.75% unrealized profit:
@@ -279,6 +312,8 @@ class PaperBroker:
                 pos["exit_reason"] = "BREAKEVEN_SL"
             elif pos.get("s3_early_be_reached"):
                 pos["exit_reason"] = "EARLY_BE_SL"
+            elif pos.get("i1_be_reached"):
+                pos["exit_reason"] = "I1_BE_PROTECTED"
             elif pos.get("intermediate_be_reached"):
                 pos["exit_reason"] = "BREAKEVEN_PROTECTED"
             else:
@@ -291,10 +326,11 @@ class PaperBroker:
             
             if total_net_pnl > 0.05:
                 pos["status"] = "WIN"
-            elif pos.get("s3_early_be_reached") or pos.get("intermediate_be_reached") or pos.get("tp1_reached") or abs(total_net_pnl) <= 0.15:
+            elif pos.get("s3_early_be_reached") or pos.get("i1_be_reached") or pos.get("intermediate_be_reached") or pos.get("tp1_reached") or abs(total_net_pnl) <= 0.15:
                 pos["status"] = "BREAKEVEN"
             else:
                 pos["status"] = "LOSS"
+
             pos["net_pnl_usdt"] = round(total_net_pnl, 4)
             pos["net_pnl_pct"] = round(net_pnl_pct, 2)
             pos["fees_paid"] = round(total_all_fees, 4)
