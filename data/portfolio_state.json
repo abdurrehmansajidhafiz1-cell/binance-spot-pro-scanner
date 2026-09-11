@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 427.4009727514282,
+  "cash_usdt": 457.982734602903,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,19 +12,19 @@
       "signal_time": "2026-09-11T13:01:19.253156+00:00",
       "entry_time": "2026-09-11T13:01:19.253156+00:00",
       "entry_price": 2.565282,
-      "current_price": 2.608,
+      "current_price": 2.616,
       "initial_quantity": 38.982069027888556,
-      "remaining_quantity": 19.491034513944278,
-      "quantity": 19.491034513944278,
+      "remaining_quantity": 7.796413805577712,
+      "quantity": 7.796413805577712,
       "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 50.0,
-      "stop_loss": 2.5678472819999993,
+      "remaining_cost_usdt": 20.0,
+      "stop_loss": 2.5716952049999997,
       "initial_stop_loss": 2.5136,
       "tp1": 2.6183,
       "tp2": 2.6585,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
+      "tp1_reached": true,
+      "tp1_hit_time": "2026-09-11T13:30:35.926510+00:00",
+      "tp1_exit_price": 2.61699085,
       "tp2_reached": false,
       "tp2_hit_time": null,
       "tp2_exit_price": null,
@@ -33,9 +33,9 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 2.611,
+      "highest_price": 2.628,
       "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.8274963361727927,
+      "realized_pnl_usdt": 1.4092581876476018,
       "metadata": {
         "atr": 0.0403,
         "mom_hist": 0.0126,
@@ -45,10 +45,10 @@
       "s3_early_be_reached": true,
       "s3_early_be_hit_time": "2026-09-11T13:15:34.051617+00:00",
       "s3_early_be_exit_price": 2.6096945000000003,
-      "total_fees_paid": 0.11314923417776292
+      "total_fees_paid": 0.13610277071877477
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-11T13:15:34.051675+00:00",
+  "last_updated": "2026-09-11T13:30:35.926529+00:00",
   "last_12h_summary_slot": "2026-09-11_06_PM"
 }
