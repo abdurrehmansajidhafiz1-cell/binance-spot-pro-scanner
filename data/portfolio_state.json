@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 175.7389752006078,
+  "cash_usdt": 75.6639752006078,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-12T12:01:24.997938+00:00",
       "entry_time": "2026-09-12T12:01:24.997938+00:00",
       "entry_price": 0.34107044999999997,
-      "current_price": 0.3404,
+      "current_price": 0.3401,
       "initial_quantity": 293.1945584849113,
       "remaining_quantity": 293.1945584849113,
       "quantity": 293.1945584849113,
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-13T00:15:57.428434+00:00",
       "entry_time": "2026-09-13T00:15:57.428434+00:00",
       "entry_price": 6.463229999999999,
-      "current_price": 6.408,
+      "current_price": 6.41,
       "initial_quantity": 15.47214009094524,
       "remaining_quantity": 15.47214009094524,
       "quantity": 15.47214009094524,
@@ -72,7 +72,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 6.471,
+      "highest_price": 6.479,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -91,7 +91,7 @@
       "signal_time": "2026-09-13T01:46:00.539755+00:00",
       "entry_time": "2026-09-13T01:46:00.539755+00:00",
       "entry_price": 3.451725e-06,
-      "current_price": 3.45e-06,
+      "current_price": 3.44e-06,
       "initial_quantity": 28971021.735509057,
       "remaining_quantity": 28971021.735509057,
       "quantity": 28971021.735509057,
@@ -121,9 +121,49 @@
         "bb_upper": 3.44e-06,
         "rsi_15m": 64.97
       }
+    },
+    "TAOUSDT": {
+      "trade_id": "T_20260913030112_TAOUSDT",
+      "symbol": "TAOUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-13T02:45:00",
+      "signal_time": "2026-09-13T03:01:12.806678+00:00",
+      "entry_time": "2026-09-13T03:01:12.806678+00:00",
+      "entry_price": 235.41765,
+      "current_price": 235.41765,
+      "initial_quantity": 0.42477698677223225,
+      "remaining_quantity": 0.42477698677223225,
+      "quantity": 0.42477698677223225,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 232.8514,
+      "initial_stop_loss": 232.8514,
+      "tp1": 238.1236,
+      "tp2": 240.006,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 235.41765,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.8156,
+        "mom_hist": 0.6525,
+        "bb_upper": 234.4883,
+        "rsi_15m": 68.5
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-13T02:45:32.290415+00:00",
+  "last_updated": "2026-09-13T03:01:12.806717+00:00",
   "last_12h_summary_slot": "2026-09-13_06_AM"
 }
