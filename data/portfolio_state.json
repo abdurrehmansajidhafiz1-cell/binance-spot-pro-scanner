@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 373.9829370384147,
+  "cash_usdt": 473.65822446341474,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -44,6 +44,6 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-13T13:15:30.413525+00:00",
+  "last_updated": "2026-09-13T13:17:13.543515+00:00",
   "last_12h_summary_slot": "2026-09-13_06_PM"
 }

@@ -181,18 +181,29 @@ class LiveScannerEngine:
         # 2. Update and Manage Existing Open Positions
         print(f"\n{Fore.BLUE}--> Step 2: Checking Active Positions ({len(self.broker.open_positions)} open)...{Style.RESET_ALL}")
         
-        # P6: Active Position Capital Protection on BTC Flash Dump (>= 1.2% in 15m)
+        # P3 & P6: Active Position Capital Protection on BTC Cumulative (60m >= 1.0%) or Flash (15m >= 1.2%) Dump
         if len(self.broker.open_positions) > 0:
-            btc_15m = self.client.get_klines("BTCUSDT", "15m", limit=3)
-            if not btc_15m.empty and len(btc_15m) >= 2:
+            btc_15m = self.client.get_klines("BTCUSDT", "15m", limit=8)
+            if not btc_15m.empty and len(btc_15m) >= 5:
+                # 1. Flash Dump: single 15m candle drop >= 1.2%
                 latest_btc = btc_15m.iloc[-1]
                 btc_o = float(latest_btc['open'])
                 btc_l = float(latest_btc['low'])
                 btc_c = float(latest_btc['close'])
-                btc_drop_pct = ((btc_l - btc_o) / btc_o) * 100.0
-                
-                if btc_drop_pct <= -1.2:
-                    print(f"{Fore.RED}  [EMERGENCY TRIGGER] BTC Flash Dump detected ({btc_drop_pct:.2f}% drop in 15m candle)!{Style.RESET_ALL}")
+                btc_drop_15m = ((btc_l - btc_o) / btc_o) * 100.0
+
+                # 2. Cumulative Dump: 60-minute (last 4 candles) drop >= 1.0%
+                btc_open_60m = float(btc_15m.iloc[-5]['open'])
+                btc_low_60m = float(btc_15m.iloc[-4:]['low'].min())
+                btc_drop_60m = ((btc_low_60m - btc_open_60m) / btc_open_60m) * 100.0
+
+                is_flash_dump = btc_drop_15m <= -1.2
+                is_cum_dump = btc_drop_60m <= -1.0
+
+                if is_flash_dump or is_cum_dump:
+                    dump_type = "Flash Dump (15m)" if is_flash_dump else "Cumulative Dump (60m)"
+                    drop_val = btc_drop_15m if is_flash_dump else btc_drop_60m
+                    print(f"{Fore.RED}  [EMERGENCY TRIGGER] BTC {dump_type} detected ({drop_val:.2f}% drop)! Tightening open positions to Breakeven...{Style.RESET_ALL}")
                     tightened = self.broker.emergency_tighten_positions_to_breakeven()
                     if tightened:
                         last_alert_time = self.broker.state.get("last_emergency_dump_alert_time")
@@ -207,13 +218,21 @@ class LiveScannerEngine:
                         if should_alert:
                             self.broker.state["last_emergency_dump_alert_time"] = get_current_utc().isoformat()
                             self.broker.save()
-                            email_sent = self.email_notifier.send_btc_emergency_dump_alert(
-                                btc_drop_pct=abs(btc_drop_pct),
-                                active_positions=tightened,
-                                btc_price=btc_c
-                            )
+                            if is_cum_dump and not is_flash_dump:
+                                email_sent = self.email_notifier.send_btc_cumulative_dump_alert(
+                                    btc_drop_pct=abs(btc_drop_60m),
+                                    active_positions=tightened,
+                                    btc_price=btc_c,
+                                    window_minutes=60
+                                )
+                            else:
+                                email_sent = self.email_notifier.send_btc_emergency_dump_alert(
+                                    btc_drop_pct=abs(btc_drop_15m),
+                                    active_positions=tightened,
+                                    btc_price=btc_c
+                                )
                             if email_sent:
-                                print(f"{Fore.CYAN}    [EMAIL SENT] URGENT: BTC Flash Dump capital protection alert dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
+                                print(f"{Fore.CYAN}    [EMAIL SENT] URGENT: BTC {dump_type} capital protection alert dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
 
         for symbol, pos in list(self.broker.open_positions.items()):
             curr_p = current_prices.get(symbol)
@@ -305,6 +324,29 @@ class LiveScannerEngine:
                             print(f"{Fore.GREEN}    [EMAIL DELIVERED] I1 Break-Even notification delivered to {RECEIVER_EMAIL}{Style.RESET_ALL}")
                     elif event_data.get("event") == "MILESTONE_TP1":
                         print(f"{Fore.GREEN}  [TP1 MILESTONE] {symbol} hit TP1 @ ${event_data['exit_price']:,.4f} | 50% Profit Locked: ${event_data['pnl_usdt']:+,.2f} | SL moved to Breakeven{Style.RESET_ALL}")
+                    elif event_data.get("event") == "S3_STAGNANT_EXIT":
+                        trade = event_data["trade"]
+                        pnl_color = Fore.GREEN if trade['net_pnl_usdt'] >= 0 else Fore.YELLOW
+                        print(f"{pnl_color}  [S3 STAGNANT EXIT] {symbol} | Open > 3h without TP1 -> Closed at Market | Net PnL: ${trade['net_pnl_usdt']:+,.4f} ({trade['net_pnl_pct']:+.2f}%) — Dispatching Expiry Email...{Style.RESET_ALL}")
+                        self.notifier.alert_close(
+                            symbol=symbol,
+                            strategy=trade["strategy"],
+                            exit_price=event_data["exit_price"],
+                            pnl_usdt=trade["net_pnl_usdt"],
+                            pnl_pct=trade["net_pnl_pct"],
+                            reason="TIME_EXIT_STAGNANT"
+                        )
+                        stagnant_email_sent = self.email_notifier.send_s3_stagnant_exit_alert(
+                            symbol=event_data["symbol"],
+                            strategy=event_data["strategy"],
+                            entry_price=event_data["entry_price"],
+                            exit_price=event_data["exit_price"],
+                            elapsed_minutes=event_data["elapsed_minutes"],
+                            net_pnl_usdt=event_data["net_pnl_usdt"],
+                            net_pnl_pct=event_data["net_pnl_pct"]
+                        )
+                        if stagnant_email_sent:
+                            print(f"{Fore.CYAN}    [EMAIL SENT] S3 Time-Based Expiry alert dispatched to {RECEIVER_EMAIL}{Style.RESET_ALL}")
                     elif event_data.get("event") == "CLOSE":
                         trade = event_data["trade"]
                         pnl_color = Fore.GREEN if trade['net_pnl_usdt'] >= 0 else Fore.RED

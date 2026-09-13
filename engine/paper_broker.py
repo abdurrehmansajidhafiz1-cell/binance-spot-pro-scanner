@@ -469,6 +469,65 @@ class PaperBroker:
                 "remaining_pct": 20 if is_s3 else 50
             }
 
+        # 3. P2: S3 Time-Based Stagnancy Exit (3 Hours / 180 minutes without TP1)
+        # S3 is a fast 15m scalp. If no momentum occurs after 3 hours, exit at market to free capital.
+        if "S3" in pos.get("strategy", "") and not pos.get("tp1_reached", False):
+            entry_time_str = pos.get("entry_time")
+            if entry_time_str:
+                try:
+                    entry_dt = datetime.fromisoformat(entry_time_str.replace("Z", "+00:00"))
+                    now_dt = datetime.fromisoformat(now_iso.replace("Z", "+00:00"))
+                    elapsed_minutes = (now_dt - entry_dt).total_seconds() / 60.0
+                    if elapsed_minutes >= 180.0:
+                        exec_price = current_price * (1.0 - SLIPPAGE_RATE)
+                        close_qty = pos["remaining_quantity"]
+                        gross_return = close_qty * exec_price
+                        exit_fee = gross_return * SPOT_FEE_RATE
+                        net_return = gross_return - exit_fee
+                        cost_basis = pos["remaining_cost_usdt"]
+                        leg_pnl_usdt = net_return - cost_basis
+
+                        self.state["cash_usdt"] += net_return
+                        pos["exit_price"] = exec_price
+                        pos["exit_time"] = now_iso
+                        pos["exit_reason"] = "TIME_EXIT_STAGNANT"
+
+                        total_net_pnl = pos["realized_pnl_usdt"] + leg_pnl_usdt
+                        total_cost = pos["initial_cost_usdt"]
+                        net_pnl_pct = (total_net_pnl / total_cost) * 100.0 if total_cost > 0 else 0.0
+                        total_all_fees = pos.get("total_fees_paid", pos["fees_paid"]) + exit_fee
+
+                        if total_net_pnl > 0.05:
+                            pos["status"] = "WIN"
+                        elif pos.get("s3_early_be_reached") or abs(total_net_pnl) <= 0.15:
+                            pos["status"] = "BREAKEVEN"
+                        else:
+                            pos["status"] = "LOSS"
+
+                        pos["net_pnl_usdt"] = round(total_net_pnl, 4)
+                        pos["net_pnl_pct"] = round(net_pnl_pct, 2)
+                        pos["fees_paid"] = round(total_all_fees, 4)
+                        pos["remaining_quantity"] = 0.0
+                        pos["remaining_cost_usdt"] = 0.0
+
+                        trade_record = dict(pos)
+                        self.trade_history.append(trade_record)
+                        del self.state["open_positions"][symbol]
+                        self.save()
+                        return {
+                            "event": "S3_STAGNANT_EXIT",
+                            "trade": trade_record,
+                            "symbol": symbol,
+                            "strategy": pos["strategy"],
+                            "entry_price": entry_price,
+                            "exit_price": exec_price,
+                            "elapsed_minutes": int(elapsed_minutes),
+                            "net_pnl_usdt": round(total_net_pnl, 4),
+                            "net_pnl_pct": round(net_pnl_pct, 2)
+                        }
+                except Exception as e_time:
+                    print(f"  [TIME CHECK ERROR] {symbol}: {e_time}")
+
         self.save()
         if be_event:
             return be_event

@@ -1033,3 +1033,235 @@ Real exchange par bhi manually update karein taake trade 100% risk-free profit m
 </html>
 """
         return self.send_email(subject, html_content, text_content)
+
+    def send_s3_stagnant_exit_alert(self, symbol: str, strategy: str,
+                                    entry_price: float, exit_price: float,
+                                    elapsed_minutes: int, net_pnl_usdt: float,
+                                    net_pnl_pct: float) -> bool:
+        """
+        P2: Dispatches an actionable alert when an S3 scalp trade has been open for 3 hours (180 mins)
+        without hitting TP1. Recommends manual market exit on Binance to free capital from dead momentum.
+        """
+        dual_time = format_dual_time()
+        pnl_color = "#16a34a" if net_pnl_usdt >= 0 else "#dc2626"
+        pnl_sign = "+" if net_pnl_usdt >= 0 else ""
+
+        subject = f"⏰ TRADE EXPIRY: [{symbol}] Stagnant for 3 Hours ({pnl_sign}{net_pnl_pct:.2f}%) — Close Position on Binance"
+
+        text_content = f"""⏰ S3 TIME-BASED STAGNANCY ALERT (BREAKOUT MOMENTUM FAILED)
+Time: {dual_time}
+
+Symbol:       {symbol} ({strategy})
+Entry Price:  ${format_price(entry_price)}
+Exit Price:   ${format_price(exit_price)}
+Time Elapsed: {elapsed_minutes} Minutes (3 Hours)
+Net Result:   {pnl_sign}${net_pnl_usdt:.4f} USDT ({pnl_sign}{net_pnl_pct:.2f}%)
+
+ANALYSIS & REASONING:
+S3 is a fast 15m scalp breakout strategy. In high-probability trades, volume expansion pushes the price to TP1 within 30-90 minutes.
+This trade has spent 3 hours without generating buying momentum, and volume has completely dried up.
+Historically, holding stagnant breakout setups leads to slow-bleed stop-outs.
+
+🎯 RECOMMENDED ACTION ON BINANCE:
+1. Open your Binance App / Web interface immediately.
+2. Market Close your {symbol} position.
+3. Your capital is preserved at a minor scratch ({pnl_sign}{net_pnl_pct:.2f}%), ready for the next high-quality setup!
+"""
+
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; }}
+    .container {{ max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 2px solid #f59e0b; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15); }}
+    .header {{ background: linear-gradient(135deg, #f59e0b, #d97706); color: #ffffff; padding: 25px; text-align: center; }}
+    .header h1 {{ margin: 0; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }}
+    .header p {{ margin: 8px 0 0 0; opacity: 0.95; font-size: 14px; }}
+    .content {{ padding: 25px; color: #334155; }}
+    .warning-banner {{ background: #fffbeb; border-left: 5px solid #f59e0b; padding: 15px; border-radius: 6px; margin-bottom: 20px; }}
+    .warning-banner p {{ margin: 0; font-size: 15px; line-height: 1.5; color: #92400e; font-weight: 600; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }}
+    th {{ background: #f1f5f9; padding: 10px; text-align: left; color: #475569; font-weight: 700; border-bottom: 2px solid #cbd5e1; }}
+    td {{ padding: 10px; border-bottom: 1px solid #e2e8f0; }}
+    tr:nth-child(even) {{ background: #f8fafc; }}
+    .action-box {{ margin-top: 20px; padding: 16px; background: #f0fdf4; border-radius: 8px; border: 2px dashed #16a34a; font-size: 14px; color: #166534; }}
+    .footer {{ background: #f1f5f9; padding: 15px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; }}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>⏰ S3 TRADE EXPIRY ALERT</h1>
+        <p>Breakout Stagnant for 3 Hours • Action Required on Binance</p>
+    </div>
+    <div class="content">
+        <div class="warning-banner">
+            <p>
+                ⌛ <b>{symbol} trade has been active for {elapsed_minutes} minutes without reaching TP1.</b><br>
+                S3 ek fast 15m scalp strategy hai. Jab 3 ghante tak momentum na aaye to buyers exhaust ho chuke hotay hain. Capital ko mazeed risk mein daalne ke bajaye safe exit le lein!
+            </p>
+        </div>
+
+        <h3 style="margin: 20px 0 10px 0; color: #1e293b; font-size: 16px;">Trade Stagnancy Details</h3>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td><b>Coin / Pair</b></td>
+                <td><b>{symbol}</b> ({strategy})</td>
+                <td>15m Squeeze Breakout</td>
+            </tr>
+            <tr>
+                <td><b>Entry Price</b></td>
+                <td>${format_price(entry_price)}</td>
+                <td>Original Buy</td>
+            </tr>
+            <tr>
+                <td><b>Current / Exit Price</b></td>
+                <td><b>${format_price(exit_price)}</b></td>
+                <td>Scratch Exit Level</td>
+            </tr>
+            <tr>
+                <td><b>Holding Duration</b></td>
+                <td><b>{elapsed_minutes} Mins (3.0 Hours)</b></td>
+                <td style="color:#dc2626; font-weight:bold;">Max Time Exceeded</td>
+            </tr>
+            <tr>
+                <td><b>Realized Net PnL</b></td>
+                <td style="color:{pnl_color}; font-weight:bold; font-size:16px;">{pnl_sign}${net_pnl_usdt:.4f} USDT</td>
+                <td style="color:{pnl_color}; font-weight:bold;">{pnl_sign}{net_pnl_pct:.2f}%</td>
+            </tr>
+        </table>
+
+        <div class="action-box">
+            🎯 <b>RECOMMENDED ACTION ON BINANCE APP:</b><br>
+            • Binance open karein aur <b>{symbol}</b> position ko <b>Market Close</b> kar dein.<br>
+            • Aapka capital minor scratch ({pnl_sign}{net_pnl_pct:.2f}%) par free ho jayega aur aglay fresh high-momentum setup ke liye safe rahega.
+        </div>
+    </div>
+    <div class="footer">
+        {dual_time} • S3 Time-Based Capital Preservation Protocol • Binance Spot
+    </div>
+</div>
+</body>
+</html>
+"""
+        return self.send_email(subject, html_content, text_content)
+
+    def send_btc_cumulative_dump_alert(self, btc_drop_pct: float,
+                                        active_positions: List[Dict[str, Any]],
+                                        btc_price: float,
+                                        window_minutes: int = 60) -> bool:
+        """
+        P3: Dispatches an urgent alert when BTC exhibits a multi-candle cumulative dump (>= 1.0% in 60m)
+        while altcoin positions are open. Recommends tightening SL to Breakeven or market scratch exit.
+        """
+        dual_time = format_dual_time()
+        pos_count = len(active_positions)
+        symbols_str = ", ".join([p.get("symbol", "") for p in active_positions])
+
+        subject = f"🚨 URGENT: BTC 60m Drop (-{abs(btc_drop_pct):.2f}%) — Move SL to Breakeven for {symbols_str}"
+
+        text_content = f"""🚨 URGENT CAPITAL PROTECTION ALERT: MULTI-CANDLE BTC DUMP
+Time: {dual_time}
+
+Bitcoin has dropped -{abs(btc_drop_pct):.2f}% over the past {window_minutes} minutes (Current BTC: ${btc_price:,.2f}).
+You have {pos_count} active position(s): [{symbols_str}].
+
+To protect your capital against market-wide cascades:
+1. Move your Stop Loss to Breakeven (Entry + 0.1% buffer).
+2. Or close at current market price to take a minor scratch instead of full SL loss!
+
+Active Positions:
+"""
+        for p in active_positions:
+            sym = p.get("symbol", "")
+            strat = p.get("strategy", "")
+            ep = p.get("entry_price", 0)
+            be_sl = ep * 1.001
+            text_content += f"- {sym} ({strat}): Entry ${format_price(ep)} -> Move SL to ${format_price(be_sl)}\n"
+
+        pos_rows_html = ""
+        for p in active_positions:
+            sym = p.get("symbol", "")
+            strat = p.get("strategy", "")
+            ep = p.get("entry_price", 0)
+            curr = p.get("current_price", ep)
+            old_sl = p.get("old_sl", p.get("stop_loss", 0))
+            be_sl = ep * 1.001
+            pos_rows_html += f"""
+            <tr>
+                <td style="padding:10px; font-weight:bold; color:#1e293b;">{sym}</td>
+                <td style="padding:10px; font-size:12px; color:#64748b;">{strat}</td>
+                <td style="padding:10px; font-weight:bold;">${format_price(ep)}</td>
+                <td style="padding:10px; color:#475569;">${format_price(curr)}</td>
+                <td style="padding:10px; color:#dc2626; text-decoration:line-through;">${format_price(old_sl)}</td>
+                <td style="padding:10px; font-weight:bold; color:#16a34a; background:#f0fdf4;">${format_price(be_sl)} ← NEW SL</td>
+            </tr>
+            """
+
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; }}
+    .container {{ max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 2px solid #ef4444; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15); }}
+    .header {{ background: linear-gradient(135deg, #dc2626, #b91c1c); color: #ffffff; padding: 25px; text-align: center; }}
+    .header h1 {{ margin: 0; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }}
+    .header p {{ margin: 8px 0 0 0; opacity: 0.95; font-size: 14px; }}
+    .content {{ padding: 25px; color: #334155; }}
+    .urgent-banner {{ background: #fef2f2; border-left: 5px solid #ef4444; padding: 15px; border-radius: 6px; margin-bottom: 20px; }}
+    .urgent-banner p {{ margin: 0; font-size: 15px; line-height: 1.5; color: #991b1b; font-weight: 600; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }}
+    th {{ background: #f1f5f9; padding: 10px; text-align: left; color: #475569; font-weight: 700; border-bottom: 2px solid #cbd5e1; }}
+    tr:nth-child(even) {{ background: #f8fafc; }}
+    .footer {{ background: #f1f5f9; padding: 15px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; }}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚨 URGENT BTC DUMP CAPITAL PROTECTION</h1>
+        <p>BTC Dropped -{abs(btc_drop_pct):.2f}% in {window_minutes} Minutes • Action Required</p>
+    </div>
+    <div class="content">
+        <div class="urgent-banner">
+            <p>
+                ⚠️ <b>Bitcoin pichle {window_minutes} minutes mein -{abs(btc_drop_pct):.2f}% dump kar chuka hai (BTC: ${btc_price:,.2f}).</b><br><br>
+                Aapki <b>{pos_count} open trade(s) [{symbols_str}]</b> market cascade ki lapet mein aa sakti hain.
+                Apne Binance App par foran ja kar Stop Loss ko <b>Breakeven</b> par shift kar dein ya <b>Market Scratch Exit</b> le lein!
+            </p>
+        </div>
+
+        <h3 style="margin: 20px 0 10px 0; color: #1e293b; font-size: 16px;">Active Positions Protection Levels</h3>
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Strategy</th>
+                <th>Entry Price</th>
+                <th>Current Price</th>
+                <th>Old Stop Loss</th>
+                <th>Recommended New SL</th>
+            </tr>
+            {pos_rows_html}
+        </table>
+
+        <div style="margin-top: 20px; padding: 12px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; font-size: 13px; color: #166534;">
+            🛡️ <b>Capital Defense Action:</b> Paper broker ne SL Breakeven par move kar diya hai. Live exchange par bhi SL Breakeven (${format_price(be_sl)}) par laga dein taake 100% safe rahein!
+        </div>
+    </div>
+    <div class="footer">
+        {dual_time} • BTC Multi-Hour Cumulative Protection • Binance Spot
+    </div>
+</div>
+</body>
+</html>
+"""
+        return self.send_email(subject, html_content, text_content)

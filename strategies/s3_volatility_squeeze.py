@@ -57,15 +57,26 @@ class VolatilitySqueezeStrategy(BaseStrategy):
         # Condition 4: OBV is above its EMA
         obv_bullish = obv.iloc[curr_idx] > obv_ema.iloc[curr_idx]
         
-        # Condition 5: Volume confirmation (P3: Hardened threshold >= 1.25x SMA volume)
+        # Condition 5: Volume confirmation (P1: Hardened threshold >= 1.50x SMA volume)
         vol_sma = df['volume'].rolling(20).mean().iloc[curr_idx]
-        vol_confirmed = df['volume'].iloc[curr_idx] >= (vol_sma * 1.25)
+        vol_confirmed = df['volume'].iloc[curr_idx] >= (vol_sma * 1.50)
 
         # Condition 6: P4 RSI Overbought Climax Protection (RSI <= 72.0 to avoid peak chase)
         curr_rsi = rsi_15m_series.iloc[curr_idx]
         rsi_not_overbought = curr_rsi <= 72.0
 
-        if (recent_squeeze or squeeze_fired) and is_breakout_band and mom_positive and obv_bullish and vol_confirmed and rsi_not_overbought:
+        # Condition 7: Bullish Candle Close Quality (Reject inverted hammer / shooting star wicks)
+        # Upper wick must not exceed 35% of the candle's total range
+        candle_high = df['high'].iloc[curr_idx]
+        candle_low = df['low'].iloc[curr_idx]
+        candle_close = df['close'].iloc[curr_idx]
+        candle_range = candle_high - candle_low
+        upper_wick = candle_high - candle_close
+        candle_structure_ok = True
+        if candle_range > 0:
+            candle_structure_ok = (upper_wick / candle_range) <= 0.35
+
+        if (recent_squeeze or squeeze_fired) and is_breakout_band and mom_positive and obv_bullish and vol_confirmed and rsi_not_overbought and candle_structure_ok:
             curr_price = df['close'].iloc[curr_idx]
             curr_atr = atr.iloc[curr_idx]
             

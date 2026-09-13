@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--5.21%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return-+14.73%25-brightgreen?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-36.4%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.36-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-45-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-13 18:15:58 PKT (13:15:58 UTC)`  
+> **Last Updated:** `2026-09-13 18:17:13 PKT (13:17:13 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `45 Unique Trades` |
-| **Current Equity** | `$473.96 USDT` | **Completed Trades** | `44 Trades` |
-| **Available Cash** | `$373.98 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$26.04 USDT` | **Win / Loss Ratio** | `16 Win / 28 Loss` |
-| **Net Return (%)** | `-5.21%` | **Win Rate** | `36.36%` |
-| **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.36` |
-| **Max Drawdown** | `-5.21%` | **Total Fees Deducted** | `$6.66 USDT` |
+| **Current Equity** | `$573.64 USDT` | **Completed Trades** | `44 Trades` |
+| **Available Cash** | `$473.66 USDT` | **Active / In-Trade** | `1 Trade` |
+| **Net PnL ($)** | `+$73.64 USDT` | **Win / Loss Ratio** | `16 Win / 28 Loss` |
+| **Net Return (%)** | `+14.73%` | **Win Rate** | `36.36%` |
+| **Peak Equity** | `$573.64 USDT` | **Profit Factor** | `0.36` |
+| **Max Drawdown** | `0.00%` | **Total Fees Deducted** | `$6.66 USDT` |
 
 ---
 
