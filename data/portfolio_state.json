@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 274.7088950605789,
+  "cash_usdt": 373.9829370384147,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -41,49 +41,9 @@
         "rsi_1h": 58.3,
         "supertrend_4h": "BULLISH"
       }
-    },
-    "AVAXUSDT": {
-      "trade_id": "T_20260913060111_AVAXUSDT",
-      "symbol": "AVAXUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-13T05:45:00",
-      "signal_time": "2026-09-13T06:01:11.364805+00:00",
-      "entry_time": "2026-09-13T06:01:11.364805+00:00",
-      "entry_price": 7.4487225,
-      "current_price": 7.425,
-      "initial_quantity": 13.425120884822867,
-      "remaining_quantity": 13.425120884822867,
-      "quantity": 13.425120884822867,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 7.4039,
-      "initial_stop_loss": 7.4039,
-      "tp1": 7.5343,
-      "tp2": 7.5939,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 7.462,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.0165,
-        "mom_hist": 0.0157,
-        "bb_upper": 7.44,
-        "rsi_15m": 68.82
-      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-13T06:45:30.640138+00:00",
+  "last_updated": "2026-09-13T07:00:44.622064+00:00",
   "last_12h_summary_slot": "2026-09-13_06_AM"
 }
