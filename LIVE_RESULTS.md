@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--5.24%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--5.14%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-35.7%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.34-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-44-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-45-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-13 10:45:54 PKT (05:45:54 UTC)`  
+> **Last Updated:** `2026-09-13 11:01:21 PKT (06:01:21 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -16,27 +16,28 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `44 Unique Trades` |
-| **Current Equity** | `$473.78 USDT` | **Completed Trades** | `42 Trades` |
-| **Available Cash** | `$273.97 USDT` | **Active / In-Trade** | `2 Trade` |
-| **Net PnL ($)** | `-$26.22 USDT` | **Win / Loss Ratio** | `15 Win / 27 Loss` |
-| **Net Return (%)** | `-5.24%` | **Win Rate** | `35.71%` |
+| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `45 Unique Trades` |
+| **Current Equity** | `$474.31 USDT` | **Completed Trades** | `42 Trades` |
+| **Available Cash** | `$254.68 USDT` | **Active / In-Trade** | `3 Trade` |
+| **Net PnL ($)** | `-$25.69 USDT` | **Win / Loss Ratio** | `15 Win / 27 Loss` |
+| **Net Return (%)** | `-5.14%` | **Win Rate** | `35.71%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.34` |
-| **Max Drawdown** | `-5.24%` | **Total Fees Deducted** | `$6.43 USDT` |
+| **Max Drawdown** | `-5.14%` | **Total Fees Deducted** | `$6.51 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (2)
+## 🟡 Active Open Positions (3)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense & Partial Exit Protocol):**
 > - **S3 Strategy:** Jab trade **+0.75%** gain reach karti hai, toh **50% original position sell/close** ho jati hai aur Stop Loss Entry Price (+0.10% fee buffer) par lock ho jata hai. Baqi 50% position **TP1 (30% exit)** aur **TP2 (20% exit)** ke liye open rehti hai. Total exit = 50% + 30% + 20% = 100%.
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-| Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                         | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                                 | Targets (TP1 / TP2)                            | Unrealized PnL   | Status   |
-|----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|----------------------------------------------------------------------|-----------------|-------------|-------------------------------------------------------------------------|------------------------------------------------|------------------|----------|
-| TRXUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-12 16:00:00 PKT (11:00:00 UTC) | 2026-09-12 17:01:24 PKT (12:01:24 UTC) | $0.3411<br><small>2026-09-12 17:01:24 PKT (12:01:24 UTC)</small>     | $0.3396         | $0.3382     | $0.3462 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>     | $0.3450 (Pending)<br>$0.3491 (Pending)         | -0.43 (-0.43%)   | 🟡 ACTIVE |
-| PEPEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-13 06:30:00 PKT (01:30:00 UTC) | 2026-09-13 06:46:00 PKT (01:46:00 UTC) | $0.00000345<br><small>2026-09-13 06:46:00 PKT (01:46:00 UTC)</small> | $0.00000346     | $0.00000341 | $0.00000348 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.00000349 (Pending)<br>$0.00000352 (Pending) | +0.24 (+0.24%)   | 🟡 ACTIVE |
+| Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                         | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                                     | Unrealized PnL   | Status                                                                                  |
+|----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|----------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|---------------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
+| TRXUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-12 16:00:00 PKT (11:00:00 UTC) | 2026-09-12 17:01:24 PKT (12:01:24 UTC) | $0.3411<br><small>2026-09-12 17:01:24 PKT (12:01:24 UTC)</small>     | $0.3396         | $0.3382     | $0.3462 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.3450 (Pending)<br>$0.3491 (Pending)                  | -0.43 (-0.43%)   | 🟡 ACTIVE                                                                                |
+| PEPEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-13 06:30:00 PKT (01:30:00 UTC) | 2026-09-13 06:46:00 PKT (01:46:00 UTC) | $0.00000345<br><small>2026-09-13 06:46:00 PKT (01:46:00 UTC)</small> | $0.00000347     | $0.00000346 | $0.00000349 (TP1)<br><b>🟢 HIT (80% Closed • SL Locked)</b>          | $0.00000349 (HIT - 30% Closed)<br>$0.00000352 (Pending) | +0.89 (+0.53%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
+| AVAXUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-13 10:45:00 PKT (05:45:00 UTC) | 2026-09-13 11:01:11 PKT (06:01:11 UTC) | $7.4487<br><small>2026-09-13 11:01:11 PKT (06:01:11 UTC)</small>     | $7.4450         | $7.4039     | $7.5046 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $7.5343 (Pending)<br>$7.5939 (Pending)                  | -0.05 (-0.05%)   | 🟡 ACTIVE                                                                                |
 
 ---
 
