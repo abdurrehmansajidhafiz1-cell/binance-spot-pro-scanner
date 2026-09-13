@@ -103,6 +103,49 @@ class LiveScannerEngine:
             self.broker.state["last_12h_summary_slot"] = target_slot
             self.broker.save()
 
+    def get_dynamic_top_coins(self, tickers: dict) -> list:
+        """
+        Dynamically selects the Top 50 most liquid USDT spot pairs by 24h quote volume,
+        filtering out stablecoins and leveraged tokens, while always retaining any coins
+        with active open positions to ensure uninterrupted trade management.
+        Falls back to COINS_UNIVERSE if ticker data is incomplete.
+        """
+        if not tickers or len(tickers) < 20:
+            return list(COINS_UNIVERSE)
+
+        EXCLUDED_BASES = {
+            "USDC", "FDUSD", "TUSD", "BUSD", "DAI", "USDP", "EUR", "AEUR", "EURI",
+            "GBP", "AUD", "TRY", "PAXG", "USD1", "RLUSD", "BFUSD", "USDE", "USDS", "BRL"
+        }
+        LEVERAGED_SUFFIXES = ("UPUSDT", "DOWNUSDT", "BULLUSDT", "BEARUSDT")
+
+        valid_pairs = []
+        for symbol, data in tickers.items():
+            if not symbol.endswith("USDT"):
+                continue
+            if any(symbol.endswith(sfx) for sfx in LEVERAGED_SUFFIXES):
+                continue
+            base = symbol[:-4]
+            # Ensure pure ASCII alphanumeric base symbol (excludes non-standard/non-English tokens)
+            if not (base.isascii() and base.isalnum()):
+                continue
+            if base in EXCLUDED_BASES or base.endswith("USD") or base.startswith("USD"):
+                continue
+            quote_vol = float(data.get("quote_volume", 0.0))
+            if quote_vol > 0:
+                valid_pairs.append((symbol, quote_vol))
+
+        valid_pairs.sort(key=lambda x: x[1], reverse=True)
+        top_50 = [item[0] for item in valid_pairs[:50]]
+
+        # Ensure any coin with an active open position is included in the scan pool
+        open_symbols = list(self.broker.open_positions.keys())
+        for sym in open_symbols:
+            if sym not in top_50:
+                top_50.append(sym)
+
+        return top_50 if len(top_50) >= 20 else list(COINS_UNIVERSE)
+
     def run_scan_cycle(self):
         """Execute one complete scanning, safety evaluation, and trade management cycle."""
         now_str = format_dual_time()
@@ -116,6 +159,10 @@ class LiveScannerEngine:
             return
         current_prices = {sym: data["last_price"] for sym, data in tickers.items()}
         print(f"{Fore.GREEN}  [OK] Tickers loaded: {len(current_prices)} symbols.{Style.RESET_ALL}")
+        
+        # Improvement 2: Dynamic Top 50 selection by 24h Quote Volume
+        active_coins = self.get_dynamic_top_coins(tickers)
+        print(f"{Fore.GREEN}  [UNIVERSE] Dynamic Top-50 liquid pairs selected ({len(active_coins)} active coins).{Style.RESET_ALL}")
         
         # 1. Global Market Safety Shield Assessment
         print(f"\n{Fore.BLUE}--> Step 1: Evaluating Market Safety Shield & Timing Filters...{Style.RESET_ALL}")
@@ -274,7 +321,7 @@ class LiveScannerEngine:
         # 3. Evaluate Strategy I2: Cross-Sectional Momentum (1D Universe Rank)
         print(f"\n{Fore.BLUE}--> Step 3: Evaluating I2 Cross-Sectional Momentum (Top 50 Ranker)...{Style.RESET_ALL}")
         universe_1d = {}
-        for symbol in COINS_UNIVERSE:
+        for symbol in active_coins:
             df_1d = self.client.get_klines(symbol, TIMEFRAME_I2_RANK, limit=40)
             if not df_1d.empty and len(df_1d) >= 32:
                 # Drop unclosed daily candle
@@ -288,8 +335,8 @@ class LiveScannerEngine:
         else:
             print(f"{Fore.GREEN}  [BTC REGIME] BTC > 50-day SMA (Bullish). Top Momentum Leaders: {', '.join(top_coins)}{Style.RESET_ALL}")
 
-        # 4. Scan 50 Coins for Strategy Signals (S3 & I1 on COMPLETED CLOSED CANDLES)
-        print(f"\n{Fore.BLUE}--> Step 4: Scanning 50 Coins for S3 (15m Squeeze) & I1 (1H Pullback) [Closed-Bar Evaluation]...{Style.RESET_ALL}")
+        # 4. Scan Coins for Strategy Signals (S3 & I1 on COMPLETED CLOSED CANDLES)
+        print(f"\n{Fore.BLUE}--> Step 4: Scanning {len(active_coins)} Coins for S3 (15m Squeeze) & I1 (1H Pullback) [Closed-Bar Evaluation]...{Style.RESET_ALL}")
         signals_found = 0
 
         # ── S3 IMPROVEMENT 1: BTC 1H Health Gate (Pre-fetch once, reuse for all coins) ──
@@ -357,7 +404,7 @@ class LiveScannerEngine:
             #    Root-cause: On BTC dump days, 4-7 altcoins fired S3 simultaneously → correlated losses.
             s3_candidates = []  # List of (symbol, signal, curr_p, closed_15m) tuples
 
-            for symbol in COINS_UNIVERSE:
+            for symbol in active_coins:
                 curr_p = current_prices.get(symbol)
                 if not curr_p:
                     curr_p = self.client.get_current_price(symbol)
@@ -439,7 +486,7 @@ class LiveScannerEngine:
                     })
 
             # ── NOW scan for I1 signals (separate loop — I1 not affected by S3 changes) ──
-            for symbol in COINS_UNIVERSE:
+            for symbol in active_coins:
                 curr_p = current_prices.get(symbol)
                 if not curr_p:
                     curr_p = self.client.get_current_price(symbol)

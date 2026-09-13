@@ -25,8 +25,8 @@ class VolatilitySqueezeStrategy(BaseStrategy):
         if df_1h is not None and len(df_1h) >= 25:
             ema20_1h = calculate_ema(df_1h['close'], 20).iloc[-1]
             rsi_1h = calculate_rsi(df_1h['close'], 14).iloc[-1]
-            # Must be in 1H bullish territory (Close > EMA20 and RSI >= 50.0)
-            if not (df_1h['close'].iloc[-1] > ema20_1h and rsi_1h >= 50.0):
+            # Must be in 1H bullish territory (Close > EMA20 and RSI >= 52.5)
+            if not (df_1h['close'].iloc[-1] > ema20_1h and rsi_1h >= 52.5):
                 return None
 
         # Calculate Squeeze & Channels
@@ -70,7 +70,13 @@ class VolatilitySqueezeStrategy(BaseStrategy):
             curr_atr = atr.iloc[curr_idx]
             
             # Stop Loss: Keltner Midline - 0.5 * ATR
-            sl_price = max(kc_mid.iloc[curr_idx] - (0.5 * curr_atr), curr_price * 0.975) # max 2.5% risk
+            # Enforce Minimum SL Floor of 1.15% to prevent micro-wick sweeps (e.g. INJ, HBAR)
+            # while maintaining the 2.50% max risk cap to protect against deep dumps.
+            raw_sl = kc_mid.iloc[curr_idx] - (0.5 * curr_atr)
+            min_sl_floor = curr_price * 0.9885  # minimum 1.15% risk distance
+            max_sl_cap = curr_price * 0.9750    # maximum 2.50% risk cap
+            sl_price = min(raw_sl, min_sl_floor)
+            sl_price = max(sl_price, max_sl_cap)
             
             # TP1: +1.2% quick fee lock / mean target (guaranteed minimum 1.2% above entry to beat slippage & fees)
             tp1_price = max(curr_price * 1.012, curr_price + (1.0 * curr_atr))
