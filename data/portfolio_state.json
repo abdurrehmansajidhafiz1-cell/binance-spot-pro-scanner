@@ -1,9 +1,50 @@
 {
-  "cash_usdt": 555.3788198853399,
+  "cash_usdt": 455.3038198853399,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {},
+  "open_positions": {
+    "UUSDT": {
+      "trade_id": "T_20260914234556_UUSDT",
+      "symbol": "UUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-14T23:30:00",
+      "signal_time": "2026-09-14T23:45:56.059463+00:00",
+      "entry_time": "2026-09-14T23:45:56.059463+00:00",
+      "entry_price": 1.0006000499999999,
+      "current_price": 1.0006000499999999,
+      "initial_quantity": 99.94003098440783,
+      "remaining_quantity": 99.94003098440783,
+      "quantity": 99.94003098440783,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.9887,
+      "initial_stop_loss": 0.9887,
+      "tp1": 1.0122,
+      "tp2": 1.0202,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 1.0006000499999999,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0001,
+        "mom_hist": 0.0,
+        "bb_upper": 1.0002,
+        "rsi_15m": 58.62
+      }
+    }
+  },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-14T21:20:30.017095+00:00",
+  "last_updated": "2026-09-14T23:45:56.059500+00:00",
   "last_12h_summary_slot": "2026-09-14_06_PM"
 }
