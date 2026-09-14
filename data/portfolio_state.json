@@ -12,7 +12,7 @@
       "signal_time": "2026-09-14T17:40:53.337105+00:00",
       "entry_time": "2026-09-14T17:40:53.337105+00:00",
       "entry_price": 0.35717849999999995,
-      "current_price": 0.35717849999999995,
+      "current_price": 0.3572,
       "initial_quantity": 279.97205878853293,
       "remaining_quantity": 279.97205878853293,
       "quantity": 279.97205878853293,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.35717849999999995,
+      "highest_price": 0.3572,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -45,6 +45,6 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-14T17:40:53.337141+00:00",
+  "last_updated": "2026-09-14T17:45:38.686141+00:00",
   "last_12h_summary_slot": "2026-09-14_06_PM"
 }
