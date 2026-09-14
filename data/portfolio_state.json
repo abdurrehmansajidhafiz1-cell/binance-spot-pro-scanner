@@ -1,50 +1,9 @@
 {
-  "cash_usdt": 460.06003852748455,
+  "cash_usdt": 555.3788198853399,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {
-    "ARKUSDT": {
-      "trade_id": "T_20260914211559_ARKUSDT",
-      "symbol": "ARKUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-14T21:00:00",
-      "signal_time": "2026-09-14T21:15:59.647425+00:00",
-      "entry_time": "2026-09-14T21:15:59.647425+00:00",
-      "entry_price": 0.17918955,
-      "current_price": 0.17918955,
-      "initial_quantity": 558.0682578866904,
-      "remaining_quantity": 558.0682578866904,
-      "quantity": 558.0682578866904,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.171015,
-      "initial_stop_loss": 0.171015,
-      "tp1": 0.180489,
-      "tp2": 0.185578,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.17918955,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.005089,
-        "mom_hist": 0.0012,
-        "bb_upper": 0.174421,
-        "rsi_15m": 62.5
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-14T21:15:59.647461+00:00",
+  "last_updated": "2026-09-14T21:20:30.017095+00:00",
   "last_12h_summary_slot": "2026-09-14_06_PM"
 }
