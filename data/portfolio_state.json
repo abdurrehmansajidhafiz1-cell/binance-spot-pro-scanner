@@ -1,27 +1,27 @@
 {
-  "cash_usdt": 461.6298907123434,
+  "cash_usdt": 459.77364316210645,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "WLDUSDT": {
-      "trade_id": "T_20260914173551_WLDUSDT",
-      "symbol": "WLDUSDT",
+    "ONDOUSDT": {
+      "trade_id": "T_20260914174053_ONDOUSDT",
+      "symbol": "ONDOUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-14T17:15:00",
-      "signal_time": "2026-09-14T17:35:51.013859+00:00",
-      "entry_time": "2026-09-14T17:35:51.013859+00:00",
-      "entry_price": 0.38989484999999996,
-      "current_price": 0.38989484999999996,
-      "initial_quantity": 256.47940720427573,
-      "remaining_quantity": 256.47940720427573,
-      "quantity": 256.47940720427573,
+      "signal_time": "2026-09-14T17:40:53.337105+00:00",
+      "entry_time": "2026-09-14T17:40:53.337105+00:00",
+      "entry_price": 0.35717849999999995,
+      "current_price": 0.35717849999999995,
+      "initial_quantity": 279.97205878853293,
+      "remaining_quantity": 279.97205878853293,
+      "quantity": 279.97205878853293,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.383429,
-      "initial_stop_loss": 0.383429,
-      "tp1": 0.395388,
-      "tp2": 0.398514,
+      "stop_loss": 0.352414,
+      "initial_stop_loss": 0.352414,
+      "tp1": 0.361891,
+      "tp2": 0.364752,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -33,18 +33,18 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.38989484999999996,
+      "highest_price": 0.35717849999999995,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.003001,
-        "mom_hist": 0.0017,
-        "bb_upper": 0.388788,
-        "rsi_15m": 68.34
+        "atr": 0.002313,
+        "mom_hist": 0.001,
+        "bb_upper": 0.356545,
+        "rsi_15m": 66.54
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-14T17:35:51.013896+00:00",
+  "last_updated": "2026-09-14T17:40:53.337141+00:00",
   "last_12h_summary_slot": "2026-09-14_06_PM"
 }
