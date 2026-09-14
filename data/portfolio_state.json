@@ -1,9 +1,50 @@
 {
-  "cash_usdt": 563.7000035449537,
+  "cash_usdt": 463.6250035449537,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {},
+  "open_positions": {
+    "UNIUSDT": {
+      "trade_id": "T_20260914173057_UNIUSDT",
+      "symbol": "UNIUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-14T17:15:00",
+      "signal_time": "2026-09-14T17:30:57.913038+00:00",
+      "entry_time": "2026-09-14T17:30:57.913038+00:00",
+      "entry_price": 6.455226,
+      "current_price": 6.455226,
+      "initial_quantity": 15.491324393599854,
+      "remaining_quantity": 15.491324393599854,
+      "quantity": 15.491324393599854,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 6.3392,
+      "initial_stop_loss": 6.3392,
+      "tp1": 6.5254,
+      "tp2": 6.577,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 6.455226,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0516,
+        "mom_hist": 0.0489,
+        "bb_upper": 6.4439,
+        "rsi_15m": 67.52
+      }
+    }
+  },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-14T17:25:28.203065+00:00",
+  "last_updated": "2026-09-14T17:30:57.913074+00:00",
   "last_12h_summary_slot": "2026-09-14_06_PM"
 }
