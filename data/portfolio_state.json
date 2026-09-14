@@ -1,9 +1,49 @@
 {
-  "cash_usdt": 572.6830499980293,
+  "cash_usdt": 472.60804999802934,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {},
+  "open_positions": {
+    "WLFIUSDT": {
+      "trade_id": "T_20260914041628_WLFIUSDT",
+      "symbol": "WLFIUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-09-14T03:00:00",
+      "signal_time": "2026-09-14T04:16:28.787766+00:00",
+      "entry_time": "2026-09-14T04:16:28.787766+00:00",
+      "entry_price": 0.057328649999999995,
+      "current_price": 0.057328649999999995,
+      "initial_quantity": 1744.3285338133728,
+      "remaining_quantity": 1744.3285338133728,
+      "quantity": 1744.3285338133728,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.056134,
+      "initial_stop_loss": 0.056134,
+      "tp1": 0.059299,
+      "tp2": 0.061197,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.057328649999999995,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 2.21,
+        "rsi_1h": 56.25,
+        "supertrend_4h": "BULLISH"
+      }
+    }
+  },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-14T01:01:17.128690+00:00",
+  "last_updated": "2026-09-14T04:16:28.787798+00:00",
   "last_12h_summary_slot": "2026-09-14_06_AM"
 }
