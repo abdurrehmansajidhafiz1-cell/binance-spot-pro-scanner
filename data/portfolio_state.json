@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 233.74609132297502,
+  "cash_usdt": 231.0850654714789,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -52,7 +52,7 @@
       "signal_time": "2026-09-17T07:25:49.175862+00:00",
       "entry_time": "2026-09-17T07:25:49.175862+00:00",
       "entry_price": 3.5017499999999995e-06,
-      "current_price": 3.49e-06,
+      "current_price": 3.5e-06,
       "initial_quantity": 28557149.99643036,
       "remaining_quantity": 28557149.99643036,
       "quantity": 28557149.99643036,
@@ -83,25 +83,25 @@
         "rsi_15m": 65.26
       }
     },
-    "ENAUSDT": {
-      "trade_id": "T_20260917083550_ENAUSDT",
-      "symbol": "ENAUSDT",
+    "HOLOUSDT": {
+      "trade_id": "T_20260917084107_HOLOUSDT",
+      "symbol": "HOLOUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-17T08:15:00",
-      "signal_time": "2026-09-17T08:35:50.339169+00:00",
-      "entry_time": "2026-09-17T08:35:50.339169+00:00",
-      "entry_price": 0.1548774,
-      "current_price": 0.1548774,
-      "initial_quantity": 645.671996043322,
-      "remaining_quantity": 645.671996043322,
-      "quantity": 645.671996043322,
+      "signal_time": "2026-09-17T08:41:07.729656+00:00",
+      "entry_time": "2026-09-17T08:41:07.729656+00:00",
+      "entry_price": 0.05662829999999999,
+      "current_price": 0.05662829999999999,
+      "initial_quantity": 1765.901501546047,
+      "remaining_quantity": 1765.901501546047,
+      "quantity": 1765.901501546047,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.151061,
-      "initial_stop_loss": 0.151061,
-      "tp1": 0.156152,
-      "tp2": 0.157386,
+      "stop_loss": 0.055949,
+      "initial_stop_loss": 0.055949,
+      "tp1": 0.057279,
+      "tp2": 0.057732,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -113,18 +113,18 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.1548774,
+      "highest_price": 0.05662829999999999,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.001356,
-        "mom_hist": 0.0009,
-        "bb_upper": 0.153491,
-        "rsi_15m": 68.05
+        "atr": 0.000243,
+        "mom_hist": 0.0002,
+        "bb_upper": 0.056512,
+        "rsi_15m": 66.88
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-17T08:35:50.339195+00:00",
+  "last_updated": "2026-09-17T08:41:07.729685+00:00",
   "last_12h_summary_slot": "2026-09-17_06_AM"
 }
