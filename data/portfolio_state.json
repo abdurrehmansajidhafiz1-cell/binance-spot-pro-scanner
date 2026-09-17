@@ -1,27 +1,27 @@
 {
-  "cash_usdt": 422.42631559692796,
+  "cash_usdt": 420.8657953646912,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "TAOUSDT": {
-      "trade_id": "T_20260917143103_TAOUSDT",
-      "symbol": "TAOUSDT",
+    "TRUMPUSDT": {
+      "trade_id": "T_20260917143545_TRUMPUSDT",
+      "symbol": "TRUMPUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-17T14:15:00",
-      "signal_time": "2026-09-17T14:31:03.815961+00:00",
-      "entry_time": "2026-09-17T14:31:03.815961+00:00",
-      "entry_price": 229.61475,
-      "current_price": 229.61475,
-      "initial_quantity": 0.43551209144882896,
-      "remaining_quantity": 0.43551209144882896,
-      "quantity": 0.43551209144882896,
+      "signal_time": "2026-09-17T14:35:45.362548+00:00",
+      "entry_time": "2026-09-17T14:35:45.362548+00:00",
+      "entry_price": 1.9709849999999998,
+      "current_price": 1.9709849999999998,
+      "initial_quantity": 50.736053293150384,
+      "remaining_quantity": 50.736053293150384,
+      "quantity": 50.736053293150384,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 226.4868,
-      "initial_stop_loss": 226.4868,
-      "tp1": 232.1528,
-      "tp2": 233.988,
+      "stop_loss": 1.9439,
+      "initial_stop_loss": 1.9439,
+      "tp1": 1.9947,
+      "tp2": 2.0104,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -33,19 +33,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 229.61475,
+      "highest_price": 1.9709849999999998,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 1.4539,
-        "mom_hist": 0.4522,
-        "bb_upper": 228.9941,
-        "rsi_15m": 62.62
+        "atr": 0.0118,
+        "mom_hist": 0.005,
+        "bb_upper": 1.9654,
+        "rsi_15m": 64.44
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-17T14:31:03.815996+00:00",
+  "last_updated": "2026-09-17T14:35:45.362573+00:00",
   "last_12h_summary_slot": "2026-09-17_06_PM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
