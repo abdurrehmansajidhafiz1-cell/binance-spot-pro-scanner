@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 131.01006547147892,
+  "cash_usdt": 229.64795754647344,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-17T07:15:49.352887+00:00",
       "entry_time": "2026-09-17T07:15:49.352887+00:00",
       "entry_price": 152.95644,
-      "current_price": 153.12,
+      "current_price": 153.1,
       "initial_quantity": 0.6537809065116841,
       "remaining_quantity": 0.6537809065116841,
       "quantity": 0.6537809065116841,
@@ -52,7 +52,7 @@
       "signal_time": "2026-09-17T07:25:49.175862+00:00",
       "entry_time": "2026-09-17T07:25:49.175862+00:00",
       "entry_price": 3.5017499999999995e-06,
-      "current_price": 3.49e-06,
+      "current_price": 3.5e-06,
       "initial_quantity": 28557149.99643036,
       "remaining_quantity": 28557149.99643036,
       "quantity": 28557149.99643036,
@@ -122,49 +122,9 @@
         "bb_upper": 0.056512,
         "rsi_15m": 66.88
       }
-    },
-    "SOLUSDT": {
-      "trade_id": "T_20260917091554_SOLUSDT",
-      "symbol": "SOLUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-17T09:00:00",
-      "signal_time": "2026-09-17T09:15:54.828602+00:00",
-      "entry_time": "2026-09-17T09:15:54.828602+00:00",
-      "entry_price": 100.73034,
-      "current_price": 100.73034,
-      "initial_quantity": 0.9927495529152388,
-      "remaining_quantity": 0.9927495529152388,
-      "quantity": 0.9927495529152388,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 99.4826,
-      "initial_stop_loss": 99.4826,
-      "tp1": 101.8477,
-      "tp2": 102.6528,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 100.73034,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.3577,
-        "mom_hist": 0.4248,
-        "bb_upper": 100.5339,
-        "rsi_15m": 66.76
-      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-17T09:15:54.828630+00:00",
+  "last_updated": "2026-09-17T09:20:33.512296+00:00",
   "last_12h_summary_slot": "2026-09-17_06_AM"
 }
