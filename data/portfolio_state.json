@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 337.9015038125472,
+  "cash_usdt": 237.82650381254723,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-17T07:15:49.352887+00:00",
       "entry_time": "2026-09-17T07:15:49.352887+00:00",
       "entry_price": 152.95644,
-      "current_price": 153.54,
+      "current_price": 153.39,
       "initial_quantity": 0.6537809065116841,
       "remaining_quantity": 0.6537809065116841,
       "quantity": 0.6537809065116841,
@@ -82,9 +82,49 @@
         "bb_upper": 3.49e-06,
         "rsi_15m": 65.26
       }
+    },
+    "INJUSDT": {
+      "trade_id": "T_20260917074550_INJUSDT",
+      "symbol": "INJUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-17T07:30:00",
+      "signal_time": "2026-09-17T07:45:50.112840+00:00",
+      "entry_time": "2026-09-17T07:45:50.112840+00:00",
+      "entry_price": 5.570784,
+      "current_price": 5.570784,
+      "initial_quantity": 17.950794717583737,
+      "remaining_quantity": 17.950794717583737,
+      "quantity": 17.950794717583737,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 5.4841,
+      "initial_stop_loss": 5.4841,
+      "tp1": 5.6338,
+      "tp2": 5.6783,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 5.570784,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0381,
+        "mom_hist": 0.009,
+        "bb_upper": 5.5666,
+        "rsi_15m": 63.89
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-17T07:40:31.718452+00:00",
+  "last_updated": "2026-09-17T07:45:50.112874+00:00",
   "last_12h_summary_slot": "2026-09-17_06_AM"
 }
