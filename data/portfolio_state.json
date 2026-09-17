@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 334.6787924068198,
+  "cash_usdt": 234.60379240681982,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-17T07:15:49.352887+00:00",
       "entry_time": "2026-09-17T07:15:49.352887+00:00",
       "entry_price": 152.95644,
-      "current_price": 153.05,
+      "current_price": 153.02,
       "initial_quantity": 0.6537809065116841,
       "remaining_quantity": 0.6537809065116841,
       "quantity": 0.6537809065116841,
@@ -82,9 +82,49 @@
         "bb_upper": 3.49e-06,
         "rsi_15m": 65.26
       }
+    },
+    "UNIUSDT": {
+      "trade_id": "T_20260917083056_UNIUSDT",
+      "symbol": "UNIUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-17T08:15:00",
+      "signal_time": "2026-09-17T08:30:56.038708+00:00",
+      "entry_time": "2026-09-17T08:30:56.038708+00:00",
+      "entry_price": 6.909452999999999,
+      "current_price": 6.909452999999999,
+      "initial_quantity": 14.472925714958913,
+      "remaining_quantity": 14.472925714958913,
+      "quantity": 14.472925714958913,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 6.7529,
+      "initial_stop_loss": 6.7529,
+      "tp1": 6.9777,
+      "tp2": 7.0329,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 6.909452999999999,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0662,
+        "mom_hist": 0.0453,
+        "bb_upper": 6.8803,
+        "rsi_15m": 65.97
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-17T08:25:26.182918+00:00",
+  "last_updated": "2026-09-17T08:30:56.038738+00:00",
   "last_12h_summary_slot": "2026-09-17_06_AM"
 }
