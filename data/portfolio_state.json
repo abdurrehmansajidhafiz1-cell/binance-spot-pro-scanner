@@ -1,50 +1,9 @@
 {
-  "cash_usdt": 445.4201587893834,
+  "cash_usdt": 541.265396662058,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {
-    "XPLUSDT": {
-      "trade_id": "T_20260917053546_XPLUSDT",
-      "symbol": "XPLUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-17T05:15:00",
-      "signal_time": "2026-09-17T05:35:46.552547+00:00",
-      "entry_time": "2026-09-17T05:35:46.552547+00:00",
-      "entry_price": 0.085272615,
-      "current_price": 0.085272615,
-      "initial_quantity": 1172.709433151546,
-      "remaining_quantity": 1172.709433151546,
-      "quantity": 1172.709433151546,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.081832,
-      "initial_stop_loss": 0.081832,
-      "tp1": 0.084937,
-      "tp2": 0.085609,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.085272615,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.000763,
-        "mom_hist": 0.0011,
-        "bb_upper": 0.08341,
-        "rsi_15m": 70.63
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-17T05:35:46.552583+00:00",
+  "last_updated": "2026-09-17T05:40:28.830141+00:00",
   "last_12h_summary_slot": "2026-09-17_06_AM"
 }
