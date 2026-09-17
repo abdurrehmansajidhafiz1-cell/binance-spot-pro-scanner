@@ -1,27 +1,27 @@
 {
-  "cash_usdt": 429.03806251133125,
+  "cash_usdt": 426.54117801615763,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "PUMPUSDT": {
-      "trade_id": "T_20260917123054_PUMPUSDT",
-      "symbol": "PUMPUSDT",
+    "PEPEUSDT": {
+      "trade_id": "T_20260917123553_PEPEUSDT",
+      "symbol": "PEPEUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-17T12:15:00",
-      "signal_time": "2026-09-17T12:30:54.640800+00:00",
-      "entry_time": "2026-09-17T12:30:54.640800+00:00",
-      "entry_price": 0.0039669825,
-      "current_price": 0.0039669825,
-      "initial_quantity": 25208.076919925916,
-      "remaining_quantity": 25208.076919925916,
-      "quantity": 25208.076919925916,
+      "signal_time": "2026-09-17T12:35:53.971929+00:00",
+      "entry_time": "2026-09-17T12:35:53.971929+00:00",
+      "entry_price": 3.531765e-06,
+      "current_price": 3.531765e-06,
+      "initial_quantity": 28314454.670681655,
+      "remaining_quantity": 28314454.670681655,
+      "quantity": 28314454.670681655,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.00387575,
-      "initial_stop_loss": 0.00387575,
-      "tp1": 0.00401865,
-      "tp2": 0.00405042,
+      "stop_loss": 3.46e-06,
+      "initial_stop_loss": 3.46e-06,
+      "tp1": 3.55e-06,
+      "tp2": 3.58e-06,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -33,18 +33,18 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.0039669825,
+      "highest_price": 3.531765e-06,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 3.731e-05,
+        "atr": 2e-08,
         "mom_hist": 0.0,
-        "bb_upper": 0.00394704,
-        "rsi_15m": 68.15
+        "bb_upper": 3.51e-06,
+        "rsi_15m": 63.4
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-17T12:30:54.640831+00:00",
+  "last_updated": "2026-09-17T12:35:53.971964+00:00",
   "last_12h_summary_slot": "2026-09-17_06_AM"
 }
