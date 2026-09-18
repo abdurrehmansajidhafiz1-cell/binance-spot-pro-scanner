@@ -1,48 +1,8 @@
 {
-  "cash_usdt": 300.6093336748145,
+  "cash_usdt": 397.9885269796772,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "REZUSDT": {
-      "trade_id": "T_20260918021548_REZUSDT",
-      "symbol": "REZUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-18T02:00:00",
-      "signal_time": "2026-09-18T02:15:48.947669+00:00",
-      "entry_time": "2026-09-18T02:15:48.947669+00:00",
-      "entry_price": 0.0039289634999999995,
-      "current_price": 0.0039289634999999995,
-      "initial_quantity": 25452.005344412086,
-      "remaining_quantity": 25452.005344412086,
-      "quantity": 25452.005344412086,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.00383078,
-      "initial_stop_loss": 0.00383078,
-      "tp1": 0.00397615,
-      "tp2": 0.00401619,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.0039289634999999995,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 4.359e-05,
-        "mom_hist": 0.0001,
-        "bb_upper": 0.00390991,
-        "rsi_15m": 70.14
-      }
-    },
     "POLUSDT": {
       "trade_id": "T_20260918021609_POLUSDT",
       "symbol": "POLUSDT",
@@ -52,7 +12,7 @@
       "signal_time": "2026-09-18T02:16:09.278244+00:00",
       "entry_time": "2026-09-18T02:16:09.278244+00:00",
       "entry_price": 0.098619285,
-      "current_price": 0.098619285,
+      "current_price": 0.09837,
       "initial_quantity": 1014.0004564016054,
       "remaining_quantity": 1014.0004564016054,
       "quantity": 1014.0004564016054,
@@ -73,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.098619285,
+      "highest_price": 0.09863,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -84,7 +44,7 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-18T02:16:09.278269+00:00",
+  "last_updated": "2026-09-18T02:20:30.653280+00:00",
   "last_12h_summary_slot": "2026-09-18_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
