@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--0.67%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--0.61%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-21.2%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-100-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-18 08:01:17 PKT (03:01:17 UTC)`  
+> **Last Updated:** `2026-09-18 08:06:18 PKT (03:06:18 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `100 Unique Trades` |
-| **Current Equity** | `$496.67 USDT` | **Completed Trades** | `99 Trades` |
+| **Current Equity** | `$496.96 USDT` | **Completed Trades** | `99 Trades` |
 | **Available Cash** | `$396.55 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$3.33 USDT` | **Win / Loss Ratio** | `21 Win / 78 Loss` |
-| **Net Return (%)** | `-0.67%` | **Win Rate** | `21.21%` |
+| **Net PnL ($)** | `-$3.04 USDT` | **Win / Loss Ratio** | `21 Win / 78 Loss` |
+| **Net Return (%)** | `-0.61%` | **Win Rate** | `21.21%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.17` |
-| **Max Drawdown** | `-0.67%` | **Total Fees Deducted** | `$14.86 USDT` |
+| **Max Drawdown** | `-0.61%` | **Total Fees Deducted** | `$14.86 USDT` |
 
 ---
 
@@ -35,7 +35,7 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| POLUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-18 06:00:00 PKT (01:00:00 UTC) | 2026-09-18 07:16:09 PKT (02:16:09 UTC) | $0.0986<br><small>2026-09-18 07:16:09 PKT (02:16:09 UTC)</small> | $0.0987         | $0.0957     | $0.1001 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.1018 (Pending)<br>$0.1054 (Pending) | +0.12 (+0.12%)   | 🟡 ACTIVE |
+| POLUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-18 06:00:00 PKT (01:00:00 UTC) | 2026-09-18 07:16:09 PKT (02:16:09 UTC) | $0.0986<br><small>2026-09-18 07:16:09 PKT (02:16:09 UTC)</small> | $0.0990         | $0.0957     | $0.1001 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.1018 (Pending)<br>$0.1054 (Pending) | +0.42 (+0.42%)   | 🟡 ACTIVE |
 
 ---
 
