@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 359.9992428762304,
+  "cash_usdt": 259.92424287623044,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-19T10:15:47.668358+00:00",
       "entry_time": "2026-09-19T10:15:47.668358+00:00",
       "entry_price": 1785.8925,
-      "current_price": 1784.01,
+      "current_price": 1783.82,
       "initial_quantity": 0.055994411757706586,
       "remaining_quantity": 0.055994411757706586,
       "quantity": 0.055994411757706586,
@@ -42,10 +42,50 @@
         "bb_upper": 1783.5607,
         "rsi_15m": 62.61
       }
+    },
+    "PEPEUSDT": {
+      "trade_id": "T_20260919103055_PEPEUSDT",
+      "symbol": "PEPEUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-19T10:15:00",
+      "signal_time": "2026-09-19T10:30:55.366150+00:00",
+      "entry_time": "2026-09-19T10:30:55.366150+00:00",
+      "entry_price": 3.8019e-06,
+      "current_price": 3.8019e-06,
+      "initial_quantity": 26302638.15460691,
+      "remaining_quantity": 26302638.15460691,
+      "quantity": 26302638.15460691,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 3.76e-06,
+      "initial_stop_loss": 3.76e-06,
+      "tp1": 3.85e-06,
+      "tp2": 3.88e-06,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 3.8019e-06,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 3e-08,
+        "mom_hist": 0.0,
+        "bb_upper": 3.79e-06,
+        "rsi_15m": 56.64
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-19T10:25:28.484659+00:00",
+  "last_updated": "2026-09-19T10:30:55.366185+00:00",
   "last_12h_summary_slot": "2026-09-19_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
