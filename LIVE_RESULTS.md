@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--8.30%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--8.29%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-20.5%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.13-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-128-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-19 16:01:31 PKT (11:01:31 UTC)`  
+> **Last Updated:** `2026-09-19 16:06:11 PKT (11:06:11 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `128 Unique Trades` |
-| **Current Equity** | `$458.51 USDT` | **Completed Trades** | `127 Trades` |
+| **Current Equity** | `$458.56 USDT` | **Completed Trades** | `127 Trades` |
 | **Available Cash** | `$358.70 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$41.49 USDT` | **Win / Loss Ratio** | `26 Win / 101 Loss` |
-| **Net Return (%)** | `-8.30%` | **Win Rate** | `20.47%` |
+| **Net PnL ($)** | `-$41.44 USDT` | **Win / Loss Ratio** | `26 Win / 101 Loss` |
+| **Net Return (%)** | `-8.29%` | **Win Rate** | `20.47%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.13` |
-| **Max Drawdown** | `-8.30%` | **Total Fees Deducted** | `$19.03 USDT` |
+| **Max Drawdown** | `-8.29%` | **Total Fees Deducted** | `$19.03 USDT` |
 
 ---
 
@@ -35,7 +35,7 @@
 
 | Symbol    | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                        | Unrealized PnL   | Status   |
 |-----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|--------------------------------------------|------------------|----------|
-| SNDKBUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-19 15:00:00 PKT (10:00:00 UTC) | 2026-09-19 15:15:47 PKT (10:15:47 UTC) | $1,785.89<br><small>2026-09-19 15:15:47 PKT (10:15:47 UTC)</small> | $1,782.57       | $1,765.08   | $1,799.29 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $1,807.04 (Pending)<br>$1,821.32 (Pending) | -0.19 (-0.19%)   | 🟡 ACTIVE |
+| SNDKBUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-19 15:00:00 PKT (10:00:00 UTC) | 2026-09-19 15:15:47 PKT (10:15:47 UTC) | $1,785.89<br><small>2026-09-19 15:15:47 PKT (10:15:47 UTC)</small> | $1,783.36       | $1,765.08   | $1,799.29 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $1,807.04 (Pending)<br>$1,821.32 (Pending) | -0.14 (-0.14%)   | 🟡 ACTIVE |
 
 ---
 
