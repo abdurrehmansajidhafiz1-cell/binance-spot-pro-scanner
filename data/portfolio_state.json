@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 365.7080872198346,
+  "cash_usdt": 265.63308721983464,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-19T08:15:54.247442+00:00",
       "entry_time": "2026-09-19T08:15:54.247442+00:00",
       "entry_price": 2635.046865,
-      "current_price": 2635.046865,
+      "current_price": 2639.04,
       "initial_quantity": 0.037949989174101466,
       "remaining_quantity": 0.037949989174101466,
       "quantity": 0.037949989174101466,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 2635.046865,
+      "highest_price": 2640.74,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -42,10 +42,50 @@
         "bb_upper": 2634.746,
         "rsi_15m": 61.84
       }
+    },
+    "ZAMAUSDT": {
+      "trade_id": "T_20260919082047_ZAMAUSDT",
+      "symbol": "ZAMAUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-19T08:00:00",
+      "signal_time": "2026-09-19T08:20:47.844647+00:00",
+      "entry_time": "2026-09-19T08:20:47.844647+00:00",
+      "entry_price": 0.06895446,
+      "current_price": 0.06895446,
+      "initial_quantity": 1450.232515779255,
+      "remaining_quantity": 1450.232515779255,
+      "quantity": 1450.232515779255,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.063755,
+      "initial_stop_loss": 0.063755,
+      "tp1": 0.0665,
+      "tp2": 0.06761,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.06895446,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.00111,
+        "mom_hist": 0.001,
+        "bb_upper": 0.064522,
+        "rsi_15m": 70.58
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-19T08:15:54.247477+00:00",
+  "last_updated": "2026-09-19T08:20:47.844697+00:00",
   "last_12h_summary_slot": "2026-09-19_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
