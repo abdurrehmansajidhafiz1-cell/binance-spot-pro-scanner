@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 253.49849499670222,
+  "cash_usdt": 153.42349499670223,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-19T15:15:49.271345+00:00",
       "entry_time": "2026-09-19T15:15:49.271345+00:00",
       "entry_price": 81772.866,
-      "current_price": 81665.55,
+      "current_price": 81624.88,
       "initial_quantity": 0.0012228995373599846,
       "remaining_quantity": 0.0012228995373599846,
       "quantity": 0.0012228995373599846,
@@ -52,7 +52,7 @@
       "signal_time": "2026-09-19T15:45:51.961743+00:00",
       "entry_time": "2026-09-19T15:45:51.961743+00:00",
       "entry_price": 2648.653665,
-      "current_price": 2643.29,
+      "current_price": 2640.13,
       "initial_quantity": 0.03775503053548528,
       "remaining_quantity": 0.03775503053548528,
       "quantity": 0.03775503053548528,
@@ -82,10 +82,50 @@
         "bb_upper": 2645.9836,
         "rsi_15m": 61.42
       }
+    },
+    "GUSDT": {
+      "trade_id": "T_20260919160057_GUSDT",
+      "symbol": "GUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-19T15:45:00",
+      "signal_time": "2026-09-19T16:00:57.701360+00:00",
+      "entry_time": "2026-09-19T16:00:57.701360+00:00",
+      "entry_price": 0.009954975,
+      "current_price": 0.009954975,
+      "initial_quantity": 10045.228641960428,
+      "remaining_quantity": 10045.228641960428,
+      "quantity": 10045.228641960428,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.009779,
+      "initial_stop_loss": 0.009779,
+      "tp1": 0.010479,
+      "tp2": 0.010927,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.009954975,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.000449,
+        "mom_hist": 0.0001,
+        "bb_upper": 0.009586,
+        "rsi_15m": 67.75
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-19T15:55:31.946565+00:00",
+  "last_updated": "2026-09-19T16:00:57.701392+00:00",
   "last_12h_summary_slot": "2026-09-19_06_PM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
