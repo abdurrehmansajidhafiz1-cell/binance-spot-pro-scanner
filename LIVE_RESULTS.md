@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--11.83%25-red?style=for-the-badge)](LIVE_RESULTS.md)
-[![Win Rate](https://img.shields.io/badge/Win_Rate-24.5%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--11.84%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Win Rate](https://img.shields.io/badge/Win_Rate-25.0%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-161-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-21 08:21:22 PKT (03:21:22 UTC)`  
+> **Last Updated:** `2026-09-21 08:26:02 PKT (03:26:02 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,30 +17,29 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `161 Unique Trades` |
-| **Current Equity** | `$440.83 USDT` | **Completed Trades** | `159 Trades` |
-| **Available Cash** | `$390.77 USDT` | **Active / In-Trade** | `2 Trade` |
-| **Net PnL ($)** | `-$59.17 USDT` | **Win / Loss Ratio** | `39 Win / 120 Loss` |
-| **Net Return (%)** | `-11.83%` | **Win Rate** | `24.53%` |
+| **Current Equity** | `$440.79 USDT` | **Completed Trades** | `160 Trades` |
+| **Available Cash** | `$440.79 USDT` | **Active / In-Trade** | `1 Trade` |
+| **Net PnL ($)** | `-$59.21 USDT` | **Win / Loss Ratio** | `40 Win / 120 Loss` |
+| **Net Return (%)** | `-11.84%` | **Win Rate** | `25.00%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.17` |
-| **Max Drawdown** | `-11.83%` | **Total Fees Deducted** | `$23.89 USDT` |
+| **Max Drawdown** | `-11.84%` | **Total Fees Deducted** | `$23.97 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (2)
+## 🟡 Active Open Positions (1)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense & Partial Exit Protocol):**
 > - **S3 Strategy:** Jab trade **+0.75%** gain reach karti hai, toh **50% original position sell/close** ho jati hai aur Stop Loss Entry Price (+0.10% fee buffer) par lock ho jata hai. Baqi 50% position **TP1 (30% exit)** aur **TP2 (20% exit)** ke liye open rehti hai. Total exit = 50% + 30% + 20% = 100%.
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-| Symbol    | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                      | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                              | Targets (TP1 / TP2)                               | Unrealized PnL   | Status                                                                                  |
-|-----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|-------------------------------------------------------------------|-----------------|-------------|----------------------------------------------------------------------|---------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
-| LTCUSDT   | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small> | $59.1600        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+2.91%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
-| CRCLBUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-21 07:00:00 PKT (02:00:00 UTC) | 2026-09-21 08:15:59 PKT (03:15:59 UTC) | $91.9059<br><small>2026-09-21 08:15:59 PKT (03:15:59 UTC)</small> | $92.0200        | $92.0438    | $93.2845 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $93.6996 (Pending)<br>$95.7791 (Pending)          | +0.84 (+0.12%)   | 🟡 ACTIVE                                                                                |
+| Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                      | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                              | Targets (TP1 / TP2)                               | Unrealized PnL   | Status                                                                                  |
+|----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|-------------------------------------------------------------------|-----------------|-------------|----------------------------------------------------------------------|---------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
+| LTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small> | $59.1700        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+2.92%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
 
 ---
 
-## 📜 Completed Trades Postmortem History (159)
+## 📜 Completed Trades Postmortem History (160)
 
 > **Result Badges Guide:**
 > - `🟢 FULL WIN` → TP2 reached (100% profit target captured)
@@ -56,6 +55,7 @@
 
 | Symbol       | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time                                                   | TP1 Price & Hit Time                                                 | TP2 Price & Hit Time                                             | SL Hit Time                            | Net PnL ($ / %)   | PKR Calculations (Rate: ₨278/$)                                                                             | Final Result           |
 |--------------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|------------------------------------------------------------------|----------------------------------------|-------------------|-------------------------------------------------------------------------------------------------------------|------------------------|
+| CRCLBUSDT    | I1_MTF_TREND_PULLBACK | **1h (4h Macro Trend)** | 2026-09-21 07:00:00 PKT (02:00:00 UTC) | 2026-09-21 08:15:59 PKT (03:15:59 UTC) | $91.9059<br><small>2026-09-21 08:15:59 PKT (03:15:59 UTC)</small>    | $93.6996<br><small>-</small>                                         | $95.7791<br><small>-</small>                                     | 2026-09-21 08:25:28 PKT (03:25:28 UTC) | +0.79 (+0.79%)    | 💵 **$100 Trade:** `+219 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `+77 PKR` profit | Fees: `15 PKR`    | 🟢 WIN                  |
 | POLUSDT      | I1_MTF_TREND_PULLBACK | **1h (4h Macro Trend)** | 2026-09-21 07:00:00 PKT (02:00:00 UTC) | 2026-09-21 08:01:41 PKT (03:01:41 UTC) | $0.1075<br><small>2026-09-21 08:01:41 PKT (03:01:41 UTC)</small>     | $0.1120<br><small>-</small>                                          | $0.1168<br><small>-</small>                                      | 2026-09-21 08:10:30 PKT (03:10:30 UTC) | +1.89 (+1.89%)    | 💵 **$100 Trade:** `+524 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `+183 PKR` profit | Fees: `15 PKR`   | 🟢 WIN                  |
 | TRUMPUSDT    | I1_MTF_TREND_PULLBACK | **1h (4h Macro Trend)** | 2026-09-21 07:00:00 PKT (02:00:00 UTC) | 2026-09-21 08:01:35 PKT (03:01:35 UTC) | $2.0900<br><small>2026-09-21 08:01:35 PKT (03:01:35 UTC)</small>     | $2.1705<br><small>-</small>                                          | $2.2590<br><small>-</small>                                      | 2026-09-21 08:10:30 PKT (03:10:30 UTC) | +0.88 (+0.88%)    | 💵 **$100 Trade:** `+245 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `+86 PKR` profit | Fees: `15 PKR`    | 🟢 WIN                  |
 | XLMUSDT      | I1_MTF_TREND_PULLBACK | **1h (4h Macro Trend)** | 2026-09-21 07:00:00 PKT (02:00:00 UTC) | 2026-09-21 08:01:32 PKT (03:01:32 UTC) | $0.1985<br><small>2026-09-21 08:01:32 PKT (03:01:32 UTC)</small>     | $0.2065<br><small>-</small>                                          | $0.2150<br><small>-</small>                                      | 2026-09-21 08:10:30 PKT (03:10:30 UTC) | +0.58 (+0.58%)    | 💵 **$100 Trade:** `+161 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `+56 PKR` profit | Fees: `15 PKR`    | 🟢 WIN                  |
