@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--12.11%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--12.22%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-23.4%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.15-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-156-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-21 05:31:25 PKT (00:31:25 UTC)`  
+> **Last Updated:** `2026-09-21 05:36:09 PKT (00:36:09 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `156 Unique Trades` |
-| **Current Equity** | `$439.44 USDT` | **Completed Trades** | `154 Trades` |
+| **Current Equity** | `$438.92 USDT` | **Completed Trades** | `154 Trades` |
 | **Available Cash** | `$341.32 USDT` | **Active / In-Trade** | `2 Trade` |
-| **Net PnL ($)** | `-$60.56 USDT` | **Win / Loss Ratio** | `36 Win / 118 Loss` |
-| **Net Return (%)** | `-12.11%` | **Win Rate** | `23.38%` |
+| **Net PnL ($)** | `-$61.08 USDT` | **Win / Loss Ratio** | `36 Win / 118 Loss` |
+| **Net Return (%)** | `-12.22%` | **Win Rate** | `23.38%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.15` |
-| **Max Drawdown** | `-12.11%` | **Total Fees Deducted** | `$23.14 USDT` |
+| **Max Drawdown** | `-12.22%` | **Total Fees Deducted** | `$23.14 USDT` |
 
 ---
 
@@ -35,8 +35,8 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                      | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                              | Targets (TP1 / TP2)                               | Unrealized PnL   | Status                                                                                  |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|-------------------------------------------------------------------|-----------------|-------------|----------------------------------------------------------------------|---------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
-| LTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small> | $59.1000        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+2.80%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
-| ARUSDT   | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-21 05:00:00 PKT (00:00:00 UTC) | 2026-09-21 05:25:47 PKT (00:25:47 UTC) | $4.9715<br><small>2026-09-21 05:25:47 PKT (00:25:47 UTC)</small>  | $4.8780         | $4.8146     | $5.0088 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $5.0343 (Pending)<br>$5.1306 (Pending)            | -1.88 (-1.88%)   | 🟡 ACTIVE                                                                                |
+| LTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small> | $59.0700        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+2.75%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
+| ARUSDT   | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-21 05:00:00 PKT (00:00:00 UTC) | 2026-09-21 05:25:47 PKT (00:25:47 UTC) | $4.9715<br><small>2026-09-21 05:25:47 PKT (00:25:47 UTC)</small>  | $4.8520         | $4.8146     | $5.0088 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $5.0343 (Pending)<br>$5.1306 (Pending)            | -2.40 (-2.40%)   | 🟡 ACTIVE                                                                                |
 
 ---
 
