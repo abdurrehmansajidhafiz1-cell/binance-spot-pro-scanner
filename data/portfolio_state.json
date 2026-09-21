@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 334.771577469538,
+  "cash_usdt": 333.3737014716101,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_price": 57.48873,
-      "current_price": 58.74,
+      "current_price": 58.9,
       "initial_quantity": 1.7394713711713583,
       "remaining_quantity": 0.0,
       "quantity": 0.0,
@@ -46,25 +46,25 @@
       "i1_be_exit_price": 57.871050000000004,
       "total_fees_paid": 0.15135110374024613
     },
-    "BTCUSDT": {
-      "trade_id": "T_20260921083059_BTCUSDT",
-      "symbol": "BTCUSDT",
+    "ETHUSDT": {
+      "trade_id": "T_20260921083546_ETHUSDT",
+      "symbol": "ETHUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-21T08:15:00",
-      "signal_time": "2026-09-21T08:30:59.046240+00:00",
-      "entry_time": "2026-09-21T08:30:59.046240+00:00",
-      "entry_price": 82281.13000499998,
-      "current_price": 82281.13000499998,
-      "initial_quantity": 0.001215345486795372,
-      "remaining_quantity": 0.001215345486795372,
-      "quantity": 0.001215345486795372,
+      "signal_time": "2026-09-21T08:35:46.898086+00:00",
+      "entry_time": "2026-09-21T08:35:46.898086+00:00",
+      "entry_price": 2689.18392,
+      "current_price": 2689.18392,
+      "initial_quantity": 0.037186002510382406,
+      "remaining_quantity": 0.037186002510382406,
+      "quantity": 0.037186002510382406,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 81294.24,
-      "initial_stop_loss": 81294.24,
-      "tp1": 83226.88,
-      "tp2": 83884.8,
+      "stop_loss": 2650.3464,
+      "initial_stop_loss": 2650.3464,
+      "tp1": 2713.3542,
+      "tp2": 2734.8036,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -76,19 +76,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 82281.13000499998,
+      "highest_price": 2689.18392,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 242.7484,
-        "mom_hist": 207.3881,
-        "bb_upper": 82027.4887,
-        "rsi_15m": 66.44
+        "atr": 11.942,
+        "mom_hist": 0.1635,
+        "bb_upper": 2677.4251,
+        "rsi_15m": 60.25
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T08:30:59.046280+00:00",
+  "last_updated": "2026-09-21T08:35:46.898122+00:00",
   "last_12h_summary_slot": "2026-09-21_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
