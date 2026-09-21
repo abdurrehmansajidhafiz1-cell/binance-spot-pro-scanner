@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 257.4877816031291,
+  "cash_usdt": 307.47523787187913,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-21T20:01:26.660516+00:00",
       "entry_time": "2026-09-21T20:01:26.660516+00:00",
       "entry_price": 0.34457219999999994,
-      "current_price": 0.3442,
+      "current_price": 0.3441,
       "initial_quantity": 290.21493898811343,
       "remaining_quantity": 290.21493898811343,
       "quantity": 290.21493898811343,
@@ -41,54 +41,10 @@
         "rsi_1h": 56.76,
         "supertrend_4h": "BULLISH"
       }
-    },
-    "XRPUSDT": {
-      "trade_id": "T_20260921204058_XRPUSDT",
-      "symbol": "XRPUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-21T20:15:00",
-      "signal_time": "2026-09-21T20:40:58.321233+00:00",
-      "entry_time": "2026-09-21T20:40:58.321233+00:00",
-      "entry_price": 1.52546235,
-      "current_price": 1.5319,
-      "initial_quantity": 65.55389584016937,
-      "remaining_quantity": 32.77694792008469,
-      "quantity": 32.77694792008469,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 50.0,
-      "stop_loss": 1.5269878123499998,
-      "initial_stop_loss": 1.4967,
-      "tp1": 1.5442,
-      "tp2": 1.5564,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 1.5373,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.32503593050002877,
-      "metadata": {
-        "atr": 0.0109,
-        "mom_hist": 0.0104,
-        "bb_upper": 1.5189,
-        "rsi_15m": 70.08
-      },
-      "s3_early_be_reached": true,
-      "s3_early_be_hit_time": "2026-09-21T20:55:30.211112+00:00",
-      "s3_early_be_exit_price": 1.5365313500000002,
-      "total_fees_paid": 0.11277210602739557
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T20:55:30.211187+00:00",
+  "last_updated": "2026-09-21T21:00:43.326129+00:00",
   "last_12h_summary_slot": "2026-09-21_06_PM",
   "last_emergency_dump_alert_time": "2026-09-21T10:45:32.129215+00:00"
 }
