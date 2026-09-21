@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 214.7616684175294,
+  "cash_usdt": 211.66790594997514,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-21T14:01:03.275335+00:00",
       "entry_time": "2026-09-21T14:01:03.275335+00:00",
       "entry_price": 0.34507245,
-      "current_price": 0.3449,
+      "current_price": 0.3448,
       "initial_quantity": 289.79421567847567,
       "remaining_quantity": 289.79421567847567,
       "quantity": 289.79421567847567,
@@ -43,25 +43,25 @@
         "rsi_15m": 63.73
       }
     },
-    "DASHUSDT": {
-      "trade_id": "T_20260921150108_DASHUSDT",
-      "symbol": "DASHUSDT",
+    "DOGEUSDT": {
+      "trade_id": "T_20260921150551_DOGEUSDT",
+      "symbol": "DOGEUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-21T14:45:00",
-      "signal_time": "2026-09-21T15:01:08.524400+00:00",
-      "entry_time": "2026-09-21T15:01:08.524400+00:00",
-      "entry_price": 61.500735,
-      "current_price": 61.500735,
-      "initial_quantity": 1.6259968275175898,
-      "remaining_quantity": 1.6259968275175898,
-      "quantity": 1.6259968275175898,
+      "signal_time": "2026-09-21T15:05:51.277317+00:00",
+      "entry_time": "2026-09-21T15:05:51.277317+00:00",
+      "entry_price": 0.09700848,
+      "current_price": 0.09700848,
+      "initial_quantity": 1030.8377164553037,
+      "remaining_quantity": 1030.8377164553037,
+      "quantity": 1030.8377164553037,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 59.7188,
-      "initial_stop_loss": 59.7188,
-      "tp1": 61.985,
-      "tp2": 62.6819,
+      "stop_loss": 0.092674,
+      "initial_stop_loss": 0.092674,
+      "tp1": 0.0961,
+      "tp2": 0.096875,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -73,19 +73,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 61.500735,
+      "highest_price": 0.09700848,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.7159,
-        "mom_hist": 0.606,
-        "bb_upper": 60.5218,
-        "rsi_15m": 71.61
+        "atr": 0.000958,
+        "mom_hist": 0.0008,
+        "bb_upper": 0.094501,
+        "rsi_15m": 68.8
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T15:01:08.524438+00:00",
+  "last_updated": "2026-09-21T15:05:51.277362+00:00",
   "last_12h_summary_slot": "2026-09-21_06_PM",
   "last_emergency_dump_alert_time": "2026-09-21T10:45:32.129215+00:00"
 }
