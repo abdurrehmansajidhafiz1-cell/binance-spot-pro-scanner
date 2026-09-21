@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--11.99%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--12.01%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-24.5%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-160-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-161-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-21 08:11:08 PKT (03:11:08 UTC)`  
+> **Last Updated:** `2026-09-21 08:16:08 PKT (03:16:08 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -16,26 +16,27 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `160 Unique Trades` |
-| **Current Equity** | `$440.07 USDT` | **Completed Trades** | `159 Trades` |
-| **Available Cash** | `$440.07 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$59.93 USDT` | **Win / Loss Ratio** | `39 Win / 120 Loss` |
-| **Net Return (%)** | `-11.99%` | **Win Rate** | `24.53%` |
+| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `161 Unique Trades` |
+| **Current Equity** | `$439.95 USDT` | **Completed Trades** | `159 Trades` |
+| **Available Cash** | `$340.00 USDT` | **Active / In-Trade** | `2 Trade` |
+| **Net PnL ($)** | `-$60.05 USDT` | **Win / Loss Ratio** | `39 Win / 120 Loss` |
+| **Net Return (%)** | `-12.01%` | **Win Rate** | `24.53%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.17` |
-| **Max Drawdown** | `-11.99%` | **Total Fees Deducted** | `$23.82 USDT` |
+| **Max Drawdown** | `-12.01%` | **Total Fees Deducted** | `$23.89 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (1)
+## 🟡 Active Open Positions (2)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense & Partial Exit Protocol):**
 > - **S3 Strategy:** Jab trade **+0.75%** gain reach karti hai, toh **50% original position sell/close** ho jati hai aur Stop Loss Entry Price (+0.10% fee buffer) par lock ho jata hai. Baqi 50% position **TP1 (30% exit)** aur **TP2 (20% exit)** ke liye open rehti hai. Total exit = 50% + 30% + 20% = 100%.
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-| Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                      | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                              | Targets (TP1 / TP2)                               | Unrealized PnL   | Status                                                                                  |
-|----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|-------------------------------------------------------------------|-----------------|-------------|----------------------------------------------------------------------|---------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
-| LTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small> | $59.0400        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+2.70%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
+| Symbol    | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                      | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                              | Targets (TP1 / TP2)                               | Unrealized PnL   | Status                                                                                  |
+|-----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|-------------------------------------------------------------------|-----------------|-------------|----------------------------------------------------------------------|---------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
+| LTCUSDT   | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small> | $59.0000        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+2.63%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
+| CRCLBUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-21 07:00:00 PKT (02:00:00 UTC) | 2026-09-21 08:15:59 PKT (03:15:59 UTC) | $91.9059<br><small>2026-09-21 08:15:59 PKT (03:15:59 UTC)</small> | $91.8600        | $90.2336    | $93.2845 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $93.6996 (Pending)<br>$95.7791 (Pending)          | -0.05 (-0.05%)   | 🟡 ACTIVE                                                                                |
 
 ---
 
