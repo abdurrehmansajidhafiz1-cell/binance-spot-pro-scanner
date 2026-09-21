@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-187-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-21 15:11:21 PKT (10:11:21 UTC)`  
+> **Last Updated:** `2026-09-21 15:16:09 PKT (10:16:09 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,8 +35,8 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                               | Unrealized PnL   | Status                                                                                  |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|---------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
-| LTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small>  | $59.6100        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+3.69%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
-| ETHUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-21 14:15:00 PKT (09:15:00 UTC) | 2026-09-21 14:40:47 PKT (09:40:47 UTC) | $2,740.00<br><small>2026-09-21 14:40:47 PKT (09:40:47 UTC)</small> | $2,722.11       | $2,669.59   | $2,760.55 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $2,750.04 (Pending)<br>$2,771.78 (Pending)        | -0.65 (-0.65%)   | 🟡 ACTIVE                                                                                |
+| LTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-20 20:00:00 PKT (15:00:00 UTC) | 2026-09-20 21:01:18 PKT (16:01:18 UTC) | $57.4887<br><small>2026-09-20 21:01:18 PKT (16:01:18 UTC)</small>  | $59.7300        | $57.6325    | $58.3511 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $59.2073 (HIT - 50% Closed)<br>$60.7946 (Pending) | +1.73 (+3.90%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
+| ETHUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-09-21 14:15:00 PKT (09:15:00 UTC) | 2026-09-21 14:40:47 PKT (09:40:47 UTC) | $2,740.00<br><small>2026-09-21 14:40:47 PKT (09:40:47 UTC)</small> | $2,721.97       | $2,669.59   | $2,760.55 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $2,750.04 (Pending)<br>$2,771.78 (Pending)        | -0.66 (-0.66%)   | 🟡 ACTIVE                                                                                |
 
 ---
 
