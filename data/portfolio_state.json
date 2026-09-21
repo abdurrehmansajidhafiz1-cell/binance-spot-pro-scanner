@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 441.1291400457569,
+  "cash_usdt": 341.0541400457569,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_price": 57.48873,
-      "current_price": 58.71,
+      "current_price": 58.67,
       "initial_quantity": 1.7394713711713583,
       "remaining_quantity": 0.0,
       "quantity": 0.0,
@@ -45,10 +45,50 @@
       "i1_be_hit_time": "2026-09-20T16:15:29.795378+00:00",
       "i1_be_exit_price": 57.871050000000004,
       "total_fees_paid": 0.15135110374024613
+    },
+    "ZAMAUSDT": {
+      "trade_id": "T_20260921041554_ZAMAUSDT",
+      "symbol": "ZAMAUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-21T04:00:00",
+      "signal_time": "2026-09-21T04:15:54.048629+00:00",
+      "entry_time": "2026-09-21T04:15:54.048629+00:00",
+      "entry_price": 0.09462728999999999,
+      "current_price": 0.09462728999999999,
+      "initial_quantity": 1056.7775955540944,
+      "remaining_quantity": 1056.7775955540944,
+      "quantity": 1056.7775955540944,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.092138,
+      "initial_stop_loss": 0.092138,
+      "tp1": 0.097014,
+      "tp2": 0.099528,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.09462728999999999,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.002514,
+        "mom_hist": 0.0021,
+        "bb_upper": 0.093307,
+        "rsi_15m": 69.47
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T04:10:28.378201+00:00",
+  "last_updated": "2026-09-21T04:15:54.048664+00:00",
   "last_12h_summary_slot": "2026-09-21_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
