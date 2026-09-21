@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 212.84007602655777,
+  "cash_usdt": 314.8366684175294,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -42,50 +42,10 @@
         "bb_upper": 0.344834,
         "rsi_15m": 63.73
       }
-    },
-    "ONEUSDT": {
-      "trade_id": "T_20260921141550_ONEUSDT",
-      "symbol": "ONEUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-21T14:00:00",
-      "signal_time": "2026-09-21T14:15:50.657700+00:00",
-      "entry_time": "2026-09-21T14:15:50.657700+00:00",
-      "entry_price": 0.0048834405,
-      "current_price": 0.0048834405,
-      "initial_quantity": 20477.36631581771,
-      "remaining_quantity": 20477.36631581771,
-      "quantity": 20477.36631581771,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.00478335,
-      "initial_stop_loss": 0.00478335,
-      "tp1": 0.00514501,
-      "tp2": 0.00538402,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.0048834405,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.00023901,
-        "mom_hist": 0.0002,
-        "bb_upper": 0.00489247,
-        "rsi_15m": 68.47
-      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T14:15:50.657738+00:00",
+  "last_updated": "2026-09-21T14:20:35.082683+00:00",
   "last_12h_summary_slot": "2026-09-21_06_PM",
   "last_emergency_dump_alert_time": "2026-09-21T10:45:32.129215+00:00"
 }
