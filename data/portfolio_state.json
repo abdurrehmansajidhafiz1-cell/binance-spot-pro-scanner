@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 265.56306376096825,
+  "cash_usdt": 315.57548878909324,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_price": 57.48873,
-      "current_price": 59.67,
+      "current_price": 59.6,
       "initial_quantity": 1.7394713711713583,
       "remaining_quantity": 0.0,
       "quantity": 0.0,
@@ -46,49 +46,6 @@
       "i1_be_exit_price": 57.871050000000004,
       "total_fees_paid": 0.15135110374024613
     },
-    "BNBUSDT": {
-      "trade_id": "T_20260921090102_BNBUSDT",
-      "symbol": "BNBUSDT",
-      "strategy": "I1_MTF_TREND_PULLBACK",
-      "timeframe": "1h (4h Macro Trend)",
-      "zone_candle_time": "2026-09-21T08:00:00",
-      "signal_time": "2026-09-21T09:01:02.112979+00:00",
-      "entry_time": "2026-09-21T09:01:02.112979+00:00",
-      "entry_price": 780.219915,
-      "current_price": 784.66,
-      "initial_quantity": 0.128168991943765,
-      "remaining_quantity": 0.0640844959718825,
-      "quantity": 0.0640844959718825,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 50.0,
-      "stop_loss": 781.3902448725,
-      "initial_stop_loss": 760.5395,
-      "tp1": 813.1407,
-      "tp2": 844.7014,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 786.8,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.35867323701933884,
-      "metadata": {
-        "risk_distance_pct": 2.69,
-        "rsi_1h": 64.88,
-        "supertrend_4h": "BULLISH"
-      },
-      "i1_be_reached": true,
-      "i1_be_hit_time": "2026-09-21T09:40:32.171102+00:00",
-      "i1_be_exit_price": 786.4066,
-      "total_fees_paid": 0.11279735294247135
-    },
     "ETHUSDT": {
       "trade_id": "T_20260921094047_ETHUSDT",
       "symbol": "ETHUSDT",
@@ -98,7 +55,7 @@
       "signal_time": "2026-09-21T09:40:47.901287+00:00",
       "entry_time": "2026-09-21T09:40:47.901287+00:00",
       "entry_price": 2739.999315,
-      "current_price": 2739.999315,
+      "current_price": 2740.74,
       "initial_quantity": 0.03649635948905337,
       "remaining_quantity": 0.03649635948905337,
       "quantity": 0.03649635948905337,
@@ -119,7 +76,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 2739.999315,
+      "highest_price": 2742.49,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -131,7 +88,7 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T09:40:47.901314+00:00",
+  "last_updated": "2026-09-21T09:45:31.386068+00:00",
   "last_12h_summary_slot": "2026-09-21_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
