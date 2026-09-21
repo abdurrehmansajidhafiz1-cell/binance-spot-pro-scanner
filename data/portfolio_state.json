@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 210.8735134176967,
+  "cash_usdt": 209.38509083947332,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-21T20:01:26.660516+00:00",
       "entry_time": "2026-09-21T20:01:26.660516+00:00",
       "entry_price": 0.34457219999999994,
-      "current_price": 0.3445,
+      "current_price": 0.3439,
       "initial_quantity": 290.21493898811343,
       "remaining_quantity": 290.21493898811343,
       "quantity": 290.21493898811343,
@@ -42,25 +42,25 @@
         "supertrend_4h": "BULLISH"
       }
     },
-    "BCHUSDT": {
-      "trade_id": "T_20260921203056_BCHUSDT",
-      "symbol": "BCHUSDT",
+    "LINKUSDT": {
+      "trade_id": "T_20260921203549_LINKUSDT",
+      "symbol": "LINKUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-21T20:15:00",
-      "signal_time": "2026-09-21T20:30:56.095542+00:00",
-      "entry_time": "2026-09-21T20:30:56.095542+00:00",
-      "entry_price": 267.83385,
-      "current_price": 267.83385,
-      "initial_quantity": 0.37336580122340773,
-      "remaining_quantity": 0.37336580122340773,
-      "quantity": 0.37336580122340773,
+      "signal_time": "2026-09-21T20:35:49.945738+00:00",
+      "entry_time": "2026-09-21T20:35:49.945738+00:00",
+      "entry_price": 13.2156045,
+      "current_price": 13.2156045,
+      "initial_quantity": 7.566812399690079,
+      "remaining_quantity": 7.566812399690079,
+      "quantity": 7.566812399690079,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 264.3786,
-      "initial_stop_loss": 264.3786,
-      "tp1": 271.5196,
-      "tp2": 273.666,
+      "stop_loss": 12.948,
+      "initial_stop_loss": 12.948,
+      "tp1": 13.41,
+      "tp2": 13.516,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -72,19 +72,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 267.83385,
+      "highest_price": 13.2156045,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 1.8676,
-        "mom_hist": 0.7934,
-        "bb_upper": 267.3305,
-        "rsi_15m": 65.69
+        "atr": 0.0969,
+        "mom_hist": 0.0588,
+        "bb_upper": 13.1602,
+        "rsi_15m": 70.15
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T20:30:56.095569+00:00",
+  "last_updated": "2026-09-21T20:35:49.945773+00:00",
   "last_12h_summary_slot": "2026-09-21_06_PM",
   "last_emergency_dump_alert_time": "2026-09-21T10:45:32.129215+00:00"
 }
