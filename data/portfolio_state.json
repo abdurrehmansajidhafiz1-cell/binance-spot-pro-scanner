@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 343.86667528679936,
+  "cash_usdt": 341.3224198033472,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_price": 57.48873,
-      "current_price": 59.1,
+      "current_price": 59.18,
       "initial_quantity": 1.7394713711713583,
       "remaining_quantity": 0.0,
       "quantity": 0.0,
@@ -46,25 +46,25 @@
       "i1_be_exit_price": 57.871050000000004,
       "total_fees_paid": 0.15135110374024613
     },
-    "LINKUSDT": {
-      "trade_id": "T_20260921002053_LINKUSDT",
-      "symbol": "LINKUSDT",
+    "ARUSDT": {
+      "trade_id": "T_20260921002547_ARUSDT",
+      "symbol": "ARUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-21T00:00:00",
-      "signal_time": "2026-09-21T00:20:53.211353+00:00",
-      "entry_time": "2026-09-21T00:20:53.211353+00:00",
-      "entry_price": 12.754373999999999,
-      "current_price": 12.754373999999999,
-      "initial_quantity": 7.840447520199738,
-      "remaining_quantity": 7.840447520199738,
-      "quantity": 7.840447520199738,
+      "signal_time": "2026-09-21T00:25:47.212885+00:00",
+      "entry_time": "2026-09-21T00:25:47.212885+00:00",
+      "entry_price": 4.9714845,
+      "current_price": 4.9714845,
+      "initial_quantity": 20.11471623817795,
+      "remaining_quantity": 20.11471623817795,
+      "quantity": 20.11471623817795,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 12.455,
-      "initial_stop_loss": 12.455,
-      "tp1": 12.8251,
-      "tp2": 12.9265,
+      "stop_loss": 4.8146,
+      "initial_stop_loss": 4.8146,
+      "tp1": 5.0343,
+      "tp2": 5.1306,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -76,19 +76,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 12.754373999999999,
+      "highest_price": 4.9714845,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.0796,
-        "mom_hist": 0.0537,
-        "bb_upper": 12.6218,
-        "rsi_15m": 66.67
+        "atr": 0.0963,
+        "mom_hist": 0.0211,
+        "bb_upper": 4.8754,
+        "rsi_15m": 64.77
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T00:20:53.211387+00:00",
+  "last_updated": "2026-09-21T00:25:47.212913+00:00",
   "last_12h_summary_slot": "2026-09-20_06_PM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
