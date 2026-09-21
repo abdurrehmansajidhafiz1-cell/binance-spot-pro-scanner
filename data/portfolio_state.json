@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 207.40023787187914,
+  "cash_usdt": 306.64520718417305,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -41,50 +41,10 @@
         "rsi_1h": 56.76,
         "supertrend_4h": "BULLISH"
       }
-    },
-    "MARSCOINUSDT": {
-      "trade_id": "T_20260921231555_MARSCOINUSDT",
-      "symbol": "MARSCOINUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-21T23:00:00",
-      "signal_time": "2026-09-21T23:15:55.663713+00:00",
-      "entry_time": "2026-09-21T23:15:55.663713+00:00",
-      "entry_price": 0.10415205,
-      "current_price": 0.10415205,
-      "initial_quantity": 960.1347261047671,
-      "remaining_quantity": 960.1347261047671,
-      "quantity": 960.1347261047671,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.10179,
-      "initial_stop_loss": 0.10179,
-      "tp1": 0.106067,
-      "tp2": 0.107734,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.10415205,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.001667,
-        "mom_hist": 0.0002,
-        "bb_upper": 0.103297,
-        "rsi_15m": 63.96
-      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T23:15:55.663738+00:00",
+  "last_updated": "2026-09-21T23:20:36.727326+00:00",
   "last_12h_summary_slot": "2026-09-21_06_PM",
   "last_emergency_dump_alert_time": "2026-09-21T10:45:32.129215+00:00"
 }
