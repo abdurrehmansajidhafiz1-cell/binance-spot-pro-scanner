@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 340.01689404647914,
+  "cash_usdt": 239.94189404647915,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_price": 57.48873,
-      "current_price": 58.21,
+      "current_price": 58.32,
       "initial_quantity": 1.7394713711713583,
       "remaining_quantity": 0.0,
       "quantity": 0.0,
@@ -85,10 +85,50 @@
         "bb_upper": 0.343705,
         "rsi_15m": 61.67
       }
+    },
+    "ARUSDT": {
+      "trade_id": "T_20260921061554_ARUSDT",
+      "symbol": "ARUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-21T06:00:00",
+      "signal_time": "2026-09-21T06:15:54.546787+00:00",
+      "entry_time": "2026-09-21T06:15:54.546787+00:00",
+      "entry_price": 4.9774875,
+      "current_price": 4.9774875,
+      "initial_quantity": 20.090457283920856,
+      "remaining_quantity": 20.090457283920856,
+      "quantity": 20.090457283920856,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 4.8194,
+      "initial_stop_loss": 4.8194,
+      "tp1": 5.0346,
+      "tp2": 5.1261,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 4.9774875,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0916,
+        "mom_hist": 0.0373,
+        "bb_upper": 4.9123,
+        "rsi_15m": 63.22
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T06:10:34.468271+00:00",
+  "last_updated": "2026-09-21T06:15:54.546811+00:00",
   "last_12h_summary_slot": "2026-09-21_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
