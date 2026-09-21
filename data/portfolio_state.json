@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 339.99625541808456,
+  "cash_usdt": 390.77275185512076,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_time": "2026-09-20T16:01:18.046522+00:00",
       "entry_price": 57.48873,
-      "current_price": 59.0,
+      "current_price": 59.16,
       "initial_quantity": 1.7394713711713583,
       "remaining_quantity": 0.0,
       "quantity": 0.0,
@@ -55,13 +55,13 @@
       "signal_time": "2026-09-21T03:15:59.859135+00:00",
       "entry_time": "2026-09-21T03:15:59.859135+00:00",
       "entry_price": 91.90593,
-      "current_price": 91.90593,
+      "current_price": 92.02,
       "initial_quantity": 1.0880690723656243,
-      "remaining_quantity": 1.0880690723656243,
-      "quantity": 1.0880690723656243,
+      "remaining_quantity": 0.5440345361828122,
+      "quantity": 0.5440345361828122,
       "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 90.2336,
+      "remaining_cost_usdt": 50.0,
+      "stop_loss": 92.043788895,
       "initial_stop_loss": 90.2336,
       "tp1": 93.6996,
       "tp2": 95.7791,
@@ -76,18 +76,22 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 91.90593,
+      "highest_price": 93.45,
       "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
+      "realized_pnl_usdt": 0.7764964370362293,
       "metadata": {
         "risk_distance_pct": 1.51,
         "rsi_1h": 55.65,
         "supertrend_4h": "BULLISH"
-      }
+      },
+      "i1_be_reached": true,
+      "i1_be_hit_time": "2026-09-21T03:20:29.619313+00:00",
+      "i1_be_exit_price": 93.40327500000001,
+      "total_fees_paid": 0.1131109555444355
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-21T03:15:59.859159+00:00",
+  "last_updated": "2026-09-21T03:20:29.619378+00:00",
   "last_12h_summary_slot": "2026-09-21_06_AM",
   "last_emergency_dump_alert_time": "2026-09-17T13:45:32.402296+00:00"
 }
