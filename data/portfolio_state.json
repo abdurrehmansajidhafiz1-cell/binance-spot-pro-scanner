@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 77.94674489491133,
+  "cash_usdt": 76.03825534498564,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_price": 2748.3734999999997,
-      "current_price": 2751.97,
+      "current_price": 2752.64,
       "initial_quantity": 0.036385156529853024,
       "remaining_quantity": 0.036385156529853024,
       "quantity": 0.036385156529853024,
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_price": 117.49871999999999,
-      "current_price": 117.57,
+      "current_price": 117.51,
       "initial_quantity": 0.8510731010516541,
       "remaining_quantity": 0.8510731010516541,
       "quantity": 0.8510731010516541,
@@ -81,25 +81,25 @@
         "supertrend_4h": "BULLISH"
       }
     },
-    "DOGEUSDT": {
-      "trade_id": "T_20260922140552_DOGEUSDT",
-      "symbol": "DOGEUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-22T13:45:00",
-      "signal_time": "2026-09-22T14:05:52.933941+00:00",
-      "entry_time": "2026-09-22T14:05:52.933941+00:00",
-      "entry_price": 0.10044019499999998,
-      "current_price": 0.10044019499999998,
-      "initial_quantity": 995.6173422403253,
-      "remaining_quantity": 995.6173422403253,
-      "quantity": 995.6173422403253,
+    "BNBUSDT": {
+      "trade_id": "T_20260922141058_BNBUSDT",
+      "symbol": "BNBUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-09-22T13:00:00",
+      "signal_time": "2026-09-22T14:10:58.218317+00:00",
+      "entry_time": "2026-09-22T14:10:58.218317+00:00",
+      "entry_price": 790.2749399999999,
+      "current_price": 790.2749399999999,
+      "initial_quantity": 0.12653823997000338,
+      "remaining_quantity": 0.12653823997000338,
+      "quantity": 0.12653823997000338,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.098722,
-      "initial_stop_loss": 0.098722,
-      "tp1": 0.102172,
-      "tp2": 0.102979,
+      "stop_loss": 780.5974,
+      "initial_stop_loss": 780.5974,
+      "tp1": 808.0289,
+      "tp2": 824.4878,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -111,19 +111,18 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.10044019499999998,
+      "highest_price": 790.2749399999999,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.000904,
-        "mom_hist": 0.0006,
-        "bb_upper": 0.10066,
-        "rsi_15m": 64.75
+        "risk_distance_pct": 1.39,
+        "rsi_1h": 55.07,
+        "supertrend_4h": "BULLISH"
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-22T14:05:52.933974+00:00",
+  "last_updated": "2026-09-22T14:10:58.218345+00:00",
   "last_12h_summary_slot": "2026-09-22_06_PM",
   "last_emergency_dump_alert_time": "2026-09-22T01:50:30.828184+00:00"
 }
