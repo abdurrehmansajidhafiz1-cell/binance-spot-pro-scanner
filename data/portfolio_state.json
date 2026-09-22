@@ -12,7 +12,7 @@
       "signal_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_price": 2748.3734999999997,
-      "current_price": 2748.3734999999997,
+      "current_price": 2735.36,
       "initial_quantity": 0.036385156529853024,
       "remaining_quantity": 0.036385156529853024,
       "quantity": 0.036385156529853024,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 2748.3734999999997,
+      "highest_price": 2755.68,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_price": 117.49871999999999,
-      "current_price": 117.49871999999999,
+      "current_price": 116.87,
       "initial_quantity": 0.8510731010516541,
       "remaining_quantity": 0.8510731010516541,
       "quantity": 0.8510731010516541,
@@ -72,7 +72,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 117.49871999999999,
+      "highest_price": 118.03,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -90,7 +90,7 @@
       "signal_time": "2026-09-22T09:01:25.910822+00:00",
       "entry_time": "2026-09-22T09:01:25.910822+00:00",
       "entry_price": 166.52321999999998,
-      "current_price": 166.52321999999998,
+      "current_price": 164.76,
       "initial_quantity": 0.6005168528449066,
       "remaining_quantity": 0.6005168528449066,
       "quantity": 0.6005168528449066,
@@ -111,7 +111,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 166.52321999999998,
+      "highest_price": 167.41,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -122,7 +122,7 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-22T09:01:25.910846+00:00",
+  "last_updated": "2026-09-22T09:05:30.547178+00:00",
   "last_12h_summary_slot": "2026-09-22_06_AM",
   "last_emergency_dump_alert_time": "2026-09-22T01:50:30.828184+00:00"
 }
