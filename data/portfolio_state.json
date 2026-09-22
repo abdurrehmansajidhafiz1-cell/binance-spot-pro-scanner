@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 185.70623865539326,
+  "cash_usdt": 85.63123865539326,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_price": 2748.3734999999997,
-      "current_price": 2754.28,
+      "current_price": 2758.55,
       "initial_quantity": 0.036385156529853024,
       "remaining_quantity": 0.036385156529853024,
       "quantity": 0.036385156529853024,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 2755.68,
+      "highest_price": 2759.15,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_price": 117.49871999999999,
-      "current_price": 117.44,
+      "current_price": 117.5,
       "initial_quantity": 0.8510731010516541,
       "remaining_quantity": 0.8510731010516541,
       "quantity": 0.8510731010516541,
@@ -80,10 +80,50 @@
         "rsi_1h": 58.56,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "AAVEUSDT": {
+      "trade_id": "T_20260922130107_AAVEUSDT",
+      "symbol": "AAVEUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-22T12:45:00",
+      "signal_time": "2026-09-22T13:01:07.796350+00:00",
+      "entry_time": "2026-09-22T13:01:07.796350+00:00",
+      "entry_price": 144.522225,
+      "current_price": 144.522225,
+      "initial_quantity": 0.6919350985635601,
+      "remaining_quantity": 0.6919350985635601,
+      "quantity": 0.6919350985635601,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 141.5206,
+      "initial_stop_loss": 141.5206,
+      "tp1": 146.062,
+      "tp2": 147.2166,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 144.522225,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.9974,
+        "mom_hist": 0.3656,
+        "bb_upper": 143.593,
+        "rsi_15m": 66.07
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-22T12:55:35.564557+00:00",
-  "last_12h_summary_slot": "2026-09-22_06_AM",
+  "last_updated": "2026-09-22T13:01:12.285276+00:00",
+  "last_12h_summary_slot": "2026-09-22_06_PM",
   "last_emergency_dump_alert_time": "2026-09-22T01:50:30.828184+00:00"
 }
