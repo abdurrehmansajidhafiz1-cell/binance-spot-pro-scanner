@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 180.33698330620336,
+  "cash_usdt": 80.26198330620336,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_time": "2026-09-22T09:01:04.281337+00:00",
       "entry_price": 2748.3734999999997,
-      "current_price": 2754.65,
+      "current_price": 2755.04,
       "initial_quantity": 0.036385156529853024,
       "remaining_quantity": 0.036385156529853024,
       "quantity": 0.036385156529853024,
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_time": "2026-09-22T09:01:06.441530+00:00",
       "entry_price": 117.49871999999999,
-      "current_price": 117.64,
+      "current_price": 117.77,
       "initial_quantity": 0.8510731010516541,
       "remaining_quantity": 0.8510731010516541,
       "quantity": 0.8510731010516541,
@@ -80,10 +80,50 @@
         "rsi_1h": 58.56,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "XLMUSDT": {
+      "trade_id": "T_20260922140107_XLMUSDT",
+      "symbol": "XLMUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-22T13:45:00",
+      "signal_time": "2026-09-22T14:01:07.953434+00:00",
+      "entry_time": "2026-09-22T14:01:07.953434+00:00",
+      "entry_price": 0.216108,
+      "current_price": 0.216108,
+      "initial_quantity": 462.7315971643808,
+      "remaining_quantity": 462.7315971643808,
+      "quantity": 462.7315971643808,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.211531,
+      "initial_stop_loss": 0.211531,
+      "tp1": 0.2193,
+      "tp2": 0.221034,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.216108,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.001779,
+        "mom_hist": 0.0011,
+        "bb_upper": 0.21544,
+        "rsi_15m": 65.91
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-22T13:55:33.603256+00:00",
+  "last_updated": "2026-09-22T14:01:07.953469+00:00",
   "last_12h_summary_slot": "2026-09-22_06_PM",
   "last_emergency_dump_alert_time": "2026-09-22T01:50:30.828184+00:00"
 }
