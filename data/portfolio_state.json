@@ -1,51 +1,10 @@
 {
-  "cash_usdt": 302.35255442282363,
+  "cash_usdt": 402.3274669603236,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {
-    "DASHUSDT": {
-      "trade_id": "T_20260922014549_DASHUSDT",
-      "symbol": "DASHUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-22T01:30:00",
-      "signal_time": "2026-09-22T01:45:49.738834+00:00",
-      "entry_time": "2026-09-22T01:45:49.738834+00:00",
-      "entry_price": 60.560265,
-      "current_price": 60.560265,
-      "initial_quantity": 1.651247728192735,
-      "remaining_quantity": 1.651247728192735,
-      "quantity": 1.651247728192735,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 59.1142,
-      "initial_stop_loss": 59.1142,
-      "tp1": 61.3576,
-      "tp2": 61.8609,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 60.560265,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.6154,
-        "mom_hist": 0.1769,
-        "bb_upper": 60.1245,
-        "rsi_15m": 65.16
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-22T01:45:49.738866+00:00",
+  "last_updated": "2026-09-22T01:50:32.884727+00:00",
   "last_12h_summary_slot": "2026-09-22_06_AM",
-  "last_emergency_dump_alert_time": "2026-09-22T01:05:31.041435+00:00"
+  "last_emergency_dump_alert_time": "2026-09-22T01:50:30.828184+00:00"
 }
