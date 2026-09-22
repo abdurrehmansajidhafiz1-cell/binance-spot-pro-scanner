@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 206.57020718417306,
+  "cash_usdt": 204.59115384172486,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-21T20:01:26.660516+00:00",
       "entry_time": "2026-09-21T20:01:26.660516+00:00",
       "entry_price": 0.34457219999999994,
-      "current_price": 0.3459,
+      "current_price": 0.3462,
       "initial_quantity": 290.21493898811343,
       "remaining_quantity": 290.21493898811343,
       "quantity": 290.21493898811343,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.346,
+      "highest_price": 0.3464,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -42,25 +42,25 @@
         "supertrend_4h": "BULLISH"
       }
     },
-    "ADAUSDT": {
-      "trade_id": "T_20260922004600_ADAUSDT",
-      "symbol": "ADAUSDT",
+    "SEIUSDT": {
+      "trade_id": "T_20260922005049_SEIUSDT",
+      "symbol": "SEIUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-22T00:30:00",
-      "signal_time": "2026-09-22T00:46:00.857638+00:00",
-      "entry_time": "2026-09-22T00:46:00.857638+00:00",
-      "entry_price": 0.24882435,
-      "current_price": 0.24882435,
-      "initial_quantity": 401.8899275734067,
-      "remaining_quantity": 401.8899275734067,
-      "quantity": 401.8899275734067,
+      "signal_time": "2026-09-22T00:50:49.057695+00:00",
+      "entry_time": "2026-09-22T00:50:49.057695+00:00",
+      "entry_price": 0.06017007,
+      "current_price": 0.06017007,
+      "initial_quantity": 1661.9558528018997,
+      "remaining_quantity": 1661.9558528018997,
+      "quantity": 1661.9558528018997,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.244392,
-      "initial_stop_loss": 0.244392,
-      "tp1": 0.251077,
-      "tp2": 0.253062,
+      "stop_loss": 0.058957,
+      "initial_stop_loss": 0.058957,
+      "tp1": 0.060791,
+      "tp2": 0.061313,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -72,19 +72,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.24882435,
+      "highest_price": 0.06017007,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.002053,
-        "mom_hist": 0.0009,
-        "bb_upper": 0.247783,
-        "rsi_15m": 60.9
+        "atr": 0.000621,
+        "mom_hist": 0.0001,
+        "bb_upper": 0.059894,
+        "rsi_15m": 59.1
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-22T00:46:00.857683+00:00",
+  "last_updated": "2026-09-22T00:50:49.057723+00:00",
   "last_12h_summary_slot": "2026-09-21_06_PM",
   "last_emergency_dump_alert_time": "2026-09-21T10:45:32.129215+00:00"
 }
