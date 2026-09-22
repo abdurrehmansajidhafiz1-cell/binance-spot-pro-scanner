@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 291.45294374060865,
+  "cash_usdt": 342.28409109670304,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,13 +12,13 @@
       "signal_time": "2026-09-22T06:01:23.607634+00:00",
       "entry_time": "2026-09-22T06:01:23.607634+00:00",
       "entry_price": 59.799885,
-      "current_price": 59.799885,
+      "current_price": 59.36,
       "initial_quantity": 1.672244018529467,
-      "remaining_quantity": 1.672244018529467,
-      "quantity": 1.672244018529467,
+      "remaining_quantity": 0.8361220092647335,
+      "quantity": 0.8361220092647335,
       "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 58.0343,
+      "remaining_cost_usdt": 50.0,
+      "stop_loss": 59.88958482750001,
       "initial_stop_loss": 58.0343,
       "tp1": 62.2236,
       "tp2": 64.7372,
@@ -33,18 +33,22 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 59.799885,
+      "highest_price": 60.87,
       "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
+      "realized_pnl_usdt": 0.8311473560944123,
       "metadata": {
         "risk_distance_pct": 2.81,
         "rsi_1h": 53.64,
         "supertrend_4h": "BULLISH"
-      }
+      },
+      "i1_be_reached": true,
+      "i1_be_hit_time": "2026-09-22T06:05:31.774897+00:00",
+      "i1_be_exit_price": 60.839565,
+      "total_fees_paid": 0.11315197449794426
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-22T06:01:23.607660+00:00",
+  "last_updated": "2026-09-22T06:05:31.774960+00:00",
   "last_12h_summary_slot": "2026-09-22_06_AM",
   "last_emergency_dump_alert_time": "2026-09-22T01:50:30.828184+00:00"
 }
