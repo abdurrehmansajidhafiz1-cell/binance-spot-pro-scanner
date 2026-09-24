@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--27.47%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--27.50%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-26.2%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.18-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-237-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-238-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-25 00:11:13 PKT (19:11:13 UTC)`  
+> **Last Updated:** `2026-09-25 00:16:19 PKT (19:16:19 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -16,24 +16,26 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `237 Unique Trades` |
-| **Current Equity** | `$362.65 USDT` | **Completed Trades** | `237 Trades` |
-| **Available Cash** | `$362.65 USDT` | **Active / In-Trade** | `0 Trade` |
-| **Net PnL ($)** | `-$137.35 USDT` | **Win / Loss Ratio** | `62 Win / 175 Loss` |
-| **Net Return (%)** | `-27.47%` | **Win Rate** | `26.16%` |
+| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `238 Unique Trades` |
+| **Current Equity** | `$362.52 USDT` | **Completed Trades** | `237 Trades` |
+| **Available Cash** | `$262.57 USDT` | **Active / In-Trade** | `1 Trade` |
+| **Net PnL ($)** | `-$137.48 USDT` | **Win / Loss Ratio** | `62 Win / 175 Loss` |
+| **Net Return (%)** | `-27.50%` | **Win Rate** | `26.16%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.18` |
-| **Max Drawdown** | `-27.47%` | **Total Fees Deducted** | `$35.40 USDT` |
+| **Max Drawdown** | `-27.50%` | **Total Fees Deducted** | `$35.47 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (0)
+## 🟡 Active Open Positions (1)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense & Partial Exit Protocol):**
 > - **S3 Strategy:** Jab trade **+0.75%** gain reach karti hai, toh **50% original position sell/close** ho jati hai aur Stop Loss Entry Price (+0.10% fee buffer) par lock ho jata hai. Baqi 50% position **TP1 (30% exit)** aur **TP2 (20% exit)** ke liye open rehti hai. Total exit = 50% + 30% + 20% = 100%.
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-_No active open positions currently._
+| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
+|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
+| LSKUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-25 00:00:00 PKT (19:00:00 UTC) | 2026-09-25 00:15:49 PKT (19:15:49 UTC) | $0.4297<br><small>2026-09-25 00:15:49 PKT (19:15:49 UTC)</small> | $0.4295         | $0.4203     | $0.4329 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.4430 (Pending)<br>$0.4549 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
 
 ---
 
