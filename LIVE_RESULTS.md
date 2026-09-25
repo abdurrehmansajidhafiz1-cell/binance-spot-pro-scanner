@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.18-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-246-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-25 06:26:58 PKT (01:26:58 UTC)`  
+> **Last Updated:** `2026-09-25 06:31:24 PKT (01:31:24 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,9 +17,9 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `246 Unique Trades` |
-| **Current Equity** | `$352.52 USDT` | **Completed Trades** | `244 Trades` |
+| **Current Equity** | `$352.48 USDT` | **Completed Trades** | `244 Trades` |
 | **Available Cash** | `$152.61 USDT` | **Active / In-Trade** | `2 Trade` |
-| **Net PnL ($)** | `-$147.48 USDT` | **Win / Loss Ratio** | `62 Win / 182 Loss` |
+| **Net PnL ($)** | `-$147.52 USDT` | **Win / Loss Ratio** | `62 Win / 182 Loss` |
 | **Net Return (%)** | `-29.50%` | **Win Rate** | `25.41%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.18` |
 | **Max Drawdown** | `-29.50%` | **Total Fees Deducted** | `$36.59 USDT` |
@@ -36,7 +36,7 @@
 | Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
 |----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
 | UUSDT    | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-25 05:45:00 PKT (00:45:00 UTC) | 2026-09-25 06:01:00 PKT (01:01:00 UTC) | $1.0002<br><small>2026-09-25 06:01:00 PKT (01:01:00 UTC)</small> | $0.9998         | $0.9883     | $1.0077 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $1.0118 (Pending)<br>$1.0198 (Pending) | -0.04 (-0.04%)   | 🟡 ACTIVE |
-| ADAUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-25 06:00:00 PKT (01:00:00 UTC) | 2026-09-25 06:26:11 PKT (01:26:11 UTC) | $0.2507<br><small>2026-09-25 06:26:11 PKT (01:26:11 UTC)</small> | $0.2506         | $0.2480     | $0.2526 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.2548 (Pending)<br>$0.2568 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
+| ADAUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-09-25 06:00:00 PKT (01:00:00 UTC) | 2026-09-25 06:26:11 PKT (01:26:11 UTC) | $0.2507<br><small>2026-09-25 06:26:11 PKT (01:26:11 UTC)</small> | $0.2505         | $0.2480     | $0.2526 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.2548 (Pending)<br>$0.2568 (Pending) | -0.09 (-0.09%)   | 🟡 ACTIVE |
 
 ---
 
