@@ -1,27 +1,27 @@
 {
-  "cash_usdt": 260.9528266025497,
+  "cash_usdt": 259.49689789210845,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "XRPUSDT": {
-      "trade_id": "T_20260925001547_XRPUSDT",
-      "symbol": "XRPUSDT",
+    "ADAUSDT": {
+      "trade_id": "T_20260925002055_ADAUSDT",
+      "symbol": "ADAUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-09-25T00:00:00",
-      "signal_time": "2026-09-25T00:15:47.592383+00:00",
-      "entry_time": "2026-09-25T00:15:47.592383+00:00",
-      "entry_price": 1.5485739,
-      "current_price": 1.5485739,
-      "initial_quantity": 64.575542697704,
-      "remaining_quantity": 64.575542697704,
-      "quantity": 64.575542697704,
+      "signal_time": "2026-09-25T00:20:55.305381+00:00",
+      "entry_time": "2026-09-25T00:20:55.305381+00:00",
+      "entry_price": 0.25062524999999997,
+      "current_price": 0.25062524999999997,
+      "initial_quantity": 399.002095758508,
+      "remaining_quantity": 399.002095758508,
+      "quantity": 399.002095758508,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 1.5291,
-      "initial_stop_loss": 1.5291,
-      "tp1": 1.5669,
-      "tp2": 1.5793,
+      "stop_loss": 0.247211,
+      "initial_stop_loss": 0.247211,
+      "tp1": 0.253304,
+      "tp2": 0.255306,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -33,19 +33,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 1.5485739,
+      "highest_price": 0.25062524999999997,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.0089,
-        "mom_hist": 0.0042,
-        "bb_upper": 1.5436,
-        "rsi_15m": 68.26
+        "atr": 0.001659,
+        "mom_hist": 0.0006,
+        "bb_upper": 0.249984,
+        "rsi_15m": 60.83
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-25T00:15:47.592415+00:00",
+  "last_updated": "2026-09-25T00:20:55.305406+00:00",
   "last_12h_summary_slot": "2026-09-24_06_PM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
