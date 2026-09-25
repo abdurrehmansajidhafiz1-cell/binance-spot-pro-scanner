@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 246.79307688004252,
+  "cash_usdt": 146.71807688004253,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-25T09:25:44.658436+00:00",
       "entry_time": "2026-09-25T09:25:44.658436+00:00",
       "entry_price": 0.23621804999999998,
-      "current_price": 0.23621804999999998,
+      "current_price": 0.2364,
       "initial_quantity": 423.337674661187,
       "remaining_quantity": 423.337674661187,
       "quantity": 423.337674661187,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.23621804999999998,
+      "highest_price": 0.2367,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -42,10 +42,50 @@
         "bb_upper": 0.234667,
         "rsi_15m": 62.18
       }
+    },
+    "ETHUSDT": {
+      "trade_id": "T_20260925093056_ETHUSDT",
+      "symbol": "ETHUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-25T09:15:00",
+      "signal_time": "2026-09-25T09:30:56.362725+00:00",
+      "entry_time": "2026-09-25T09:30:56.362725+00:00",
+      "entry_price": 2710.344495,
+      "current_price": 2710.344495,
+      "initial_quantity": 0.036895678827720386,
+      "remaining_quantity": 0.036895678827720386,
+      "quantity": 0.036895678827720386,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 2679.3787,
+      "initial_stop_loss": 2679.3787,
+      "tp1": 2743.0766,
+      "tp2": 2764.761,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 2710.344495,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 9.1386,
+        "mom_hist": 6.0119,
+        "bb_upper": 2700.7857,
+        "rsi_15m": 68.63
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-25T09:25:44.658465+00:00",
+  "last_updated": "2026-09-25T09:30:56.362780+00:00",
   "last_12h_summary_slot": "2026-09-25_06_AM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
