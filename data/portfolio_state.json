@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 242.2610274892628,
+  "cash_usdt": 142.1860274892628,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-26T02:01:21.866797+00:00",
       "entry_time": "2026-09-26T02:01:21.866797+00:00",
       "entry_price": 0.22171079999999999,
-      "current_price": 0.218,
+      "current_price": 0.2178,
       "initial_quantity": 451.03801889668887,
       "remaining_quantity": 451.03801889668887,
       "quantity": 451.03801889668887,
@@ -41,10 +41,49 @@
         "rsi_1h": 59.54,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "PENGUUSDT": {
+      "trade_id": "T_20260926080118_PENGUUSDT",
+      "symbol": "PENGUUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-09-26T07:00:00",
+      "signal_time": "2026-09-26T08:01:18.997725+00:00",
+      "entry_time": "2026-09-26T08:01:18.997725+00:00",
+      "entry_price": 0.010231113,
+      "current_price": 0.010231113,
+      "initial_quantity": 9774.107665510097,
+      "remaining_quantity": 9774.107665510097,
+      "quantity": 9774.107665510097,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.009895,
+      "initial_stop_loss": 0.009895,
+      "tp1": 0.010735,
+      "tp2": 0.011239,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.010231113,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 3.28,
+        "rsi_1h": 57.64,
+        "supertrend_4h": "BULLISH"
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-26T07:55:25.956198+00:00",
+  "last_updated": "2026-09-26T08:01:18.997751+00:00",
   "last_12h_summary_slot": "2026-09-26_06_AM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
