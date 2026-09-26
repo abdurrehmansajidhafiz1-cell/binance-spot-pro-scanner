@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.18-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-259-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-09-26 14:51:14 PKT (09:51:14 UTC)`  
+> **Last Updated:** `2026-09-26 14:56:21 PKT (09:56:21 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,8 +35,8 @@
 
 | Symbol    | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
 |-----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| XLMUSDT   | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-26 06:00:00 PKT (01:00:00 UTC) | 2026-09-26 07:01:21 PKT (02:01:21 UTC) | $0.2217<br><small>2026-09-26 07:01:21 PKT (02:01:21 UTC)</small> | $0.2166         | $0.2141     | $0.2250 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.2334 (Pending)<br>$0.2450 (Pending) | -2.31 (-2.31%)   | 🟡 ACTIVE |
-| PENGUUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-26 12:00:00 PKT (07:00:00 UTC) | 2026-09-26 13:01:18 PKT (08:01:18 UTC) | $0.0102<br><small>2026-09-26 13:01:18 PKT (08:01:18 UTC)</small> | $0.0100         | $0.0099     | $0.0104 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.0107 (Pending)<br>$0.0112 (Pending) | -2.02 (-2.02%)   | 🟡 ACTIVE |
+| XLMUSDT   | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-26 06:00:00 PKT (01:00:00 UTC) | 2026-09-26 07:01:21 PKT (02:01:21 UTC) | $0.2217<br><small>2026-09-26 07:01:21 PKT (02:01:21 UTC)</small> | $0.2167         | $0.2141     | $0.2250 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.2334 (Pending)<br>$0.2450 (Pending) | -2.26 (-2.26%)   | 🟡 ACTIVE |
+| PENGUUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-09-26 12:00:00 PKT (07:00:00 UTC) | 2026-09-26 13:01:18 PKT (08:01:18 UTC) | $0.0102<br><small>2026-09-26 13:01:18 PKT (08:01:18 UTC)</small> | $0.0100         | $0.0099     | $0.0104 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.0107 (Pending)<br>$0.0112 (Pending) | -2.07 (-2.07%)   | 🟡 ACTIVE |
 
 ---
 
