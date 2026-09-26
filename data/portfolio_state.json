@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 137.70715479296976,
+  "cash_usdt": 37.63215479296976,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-26T02:01:21.866797+00:00",
       "entry_time": "2026-09-26T02:01:21.866797+00:00",
       "entry_price": 0.22171079999999999,
-      "current_price": 0.2192,
+      "current_price": 0.2193,
       "initial_quantity": 451.03801889668887,
       "remaining_quantity": 451.03801889668887,
       "quantity": 451.03801889668887,
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-26T08:01:18.997725+00:00",
       "entry_time": "2026-09-26T08:01:18.997725+00:00",
       "entry_price": 0.010231113,
-      "current_price": 0.010193,
+      "current_price": 0.010192,
       "initial_quantity": 9774.107665510097,
       "remaining_quantity": 9774.107665510097,
       "quantity": 9774.107665510097,
@@ -80,10 +80,50 @@
         "rsi_1h": 57.64,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "GRAMUSDT": {
+      "trade_id": "T_20260926111549_GRAMUSDT",
+      "symbol": "GRAMUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-26T11:00:00",
+      "signal_time": "2026-09-26T11:15:49.978483+00:00",
+      "entry_time": "2026-09-26T11:15:49.978483+00:00",
+      "entry_price": 1.4607299999999999,
+      "current_price": 1.4607299999999999,
+      "initial_quantity": 68.45892122431935,
+      "remaining_quantity": 68.45892122431935,
+      "quantity": 68.45892122431935,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 1.4442,
+      "initial_stop_loss": 1.4442,
+      "tp1": 1.4785,
+      "tp2": 1.4902,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 1.4607299999999999,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0059,
+        "mom_hist": 0.002,
+        "bb_upper": 1.4595,
+        "rsi_15m": 61.98
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-26T11:10:29.104513+00:00",
+  "last_updated": "2026-09-26T11:15:49.978524+00:00",
   "last_12h_summary_slot": "2026-09-26_06_AM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
