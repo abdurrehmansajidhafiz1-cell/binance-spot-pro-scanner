@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 114.5887858477442,
+  "cash_usdt": 164.9862442838385,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_price": 156.69831,
-      "current_price": 155.07,
+      "current_price": 154.56,
       "initial_quantity": 0.6381689757853802,
       "remaining_quantity": 0.6381689757853802,
       "quantity": 0.6381689757853802,
@@ -51,13 +51,13 @@
       "signal_time": "2026-09-27T14:01:04.712389+00:00",
       "entry_time": "2026-09-27T14:01:04.712389+00:00",
       "entry_price": 11.019506999999999,
-      "current_price": 11.019506999999999,
+      "current_price": 10.99,
       "initial_quantity": 9.07481614195626,
-      "remaining_quantity": 9.07481614195626,
-      "quantity": 9.07481614195626,
+      "remaining_quantity": 4.53740807097813,
+      "quantity": 4.53740807097813,
       "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 10.6768,
+      "remaining_cost_usdt": 50.0,
+      "stop_loss": 11.0360362605,
       "initial_stop_loss": 10.6768,
       "tp1": 11.5147,
       "tp2": 12.0175,
@@ -72,18 +72,22 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 11.019506999999999,
+      "highest_price": 11.121,
       "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
+      "realized_pnl_usdt": 0.3974584360942899,
       "metadata": {
         "risk_distance_pct": 3.04,
         "rsi_1h": 56.79,
         "supertrend_4h": "BULLISH"
-      }
+      },
+      "i1_be_reached": true,
+      "i1_be_hit_time": "2026-09-27T14:05:23.207216+00:00",
+      "i1_be_exit_price": 11.1154395,
+      "total_fees_paid": 0.11282646367482684
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-27T14:01:04.712413+00:00",
+  "last_updated": "2026-09-27T14:05:23.207259+00:00",
   "last_12h_summary_slot": "2026-09-27_06_PM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
