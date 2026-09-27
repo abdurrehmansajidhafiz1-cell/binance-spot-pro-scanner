@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 118.37016002290885,
+  "cash_usdt": 18.295160022908846,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_price": 156.69831,
-      "current_price": 155.53,
+      "current_price": 155.69,
       "initial_quantity": 0.6381689757853802,
       "remaining_quantity": 0.6381689757853802,
       "quantity": 0.6381689757853802,
@@ -81,10 +81,50 @@
         "bb_upper": 1.0002,
         "rsi_15m": 68.94
       }
+    },
+    "MARSCOINUSDT": {
+      "trade_id": "T_20260927104545_MARSCOINUSDT",
+      "symbol": "MARSCOINUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-27T10:30:00",
+      "signal_time": "2026-09-27T10:45:45.992383+00:00",
+      "entry_time": "2026-09-27T10:45:45.992383+00:00",
+      "entry_price": 0.13436715,
+      "current_price": 0.13436715,
+      "initial_quantity": 744.2295233619229,
+      "remaining_quantity": 744.2295233619229,
+      "quantity": 744.2295233619229,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.13065,
+      "initial_stop_loss": 0.13065,
+      "tp1": 0.135841,
+      "tp2": 0.137681,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.13436715,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.001841,
+        "mom_hist": 0.0013,
+        "bb_upper": 0.133331,
+        "rsi_15m": 62.81
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-27T10:40:31.609831+00:00",
+  "last_updated": "2026-09-27T10:45:45.992409+00:00",
   "last_12h_summary_slot": "2026-09-27_06_AM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
