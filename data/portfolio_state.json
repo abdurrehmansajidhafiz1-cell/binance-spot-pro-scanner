@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 214.99866931196348,
+  "cash_usdt": 114.92366931196348,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_price": 156.69831,
-      "current_price": 155.5,
+      "current_price": 155.63,
       "initial_quantity": 0.6381689757853802,
       "remaining_quantity": 0.6381689757853802,
       "quantity": 0.6381689757853802,
@@ -41,10 +41,50 @@
         "rsi_1h": 61.76,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "NEARUSDT": {
+      "trade_id": "T_20260927183054_NEARUSDT",
+      "symbol": "NEARUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-09-27T18:15:00",
+      "signal_time": "2026-09-27T18:30:54.156609+00:00",
+      "entry_time": "2026-09-27T18:30:54.156609+00:00",
+      "entry_price": 5.3496735,
+      "current_price": 5.3496735,
+      "initial_quantity": 18.692729565645454,
+      "remaining_quantity": 18.692729565645454,
+      "quantity": 18.692729565645454,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 5.2124,
+      "initial_stop_loss": 5.2124,
+      "tp1": 5.4102,
+      "tp2": 5.4615,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 5.3496735,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0578,
+        "mom_hist": 0.0326,
+        "bb_upper": 5.3115,
+        "rsi_15m": 65.3
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-27T18:25:28.779234+00:00",
+  "last_updated": "2026-09-27T18:30:54.156638+00:00",
   "last_12h_summary_slot": "2026-09-27_06_PM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
