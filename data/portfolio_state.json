@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 119.93317019826706,
+  "cash_usdt": 19.85817019826706,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_time": "2026-09-27T06:01:32.055036+00:00",
       "entry_price": 156.69831,
-      "current_price": 155.92,
+      "current_price": 155.84,
       "initial_quantity": 0.6381689757853802,
       "remaining_quantity": 0.6381689757853802,
       "quantity": 0.6381689757853802,
@@ -51,7 +51,7 @@
       "signal_time": "2026-09-27T08:31:02.310073+00:00",
       "entry_time": "2026-09-27T08:31:02.310073+00:00",
       "entry_price": 1.0006000499999999,
-      "current_price": 1.0002,
+      "current_price": 1.0001,
       "initial_quantity": 99.94003098440783,
       "remaining_quantity": 99.94003098440783,
       "quantity": 99.94003098440783,
@@ -81,10 +81,49 @@
         "bb_upper": 1.0002,
         "rsi_15m": 68.94
       }
+    },
+    "ADAUSDT": {
+      "trade_id": "T_20260927100121_ADAUSDT",
+      "symbol": "ADAUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-09-27T09:00:00",
+      "signal_time": "2026-09-27T10:01:21.523919+00:00",
+      "entry_time": "2026-09-27T10:01:21.523919+00:00",
+      "entry_price": 0.25622805,
+      "current_price": 0.25622805,
+      "initial_quantity": 390.2773330242337,
+      "remaining_quantity": 390.2773330242337,
+      "quantity": 390.2773330242337,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.249129,
+      "initial_stop_loss": 0.249129,
+      "tp1": 0.267056,
+      "tp2": 0.277812,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.25622805,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 2.8,
+        "rsi_1h": 54.62,
+        "supertrend_4h": "BULLISH"
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-27T09:55:31.672759+00:00",
+  "last_updated": "2026-09-27T10:01:21.523945+00:00",
   "last_12h_summary_slot": "2026-09-27_06_AM",
   "last_emergency_dump_alert_time": "2026-09-22T15:00:46.575212+00:00"
 }
