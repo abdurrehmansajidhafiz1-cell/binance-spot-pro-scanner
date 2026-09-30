@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 97.62714309085918,
+  "cash_usdt": 196.1560972296544,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -42,50 +42,10 @@
         "bb_upper": 149.646,
         "rsi_15m": 63.47
       }
-    },
-    "DOGEUSDT": {
-      "trade_id": "T_20260930103549_DOGEUSDT",
-      "symbol": "DOGEUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-30T10:15:00",
-      "signal_time": "2026-09-30T10:35:49.403438+00:00",
-      "entry_time": "2026-09-30T10:35:49.403438+00:00",
-      "entry_price": 0.09500747999999999,
-      "current_price": 0.09500747999999999,
-      "initial_quantity": 1052.5487045862074,
-      "remaining_quantity": 1052.5487045862074,
-      "quantity": 1052.5487045862074,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.093727,
-      "initial_stop_loss": 0.093727,
-      "tp1": 0.096029,
-      "tp2": 0.096788,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.09500747999999999,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.000451,
-        "mom_hist": 0.0004,
-        "bb_upper": 0.094747,
-        "rsi_15m": 66.2
-      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-30T10:35:49.403465+00:00",
+  "last_updated": "2026-09-30T10:40:34.803423+00:00",
   "last_12h_summary_slot": "2026-09-30_06_AM",
   "last_emergency_dump_alert_time": "2026-09-28T01:30:31.363163+00:00"
 }
