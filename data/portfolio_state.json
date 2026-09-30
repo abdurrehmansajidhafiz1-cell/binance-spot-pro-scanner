@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 93.80941189028185,
+  "cash_usdt": 192.80715485683527,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-09-30T10:15:55.682838+00:00",
       "entry_time": "2026-09-30T10:15:55.682838+00:00",
       "entry_price": 149.74483499999997,
-      "current_price": 149.55,
+      "current_price": 149.49,
       "initial_quantity": 0.6678026657814276,
       "remaining_quantity": 0.6678026657814276,
       "quantity": 0.6678026657814276,
@@ -42,50 +42,10 @@
         "bb_upper": 149.646,
         "rsi_15m": 63.47
       }
-    },
-    "ICPUSDT": {
-      "trade_id": "T_20260930124552_ICPUSDT",
-      "symbol": "ICPUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-09-30T12:30:00",
-      "signal_time": "2026-09-30T12:45:52.108526+00:00",
-      "entry_time": "2026-09-30T12:45:52.108526+00:00",
-      "entry_price": 3.5187584999999997,
-      "current_price": 3.5187584999999997,
-      "initial_quantity": 28.419114298409514,
-      "remaining_quantity": 28.419114298409514,
-      "quantity": 28.419114298409514,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 3.4287,
-      "initial_stop_loss": 3.4287,
-      "tp1": 3.5501,
-      "tp2": 3.5782,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 3.5187584999999997,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 0.0311,
-        "mom_hist": 0.0099,
-        "bb_upper": 3.4909,
-        "rsi_15m": 65.83
-      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-09-30T12:45:52.108552+00:00",
+  "last_updated": "2026-09-30T12:50:33.304600+00:00",
   "last_12h_summary_slot": "2026-09-30_06_AM",
   "last_emergency_dump_alert_time": "2026-09-28T01:30:31.363163+00:00"
 }
