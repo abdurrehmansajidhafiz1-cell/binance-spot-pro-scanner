@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 82.78762583715614,
+  "cash_usdt": 34.40046000242556,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,13 +12,13 @@
       "signal_time": "2026-10-01T14:01:23.991039+00:00",
       "entry_time": "2026-10-01T14:01:23.991039+00:00",
       "entry_price": 165.6828,
-      "current_price": 165.81,
+      "current_price": 169.54,
       "initial_quantity": 0.6035629528231055,
-      "remaining_quantity": 0.6035629528231055,
-      "quantity": 0.6035629528231055,
+      "remaining_quantity": 0.30178147641155273,
+      "quantity": 0.30178147641155273,
       "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 160.4966,
+      "remaining_cost_usdt": 50.0,
+      "stop_loss": 165.9313242,
       "initial_stop_loss": 160.4966,
       "tp1": 174.3802,
       "tp2": 182.7103,
@@ -33,14 +33,18 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 166.6,
+      "highest_price": 171.49,
       "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
+      "realized_pnl_usdt": 1.6878341652694289,
       "metadata": {
         "risk_distance_pct": 3.34,
         "rsi_1h": 56.97,
         "supertrend_4h": "BULLISH"
-      }
+      },
+      "i1_be_reached": true,
+      "i1_be_hit_time": "2026-10-01T14:10:34.083971+00:00",
+      "i1_be_exit_price": 171.404255,
+      "total_fees_paid": 0.11379497185284171
     },
     "SPCXBUSDT": {
       "trade_id": "T_20261001140139_SPCXBUSDT",
@@ -51,7 +55,7 @@
       "signal_time": "2026-10-01T14:01:39.700651+00:00",
       "entry_time": "2026-10-01T14:01:39.700651+00:00",
       "entry_price": 151.95594,
-      "current_price": 151.72,
+      "current_price": 152.33,
       "initial_quantity": 0.6580854950454718,
       "remaining_quantity": 0.6580854950454718,
       "quantity": 0.6580854950454718,
@@ -80,10 +84,49 @@
         "rsi_1h": 60.68,
         "supertrend_4h": "BULLISH"
       }
+    },
+    "NVDABUSDT": {
+      "trade_id": "T_20261001141114_NVDABUSDT",
+      "symbol": "NVDABUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-10-01T13:00:00",
+      "signal_time": "2026-10-01T14:11:14.308536+00:00",
+      "entry_time": "2026-10-01T14:11:14.308536+00:00",
+      "entry_price": 230.33511,
+      "current_price": 230.33511,
+      "initial_quantity": 0.4341500520697865,
+      "remaining_quantity": 0.4341500520697865,
+      "quantity": 0.4341500520697865,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 228.2604,
+      "initial_stop_loss": 228.2604,
+      "tp1": 234.6343,
+      "tp2": 238.4587,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 230.33511,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 1.1,
+        "rsi_1h": 55.01,
+        "supertrend_4h": "BULLISH"
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-01T14:05:32.333563+00:00",
+  "last_updated": "2026-10-01T14:11:14.308560+00:00",
   "last_12h_summary_slot": "2026-10-01_06_PM",
   "last_emergency_dump_alert_time": "2026-10-01T07:25:22.821674+00:00"
 }
