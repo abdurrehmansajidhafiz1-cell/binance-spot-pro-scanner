@@ -1,50 +1,10 @@
 {
-  "cash_usdt": 182.96271329965617,
+  "cash_usdt": 282.93762583715613,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {
-    "TRXUSDT": {
-      "trade_id": "T_20261001040117_TRXUSDT",
-      "symbol": "TRXUSDT",
-      "strategy": "I1_MTF_TREND_PULLBACK",
-      "timeframe": "1h (4h Macro Trend)",
-      "zone_candle_time": "2026-10-01T03:00:00",
-      "signal_time": "2026-10-01T04:01:17.303546+00:00",
-      "entry_time": "2026-10-01T04:01:17.303546+00:00",
-      "entry_price": 0.3387693,
-      "current_price": 0.3376,
-      "initial_quantity": 295.1861340446138,
-      "remaining_quantity": 295.1861340446138,
-      "quantity": 295.1861340446138,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.336578,
-      "initial_stop_loss": 0.336578,
-      "tp1": 0.341383,
-      "tp2": 0.344267,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 0.3387693,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "risk_distance_pct": 0.57,
-        "rsi_1h": 58.84,
-        "supertrend_4h": "BULLISH"
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-01T07:20:32.721144+00:00",
+  "last_updated": "2026-10-01T07:25:25.095106+00:00",
   "last_12h_summary_slot": "2026-10-01_06_AM",
-  "last_emergency_dump_alert_time": "2026-09-28T01:30:31.363163+00:00"
+  "last_emergency_dump_alert_time": "2026-10-01T07:25:22.821674+00:00"
 }
