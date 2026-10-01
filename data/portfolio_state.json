@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 84.46279206121055,
+  "cash_usdt": 83.13758836212496,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-10-01T04:01:17.303546+00:00",
       "entry_time": "2026-10-01T04:01:17.303546+00:00",
       "entry_price": 0.3387693,
-      "current_price": 0.3383,
+      "current_price": 0.3384,
       "initial_quantity": 295.1861340446138,
       "remaining_quantity": 295.1861340446138,
       "quantity": 295.1861340446138,
@@ -42,25 +42,25 @@
         "supertrend_4h": "BULLISH"
       }
     },
-    "DOGEUSDT": {
-      "trade_id": "T_20261001040542_DOGEUSDT",
-      "symbol": "DOGEUSDT",
+    "PEPEUSDT": {
+      "trade_id": "T_20261001041044_PEPEUSDT",
+      "symbol": "PEPEUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-10-01T03:45:00",
-      "signal_time": "2026-10-01T04:05:42.124835+00:00",
-      "entry_time": "2026-10-01T04:05:42.124835+00:00",
-      "entry_price": 0.095757855,
-      "current_price": 0.095757855,
-      "initial_quantity": 1044.3007521419522,
-      "remaining_quantity": 1044.3007521419522,
-      "quantity": 1044.3007521419522,
+      "signal_time": "2026-10-01T04:10:44.118784+00:00",
+      "entry_time": "2026-10-01T04:10:44.118784+00:00",
+      "entry_price": 4.38219e-06,
+      "current_price": 4.38219e-06,
+      "initial_quantity": 22819640.408106446,
+      "remaining_quantity": 22819640.408106446,
+      "quantity": 22819640.408106446,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 0.094679,
-      "initial_stop_loss": 0.094679,
-      "tp1": 0.096929,
-      "tp2": 0.097696,
+      "stop_loss": 4.3e-06,
+      "initial_stop_loss": 4.3e-06,
+      "tp1": 4.43e-06,
+      "tp2": 4.47e-06,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -72,19 +72,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.095757855,
+      "highest_price": 4.38219e-06,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.000428,
-        "mom_hist": 0.0004,
-        "bb_upper": 0.09564,
-        "rsi_15m": 67.47
+        "atr": 3e-08,
+        "mom_hist": 0.0,
+        "bb_upper": 4.37e-06,
+        "rsi_15m": 66.15
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-01T04:05:42.124864+00:00",
+  "last_updated": "2026-10-01T04:10:44.118816+00:00",
   "last_12h_summary_slot": "2026-10-01_06_AM",
   "last_emergency_dump_alert_time": "2026-09-28T01:30:31.363163+00:00"
 }
