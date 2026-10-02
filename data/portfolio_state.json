@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 73.39348015371262,
+  "cash_usdt": 23.783314765970374,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,13 +12,13 @@
       "signal_time": "2026-10-02T07:16:27.056386+00:00",
       "entry_time": "2026-10-02T07:16:27.056386+00:00",
       "entry_price": 1096.818135,
-      "current_price": 1102.85,
+      "current_price": 1107.84,
       "initial_quantity": 0.09117281781632833,
-      "remaining_quantity": 0.09117281781632833,
-      "quantity": 0.09117281781632833,
+      "remaining_quantity": 0.045586408908164164,
+      "quantity": 0.045586408908164164,
       "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 1083.8013,
+      "remaining_cost_usdt": 50.0,
+      "stop_loss": 1097.914953135,
       "initial_stop_loss": 1083.8013,
       "tp1": 1109.5669,
       "tp2": 1118.3382,
@@ -33,15 +33,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 1104.76,
+      "highest_price": 1108.4,
       "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
+      "realized_pnl_usdt": 0.4648346122577607,
       "metadata": {
         "atr": 2.2916,
         "mom_hist": 1.4401,
         "bb_upper": 1095.6368,
         "rsi_15m": 63.41
-      }
+      },
+      "s3_early_be_reached": true,
+      "s3_early_be_hit_time": "2026-10-02T08:25:26.468584+00:00",
+      "s3_early_be_exit_price": 1107.8458,
+      "total_fees_paid": 0.11287703373449419
     },
     "SNDKBUSDT": {
       "trade_id": "T_20261002080059_SNDKBUSDT",
@@ -52,7 +56,7 @@
       "signal_time": "2026-10-02T08:00:59.431945+00:00",
       "entry_time": "2026-10-02T08:00:59.431945+00:00",
       "entry_price": 1794.83697,
-      "current_price": 1797.18,
+      "current_price": 1801.89,
       "initial_quantity": 0.05571536672770898,
       "remaining_quantity": 0.05571536672770898,
       "quantity": 0.05571536672770898,
@@ -73,7 +77,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 1799.32,
+      "highest_price": 1806.55,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -82,10 +86,50 @@
         "bb_upper": 1793.8158,
         "rsi_15m": 60.96
       }
+    },
+    "NVDABUSDT": {
+      "trade_id": "T_20261002082552_NVDABUSDT",
+      "symbol": "NVDABUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-10-02T08:00:00",
+      "signal_time": "2026-10-02T08:25:52.089552+00:00",
+      "entry_time": "2026-10-02T08:25:52.089552+00:00",
+      "entry_price": 232.79634,
+      "current_price": 232.79634,
+      "initial_quantity": 0.42956001799684657,
+      "remaining_quantity": 0.42956001799684657,
+      "quantity": 0.42956001799684657,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 230.0141,
+      "initial_stop_loss": 230.0141,
+      "tp1": 235.4823,
+      "tp2": 237.3438,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 232.79634,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.3218,
+        "mom_hist": 0.2396,
+        "bb_upper": 232.4485,
+        "rsi_15m": 67.2
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-02T08:20:29.724878+00:00",
+  "last_updated": "2026-10-02T08:25:52.089590+00:00",
   "last_12h_summary_slot": "2026-10-02_06_AM",
   "last_emergency_dump_alert_time": "2026-10-02T05:40:30.450937+00:00"
 }
