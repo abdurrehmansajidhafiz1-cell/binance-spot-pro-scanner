@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-324-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-02 18:05:35 PKT (13:05:35 UTC)`  
+> **Last Updated:** `2026-10-02 18:10:40 PKT (13:10:40 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,8 +35,8 @@
 
 | Symbol    | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                        | Unrealized PnL   | Status   |
 |-----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|--------------------------------------------|------------------|----------|
-| BNBUSDT   | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-02 17:45:00 PKT (12:45:00 UTC) | 2026-10-02 18:00:57 PKT (13:00:57 UTC) | $781.9408<br><small>2026-10-02 18:00:57 PKT (13:00:57 UTC)</small> | $781.3000       | $772.3546   | $787.8053 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $790.7161 (Pending)<br>$796.9668 (Pending) | -0.08 (-0.08%)   | 🟡 ACTIVE |
-| SPCXBUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-02 17:00:00 PKT (12:00:00 UTC) | 2026-10-02 18:01:18 PKT (13:01:18 UTC) | $149.8149<br><small>2026-10-02 18:01:18 PKT (13:01:18 UTC)</small> | $150.1700       | $148.9866   | $152.0621 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $150.9201 (Pending)<br>$152.0803 (Pending) | +0.24 (+0.24%)   | 🟡 ACTIVE |
+| BNBUSDT   | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-02 17:45:00 PKT (12:45:00 UTC) | 2026-10-02 18:00:57 PKT (13:00:57 UTC) | $781.9408<br><small>2026-10-02 18:00:57 PKT (13:00:57 UTC)</small> | $781.8700       | $772.3546   | $787.8053 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $790.7161 (Pending)<br>$796.9668 (Pending) | -0.01 (-0.01%)   | 🟡 ACTIVE |
+| SPCXBUSDT | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-02 17:00:00 PKT (12:00:00 UTC) | 2026-10-02 18:01:18 PKT (13:01:18 UTC) | $149.8149<br><small>2026-10-02 18:01:18 PKT (13:01:18 UTC)</small> | $150.0600       | $148.9866   | $152.0621 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $150.9201 (Pending)<br>$152.0803 (Pending) | +0.16 (+0.16%)   | 🟡 ACTIVE |
 
 ---
 
