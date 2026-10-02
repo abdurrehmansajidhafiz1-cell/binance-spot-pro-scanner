@@ -12,7 +12,7 @@
       "signal_time": "2026-10-02T04:40:48.006936+00:00",
       "entry_time": "2026-10-02T04:40:48.006936+00:00",
       "entry_price": 0.506253,
-      "current_price": 0.5055,
+      "current_price": 0.5063,
       "initial_quantity": 197.52969365119813,
       "remaining_quantity": 197.52969365119813,
       "quantity": 197.52969365119813,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.5082,
+      "highest_price": 0.5098,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -52,7 +52,7 @@
       "signal_time": "2026-10-02T05:05:54.729565+00:00",
       "entry_time": "2026-10-02T05:05:54.729565+00:00",
       "entry_price": 232.18603499999998,
-      "current_price": 232.18603499999998,
+      "current_price": 232.12,
       "initial_quantity": 0.4306891239173795,
       "remaining_quantity": 0.4306891239173795,
       "quantity": 0.4306891239173795,
@@ -73,7 +73,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 232.18603499999998,
+      "highest_price": 232.44,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -85,7 +85,7 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-02T05:05:54.729591+00:00",
+  "last_updated": "2026-10-02T05:10:31.374784+00:00",
   "last_12h_summary_slot": "2026-10-02_06_AM",
   "last_emergency_dump_alert_time": "2026-10-01T07:25:22.821674+00:00"
 }
