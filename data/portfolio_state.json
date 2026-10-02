@@ -1,48 +1,8 @@
 {
-  "cash_usdt": 73.77077103472038,
+  "cash_usdt": 173.42395062510678,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "SNDKBUSDT": {
-      "trade_id": "T_20261002080059_SNDKBUSDT",
-      "symbol": "SNDKBUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-10-02T07:45:00",
-      "signal_time": "2026-10-02T08:00:59.431945+00:00",
-      "entry_time": "2026-10-02T08:00:59.431945+00:00",
-      "entry_price": 1794.83697,
-      "current_price": 1792.51,
-      "initial_quantity": 0.05571536672770898,
-      "remaining_quantity": 0.05571536672770898,
-      "quantity": 0.05571536672770898,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 1774.1104,
-      "initial_stop_loss": 1774.1104,
-      "tp1": 1816.287,
-      "tp2": 1830.645,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 1806.55,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 4.2631,
-        "mom_hist": 2.3977,
-        "bb_upper": 1793.8158,
-        "rsi_15m": 60.96
-      }
-    },
     "NVDABUSDT": {
       "trade_id": "T_20261002082552_NVDABUSDT",
       "symbol": "NVDABUSDT",
@@ -52,7 +12,7 @@
       "signal_time": "2026-10-02T08:25:52.089552+00:00",
       "entry_time": "2026-10-02T08:25:52.089552+00:00",
       "entry_price": 232.79634,
-      "current_price": 233.79,
+      "current_price": 233.67,
       "initial_quantity": 0.42956001799684657,
       "remaining_quantity": 0.42956001799684657,
       "quantity": 0.42956001799684657,
@@ -85,7 +45,7 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-02T11:00:51.458991+00:00",
+  "last_updated": "2026-10-02T11:05:26.663005+00:00",
   "last_12h_summary_slot": "2026-10-02_06_AM",
   "last_emergency_dump_alert_time": "2026-10-02T05:40:30.450937+00:00"
 }
