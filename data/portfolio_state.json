@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 71.46875369488633,
+  "cash_usdt": 68.87800376805801,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-10-02T13:00:57.452345+00:00",
       "entry_time": "2026-10-02T13:00:57.452345+00:00",
       "entry_price": 781.9407749999999,
-      "current_price": 782.4,
+      "current_price": 781.81,
       "initial_quantity": 0.12788692340542032,
       "remaining_quantity": 0.12788692340542032,
       "quantity": 0.12788692340542032,
@@ -43,25 +43,25 @@
         "rsi_15m": 64.93
       }
     },
-    "SUIUSDT": {
-      "trade_id": "T_20261002134549_SUIUSDT",
-      "symbol": "SUIUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-10-02T13:30:00",
-      "signal_time": "2026-10-02T13:45:49.755223+00:00",
-      "entry_time": "2026-10-02T13:45:49.755223+00:00",
-      "entry_price": 1.21170555,
-      "current_price": 1.21170555,
-      "initial_quantity": 82.52830070803917,
-      "remaining_quantity": 82.52830070803917,
-      "quantity": 82.52830070803917,
+    "TAOUSDT": {
+      "trade_id": "T_20261002135057_TAOUSDT",
+      "symbol": "TAOUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-10-02T12:00:00",
+      "signal_time": "2026-10-02T13:50:57.556846+00:00",
+      "entry_time": "2026-10-02T13:50:57.556846+00:00",
+      "entry_price": 313.5567,
+      "current_price": 313.5567,
+      "initial_quantity": 0.31892158579293634,
+      "remaining_quantity": 0.31892158579293634,
+      "quantity": 0.31892158579293634,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 1.1827,
-      "initial_stop_loss": 1.1827,
-      "tp1": 1.225,
-      "tp2": 1.2347,
+      "stop_loss": 304.4209,
+      "initial_stop_loss": 304.4209,
+      "tp1": 324.8687,
+      "tp2": 337.1373,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -73,19 +73,18 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 1.21170555,
+      "highest_price": 313.5567,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.0105,
-        "mom_hist": 0.0053,
-        "bb_upper": 1.2043,
-        "rsi_15m": 68.64
+        "risk_distance_pct": 2.62,
+        "rsi_1h": 59.24,
+        "supertrend_4h": "BULLISH"
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-02T13:45:49.755260+00:00",
+  "last_updated": "2026-10-02T13:50:57.556873+00:00",
   "last_12h_summary_slot": "2026-10-02_06_PM",
   "last_emergency_dump_alert_time": "2026-10-02T05:40:30.450937+00:00"
 }
