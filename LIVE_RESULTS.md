@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-322-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-02 13:35:37 PKT (08:35:37 UTC)`  
+> **Last Updated:** `2026-10-02 13:40:40 PKT (08:40:40 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,8 +35,8 @@
 
 | Symbol    | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                        | Unrealized PnL   | Status   |
 |-----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|--------------------------------------------|------------------|----------|
-| SNDKBUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-02 12:45:00 PKT (07:45:00 UTC) | 2026-10-02 13:00:59 PKT (08:00:59 UTC) | $1,794.84<br><small>2026-10-02 13:00:59 PKT (08:00:59 UTC)</small> | $1,798.21       | $1,774.11   | $1,808.30 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $1,816.29 (Pending)<br>$1,830.64 (Pending) | +0.19 (+0.19%)   | 🟡 ACTIVE |
-| NVDABUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-02 13:00:00 PKT (08:00:00 UTC) | 2026-10-02 13:25:52 PKT (08:25:52 UTC) | $232.7963<br><small>2026-10-02 13:25:52 PKT (08:25:52 UTC)</small> | $232.7900       | $230.0141   | $234.5423 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $235.4823 (Pending)<br>$237.3438 (Pending) | -0.00 (-0.00%)   | 🟡 ACTIVE |
+| SNDKBUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-02 12:45:00 PKT (07:45:00 UTC) | 2026-10-02 13:00:59 PKT (08:00:59 UTC) | $1,794.84<br><small>2026-10-02 13:00:59 PKT (08:00:59 UTC)</small> | $1,798.13       | $1,774.11   | $1,808.30 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $1,816.29 (Pending)<br>$1,830.64 (Pending) | +0.18 (+0.18%)   | 🟡 ACTIVE |
+| NVDABUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-02 13:00:00 PKT (08:00:00 UTC) | 2026-10-02 13:25:52 PKT (08:25:52 UTC) | $232.7963<br><small>2026-10-02 13:25:52 PKT (08:25:52 UTC)</small> | $232.8100       | $230.0141   | $234.5423 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $235.4823 (Pending)<br>$237.3438 (Pending) | +0.01 (+0.01%)   | 🟡 ACTIVE |
 
 ---
 
