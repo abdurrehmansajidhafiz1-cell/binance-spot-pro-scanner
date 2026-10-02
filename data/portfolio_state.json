@@ -1,51 +1,10 @@
 {
-  "cash_usdt": 167.37215962742403,
+  "cash_usdt": 267.34707216492404,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {
-    "BNBUSDT": {
-      "trade_id": "T_20261002130057_BNBUSDT",
-      "symbol": "BNBUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-10-02T12:45:00",
-      "signal_time": "2026-10-02T13:00:57.452345+00:00",
-      "entry_time": "2026-10-02T13:00:57.452345+00:00",
-      "entry_price": 781.9407749999999,
-      "current_price": 778.37,
-      "initial_quantity": 0.12788692340542032,
-      "remaining_quantity": 0.12788692340542032,
-      "quantity": 0.12788692340542032,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 100.0,
-      "stop_loss": 772.3546,
-      "initial_stop_loss": 772.3546,
-      "tp1": 790.7161,
-      "tp2": 796.9668,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 784.46,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.0,
-      "metadata": {
-        "atr": 1.9167,
-        "mom_hist": 0.7956,
-        "bb_upper": 780.4197,
-        "rsi_15m": 64.93
-      }
-    }
-  },
+  "open_positions": {},
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-02T14:30:37.165116+00:00",
+  "last_updated": "2026-10-02T14:35:33.696228+00:00",
   "last_12h_summary_slot": "2026-10-02_06_PM",
-  "last_emergency_dump_alert_time": "2026-10-02T05:40:30.450937+00:00"
+  "last_emergency_dump_alert_time": "2026-10-02T14:35:31.695340+00:00"
 }
