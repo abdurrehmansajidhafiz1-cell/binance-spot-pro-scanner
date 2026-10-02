@@ -3,9 +3,9 @@
 [![Portfolio Return](https://img.shields.io/badge/Net_Return--44.41%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-25.4%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
-[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-316-informational?style=for-the-badge)](LIVE_RESULTS.md)
+[![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-317-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-02 09:56:17 PKT (04:56:17 UTC)`  
+> **Last Updated:** `2026-10-02 10:00:57 PKT (05:00:57 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -16,26 +16,27 @@
 
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
-| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `316 Unique Trades` |
-| **Current Equity** | `$277.96 USDT` | **Completed Trades** | `315 Trades` |
-| **Available Cash** | `$177.93 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$222.04 USDT` | **Win / Loss Ratio** | `80 Win / 235 Loss` |
+| **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `317 Unique Trades` |
+| **Current Equity** | `$277.93 USDT` | **Completed Trades** | `315 Trades` |
+| **Available Cash** | `$77.85 USDT` | **Active / In-Trade** | `2 Trade` |
+| **Net PnL ($)** | `-$222.07 USDT` | **Win / Loss Ratio** | `80 Win / 235 Loss` |
 | **Net Return (%)** | `-44.41%` | **Win Rate** | `25.40%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.17` |
-| **Max Drawdown** | `-44.41%` | **Total Fees Deducted** | `$47.12 USDT` |
+| **Max Drawdown** | `-44.41%` | **Total Fees Deducted** | `$47.19 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (1)
+## 🟡 Active Open Positions (2)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense & Partial Exit Protocol):**
 > - **S3 Strategy:** Jab trade **+0.75%** gain reach karti hai, toh **50% original position sell/close** ho jati hai aur Stop Loss Entry Price (+0.10% fee buffer) par lock ho jata hai. Baqi 50% position **TP1 (30% exit)** aur **TP2 (20% exit)** ke liye open rehti hai. Total exit = 50% + 30% + 20% = 100%.
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
-|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| ONDOUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-02 09:15:00 PKT (04:15:00 UTC) | 2026-10-02 09:40:48 PKT (04:40:48 UTC) | $0.5063<br><small>2026-10-02 09:40:48 PKT (04:40:48 UTC)</small> | $0.5064         | $0.4954     | $0.5100 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.5142 (Pending)<br>$0.5183 (Pending) | +0.03 (+0.03%)   | 🟡 ACTIVE |
+| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                      | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                              | Targets (TP1 / TP2)                      | Unrealized PnL   | Status   |
+|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|-------------------------------------------------------------------|-----------------|-------------|----------------------------------------------------------------------|------------------------------------------|------------------|----------|
+| ONDOUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-02 09:15:00 PKT (04:15:00 UTC) | 2026-10-02 09:40:48 PKT (04:40:48 UTC) | $0.5063<br><small>2026-10-02 09:40:48 PKT (04:40:48 UTC)</small>  | $0.5069         | $0.4954     | $0.5100 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $0.5142 (Pending)<br>$0.5183 (Pending)   | +0.13 (+0.13%)   | 🟡 ACTIVE |
+| AVAXUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-02 09:45:00 PKT (04:45:00 UTC) | 2026-10-02 10:00:56 PKT (05:00:56 UTC) | $11.1866<br><small>2026-10-02 10:00:56 PKT (05:00:56 UTC)</small> | $11.1810        | $10.9937    | $11.2705 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $11.3182 (Pending)<br>$11.4077 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
 
 ---
 
