@@ -1,27 +1,27 @@
 {
-  "cash_usdt": 178.53257429044152,
+  "cash_usdt": 177.92817697428802,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "SUIUSDT": {
-      "trade_id": "T_20261002043547_SUIUSDT",
-      "symbol": "SUIUSDT",
+    "ONDOUSDT": {
+      "trade_id": "T_20261002044048_ONDOUSDT",
+      "symbol": "ONDOUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-10-02T04:15:00",
-      "signal_time": "2026-10-02T04:35:47.216909+00:00",
-      "entry_time": "2026-10-02T04:35:47.216909+00:00",
-      "entry_price": 1.19729835,
-      "current_price": 1.19729835,
-      "initial_quantity": 83.52137126055506,
-      "remaining_quantity": 83.52137126055506,
-      "quantity": 83.52137126055506,
+      "signal_time": "2026-10-02T04:40:48.006936+00:00",
+      "entry_time": "2026-10-02T04:40:48.006936+00:00",
+      "entry_price": 0.506253,
+      "current_price": 0.506253,
+      "initial_quantity": 197.52969365119813,
+      "remaining_quantity": 197.52969365119813,
+      "quantity": 197.52969365119813,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 1.1751,
-      "initial_stop_loss": 1.1751,
-      "tp1": 1.2176,
-      "tp2": 1.2273,
+      "stop_loss": 0.495398,
+      "initial_stop_loss": 0.495398,
+      "tp1": 0.514197,
+      "tp2": 0.518262,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -33,19 +33,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 1.19729835,
+      "highest_price": 0.506253,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.0119,
-        "mom_hist": 0.0056,
-        "bb_upper": 1.1965,
-        "rsi_15m": 63.04
+        "atr": 0.004186,
+        "mom_hist": 0.0033,
+        "bb_upper": 0.503564,
+        "rsi_15m": 67.39
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-02T04:35:47.216944+00:00",
+  "last_updated": "2026-10-02T04:40:48.006974+00:00",
   "last_12h_summary_slot": "2026-10-02_06_AM",
   "last_emergency_dump_alert_time": "2026-10-01T07:25:22.821674+00:00"
 }
