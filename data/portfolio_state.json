@@ -1,10 +1,50 @@
 {
-  "cash_usdt": 265.5352559386118,
+  "cash_usdt": 165.4602559386118,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
-  "open_positions": {},
+  "open_positions": {
+    "BTCUSDT": {
+      "trade_id": "T_20261003160103_BTCUSDT",
+      "symbol": "BTCUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-10-03T15:00:00",
+      "signal_time": "2026-10-03T16:01:03.137370+00:00",
+      "entry_time": "2026-10-03T16:01:03.137370+00:00",
+      "entry_price": 84909.71363999999,
+      "current_price": 84909.71363999999,
+      "initial_quantity": 0.001177721555203681,
+      "remaining_quantity": 0.001177721555203681,
+      "quantity": 0.001177721555203681,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 84497.7875,
+      "initial_stop_loss": 84497.7875,
+      "tp1": 85421.5188,
+      "tp2": 85975.7576,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 84909.71363999999,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 0.44,
+        "rsi_1h": 51.87,
+        "supertrend_4h": "BULLISH"
+      }
+    }
+  },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-03T15:20:26.783738+00:00",
+  "last_updated": "2026-10-03T16:01:03.137395+00:00",
   "last_12h_summary_slot": "2026-10-03_06_PM",
   "last_emergency_dump_alert_time": "2026-10-02T14:35:31.695340+00:00"
 }
