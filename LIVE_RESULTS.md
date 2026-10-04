@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--47.32%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--47.26%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-27.2%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.18-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-344-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-05 03:51:13 PKT (22:51:13 UTC)`  
+> **Last Updated:** `2026-10-05 03:55:31 PKT (22:55:31 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `344 Unique Trades` |
-| **Current Equity** | `$263.40 USDT` | **Completed Trades** | `342 Trades` |
+| **Current Equity** | `$263.72 USDT` | **Completed Trades** | `342 Trades` |
 | **Available Cash** | `$64.44 USDT` | **Active / In-Trade** | `2 Trade` |
-| **Net PnL ($)** | `-$236.60 USDT` | **Win / Loss Ratio** | `93 Win / 249 Loss` |
-| **Net Return (%)** | `-47.32%` | **Win Rate** | `27.19%` |
+| **Net PnL ($)** | `-$236.28 USDT` | **Win / Loss Ratio** | `93 Win / 249 Loss` |
+| **Net Return (%)** | `-47.26%` | **Win Rate** | `27.19%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.18` |
-| **Max Drawdown** | `-47.32%` | **Total Fees Deducted** | `$51.23 USDT` |
+| **Max Drawdown** | `-47.26%` | **Total Fees Deducted** | `$51.23 USDT` |
 
 ---
 
@@ -35,8 +35,8 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                      | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                              | Targets (TP1 / TP2)                      | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|-------------------------------------------------------------------|-----------------|-------------|----------------------------------------------------------------------|------------------------------------------|------------------|----------|
-| WLDUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-04 19:00:00 PKT (14:00:00 UTC) | 2026-10-04 20:00:57 PKT (15:00:57 UTC) | $0.5880<br><small>2026-10-04 20:00:57 PKT (15:00:57 UTC)</small>  | $0.5830         | $0.5720     | $0.5968 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $0.6116 (Pending)<br>$0.6353 (Pending)   | -0.85 (-0.85%)   | 🟡 ACTIVE |
-| LINKUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-05 03:00:00 PKT (22:00:00 UTC) | 2026-10-05 03:25:50 PKT (22:25:50 UTC) | $14.2581<br><small>2026-10-05 03:25:50 PKT (22:25:50 UTC)</small> | $14.2300        | $14.1375    | $14.3651 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $14.4736 (Pending)<br>$14.5880 (Pending) | -0.20 (-0.20%)   | 🟡 ACTIVE |
+| WLDUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-04 19:00:00 PKT (14:00:00 UTC) | 2026-10-04 20:00:57 PKT (15:00:57 UTC) | $0.5880<br><small>2026-10-04 20:00:57 PKT (15:00:57 UTC)</small>  | $0.5837         | $0.5720     | $0.5968 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $0.6116 (Pending)<br>$0.6353 (Pending)   | -0.73 (-0.73%)   | 🟡 ACTIVE |
+| LINKUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-05 03:00:00 PKT (22:00:00 UTC) | 2026-10-05 03:25:50 PKT (22:25:50 UTC) | $14.2581<br><small>2026-10-05 03:25:50 PKT (22:25:50 UTC)</small> | $14.2590        | $14.1375    | $14.3651 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $14.4736 (Pending)<br>$14.5880 (Pending) | +0.01 (+0.01%)   | 🟡 ACTIVE |
 
 ---
 
