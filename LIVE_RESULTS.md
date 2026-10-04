@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-333-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-04 13:06:10 PKT (08:06:10 UTC)`  
+> **Last Updated:** `2026-10-04 13:11:08 PKT (08:11:08 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,9 +17,9 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `333 Unique Trades` |
-| **Current Equity** | `$265.94 USDT` | **Completed Trades** | `332 Trades` |
+| **Current Equity** | `$265.96 USDT` | **Completed Trades** | `332 Trades` |
 | **Available Cash** | `$165.68 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$234.06 USDT` | **Win / Loss Ratio** | `86 Win / 246 Loss` |
+| **Net PnL ($)** | `-$234.04 USDT` | **Win / Loss Ratio** | `86 Win / 246 Loss` |
 | **Net Return (%)** | `-46.81%` | **Win Rate** | `25.90%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.17` |
 | **Max Drawdown** | `-46.81%` | **Total Fees Deducted** | `$49.66 USDT` |
@@ -35,7 +35,7 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                        | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                                | Targets (TP1 / TP2)                          | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|---------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------------|----------------------------------------------|------------------|----------|
-| BTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-03 20:00:00 PKT (15:00:00 UTC) | 2026-10-03 21:01:03 PKT (16:01:03 UTC) | $84,909.71<br><small>2026-10-03 21:01:03 PKT (16:01:03 UTC)</small> | $85,127.70      | $84,497.79  | $86,183.36 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $85,421.52 (Pending)<br>$85,975.76 (Pending) | +0.26 (+0.26%)   | 🟡 ACTIVE |
+| BTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-03 20:00:00 PKT (15:00:00 UTC) | 2026-10-03 21:01:03 PKT (16:01:03 UTC) | $84,909.71<br><small>2026-10-03 21:01:03 PKT (16:01:03 UTC)</small> | $85,149.99      | $84,497.79  | $86,183.36 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $85,421.52 (Pending)<br>$85,975.76 (Pending) | +0.28 (+0.28%)   | 🟡 ACTIVE |
 
 ---
 
