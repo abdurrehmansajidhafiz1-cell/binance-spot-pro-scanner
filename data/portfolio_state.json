@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 115.66825769446088,
+  "cash_usdt": 165.68068272258589,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-10-03T16:01:03.137370+00:00",
       "entry_time": "2026-10-03T16:01:03.137370+00:00",
       "entry_price": 84909.71363999999,
-      "current_price": 85120.01,
+      "current_price": 85127.7,
       "initial_quantity": 0.001177721555203681,
       "remaining_quantity": 0.001177721555203681,
       "quantity": 0.001177721555203681,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 85120.01,
+      "highest_price": 85180.12,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -41,53 +41,10 @@
         "rsi_1h": 51.87,
         "supertrend_4h": "BULLISH"
       }
-    },
-    "ETHUSDT": {
-      "trade_id": "T_20261003180054_ETHUSDT",
-      "symbol": "ETHUSDT",
-      "strategy": "I1_MTF_TREND_PULLBACK",
-      "timeframe": "1h (4h Macro Trend)",
-      "zone_candle_time": "2026-10-03T17:00:00",
-      "signal_time": "2026-10-03T18:00:54.601222+00:00",
-      "entry_time": "2026-10-03T18:00:54.601222+00:00",
-      "entry_price": 2689.38402,
-      "current_price": 2703.56,
-      "initial_quantity": 0.03718323573589167,
-      "remaining_quantity": 0.018591617867945835,
-      "quantity": 0.018591617867945835,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 50.0,
-      "stop_loss": 2693.41809603,
-      "initial_stop_loss": 2674.5711,
-      "tp1": 2710.6683,
-      "tp2": 2732.3266,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 2707.99,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.28300175584908516,
-      "metadata": {
-        "risk_distance_pct": 0.54,
-        "rsi_1h": 52.88,
-        "supertrend_4h": "BULLISH"
-      },
-      "i1_be_reached": true,
-      "i1_be_hit_time": "2026-10-04T08:00:37.928087+00:00",
-      "i1_be_exit_price": 2706.636005,
-      "total_fees_paid": 0.11274055673443764
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-04T08:00:37.928153+00:00",
+  "last_updated": "2026-10-04T08:05:31.868923+00:00",
   "last_12h_summary_slot": "2026-10-04_06_AM",
   "last_emergency_dump_alert_time": "2026-10-02T14:35:31.695340+00:00"
 }
