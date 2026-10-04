@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--47.44%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--47.50%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-26.6%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-341-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-04 21:00:41 PKT (16:00:41 UTC)`  
+> **Last Updated:** `2026-10-04 21:05:34 PKT (16:05:34 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `341 Unique Trades` |
-| **Current Equity** | `$262.79 USDT` | **Completed Trades** | `338 Trades` |
+| **Current Equity** | `$262.52 USDT` | **Completed Trades** | `338 Trades` |
 | **Available Cash** | `$14.03 USDT` | **Active / In-Trade** | `3 Trade` |
-| **Net PnL ($)** | `-$237.21 USDT` | **Win / Loss Ratio** | `90 Win / 248 Loss` |
-| **Net Return (%)** | `-47.44%` | **Win Rate** | `26.63%` |
+| **Net PnL ($)** | `-$237.48 USDT` | **Win / Loss Ratio** | `90 Win / 248 Loss` |
+| **Net Return (%)** | `-47.50%` | **Win Rate** | `26.63%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.17` |
-| **Max Drawdown** | `-47.44%` | **Total Fees Deducted** | `$50.71 USDT` |
+| **Max Drawdown** | `-47.50%` | **Total Fees Deducted** | `$50.71 USDT` |
 
 ---
 
@@ -35,9 +35,9 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                        | Unrealized PnL   | Status                                                                                               |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|--------------------------------------------|------------------|------------------------------------------------------------------------------------------------------|
-| DOGEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-04 19:30:00 PKT (14:30:00 UTC) | 2026-10-04 19:45:47 PKT (14:45:47 UTC) | $0.0938<br><small>2026-10-04 19:45:47 PKT (14:45:47 UTC)</small>   | $0.0942         | $0.0939     | $0.0945 (+0.75%)<br><b>⚡ HIT (50% Closed • SL Locked)</b>             | $0.0949 (Pending)<br>$0.0957 (Pending)     | +0.56 (+0.44%)   | ⚡ EARLY BREAK-EVEN HIT<br><small style='color:#b45309;'><b>50% Closed • 50% Still Active</b></small> |
-| WLDUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-04 19:00:00 PKT (14:00:00 UTC) | 2026-10-04 20:00:57 PKT (15:00:57 UTC) | $0.5880<br><small>2026-10-04 20:00:57 PKT (15:00:57 UTC)</small>   | $0.5813         | $0.5720     | $0.5968 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $0.6116 (Pending)<br>$0.6353 (Pending)     | -1.14 (-1.14%)   | 🟡 ACTIVE                                                                                             |
-| SOLUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-04 20:00:00 PKT (15:00:00 UTC) | 2026-10-04 20:15:56 PKT (15:15:56 UTC) | $121.9810<br><small>2026-10-04 20:15:56 PKT (15:15:56 UTC)</small> | $121.5800       | $120.5673   | $122.8958 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $123.4336 (Pending)<br>$124.4094 (Pending) | -0.33 (-0.33%)   | 🟡 ACTIVE                                                                                             |
+| DOGEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-04 19:30:00 PKT (14:30:00 UTC) | 2026-10-04 19:45:47 PKT (14:45:47 UTC) | $0.0938<br><small>2026-10-04 19:45:47 PKT (14:45:47 UTC)</small>   | $0.0943         | $0.0939     | $0.0945 (+0.75%)<br><b>⚡ HIT (50% Closed • SL Locked)</b>             | $0.0949 (Pending)<br>$0.0957 (Pending)     | +0.59 (+0.49%)   | ⚡ EARLY BREAK-EVEN HIT<br><small style='color:#b45309;'><b>50% Closed • 50% Still Active</b></small> |
+| WLDUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-04 19:00:00 PKT (14:00:00 UTC) | 2026-10-04 20:00:57 PKT (15:00:57 UTC) | $0.5880<br><small>2026-10-04 20:00:57 PKT (15:00:57 UTC)</small>   | $0.5803         | $0.5720     | $0.5968 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>   | $0.6116 (Pending)<br>$0.6353 (Pending)     | -1.31 (-1.31%)   | 🟡 ACTIVE                                                                                             |
+| SOLUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>                 | 2026-10-04 20:00:00 PKT (15:00:00 UTC) | 2026-10-04 20:15:56 PKT (15:15:56 UTC) | $121.9810<br><small>2026-10-04 20:15:56 PKT (15:15:56 UTC)</small> | $121.4300       | $120.5673   | $122.8958 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $123.4336 (Pending)<br>$124.4094 (Pending) | -0.45 (-0.45%)   | 🟡 ACTIVE                                                                                             |
 
 ---
 
