@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 163.8454789321379,
+  "cash_usdt": 63.77047893213789,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-10-04T14:45:47.358306+00:00",
       "entry_time": "2026-10-04T14:45:47.358306+00:00",
       "entry_price": 0.09382689,
-      "current_price": 0.09408,
+      "current_price": 0.09405,
       "initial_quantity": 1065.7925462519327,
       "remaining_quantity": 1065.7925462519327,
       "quantity": 1065.7925462519327,
@@ -42,10 +42,49 @@
         "bb_upper": 0.093723,
         "rsi_15m": 63.6
       }
+    },
+    "WLDUSDT": {
+      "trade_id": "T_20261004150057_WLDUSDT",
+      "symbol": "WLDUSDT",
+      "strategy": "I1_MTF_TREND_PULLBACK",
+      "timeframe": "1h (4h Macro Trend)",
+      "zone_candle_time": "2026-10-04T14:00:00",
+      "signal_time": "2026-10-04T15:00:57.589090+00:00",
+      "entry_time": "2026-10-04T15:00:57.589090+00:00",
+      "entry_price": 0.5879938499999999,
+      "current_price": 0.5879938499999999,
+      "initial_quantity": 170.06980600222266,
+      "remaining_quantity": 170.06980600222266,
+      "quantity": 170.06980600222266,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 0.571962,
+      "initial_stop_loss": 0.571962,
+      "tp1": 0.611556,
+      "tp2": 0.635313,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 0.5879938499999999,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "risk_distance_pct": 2.69,
+        "rsi_1h": 52.57,
+        "supertrend_4h": "BULLISH"
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-04T14:55:28.901029+00:00",
+  "last_updated": "2026-10-04T15:00:57.589113+00:00",
   "last_12h_summary_slot": "2026-10-04_06_PM",
   "last_emergency_dump_alert_time": "2026-10-02T14:35:31.695340+00:00"
 }
