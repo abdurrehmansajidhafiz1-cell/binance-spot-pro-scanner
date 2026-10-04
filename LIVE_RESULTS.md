@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-333-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-04 07:55:33 PKT (02:55:33 UTC)`  
+> **Last Updated:** `2026-10-04 08:00:52 PKT (03:00:52 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,8 +35,8 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                        | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                                | Targets (TP1 / TP2)                          | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|---------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------------|----------------------------------------------|------------------|----------|
-| BTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-03 20:00:00 PKT (15:00:00 UTC) | 2026-10-03 21:01:03 PKT (16:01:03 UTC) | $84,909.71<br><small>2026-10-03 21:01:03 PKT (16:01:03 UTC)</small> | $84,804.04      | $84,497.79  | $86,183.36 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $85,421.52 (Pending)<br>$85,975.76 (Pending) | -0.12 (-0.12%)   | 🟡 ACTIVE |
-| ETHUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-03 22:00:00 PKT (17:00:00 UTC) | 2026-10-03 23:00:54 PKT (18:00:54 UTC) | $2,689.38<br><small>2026-10-03 23:00:54 PKT (18:00:54 UTC)</small>  | $2,692.38       | $2,674.57   | $2,729.72 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $2,710.67 (Pending)<br>$2,732.33 (Pending)   | +0.11 (+0.11%)   | 🟡 ACTIVE |
+| BTCUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-03 20:00:00 PKT (15:00:00 UTC) | 2026-10-03 21:01:03 PKT (16:01:03 UTC) | $84,909.71<br><small>2026-10-03 21:01:03 PKT (16:01:03 UTC)</small> | $84,802.16      | $84,497.79  | $86,183.36 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $85,421.52 (Pending)<br>$85,975.76 (Pending) | -0.13 (-0.13%)   | 🟡 ACTIVE |
+| ETHUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-03 22:00:00 PKT (17:00:00 UTC) | 2026-10-03 23:00:54 PKT (18:00:54 UTC) | $2,689.38<br><small>2026-10-03 23:00:54 PKT (18:00:54 UTC)</small>  | $2,692.33       | $2,674.57   | $2,729.72 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $2,710.67 (Pending)<br>$2,732.33 (Pending)   | +0.11 (+0.11%)   | 🟡 ACTIVE |
 
 ---
 
