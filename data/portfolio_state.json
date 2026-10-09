@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 97.9840693766183,
+  "cash_usdt": 147.97152564536827,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-10-09T11:45:48.232517+00:00",
       "entry_time": "2026-10-09T11:45:48.232517+00:00",
       "entry_price": 83099.529,
-      "current_price": 83324.0,
+      "current_price": 83214.0,
       "initial_quantity": 0.0012033762549965837,
       "remaining_quantity": 0.0012033762549965837,
       "quantity": 0.0012033762549965837,
@@ -42,54 +42,10 @@
         "bb_upper": 82849.231,
         "rsi_15m": 67.2
       }
-    },
-    "QNTUSDT": {
-      "trade_id": "T_20261009115556_QNTUSDT",
-      "symbol": "QNTUSDT",
-      "strategy": "S3_VOLATILITY_SQUEEZE",
-      "timeframe": "15m",
-      "zone_candle_time": "2026-10-09T11:30:00",
-      "signal_time": "2026-10-09T11:55:56.822331+00:00",
-      "entry_time": "2026-10-09T11:55:56.822331+00:00",
-      "entry_price": 248.08398,
-      "current_price": 249.78,
-      "initial_quantity": 0.40308930870909115,
-      "remaining_quantity": 0.20154465435454558,
-      "quantity": 0.20154465435454558,
-      "initial_cost_usdt": 100.0,
-      "remaining_cost_usdt": 50.0,
-      "stop_loss": 248.33206397999996,
-      "initial_stop_loss": 243.0382,
-      "tp1": 252.2612,
-      "tp2": 254.2554,
-      "tp1_reached": false,
-      "tp1_hit_time": null,
-      "tp1_exit_price": null,
-      "tp2_reached": false,
-      "tp2_hit_time": null,
-      "tp2_exit_price": null,
-      "sl_hit_time": null,
-      "sl_exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "status": "ACTIVE",
-      "highest_price": 249.96,
-      "fees_paid": 0.075,
-      "realized_pnl_usdt": 0.3151480669973168,
-      "metadata": {
-        "atr": 2.3577,
-        "mom_hist": 1.9644,
-        "bb_upper": 247.923,
-        "rsi_15m": 67.29
-      },
-      "s3_early_be_reached": true,
-      "s3_early_be_hit_time": "2026-10-09T12:15:29.138794+00:00",
-      "s3_early_be_exit_price": 249.83502000000001,
-      "total_fees_paid": 0.11276468456367074
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-09T12:15:29.138859+00:00",
+  "last_updated": "2026-10-09T12:20:29.893090+00:00",
   "last_12h_summary_slot": "2026-10-09_06_AM",
   "last_emergency_dump_alert_time": "2026-10-06T16:00:40.569601+00:00"
 }
