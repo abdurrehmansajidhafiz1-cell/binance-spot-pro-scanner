@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 40.59871498941969,
+  "cash_usdt": 38.8468312046147,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -43,25 +43,25 @@
         "rsi_15m": 63.92
       }
     },
-    "AAVEUSDT": {
-      "trade_id": "T_20261010020105_AAVEUSDT",
-      "symbol": "AAVEUSDT",
+    "LINKUSDT": {
+      "trade_id": "T_20261010020543_LINKUSDT",
+      "symbol": "LINKUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-10-10T01:45:00",
-      "signal_time": "2026-10-10T02:01:05.706928+00:00",
-      "entry_time": "2026-10-10T02:01:05.706928+00:00",
-      "entry_price": 170.34512999999998,
-      "current_price": 170.34512999999998,
-      "initial_quantity": 0.5870434922325047,
-      "remaining_quantity": 0.5870434922325047,
-      "quantity": 0.5870434922325047,
+      "signal_time": "2026-10-10T02:05:43.656713+00:00",
+      "entry_time": "2026-10-10T02:05:43.656713+00:00",
+      "entry_price": 12.8574255,
+      "current_price": 12.8574255,
+      "initial_quantity": 7.777606800054957,
+      "remaining_quantity": 7.777606800054957,
+      "quantity": 7.777606800054957,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 167.6982,
-      "initial_stop_loss": 167.6982,
-      "tp1": 172.7585,
-      "tp2": 174.1242,
+      "stop_loss": 12.7171,
+      "initial_stop_loss": 12.7171,
+      "tp1": 13.0194,
+      "tp2": 13.1223,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -73,19 +73,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 170.34512999999998,
+      "highest_price": 12.8574255,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.8753,
-        "mom_hist": 0.5685,
-        "bb_upper": 169.4721,
-        "rsi_15m": 69.42
+        "atr": 0.0363,
+        "mom_hist": 0.0186,
+        "bb_upper": 12.8603,
+        "rsi_15m": 58.61
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-10T02:01:05.706954+00:00",
+  "last_updated": "2026-10-10T02:05:43.656748+00:00",
   "last_12h_summary_slot": "2026-10-10_06_AM",
   "last_emergency_dump_alert_time": "2026-10-06T16:00:40.569601+00:00"
 }
