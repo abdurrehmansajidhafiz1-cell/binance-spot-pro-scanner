@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-372-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-10 13:05:34 PKT (08:05:34 UTC)`  
+> **Last Updated:** `2026-10-10 13:10:35 PKT (08:10:35 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,8 +35,8 @@
 
 | Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                        | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                                | Targets (TP1 / TP2)                          | Unrealized PnL   | Status   |
 |----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|---------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------------|----------------------------------------------|------------------|----------|
-| ETHUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-10 10:30:00 PKT (05:30:00 UTC) | 2026-10-10 10:45:45 PKT (05:45:45 UTC) | $2,499.17<br><small>2026-10-10 10:45:45 PKT (05:45:45 UTC)</small>  | $2,496.44       | $2,469.47   | $2,517.91 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $2,528.18 (Pending)<br>$2,548.16 (Pending)   | -0.11 (-0.11%)   | 🟡 ACTIVE |
-| BTCUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-10 10:45:00 PKT (05:45:00 UTC) | 2026-10-10 11:00:56 PKT (06:00:56 UTC) | $82,882.41<br><small>2026-10-10 11:00:56 PKT (06:00:56 UTC)</small> | $82,831.02      | $81,891.30  | $83,504.03 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $83,838.14 (Pending)<br>$84,500.89 (Pending) | -0.06 (-0.06%)   | 🟡 ACTIVE |
+| ETHUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-10 10:30:00 PKT (05:30:00 UTC) | 2026-10-10 10:45:45 PKT (05:45:45 UTC) | $2,499.17<br><small>2026-10-10 10:45:45 PKT (05:45:45 UTC)</small>  | $2,496.38       | $2,469.47   | $2,517.91 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small>  | $2,528.18 (Pending)<br>$2,548.16 (Pending)   | -0.11 (-0.11%)   | 🟡 ACTIVE |
+| BTCUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-10 10:45:00 PKT (05:45:00 UTC) | 2026-10-10 11:00:56 PKT (06:00:56 UTC) | $82,882.41<br><small>2026-10-10 11:00:56 PKT (06:00:56 UTC)</small> | $82,830.67      | $81,891.30  | $83,504.03 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $83,838.14 (Pending)<br>$84,500.89 (Pending) | -0.06 (-0.06%)   | 🟡 ACTIVE |
 
 ---
 
