@@ -1,5 +1,5 @@
 {
-  "cash_usdt": 129.79215382429777,
+  "cash_usdt": 29.717153824297768,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
@@ -12,7 +12,7 @@
       "signal_time": "2026-10-10T11:45:52.177225+00:00",
       "entry_time": "2026-10-10T11:45:52.177225+00:00",
       "entry_price": 2500.16946,
-      "current_price": 2499.57,
+      "current_price": 2505.85,
       "initial_quantity": 0.03999728882377437,
       "remaining_quantity": 0.03999728882377437,
       "quantity": 0.03999728882377437,
@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 2500.16946,
+      "highest_price": 2509.89,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -42,10 +42,50 @@
         "bb_upper": 2498.5293,
         "rsi_15m": 60.55
       }
+    },
+    "SUIUSDT": {
+      "trade_id": "T_20261010143055_SUIUSDT",
+      "symbol": "SUIUSDT",
+      "strategy": "S3_VOLATILITY_SQUEEZE",
+      "timeframe": "15m",
+      "zone_candle_time": "2026-10-10T14:15:00",
+      "signal_time": "2026-10-10T14:30:55.719896+00:00",
+      "entry_time": "2026-10-10T14:30:55.719896+00:00",
+      "entry_price": 1.1336665499999998,
+      "current_price": 1.1336665499999998,
+      "initial_quantity": 88.20935926882558,
+      "remaining_quantity": 88.20935926882558,
+      "quantity": 88.20935926882558,
+      "initial_cost_usdt": 100.0,
+      "remaining_cost_usdt": 100.0,
+      "stop_loss": 1.1132,
+      "initial_stop_loss": 1.1132,
+      "tp1": 1.1438,
+      "tp2": 1.1528,
+      "tp1_reached": false,
+      "tp1_hit_time": null,
+      "tp1_exit_price": null,
+      "tp2_reached": false,
+      "tp2_hit_time": null,
+      "tp2_exit_price": null,
+      "sl_hit_time": null,
+      "sl_exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "status": "ACTIVE",
+      "highest_price": 1.1336665499999998,
+      "fees_paid": 0.075,
+      "realized_pnl_usdt": 0.0,
+      "metadata": {
+        "atr": 0.0069,
+        "mom_hist": 0.0017,
+        "bb_upper": 1.1269,
+        "rsi_15m": 64.18
+      }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-10T14:25:26.352774+00:00",
+  "last_updated": "2026-10-10T14:30:55.719930+00:00",
   "last_12h_summary_slot": "2026-10-10_06_PM",
   "last_emergency_dump_alert_time": "2026-10-06T16:00:40.569601+00:00"
 }
