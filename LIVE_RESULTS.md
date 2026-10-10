@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.17-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-372-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-10 13:56:20 PKT (08:56:20 UTC)`  
+> **Last Updated:** `2026-10-10 14:01:23 PKT (09:01:23 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,7 +35,7 @@
 
 | Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                        | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                                | Targets (TP1 / TP2)                          | Unrealized PnL   | Status   |
 |----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|---------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------------|----------------------------------------------|------------------|----------|
-| BTCUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-10 10:45:00 PKT (05:45:00 UTC) | 2026-10-10 11:00:56 PKT (06:00:56 UTC) | $82,882.41<br><small>2026-10-10 11:00:56 PKT (06:00:56 UTC)</small> | $82,848.01      | $81,891.30  | $83,504.03 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $83,838.14 (Pending)<br>$84,500.89 (Pending) | -0.04 (-0.04%)   | 🟡 ACTIVE |
+| BTCUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-10 10:45:00 PKT (05:45:00 UTC) | 2026-10-10 11:00:56 PKT (06:00:56 UTC) | $82,882.41<br><small>2026-10-10 11:00:56 PKT (06:00:56 UTC)</small> | $82,850.00      | $81,891.30  | $83,504.03 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $83,838.14 (Pending)<br>$84,500.89 (Pending) | -0.04 (-0.04%)   | 🟡 ACTIVE |
 
 ---
 
