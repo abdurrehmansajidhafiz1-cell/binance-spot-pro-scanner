@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.15-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-398-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-12 13:20:38 PKT (08:20:38 UTC)`  
+> **Last Updated:** `2026-10-12 13:25:32 PKT (08:25:32 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,7 +35,7 @@
 
 | Symbol   | Strategy              | TradingView Timeframe      | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
 |----------|-----------------------|----------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| SUIUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-12 09:00:00 PKT (04:00:00 UTC) | 2026-10-12 10:10:57 PKT (05:10:57 UTC) | $1.1382<br><small>2026-10-12 10:10:57 PKT (05:10:57 UTC)</small> | $1.1191         | $1.1001     | $1.1552 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $1.1895 (Pending)<br>$1.2432 (Pending) | -1.68 (-1.68%)   | 🟡 ACTIVE |
+| SUIUSDT  | I1_MTF_TREND_PULLBACK | <b>1h (4h Macro Trend)</b> | 2026-10-12 09:00:00 PKT (04:00:00 UTC) | 2026-10-12 10:10:57 PKT (05:10:57 UTC) | $1.1382<br><small>2026-10-12 10:10:57 PKT (05:10:57 UTC)</small> | $1.1190         | $1.1001     | $1.1552 (+1.50%)<br><small style='color:#64748b;'>⚪ Pending</small> | $1.1895 (Pending)<br>$1.2432 (Pending) | -1.68 (-1.68%)   | 🟡 ACTIVE |
 
 ---
 
