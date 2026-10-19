@@ -5,7 +5,7 @@
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.14-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-419-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-19 14:35:32 PKT (09:35:32 UTC)`  
+> **Last Updated:** `2026-10-19 14:40:35 PKT (09:40:35 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -35,7 +35,7 @@
 
 | Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                        | Unrealized PnL   | Status   |
 |----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|--------------------------------------------|------------------|----------|
-| XAUTUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-19 11:45:00 PKT (06:45:00 UTC) | 2026-10-19 12:01:05 PKT (07:01:05 UTC) | $4,185.08<br><small>2026-10-19 12:01:05 PKT (07:01:05 UTC)</small> | $4,164.49       | $4,132.19   | $4,216.47 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $4,230.42 (Pending)<br>$4,263.87 (Pending) | -0.49 (-0.49%)   | 🟡 ACTIVE |
+| XAUTUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-19 11:45:00 PKT (06:45:00 UTC) | 2026-10-19 12:01:05 PKT (07:01:05 UTC) | $4,185.08<br><small>2026-10-19 12:01:05 PKT (07:01:05 UTC)</small> | $4,164.31       | $4,132.19   | $4,216.47 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $4,230.42 (Pending)<br>$4,263.87 (Pending) | -0.50 (-0.50%)   | 🟡 ACTIVE |
 
 ---
 
