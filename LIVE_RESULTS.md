@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
 [![Portfolio Return](https://img.shields.io/badge/Net_Return--68.28%25-red?style=for-the-badge)](LIVE_RESULTS.md)
-[![Win Rate](https://img.shields.io/badge/Win_Rate-23.9%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
+[![Win Rate](https://img.shields.io/badge/Win_Rate-23.8%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.14-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-420-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-19 15:45:50 PKT (10:45:50 UTC)`  
+> **Last Updated:** `2026-10-19 15:51:20 PKT (10:51:20 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,29 +17,27 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `420 Unique Trades` |
-| **Current Equity** | `$158.58 USDT` | **Completed Trades** | `419 Trades` |
-| **Available Cash** | `$58.63 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$341.42 USDT` | **Win / Loss Ratio** | `100 Win / 319 Loss` |
-| **Net Return (%)** | `-68.28%` | **Win Rate** | `23.87%` |
+| **Current Equity** | `$158.61 USDT` | **Completed Trades** | `420 Trades` |
+| **Available Cash** | `$158.61 USDT` | **Active / In-Trade** | `0 Trade` |
+| **Net PnL ($)** | `-$341.39 USDT` | **Win / Loss Ratio** | `100 Win / 320 Loss` |
+| **Net Return (%)** | `-68.28%` | **Win Rate** | `23.81%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.14` |
-| **Max Drawdown** | `-68.28%` | **Total Fees Deducted** | `$62.64 USDT` |
+| **Max Drawdown** | `-68.28%` | **Total Fees Deducted** | `$62.71 USDT` |
 
 ---
 
-## 🟡 Active Open Positions (1)
+## 🟡 Active Open Positions (0)
 
 > **🛡️ Rule 1 (Break-Even Capital Defense & Partial Exit Protocol):**
 > - **S3 Strategy:** Jab trade **+0.75%** gain reach karti hai, toh **50% original position sell/close** ho jati hai aur Stop Loss Entry Price (+0.10% fee buffer) par lock ho jata hai. Baqi 50% position **TP1 (30% exit)** aur **TP2 (20% exit)** ke liye open rehti hai. Total exit = 50% + 30% + 20% = 100%.
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                       | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                               | Targets (TP1 / TP2)                        | Unrealized PnL   | Status   |
-|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|--------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------------------|--------------------------------------------|------------------|----------|
-| MUBUSDT  | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-19 15:30:00 PKT (10:30:00 UTC) | 2026-10-19 15:45:49 PKT (10:45:49 UTC) | $910.8752<br><small>2026-10-19 15:45:49 PKT (10:45:49 UTC)</small> | $910.4200       | $900.0095   | $917.7068 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $921.4058 (Pending)<br>$928.6896 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
+_No active open positions currently._
 
 ---
 
-## 📜 Completed Trades Postmortem History (419)
+## 📜 Completed Trades Postmortem History (420)
 
 > **Result Badges Guide:**
 > - `🟢 FULL WIN` → TP2 reached (100% profit target captured)
@@ -55,6 +53,7 @@
 
 | Symbol       | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time                                                   | TP1 Price & Hit Time                                                 | TP2 Price & Hit Time                                                 | SL Hit Time                            | Net PnL ($ / %)   | PKR Calculations (Rate: ₨278/$)                                                                             | Final Result           |
 |--------------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------|-------------------|-------------------------------------------------------------------------------------------------------------|------------------------|
+| MUBUSDT      | S3_VOLATILITY_SQUEEZE | **15m**                 | 2026-10-19 15:30:00 PKT (10:30:00 UTC) | 2026-10-19 15:45:49 PKT (10:45:49 UTC) | $910.8752<br><small>2026-10-19 15:45:49 PKT (10:45:49 UTC)</small>   | $921.4058<br><small>-</small>                                        | $928.6896<br><small>-</small>                                        | 2026-10-19 15:50:32 PKT (10:50:32 UTC) | -0.03 (-0.03%)    | 💵 **$100 Trade:** `-7 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `-2 PKR` profit | Fees: `15 PKR`       | 🛡️ BREAKEVEN PROTECTED |
 | XAUTUSDT     | S3_VOLATILITY_SQUEEZE | **15m**                 | 2026-10-19 11:45:00 PKT (06:45:00 UTC) | 2026-10-19 12:01:05 PKT (07:01:05 UTC) | $4,185.08<br><small>2026-10-19 12:01:05 PKT (07:01:05 UTC)</small>   | $4,230.42<br><small>-</small>                                        | $4,263.87<br><small>-</small>                                        | -                                      | -0.61 (-0.61%)    | 💵 **$100 Trade:** `-170 PKR` profit | Fees: `42 PKR`<br>📌 **$35 Ref:** `-60 PKR` profit | Fees: `15 PKR`    | 🔴 LOSS                 |
 | MUBUSDT      | S3_VOLATILITY_SQUEEZE | **15m**                 | 2026-10-19 11:15:00 PKT (06:15:00 UTC) | 2026-10-19 11:30:58 PKT (06:30:58 UTC) | $906.0728<br><small>2026-10-19 11:30:58 PKT (06:30:58 UTC)</small>   | $915.9713<br><small>-</small>                                        | $923.2122<br><small>-</small>                                        | 2026-10-19 11:35:24 PKT (06:35:24 UTC) | -1.38 (-1.38%)    | 💵 **$100 Trade:** `-383 PKR` profit | Fees: `41 PKR`<br>📌 **$35 Ref:** `-134 PKR` profit | Fees: `14 PKR`   | 🔴 LOSS                 |
 | FETUSDT      | S3_VOLATILITY_SQUEEZE | **15m**                 | 2026-10-19 11:00:00 PKT (06:00:00 UTC) | 2026-10-19 11:20:48 PKT (06:20:48 UTC) | $0.1922<br><small>2026-10-19 11:20:48 PKT (06:20:48 UTC)</small>     | $0.1942<br><small>-</small>                                          | $0.1957<br><small>-</small>                                          | 2026-10-19 11:25:23 PKT (06:25:23 UTC) | -1.68 (-1.68%)    | 💵 **$100 Trade:** `-466 PKR` profit | Fees: `41 PKR`<br>📌 **$35 Ref:** `-163 PKR` profit | Fees: `14 PKR`   | 🔴 LOSS                 |
