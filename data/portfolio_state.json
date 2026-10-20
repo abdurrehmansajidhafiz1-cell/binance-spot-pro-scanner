@@ -1,27 +1,27 @@
 {
-  "cash_usdt": 42.6852834261998,
+  "cash_usdt": 41.27968352683148,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "LINKUSDT": {
-      "trade_id": "T_20261020210102_LINKUSDT",
-      "symbol": "LINKUSDT",
+    "AVAXUSDT": {
+      "trade_id": "T_20261020210544_AVAXUSDT",
+      "symbol": "AVAXUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-10-20T20:45:00",
-      "signal_time": "2026-10-20T21:01:02.913344+00:00",
-      "entry_time": "2026-10-20T21:01:02.913344+00:00",
-      "entry_price": 12.3231585,
-      "current_price": 12.3231585,
-      "initial_quantity": 8.114802710684927,
-      "remaining_quantity": 8.114802710684927,
-      "quantity": 8.114802710684927,
+      "signal_time": "2026-10-20T21:05:44.484615+00:00",
+      "entry_time": "2026-10-20T21:05:44.484615+00:00",
+      "entry_price": 9.775885500000001,
+      "current_price": 9.775885500000001,
+      "initial_quantity": 10.22925237821167,
+      "remaining_quantity": 10.22925237821167,
+      "quantity": 10.22925237821167,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 12.1744,
-      "initial_stop_loss": 12.1744,
-      "tp1": 12.4638,
-      "tp2": 12.5623,
+      "stop_loss": 9.6287,
+      "initial_stop_loss": 9.6287,
+      "tp1": 9.8943,
+      "tp2": 9.9725,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -33,19 +33,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 12.3231585,
+      "highest_price": 9.775885500000001,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 0.0644,
-        "mom_hist": 0.0193,
-        "bb_upper": 12.3052,
-        "rsi_15m": 63.81
+        "atr": 0.0622,
+        "mom_hist": 0.0143,
+        "bb_upper": 9.7464,
+        "rsi_15m": 64.2
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-20T21:01:02.913374+00:00",
+  "last_updated": "2026-10-20T21:05:44.484642+00:00",
   "last_12h_summary_slot": "2026-10-20_06_PM",
   "last_emergency_dump_alert_time": "2026-10-19T10:50:30.291838+00:00"
 }
