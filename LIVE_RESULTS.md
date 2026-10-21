@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--75.37%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--75.40%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-23.2%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.14-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-449-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-21 20:10:51 PKT (15:10:51 UTC)`  
+> **Last Updated:** `2026-10-21 20:15:41 PKT (15:15:41 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `449 Unique Trades` |
-| **Current Equity** | `$123.13 USDT` | **Completed Trades** | `448 Trades` |
-| **Available Cash** | `$23.18 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$376.87 USDT` | **Win / Loss Ratio** | `104 Win / 344 Loss` |
-| **Net Return (%)** | `-75.37%` | **Win Rate** | `23.21%` |
+| **Current Equity** | `$123.01 USDT` | **Completed Trades** | `448 Trades` |
+| **Available Cash** | `$53.07 USDT` | **Active / In-Trade** | `1 Trade` |
+| **Net PnL ($)** | `-$376.99 USDT` | **Win / Loss Ratio** | `104 Win / 344 Loss` |
+| **Net Return (%)** | `-75.40%` | **Win Rate** | `23.21%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.14` |
-| **Max Drawdown** | `-75.37%` | **Total Fees Deducted** | `$66.96 USDT` |
+| **Max Drawdown** | `-75.40%` | **Total Fees Deducted** | `$66.96 USDT` |
 
 ---
 
@@ -33,9 +33,9 @@
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
-|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| NEARUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-21 19:45:00 PKT (14:45:00 UTC) | 2026-10-21 20:10:50 PKT (15:10:50 UTC) | $5.3627<br><small>2026-10-21 20:10:50 PKT (15:10:50 UTC)</small> | $5.3600         | $5.1723     | $5.4029 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $5.3494 (Pending)<br>$5.3995 (Pending) | -0.05 (-0.05%)   | 🟡 ACTIVE |
+| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                | Targets (TP1 / TP2)                             | Unrealized PnL   | Status                                                                                  |
+|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|--------------------------------------------------------|-------------------------------------------------|------------------|-----------------------------------------------------------------------------------------|
+| NEARUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-21 19:45:00 PKT (14:45:00 UTC) | 2026-10-21 20:10:50 PKT (15:10:50 UTC) | $5.3627<br><small>2026-10-21 20:10:50 PKT (15:10:50 UTC)</small> | $5.3580         | $5.3761     | $5.3494 (TP1)<br><b>🟢 HIT (80% Closed • SL Locked)</b> | $5.3494 (HIT - 30% Closed)<br>$5.3995 (Pending) | -0.17 (-0.09%)   | 🎯 TP1 HIT<br><small style='color:#16a34a;'><b>80% Closed • 20% Still Active</b></small> |
 
 ---
 
