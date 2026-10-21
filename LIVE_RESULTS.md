@@ -1,11 +1,11 @@
 # 🚀 Binance Spot 15-Day Live Paper Trading Dashboard
 
-[![Portfolio Return](https://img.shields.io/badge/Net_Return--75.06%25-red?style=for-the-badge)](LIVE_RESULTS.md)
+[![Portfolio Return](https://img.shields.io/badge/Net_Return--74.94%25-red?style=for-the-badge)](LIVE_RESULTS.md)
 [![Win Rate](https://img.shields.io/badge/Win_Rate-22.9%25-blue?style=for-the-badge)](LIVE_RESULTS.md)
 [![Profit Factor](https://img.shields.io/badge/Profit_Factor-0.13-orange?style=for-the-badge)](LIVE_RESULTS.md)
 [![Total Qualified Trades](https://img.shields.io/badge/Total_Qualified-446-informational?style=for-the-badge)](LIVE_RESULTS.md)
 
-> **Last Updated:** `2026-10-21 19:45:37 PKT (14:45:37 UTC)`  
+> **Last Updated:** `2026-10-21 19:50:44 PKT (14:50:44 UTC)`  
 > **Testing Start Date:** `2026-09-07 17:00:00 PKT (12:00:00 UTC)`  
 > **Target Universe:** Top 50 Liquid Binance Spot Pairs (Zero Futures / Pure Spot)
 > **Fixed Trade Budget:** `$100 USDT per trade` | **PKR Rate:** `₨278 per $1 USD`
@@ -17,12 +17,12 @@
 | Metric | Value | Metric | Value |
 | :--- | :--- | :--- | :--- |
 | **Starting Balance** | `$500.00 USDT` | **Total Qualified Trades** | `446 Unique Trades` |
-| **Current Equity** | `$124.71 USDT` | **Completed Trades** | `445 Trades` |
-| **Available Cash** | `$24.54 USDT` | **Active / In-Trade** | `1 Trade` |
-| **Net PnL ($)** | `-$375.29 USDT` | **Win / Loss Ratio** | `102 Win / 343 Loss` |
-| **Net Return (%)** | `-75.06%` | **Win Rate** | `22.92%` |
+| **Current Equity** | `$125.30 USDT` | **Completed Trades** | `445 Trades` |
+| **Available Cash** | `$74.90 USDT` | **Active / In-Trade** | `1 Trade` |
+| **Net PnL ($)** | `-$374.70 USDT` | **Win / Loss Ratio** | `102 Win / 343 Loss` |
+| **Net Return (%)** | `-74.94%` | **Win Rate** | `22.92%` |
 | **Peak Equity** | `$500.00 USDT` | **Profit Factor** | `0.13` |
-| **Max Drawdown** | `-75.06%` | **Total Fees Deducted** | `$66.51 USDT` |
+| **Max Drawdown** | `-74.94%` | **Total Fees Deducted** | `$66.51 USDT` |
 
 ---
 
@@ -33,9 +33,9 @@
 > - **I1 Strategy:** Jab trade +1.50% gain reach karti hai, toh Stop Loss automatically Entry Price (+0.15% fee buffer) par lock ho jata hai. Trade bina TP1 hit hue bhi **100% Risk-Free (Safe)** ho jati hai.
 > - **Active Status Progression:** `🟡 ACTIVE` → `⚡ EARLY BREAK-EVEN HIT (50% Closed)` → `🎯 TP1 HIT (80% Closed)` → `🟢 FULL WIN (100% Closed)`
 
-| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                             | Targets (TP1 / TP2)                    | Unrealized PnL   | Status   |
-|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|---------------------------------------------------------------------|----------------------------------------|------------------|----------|
-| DOGEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-21 18:00:00 PKT (13:00:00 UTC) | 2026-10-21 18:25:51 PKT (13:25:51 UTC) | $0.0825<br><small>2026-10-21 18:25:51 PKT (13:25:51 UTC)</small> | $0.0827         | $0.0816     | $0.0831 (+0.75%)<br><small style='color:#64748b;'>⚪ Pending</small> | $0.0835 (Pending)<br>$0.0842 (Pending) | +0.17 (+0.17%)   | 🟡 ACTIVE |
+| Symbol   | Strategy              | TradingView Timeframe   | Zone Formed (PKT/UTC)                  | Signal Time (PKT/UTC)                  | Entry Price & Time (PKT/UTC)                                     | Current Price   | Stop Loss   | 🛡️ Break-Even Milestone                                   | Targets (TP1 / TP2)                    | Unrealized PnL   | Status                                                                                               |
+|----------|-----------------------|-------------------------|----------------------------------------|----------------------------------------|------------------------------------------------------------------|-----------------|-------------|-----------------------------------------------------------|----------------------------------------|------------------|------------------------------------------------------------------------------------------------------|
+| DOGEUSDT | S3_VOLATILITY_SQUEEZE | <b>15m</b>              | 2026-10-21 18:00:00 PKT (13:00:00 UTC) | 2026-10-21 18:25:51 PKT (13:25:51 UTC) | $0.0825<br><small>2026-10-21 18:25:51 PKT (13:25:51 UTC)</small> | $0.0832         | $0.0826     | $0.0831 (+0.75%)<br><b>⚡ HIT (50% Closed • SL Locked)</b> | $0.0835 (Pending)<br>$0.0842 (Pending) | +0.76 (+0.81%)   | ⚡ EARLY BREAK-EVEN HIT<br><small style='color:#b45309;'><b>50% Closed • 50% Still Active</b></small> |
 
 ---
 
