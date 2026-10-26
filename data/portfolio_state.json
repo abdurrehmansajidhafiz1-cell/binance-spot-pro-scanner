@@ -1,27 +1,27 @@
 {
-  "cash_usdt": 12.672540252251096,
+  "cash_usdt": 10.127712990508357,
   "starting_balance": 500.0,
   "equity_peak": 500.0,
   "open_positions": {
-    "ZECUSDT": {
-      "trade_id": "T_20261026150126_ZECUSDT",
-      "symbol": "ZECUSDT",
+    "BNBUSDT": {
+      "trade_id": "T_20261026150548_BNBUSDT",
+      "symbol": "BNBUSDT",
       "strategy": "S3_VOLATILITY_SQUEEZE",
       "timeframe": "15m",
       "zone_candle_time": "2026-10-26T14:45:00",
-      "signal_time": "2026-10-26T15:01:26.774508+00:00",
-      "entry_time": "2026-10-26T15:01:26.774508+00:00",
-      "entry_price": 1253.216295,
-      "current_price": 1253.216295,
-      "initial_quantity": 0.07979468540185236,
-      "remaining_quantity": 0.07979468540185236,
-      "quantity": 0.07979468540185236,
+      "signal_time": "2026-10-26T15:05:48.151473+00:00",
+      "entry_time": "2026-10-26T15:05:48.151473+00:00",
+      "entry_price": 745.582605,
+      "current_price": 745.582605,
+      "initial_quantity": 0.1341233007977701,
+      "remaining_quantity": 0.1341233007977701,
+      "quantity": 0.1341233007977701,
       "initial_cost_usdt": 100.0,
       "remaining_cost_usdt": 100.0,
-      "stop_loss": 1223.7933,
-      "initial_stop_loss": 1223.7933,
-      "tp1": 1267.7223,
-      "tp2": 1278.7094,
+      "stop_loss": 736.9959,
+      "initial_stop_loss": 736.9959,
+      "tp1": 754.5168,
+      "tp2": 760.4814,
       "tp1_reached": false,
       "tp1_hit_time": null,
       "tp1_exit_price": null,
@@ -33,19 +33,19 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 1253.216295,
+      "highest_price": 745.582605,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
-        "atr": 13.0097,
-        "mom_hist": 5.5767,
-        "bb_upper": 1247.9732,
-        "rsi_15m": 64.57
+        "atr": 2.702,
+        "mom_hist": 1.6442,
+        "bb_upper": 745.0104,
+        "rsi_15m": 61.98
       }
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-26T15:01:26.774535+00:00",
+  "last_updated": "2026-10-26T15:05:48.151504+00:00",
   "last_12h_summary_slot": "2026-10-26_06_PM",
   "last_emergency_dump_alert_time": "2026-10-26T13:50:33.279384+00:00"
 }
