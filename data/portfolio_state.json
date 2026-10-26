@@ -33,7 +33,7 @@
       "exit_time": null,
       "exit_reason": null,
       "status": "ACTIVE",
-      "highest_price": 0.33166575,
+      "highest_price": 0.3317,
       "fees_paid": 0.075,
       "realized_pnl_usdt": 0.0,
       "metadata": {
@@ -45,7 +45,7 @@
     }
   },
   "start_time": "2026-09-07T12:00:00+00:00",
-  "last_updated": "2026-10-26T12:35:31.500860+00:00",
+  "last_updated": "2026-10-26T12:40:33.446429+00:00",
   "last_12h_summary_slot": "2026-10-26_06_AM",
   "last_emergency_dump_alert_time": "2026-10-23T14:45:31.560796+00:00"
 }
